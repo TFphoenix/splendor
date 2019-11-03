@@ -21,9 +21,15 @@
     <ClCompile Include="SessionsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ICard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SessionsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
