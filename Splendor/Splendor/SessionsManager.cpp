@@ -1,8 +1,11 @@
 #include "SessionsManager.h"
+#include "PregameSetup.h"
+
+#include <iostream>
 
 SessionsManager::SessionsManager()
 {
-	m_window = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
+	//m_window = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
 }
 
 void SessionsManager::MainSession()
@@ -22,5 +25,20 @@ void SessionsManager::MainSession()
 		m_window->clear();
 		m_window->draw(shape);
 		m_window->display();
+	}
+}
+
+void SessionsManager::GameSession()
+{
+	uint16_t playerCount;
+	std::cin >> playerCount;
+
+	try
+	{
+		PregameSetup pregameSetup(playerCount);
+	}
+	catch (const char* errorMessage)
+	{
+		std::cout << errorMessage;
 	}
 }

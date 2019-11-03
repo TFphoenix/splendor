@@ -24,12 +24,21 @@
     <ClCompile Include="ICard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PregameSetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SessionsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ICard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PregameSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePieces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

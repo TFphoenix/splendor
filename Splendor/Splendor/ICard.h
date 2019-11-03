@@ -7,7 +7,8 @@ class ICard
 public:
 	virtual ~ICard() = 0;
 
-protected:
+private:
 	std::optional<uint16_t> m_prestigePoints;
+	bool m_isFaceUp;
 };
 
