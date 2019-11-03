@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ICard.cpp" />
+    <ClCompile Include="IToken.cpp" />
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
@@ -136,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="GamePieces.h" />
     <ClInclude Include="ICard.h" />
+    <ClInclude Include="IToken.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
   </ItemGroup>

@@ -27,6 +27,9 @@
     <ClCompile Include="PregameSetup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SessionsManager.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GamePieces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IToken.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
