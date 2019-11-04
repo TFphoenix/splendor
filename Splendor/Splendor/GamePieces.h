@@ -17,4 +17,4 @@ inline const uint16_t g_L3DevelopmentCardCount = 40;
 #pragma region UPDATED PIECES
 inline uint16_t g_UGemTokenCount;
 inline uint16_t g_UNobleCardCount;
-#pragma endregion 
+#pragma endregion

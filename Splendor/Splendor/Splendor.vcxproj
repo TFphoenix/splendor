@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExpansionCard.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
     <ClCompile Include="PregameSetup.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Splendor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExpansionCard.h" />
     <ClInclude Include="GamePieces.h" />
     <ClInclude Include="ICard.h" />
     <ClInclude Include="IToken.h" />

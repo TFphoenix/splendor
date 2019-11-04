@@ -5,6 +5,8 @@
 class ICard
 {
 public:
+	ICard(uint16_t prestigePoints, bool isFaceUp);
+
 	virtual ~ICard() = 0;
 
 private:
