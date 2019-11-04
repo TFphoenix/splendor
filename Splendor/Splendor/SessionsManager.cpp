@@ -5,13 +5,13 @@
 
 SessionsManager::SessionsManager()
 {
-	//m_window = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
+	m_window = new sf::RenderWindow(sf::VideoMode(500, 500), "SFML works!");
 }
 
 void SessionsManager::MainSession()
 {
 	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Red);
+	shape.setFillColor(sf::Color::Green);
 
 	while (m_window->isOpen())
 	{
