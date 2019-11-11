@@ -131,6 +131,7 @@
     <ClCompile Include="ExpansionCard.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
+    <ClCompile Include="NobleCard.cpp" />
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="GamePieces.h" />
     <ClInclude Include="ICard.h" />
     <ClInclude Include="IToken.h" />
+    <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
   </ItemGroup>

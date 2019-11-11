@@ -33,6 +33,9 @@
     <ClCompile Include="ExpansionCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NobleCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SessionsManager.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExpansionCard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NobleCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

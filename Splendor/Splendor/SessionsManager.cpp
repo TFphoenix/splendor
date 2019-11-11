@@ -1,6 +1,8 @@
 #include "SessionsManager.h"
 #include "PregameSetup.h"
 
+#include <SFML/Graphics.hpp>
+
 #include <iostream>
 
 SessionsManager::SessionsManager()

@@ -1,0 +1,2 @@
+GamePieces.h -> class with static const values and updatable variables - static getters & setters
+Restructure OOP - Big class that contains: Board, Deck, player, etc. (maybe GameSessions)

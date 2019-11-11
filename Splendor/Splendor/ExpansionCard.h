@@ -14,18 +14,19 @@ public:
 	};
 
 public:
-	ExpansionCard(Level level,
+	ExpansionCard(
+		Level level,
 		IToken::Type rewardType,
-		uint16_t gEcost,
-		uint16_t bScost,
-		uint16_t wDcost,
-		uint16_t bOcost,
-		uint16_t rRcost,
+		uint16_t gECost,
+		uint16_t bSCost,
+		uint16_t wDCost,
+		uint16_t bOCost,
+		uint16_t rRCost,
 		uint16_t prestigePoints = 0,
 		bool isFaceUp = false);
 
 private:
-	Level m_level;
+	Level m_level : 1;
 	IToken::Type m_rewardType;
 	std::map<IToken::Type, uint16_t> m_cost;
 };

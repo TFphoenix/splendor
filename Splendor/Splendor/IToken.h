@@ -8,7 +8,7 @@ public:
 		GreenEmerald,
 		BlueSapphire,
 		WhiteDiamond,
-		blackOnyx,
+		BlackOnyx,
 		RedRuby,
 		Gold
 	};
