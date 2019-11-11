@@ -1,3 +1,2 @@
-1. GamePieces.h -> class with static const values and updatable variables - static getters & setters
-
+1. Database of Cards - Noble & Expansions
 2. Restructure OOP - Big class that contains: Board, Deck, player, etc. (maybe GameSessions)

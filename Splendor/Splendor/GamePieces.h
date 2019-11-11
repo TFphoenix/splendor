@@ -6,11 +6,11 @@ class GamePieces
 public:
 	GamePieces() = delete;
 
-	static inline uint16_t GetGemTokenCount();
-	static inline uint16_t GetNobleCardCount();
+	static uint16_t GetGemTokenCount();
+	static uint16_t GetNobleCardCount();
 
-	static inline void SetGemTokenCount(uint16_t newGemTokenCount);
-	static inline void SetNobleCardCount(uint16_t newNobleCardCount);
+	static void SetGemTokenCount(uint16_t newGemTokenCount);
+	static void SetNobleCardCount(uint16_t newNobleCardCount);
 
 public:
 	// Total Pieces

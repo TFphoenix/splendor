@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="ExpansionCard.cpp" />
     <ClCompile Include="GamePieces.cpp" />
+    <ClCompile Include="Token.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
     <ClCompile Include="NobleCard.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="ExpansionCard.h" />
     <ClInclude Include="GamePieces.h" />
+    <ClInclude Include="Token.h" />
     <ClInclude Include="ICard.h" />
     <ClInclude Include="IToken.h" />
     <ClInclude Include="NobleCard.h" />
