@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ExpansionCard.cpp" />
+    <ClCompile Include="GamePieces.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
     <ClCompile Include="NobleCard.cpp" />

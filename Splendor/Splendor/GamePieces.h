@@ -1,20 +1,33 @@
 #pragma once
 #include <cstdint>
 
-#pragma region TOTAL PIECES
-inline const uint16_t g_TokenCount = 40;
-inline const uint16_t g_GemTokenCount = 7;
-inline const uint16_t g_GoldTokenCount = 5;
+class GamePieces
+{
+public:
+	GamePieces() = delete;
 
-inline const uint16_t g_NobleCardCount = 10;
+	static inline uint16_t GetGemTokenCount();
+	static inline uint16_t GetNobleCardCount();
 
-inline const uint16_t g_DevelopmentCardCount = 90;
-inline const uint16_t g_L1DevelopmentCardCount = 40;
-inline const uint16_t g_L2DevelopmentCardCount = 30;
-inline const uint16_t g_L3DevelopmentCardCount = 40;
-#pragma endregion
+	static inline void SetGemTokenCount(uint16_t newGemTokenCount);
+	static inline void SetNobleCardCount(uint16_t newNobleCardCount);
 
-#pragma region UPDATED PIECES
-inline uint16_t g_UGemTokenCount;
-inline uint16_t g_UNobleCardCount;
-#pragma endregion
+public:
+	// Total Pieces
+	static inline const uint16_t s_TokenCount = 40;
+	static inline const uint16_t s_GemTokenCount = 7;
+	static inline const uint16_t s_GoldTokenCount = 5;
+
+	static inline const uint16_t s_NobleCardCount = 10;
+
+	static inline const uint16_t s_DevelopmentCardCount = 90;
+	static inline const uint16_t s_L1DevelopmentCardCount = 40;
+	static inline const uint16_t s_L2DevelopmentCardCount = 30;
+	static inline const uint16_t s_L3DevelopmentCardCount = 40;
+
+private:
+	// Updatable Pieces
+	static inline uint16_t uGemTokenCount;
+	static inline uint16_t uNobleCardCount;
+
+};
