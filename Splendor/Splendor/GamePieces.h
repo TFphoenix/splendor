@@ -23,7 +23,7 @@ public:
 	static inline const uint16_t s_DevelopmentCardCount = 90;
 	static inline const uint16_t s_L1DevelopmentCardCount = 40;
 	static inline const uint16_t s_L2DevelopmentCardCount = 30;
-	static inline const uint16_t s_L3DevelopmentCardCount = 40;
+	static inline const uint16_t s_L3DevelopmentCardCount = 20;
 
 private:
 	// Updatable Pieces

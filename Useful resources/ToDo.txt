@@ -1,2 +1,20 @@
-1. Database of Cards - Noble & Expansions
-2. Restructure OOP - Big class that contains: Board, Deck, player, etc. (maybe GameSessions)
+1. Database of Cards - Noble & Expansions (Bogdy)
+- 3 fisiere Expansion
+- 1 fisier Nobili
+- ordine: GreenEmerald, BlueSapphire, WhiteDiamond, BlackOnyx, RedRuby
+
+2.1. Random implementation (Adi)
+- #include <random>
+- Useful resources (Random.cpp & Random.h)
+
+2.2. Deck implementation (Adi)
+- vector/queue pointer ICard
+- functie shuffleDeck (sorteaza random cartile)
+- functie drawCard (trage prima carte din deck)
+
+3. TokenPile implementation (Eugen)
+- vector Token
+- drawToken
+
+4. Hand implementation (Eugen)
+- array de pointer ICard
