@@ -16,3 +16,12 @@ private:
 
 };
 
+template <class cardType>
+void Deck<cardType>::ShuffleDeck()
+{
+}
+
+template <class cardType>
+cardType Deck<cardType>::DrawCard()
+{
+}

@@ -131,6 +131,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="ExpansionCard.cpp" />
     <ClCompile Include="GamePieces.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="ExpansionCard.h" />
     <ClInclude Include="GamePieces.h" />
+    <ClInclude Include="Randomizer.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="ICard.h" />
     <ClInclude Include="IToken.h" />
