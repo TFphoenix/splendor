@@ -3,18 +3,11 @@
 - 1 fisier Nobili
 - ordine: GreenEmerald, BlueSapphire, WhiteDiamond, BlackOnyx, RedRuby
 
-2.1. Random implementation (Adi)
-- #include <random>
-- Useful resources (Random.cpp & Random.h)
-
-2.2. Deck implementation (Adi)
-- vector/queue pointer ICard
-- functie shuffleDeck (sorteaza random cartile)
-- functie drawCard (trage prima carte din deck)
-
-3. TokenPile implementation (Eugen)
+2. TokenPile implementation (Eugen)
 - vector Token
 - drawToken
 
-4. Hand implementation (Eugen)
+3. Hand implementation (Eugen)
 - array de pointer ICard
+
+4. Add move/copy constructor, operator= for ExpansionCard, NobleCard, Token

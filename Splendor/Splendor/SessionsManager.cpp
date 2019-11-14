@@ -50,4 +50,6 @@ void SessionsManager::GameSession()
 void SessionsManager::TestSession()
 {
 	Deck<ExpansionCard> deck;
+	deck.AddCard(ExpansionCard(ExpansionCard::Level::Level1, IToken::Type::BlackOnyx, 0, 2, 2, 3, 0));
+	deck.DrawCard();
 }
