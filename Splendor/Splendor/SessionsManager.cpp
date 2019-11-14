@@ -1,5 +1,7 @@
 #include "SessionsManager.h"
 #include "PregameSetup.h"
+#include "Deck.h"
+#include "ExpansionCard.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -43,4 +45,9 @@ void SessionsManager::GameSession()
 	{
 		std::cout << errorMessage;
 	}
+}
+
+void SessionsManager::TestSession()
+{
+	Deck<ExpansionCard> deck;
 }

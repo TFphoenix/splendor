@@ -7,6 +7,7 @@ public:
 	SessionsManager();
 	void MainSession();
 	void GameSession();
+	void TestSession();
 	
 private:
 	sf::RenderWindow* m_window;
