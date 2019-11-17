@@ -4,6 +4,7 @@
 
 #include <map>
 #include <vector>
+
 class ExpansionCard :ICard
 {
 public:
@@ -25,7 +26,7 @@ public:
 		uint16_t prestigePoints = 0,
 		bool isFaceUp = false);
 
-	void ReadCards(const ExpansionCard& card);
+	//void ReadCards(const ExpansionCard& card);
 
 private:
 	Level m_level : 1;
