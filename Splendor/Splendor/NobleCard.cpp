@@ -1,4 +1,6 @@
 #include "NobleCard.h"
+#include<iostream>
+#include<vector>
 
 NobleCard::NobleCard(
 	uint16_t gERequirement,
@@ -16,3 +18,4 @@ NobleCard::NobleCard(
 	m_expansionRequirements[IToken::Type::BlackOnyx] = bORequirement;
 	m_expansionRequirements[IToken::Type::RedRuby] = rRRequirement;
 }
+
