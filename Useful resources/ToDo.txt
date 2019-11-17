@@ -1,7 +1,8 @@
 1. Database of Cards - Noble & Expansions (Bogdy)
-- 3 fisiere Expansion
-- 1 fisier Nobili
-- ordine: GreenEmerald, BlueSapphire, WhiteDiamond, BlackOnyx, RedRuby
+- 3 fisiere Expansion [x]
+- 1 fisier Nobili[x]
+- ordine: GreenEmerald, BlueSapphire, WhiteDiamond, BlackOnyx, RedRuby[x]
+- ce facem cu prestigePoints al cartilor
 
 2. TokenPile implementation (Eugen)
 - vector Token

@@ -3,7 +3,7 @@
 #include  "IToken.h"
 
 #include <map>
-
+#include <vector>
 class ExpansionCard :ICard
 {
 public:
@@ -25,9 +25,13 @@ public:
 		uint16_t prestigePoints = 0,
 		bool isFaceUp = false);
 
+	void ReadCards(const ExpansionCard& card);
+
 private:
 	Level m_level : 1;
 	IToken::Type m_rewardType;
 	std::map<IToken::Type, uint16_t> m_cost;
+	std::vector<ExpansionCard> m_cards;
+
 };
 
