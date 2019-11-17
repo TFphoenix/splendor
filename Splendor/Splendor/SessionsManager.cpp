@@ -104,7 +104,7 @@ void SessionsManager::initKeys()
 
 void SessionsManager::initStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->supportedKeys));
+	this->states.push(new MainMenuState(this->window, &this->supportedKeys,&this->states));
 	
 }
 

@@ -10,7 +10,7 @@ private:
 	void initKeybinds();
 
 public:
-	GameState(sf::RenderWindow* windows, std::map<std::string, int>* supportedKeys);
+	GameState(sf::RenderWindow* windows, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
 
 	void updateInput(const float& dt);

@@ -4,17 +4,20 @@
 class MainMenuState : public State
 {
 private:
+	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
 
 	std::map<std::string, Button*> buttons;
 
+	void initVariables();
+	void initBackground();
 	void initFonts();
 	void initKeybinds();
 	void initButtons();
 
 public:
-	MainMenuState(sf::RenderWindow* windows, std::map<std::string, int>* supportedKeys);
+	MainMenuState(sf::RenderWindow* windows, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~MainMenuState();
 	void endState();
 

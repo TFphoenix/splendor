@@ -3,7 +3,8 @@
 int main()
 {
 	SessionsManager sessions;
-	sessions.TestSession();
+	sessions.Test1Session();
+
 	
 	return 0;
 }
