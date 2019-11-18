@@ -31,7 +31,11 @@ private:
 
 	std::stack<State*> states;
 	std::map<std::string, int> supportedKeys;
+	std::vector<sf::VideoMode> videoModes;
+	sf::ContextSettings windowSetting;
+	bool fullscreen;
 
+	void initVariables();
 	void initWindows();
 	void initKeys();
 	void initStates();

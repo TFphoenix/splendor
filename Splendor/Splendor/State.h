@@ -28,6 +28,6 @@ protected:
 	sf::Vector2f mousePosView;
 	std::vector<sf::Texture> textures;
 
-	void initKeybinds();
+	virtual void initKeybinds()=0;
 };
 

@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
+#include <fstream>
 
 SessionsManager::SessionsManager()
 {
@@ -13,7 +14,6 @@ SessionsManager::SessionsManager()
 	this->initWindows();
 	this->initKeys();
 	this->initStates();
-
 }
 
 SessionsManager::~SessionsManager()
@@ -80,24 +80,69 @@ void SessionsManager::updateDt()
 	
 }
 
+void SessionsManager::initVariables()
+{
+	this->window = NULL;
+	this->fullscreen = false;
+	this->dt = 0.f;
+}
+
 void SessionsManager::initWindows()
 {
+	std::ifstream ifs("Config/window.ini");
+	this->videoModes = sf::VideoMode::getFullscreenModes();
+
 	std::string title = "Splendor";
-	sf::VideoMode window_bounds(800, 600);
+	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
+	bool fullscreen=false;
 	unsigned framerate_limit = 120;
 	bool vertical_sync_enabled = false;
-	this->window = new sf::RenderWindow(window_bounds, title);
+	unsigned level = 0;
+
+	if (ifs.is_open())
+	{
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> fullscreen;
+		ifs >> framerate_limit;
+		ifs >> vertical_sync_enabled;
+		ifs >> level;
+	}
+	ifs.close();
+	this->fullscreen = fullscreen;
+	sf::ContextSettings window_setting;
+	this->windowSetting.antialiasingLevel = level;
+	if (this->fullscreen)
+	{
+		this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Fullscreen, windowSetting);
+	}
+	else
+	{
+		this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSetting);
+	}
+
+	
+
 	this->window->setFramerateLimit(framerate_limit);
 	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
 
 void SessionsManager::initKeys()
 {
-	this->supportedKeys.emplace("Esc", sf::Keyboard::Key::Escape);
-	this->supportedKeys.emplace("A", sf::Keyboard::Key::A);
-	this->supportedKeys.emplace("D", sf::Keyboard::Key::D);
-	this->supportedKeys.emplace("W", sf::Keyboard::Key::W);
-	this->supportedKeys.emplace("S", sf::Keyboard::Key::S);
+	std::ifstream ifs("Config/supported_keys.ini");
+	if (ifs.is_open())
+	{
+		std::string key = "";
+		int key_val = 0;
+		while (ifs >> key >> key_val)
+		{
+			this->supportedKeys[key] = key_val;
+		}
+
+	}
+	ifs.close();
+
+
 
 	std::cout << this->supportedKeys.at("A");
 }
@@ -107,7 +152,6 @@ void SessionsManager::initStates()
 	this->states.push(new MainMenuState(this->window, &this->supportedKeys,&this->states));
 	
 }
-
 
 
 void SessionsManager::updateEvents()

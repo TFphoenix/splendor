@@ -28,19 +28,9 @@ void MainMenuState::initFonts()
 }
 void MainMenuState::initKeybinds()
 {
-	//std::ifstream ifs("Config/mainmenustate_keybinds.ini");
-	//if (ifs.is_open())
-	//{
-	//	std::string key = "";
-	//	std::string key2 = "";
-	//	while (ifs >> key >> key2)
-	//	{
-	//		this->keybinds[key] = this->supportedKeys->at(key2);
-	//	}
-	//}
-	//ifs.close();
 
-	this->keybinds.emplace("Escape", this->supportedKeys->at("Esc"));
+
+	this->keybinds.emplace("Escape", this->supportedKeys->at("Escape"));
 	this->keybinds.emplace("MOVE_LEFT", this->supportedKeys->at("A"));
 	this->keybinds.emplace("MOVE_RIGHT", this->supportedKeys->at("D"));
 	this->keybinds.emplace("MOVE_UP", this->supportedKeys->at("W"));
