@@ -128,10 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExpansionCard.cpp" />
     <ClCompile Include="GamePieces.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Randomizer.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="ICard.cpp" />
     <ClCompile Include="IToken.cpp" />
@@ -141,10 +146,15 @@
     <ClCompile Include="Splendor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="ExpansionCard.h" />
     <ClInclude Include="GamePieces.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Randomizer.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="ICard.h" />
     <ClInclude Include="IToken.h" />
