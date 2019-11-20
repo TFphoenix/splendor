@@ -1,114 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{1db8a406-86fa-4d98-9ca0-275a7caab89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pieces">
+      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{09eb9967-5ca3-4efa-a93a-dd6290d0828a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Splendor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="SessionsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ICard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="PregameSetup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IToken.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ExpansionCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NobleCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePieces.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Token.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpansionCard.cpp">
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePieces.cpp">
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="ICard.cpp">
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="IToken.cpp">
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="NobleCard.cpp">
+      <Filter>Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
+      <Filter>Pieces</Filter>
     </ClCompile>
     <ClCompile Include="Randomizer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SessionsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PregameSetup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePieces.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IToken.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Deck.h">
+      <Filter>Pieces</Filter>
     </ClInclude>
     <ClInclude Include="ExpansionCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePieces.h">
+      <Filter>Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="ICard.h">
+      <Filter>Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="IToken.h">
+      <Filter>Pieces</Filter>
     </ClInclude>
     <ClInclude Include="NobleCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Deck.h">
-      <Filter>Header Files</Filter>
+      <Filter>Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Randomizer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PregameSetup.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="SessionsManager.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UIButton.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
