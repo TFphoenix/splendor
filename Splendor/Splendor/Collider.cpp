@@ -2,12 +2,18 @@
 
 void Collider::HandleEvent(const sf::Event& event)
 {
+	const bool wasMouseIn = m_isMouseIn;
 	switch (event.type)
 	{
 	case sf::Event::MouseMoved:
 		if (DetectMouseCollision(sf::Vector2i(event.mouseMove.x, event.mouseMove.y)))
 		{
+			m_isMouseIn = true;
 			OnMouseOver();
+		}
+		else
+		{
+			m_isMouseIn = false;
 		}
 		break;
 	case sf::Event::MouseButtonPressed:
@@ -39,9 +45,28 @@ void Collider::HandleEvent(const sf::Event& event)
 	default:
 		break;
 	}
+
+	if (wasMouseIn)
+	{
+		if (!m_isMouseIn)
+		{
+			OnMouseLeave();
+		}
+	}
+	else
+	{
+		if (m_isMouseIn)
+		{
+			OnMouseEnter();
+		}
+	}
 }
 
 void Collider::OnMouseOver() { /*empty*/ }
+
+void Collider::OnMouseEnter() { /*empty*/ }
+
+void Collider::OnMouseLeave() { /*empty*/ }
 
 void Collider::OnMouseLeftClick() { /*empty*/ }
 

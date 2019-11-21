@@ -2,6 +2,7 @@
 #include "PregameSetup.h"
 #include "Deck.h"
 #include "ExpansionCard.h"
+#include "UIButton.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -18,20 +19,20 @@ SessionsManager::SessionsManager()
 
 void SessionsManager::MainSession()
 {
-	sf::CircleShape shape(100.f);
+	sf::RectangleShape shape(sf::Vector2f(100, 100));
 	shape.setFillColor(sf::Color::Green);
+	//Collider* button = new UIButton(shape, UIButton::Design(sf::Color::Blue), UIButton::Design(sf::Color::Red), UIButton::Design(sf::Color::Cyan));
 
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window->close();
+			//button->HandleEvent(event);
 		}
 
 		window->clear();
-		window->draw(shape);
+		//dynamic_cast<UIButton*>(button)->Draw(window);
 		window->display();
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

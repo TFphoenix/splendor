@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
 
-class RectCollider :Collider
+class RectCollider :public Collider
 {
 public:
 	RectCollider(const sf::Rect<int>& body);
