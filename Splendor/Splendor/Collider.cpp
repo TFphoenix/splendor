@@ -40,3 +40,13 @@ void Collider::HandleEvent(const sf::Event& event)
 		break;
 	}
 }
+
+void Collider::OnMouseOver() { /*empty*/ }
+
+void Collider::OnMouseLeftClick() { /*empty*/ }
+
+void Collider::OnMouseRightClick() { /*empty*/ }
+
+void Collider::OnMouseLeftRelease() { /*empty*/ }
+
+void Collider::OnMouseRightRelease() { /*empty*/ }
