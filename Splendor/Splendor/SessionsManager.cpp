@@ -10,8 +10,10 @@
 
 SessionsManager::SessionsManager()
 {
-	sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
-	window = new sf::RenderWindow(desktop, "Splendor", sf::Style::None);
+	/*sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
+	window = new sf::RenderWindow(desktop, "Splendor", sf::Style::None);*/
+	sf::VideoMode windowed = sf::VideoMode(800, 500);
+	window = new sf::RenderWindow(windowed, "Splendor", sf::Style::None);
 }
 
 void SessionsManager::MainSession()
@@ -19,9 +21,6 @@ void SessionsManager::MainSession()
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
-	int x = 0;
-
-	sf::Clock clock;
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -31,25 +30,15 @@ void SessionsManager::MainSession()
 				window->close();
 		}
 
-		sf::Time dt = clock.restart();
-
-		x++;
-		if (x > 100) {
-			x = 0;
-		}
-
 		window->clear();
-		shape.setOrigin(x, 0);
 		window->draw(shape);
 		window->display();
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			return;
 		}
 	}
-
-	return;
 }
 
 void SessionsManager::GameSession()

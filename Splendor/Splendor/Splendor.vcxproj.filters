@@ -15,20 +15,13 @@
       <UniqueIdentifier>{09eb9967-5ca3-4efa-a93a-dd6290d0828a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Main">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <UniqueIdentifier>{379be94f-5060-44f6-9834-e1aedba7e7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Colliders">
+      <UniqueIdentifier>{016a3cb1-33e0-49af-a279-2242ee035977}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Splendor.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="SessionsManager.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="PregameSetup.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Pieces</Filter>
     </ClCompile>
@@ -56,6 +49,19 @@
     <ClCompile Include="UIButton.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="PregameSetup.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionsManager.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Splendor.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="RectCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -82,14 +88,18 @@
     <ClInclude Include="Randomizer.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
     <ClInclude Include="PregameSetup.h">
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="SessionsManager.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h">
-      <Filter>GUI</Filter>
+    <ClInclude Include="Collider.h">
+      <Filter>Utility\Colliders</Filter>
     </ClInclude>
+    <ClInclude Include="RectCollider.h" />
   </ItemGroup>
 </Project>
