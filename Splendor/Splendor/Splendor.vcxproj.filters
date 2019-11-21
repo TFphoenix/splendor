@@ -61,7 +61,10 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Utility\Colliders</Filter>
     </ClCompile>
-    <ClCompile Include="RectCollider.cpp" />
+    <ClCompile Include="RectCollider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="CircCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -100,6 +103,9 @@
     <ClInclude Include="Collider.h">
       <Filter>Utility\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="RectCollider.h" />
+    <ClInclude Include="RectCollider.h">
+      <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="CircCollider.h" />
   </ItemGroup>
 </Project>
