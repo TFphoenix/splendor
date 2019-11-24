@@ -4,7 +4,7 @@
 #include "ExpansionCard.h"
 #include "UIButton.h"
 #include "UIColors.h"
-#include "CircCollider.h"
+#include "UIToken.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -217,20 +217,18 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
-	sf::CircleShape circle(100);
-	circle.setOrigin(circle.getRadius(), circle.getRadius());
-	circle.setPosition(200, 200);
-	circle.setFillColor(UIColors::GoldYellow);
-
-	Collider* circleCollider = new CircCollider(circle);
+	Collider* gEToken = new UIToken(IToken::Type::GreenEmerald, sf::Vector2f(100, 100));
+	Collider* bSToken = new UIToken(IToken::Type::BlueSapphire, sf::Vector2f(250, 100));
+	Collider* wDToken = new UIToken(IToken::Type::WhiteDiamond, sf::Vector2f(400, 100));
+	Collider* bOToken = new UIToken(IToken::Type::BlackOnyx, sf::Vector2f(550, 100));
+	Collider* rRToken = new UIToken(IToken::Type::RedRuby, sf::Vector2f(700, 100));
+	Collider* goldToken = new UIToken(IToken::Type::Gold, sf::Vector2f(850, 100));
 
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
-			circleCollider->HandleEvent(event);
-
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
@@ -241,7 +239,12 @@ void SessionsManager::PreGameSession() const
 		}
 
 		window->clear(UIColors::DarkBlue);
-		window->draw(circle);
+		window->draw(*dynamic_cast<UIToken*>(gEToken));
+		window->draw(*dynamic_cast<UIToken*>(bSToken));
+		window->draw(*dynamic_cast<UIToken*>(wDToken));
+		window->draw(*dynamic_cast<UIToken*>(bOToken));
+		window->draw(*dynamic_cast<UIToken*>(rRToken));
+		window->draw(*dynamic_cast<UIToken*>(goldToken));
 		window->display();
 	}
 }

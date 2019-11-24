@@ -145,6 +145,7 @@
     <ClCompile Include="Splendor.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="UIToken.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircCollider.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="UIColors.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIText.h" />
+    <ClInclude Include="UIToken.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Bold.ttf" />

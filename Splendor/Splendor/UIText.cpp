@@ -1,6 +1,6 @@
 #include "UIText.h"
 
-std::vector<sf::Font> UIText::m_availableFonts;
+std::vector<sf::Font> UIText::s_availableFonts;
 
 UIText::UIText(const sf::Vector2f& position, TextAlign align, AvailableFonts font, const std::string& text, uint16_t fontSize, sf::Color fontFill, sf::Color fontOutline, float outlineThickness)
 {
@@ -18,16 +18,16 @@ UIText::UIText(const sf::Vector2f& position, TextAlign align, AvailableFonts fon
 
 void UIText::SetFont(AvailableFonts font)
 {
-	setFont(m_availableFonts[static_cast<int>(font)]);
+	setFont(s_availableFonts[static_cast<int>(font)]);
 }
 
 void UIText::LoadFonts()
 {
-	if (m_availableFonts.size() != s_fontsCount)
+	if (s_availableFonts.size() != s_fontsCount)
 	{
-		m_availableFonts.resize(s_fontsCount);
+		s_availableFonts.resize(s_fontsCount);
 		size_t fontIndex = 0;
-		for (auto& font : m_availableFonts)
+		for (auto& font : s_availableFonts)
 		{
 			switch (static_cast<AvailableFonts>(fontIndex++))
 			{

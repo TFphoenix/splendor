@@ -76,6 +76,9 @@
     <ClCompile Include="UIPanel.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="UIToken.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -127,6 +130,9 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="UIPanel.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIToken.h">
       <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>

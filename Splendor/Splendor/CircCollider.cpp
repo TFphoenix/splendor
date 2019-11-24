@@ -23,13 +23,3 @@ bool CircCollider::DetectMouseCollision(sf::Vector2i&& mousePosition)
 		+ (mousePosition.y - bodyPosition.y) * (mousePosition.y - bodyPosition.y));
 	return distance < m_body.getRadius();
 }
-
-void CircCollider::OnMouseEnter()
-{
-	std::cout << "ENTER\n";
-}
-
-void CircCollider::OnMouseLeave()
-{
-	std::cout << "LEAVE\n";
-}

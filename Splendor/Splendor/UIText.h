@@ -20,6 +20,7 @@ public:
 	};
 
 private:
+	static std::vector<sf::Font> s_availableFonts;
 	const inline static std::string s_fontsFile = "../external/Resources/Fonts/";
 	const inline static size_t s_fontsCount = 4;
 
@@ -37,7 +38,4 @@ public:
 private:
 	// Preparation
 	static void LoadFonts();
-
-private:
-	static std::vector<sf::Font> m_availableFonts;
 };

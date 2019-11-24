@@ -10,10 +10,6 @@ public:
 
 	bool DetectMouseCollision(sf::Vector2i&& mousePosition) override;
 
-	//TEST
-	void OnMouseEnter() override;
-	void OnMouseLeave() override;
-
 private:
 	sf::CircleShape m_body;
 };
