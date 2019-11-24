@@ -143,6 +143,7 @@
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
+    <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
     <ClInclude Include="UIColors.h" />
+    <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIText.h" />
   </ItemGroup>
   <ItemGroup>
