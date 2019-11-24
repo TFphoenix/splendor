@@ -3,6 +3,7 @@
 #include "Deck.h"
 #include "ExpansionCard.h"
 #include "UIButton.h"
+#include "UIColors.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -29,11 +30,6 @@ SessionsManager::~SessionsManager()
 
 void SessionsManager::MainMenuSession() const
 {
-	// Colors
-	const sf::Color goldYellow(234, 191, 0);
-	const sf::Color darkYellow(200, 160, 0);
-	const sf::Color darkBlue(10, 45, 90);
-
 	// Background
 	sf::Texture backgroundTexture;
 	backgroundTexture.loadFromFile("../external/Resources/Images/Backgrounds/Splendor_background.png");
@@ -54,19 +50,19 @@ void SessionsManager::MainMenuSession() const
 	exitMenu.setOrigin(exitMenuSize.x / 2.0f, exitMenuSize.y / 2.0f);
 	exitMenu.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
 	exitMenuPosition = exitMenu.getPosition();
-	exitMenu.setFillColor(darkBlue);
-	exitMenu.setOutlineColor(darkYellow);
+	exitMenu.setFillColor(UIColors::DarkBlue);
+	exitMenu.setOutlineColor(UIColors::GoldYellow);
 	exitMenu.setOutlineThickness(5.0f);
 
 	// Main Menu Text
 	UIText mainMenuText(sf::Vector2f(mainMenuPosition.x + mainMenuSize.x / 2, mainMenuPosition.y + 75), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, "Main Menu", 60);
-	mainMenuText.setFillColor(goldYellow);
+	mainMenuText.setFillColor(UIColors::GoldYellow);
 	mainMenuText.setOutlineThickness(3.0f);
 	mainMenuText.AlignText(UIText::TextAlign::mid_center);
 
 	// Exit Menu Text
 	UIText exitMenuText(sf::Vector2f(exitMenuPosition.x, exitMenuPosition.y - 50), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisBold, "Are you sure you want to exit Splendor Game?", 35);
-	exitMenuText.setFillColor(goldYellow);
+	exitMenuText.setFillColor(UIColors::GoldYellow);
 	exitMenuText.setOutlineThickness(0.0f);
 	exitMenuText.AlignText(UIText::TextAlign::mid_center);
 
@@ -88,7 +84,7 @@ void SessionsManager::MainMenuSession() const
 		UIButton::Design::Body
 		{
 		sf::Color(0, 0, 0,0),
-		goldYellow,
+		UIColors::GoldYellow,
 		4.0f
 		},
 		UIButton::Design::Text
@@ -96,7 +92,7 @@ void SessionsManager::MainMenuSession() const
 		"Button",
 		UIText::AvailableFonts::DosisBold,
 		30,
-		goldYellow,
+		UIColors::GoldYellow,
 		sf::Color(0,0,0),
 		0.0f
 		}
@@ -104,7 +100,7 @@ void SessionsManager::MainMenuSession() const
 	UIButton::Design buttonHoverDesign = {
 		UIButton::Design::Body
 		{
-		goldYellow,
+		UIColors::GoldYellow,
 		sf::Color(255,255,255),
 		2.0f
 		},
@@ -121,7 +117,7 @@ void SessionsManager::MainMenuSession() const
 	UIButton::Design buttonPressDesign = {
 		UIButton::Design::Body
 		{
-		darkYellow,
+		UIColors::DarkYellow,
 		sf::Color(0,0,0),
 		0.0f
 		},
@@ -182,7 +178,7 @@ void SessionsManager::MainMenuSession() const
 			if (dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->GetState() == UIButton::State::Release)
 			{
 				dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->SwitchState(UIButton::State::None);
-				GameSession();
+				PreGameSession();
 			}
 			if (dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->GetState() == UIButton::State::Release)
 			{
@@ -216,6 +212,11 @@ void SessionsManager::MainMenuSession() const
 		}
 		window->display();
 	}
+}
+
+void SessionsManager::PreGameSession() const
+{
+
 }
 
 void SessionsManager::GameSession() const

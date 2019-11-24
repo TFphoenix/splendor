@@ -160,6 +160,7 @@
     <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
+    <ClInclude Include="UIColors.h" />
     <ClInclude Include="UIText.h" />
   </ItemGroup>
   <ItemGroup>

@@ -120,6 +120,9 @@
     <ClInclude Include="UIText.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="UIColors.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">

@@ -8,6 +8,7 @@ public:
 	~SessionsManager();
 	
 	void MainMenuSession() const;
+	void PreGameSession() const;
 	void GameSession() const;
 	void TestSession() const;
 
