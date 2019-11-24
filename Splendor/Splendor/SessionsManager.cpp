@@ -2,6 +2,7 @@
 #include "PregameSetup.h"
 #include "Deck.h"
 #include "ExpansionCard.h"
+#include "UIButton.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -10,28 +11,34 @@
 
 SessionsManager::SessionsManager()
 {
-	/*sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
-	window = new sf::RenderWindow(desktop, "Splendor", sf::Style::None);*/
-	sf::VideoMode windowed = sf::VideoMode(800, 500);
-	window = new sf::RenderWindow(windowed, "Splendor", sf::Style::None);
+	/*const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
+	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);*/
+	const sf::VideoMode windowedVM = sf::VideoMode(800, 500);
+	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 }
 
 void SessionsManager::MainSession()
 {
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RectangleShape shape(sf::Vector2f(200, 100));
+	shape.setPosition(sf::Vector2f(100, 100));
+	//UIButton::Design noneDesign, hoverDesign, pressDesign;
+	Collider* button = new UIButton(shape/*, noneDesign, hoverDesign, pressDesign*/);
 
+
+	window->clear();
+	dynamic_cast<UIButton*>(button)->Draw(window);
+	window->display();
+	
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window->close();
+			button->HandleEvent(event);
 		}
 
 		window->clear();
-		window->draw(shape);
+		dynamic_cast<UIButton*>(button)->Draw(window);
 		window->display();
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

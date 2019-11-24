@@ -8,9 +8,6 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{1db8a406-86fa-4d98-9ca0-275a7caab89a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pieces">
-      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utility">
       <UniqueIdentifier>{09eb9967-5ca3-4efa-a93a-dd6290d0828a}</UniqueIdentifier>
     </Filter>
@@ -20,28 +17,34 @@
     <Filter Include="Utility\Colliders">
       <UniqueIdentifier>{016a3cb1-33e0-49af-a279-2242ee035977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Pieces">
+      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{06eae609-1ed0-47d0-acb5-5d009df3b964}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Deck.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="ExpansionCard.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="GamePieces.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="ICard.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="IToken.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="NobleCard.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="Token.cpp">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClCompile>
     <ClCompile Include="Randomizer.cpp">
       <Filter>Utility</Filter>
@@ -64,29 +67,34 @@
     <ClCompile Include="RectCollider.cpp">
       <Filter>Utility\Colliders</Filter>
     </ClCompile>
-    <ClCompile Include="CircCollider.cpp" />
+    <ClCompile Include="UIText.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CircCollider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="ExpansionCard.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="GamePieces.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="ICard.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="IToken.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="NobleCard.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Token.h">
-      <Filter>Pieces</Filter>
+      <Filter>Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Randomizer.h">
       <Filter>Utility</Filter>
@@ -106,6 +114,19 @@
     <ClInclude Include="RectCollider.h">
       <Filter>Utility\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="CircCollider.h" />
+    <ClInclude Include="UIText.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CircCollider.h">
+      <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="..\external\Resources\Fonts\PixellettersFull.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

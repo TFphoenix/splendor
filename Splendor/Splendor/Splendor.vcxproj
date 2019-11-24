@@ -143,6 +143,7 @@
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
+    <ClCompile Include="UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircCollider.h" />
@@ -159,6 +160,11 @@
     <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
+    <ClInclude Include="UIText.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf" />
+    <Font Include="..\external\Resources\Fonts\PixellettersFull.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
