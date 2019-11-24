@@ -73,7 +73,9 @@
     <ClCompile Include="UIText.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UIPanel.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -124,7 +126,9 @@
     <ClInclude Include="UIColors.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UIPanel.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">

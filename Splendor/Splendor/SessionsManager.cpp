@@ -4,6 +4,7 @@
 #include "ExpansionCard.h"
 #include "UIButton.h"
 #include "UIColors.h"
+#include "CircCollider.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -216,13 +217,38 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
+	sf::CircleShape circle(100);
+	circle.setOrigin(circle.getRadius(), circle.getRadius());
+	circle.setPosition(200, 200);
+	circle.setFillColor(UIColors::GoldYellow);
 
+	Collider* circleCollider = new CircCollider(circle);
+
+	while (window->isOpen())
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			circleCollider->HandleEvent(event);
+
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					return;
+				}
+			}
+		}
+
+		window->clear(UIColors::DarkBlue);
+		window->draw(circle);
+		window->display();
+	}
 }
 
 void SessionsManager::GameSession() const
 {
-	const sf::Color darkBlue(10, 45, 90);
-	window->clear(darkBlue);
+	window->clear(UIColors::DarkBlue);
 	window->display();
 	while (window->isOpen())
 	{
