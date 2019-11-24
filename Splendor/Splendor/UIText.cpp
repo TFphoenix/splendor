@@ -34,8 +34,14 @@ void UIText::LoadFonts()
 			case AvailableFonts::DosisLight:
 				font.loadFromFile(s_fontsFile + "Dosis-Light.ttf");
 				break;
+			case AvailableFonts::DosisBold:
+				font.loadFromFile(s_fontsFile + "Dosis-Bold.ttf");
+				break;
 			case AvailableFonts::PixellettersFull:
 				font.loadFromFile(s_fontsFile + "PixellettersFull.ttf");
+				break;
+			case AvailableFonts::Splendor:
+				font.loadFromFile(s_fontsFile + "Splendor.ttf");
 				break;
 			default:
 				font.loadFromFile(s_fontsFile + "Dosis-Light.ttf");

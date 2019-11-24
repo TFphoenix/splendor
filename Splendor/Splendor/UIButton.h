@@ -11,7 +11,8 @@ public:
 	{
 		None,
 		Hover,
-		Press
+		Press,
+		Release
 	};
 	class Design
 	{
@@ -59,6 +60,7 @@ public:
 	State GetState() const;
 	void SwitchState(State newState);
 	Design GetDesign() const;
+	void ChangeText(const std::string& newText);
 
 	// Events
 	void OnMouseEnter() override;

@@ -7,7 +7,9 @@ public:
 	enum class AvailableFonts
 	{
 		DosisLight,
+		DosisBold,
 		PixellettersFull,
+		Splendor
 	};
 	enum class TextAlign
 	{
@@ -19,7 +21,7 @@ public:
 
 private:
 	const inline static std::string s_fontsFile = "../external/Resources/Fonts/";
-	const inline static size_t s_fontsCount = 2;
+	const inline static size_t s_fontsCount = 4;
 
 public:
 	// Constr.

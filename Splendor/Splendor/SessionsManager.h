@@ -5,11 +5,15 @@ class SessionsManager
 {
 public:
 	SessionsManager();
-	void MainSession();
-	void GameSession();
-	void TestSession();
+	~SessionsManager();
 	
+	void MainMenuSession() const;
+	void GameSession() const;
+	void TestSession() const;
+
 private:
 	sf::RenderWindow* window;
+	sf::Vector2i windowPosition;
+	sf::Vector2u windowSize;
 };
 

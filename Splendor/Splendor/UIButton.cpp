@@ -43,7 +43,7 @@ const UIButton::Design UIButton::DefaultDesign::HoverDesign = UIButton::Design
 	Design::Text
 	{
 	"Hover",
-	UIText::AvailableFonts::PixellettersFull,
+	UIText::AvailableFonts::DosisLight,
 	30,
 	sf::Color(10,255,10),
 	sf::Color(255,255,255),
@@ -113,6 +113,13 @@ UIButton::Design UIButton::GetDesign() const
 	return *m_currentDesign;
 }
 
+void UIButton::ChangeText(const std::string& newText)
+{
+	m_noneDesign.m_textDesign.text = newText;
+	m_hoverDesign.m_textDesign.text = newText;
+	m_pressDesign.m_textDesign.text = newText;
+}
+
 void UIButton::OnMouseEnter()
 {
 	m_currentState = State::Hover;
@@ -133,7 +140,7 @@ void UIButton::OnMouseLeftClick()
 
 void UIButton::OnMouseLeftRelease()
 {
-	m_currentState = State::Hover;
+	m_currentState = State::Release;
 	m_currentDesign = &m_hoverDesign;
 }
 

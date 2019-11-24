@@ -163,8 +163,10 @@
     <ClInclude Include="UIText.h" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="..\external\Resources\Fonts\Dosis-Bold.ttf" />
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf" />
     <Font Include="..\external\Resources\Fonts\PixellettersFull.ttf" />
+    <Font Include="..\external\Resources\Fonts\Splendor.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

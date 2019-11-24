@@ -2,9 +2,8 @@
 
 int main()
 {
-	SessionsManager sessions;
-	sessions.MainSession();
+	SessionsManager SplendorSession;
+	SplendorSession.MainMenuSession();
 
-	
 	return 0;
 }

@@ -21,7 +21,7 @@
       <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Fonts">
-      <UniqueIdentifier>{06eae609-1ed0-47d0-acb5-5d009df3b964}</UniqueIdentifier>
+      <UniqueIdentifier>{a144c2f7-4e64-4faf-ac97-d5d24d8172c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,9 +49,6 @@
     <ClCompile Include="Randomizer.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="UIButton.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
     <ClCompile Include="PregameSetup.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -67,11 +64,14 @@
     <ClCompile Include="RectCollider.cpp">
       <Filter>Utility\Colliders</Filter>
     </ClCompile>
-    <ClCompile Include="UIText.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
     <ClCompile Include="CircCollider.cpp">
       <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +99,6 @@
     <ClInclude Include="Randomizer.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
     <ClInclude Include="PregameSetup.h">
       <Filter>Main</Filter>
     </ClInclude>
@@ -114,11 +111,14 @@
     <ClInclude Include="RectCollider.h">
       <Filter>Utility\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="UIText.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
     <ClInclude Include="CircCollider.h">
       <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +126,12 @@
       <Filter>Resource Files\Fonts</Filter>
     </Font>
     <Font Include="..\external\Resources\Fonts\PixellettersFull.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="..\external\Resources\Fonts\Splendor.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="..\external\Resources\Fonts\Dosis-Bold.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
   </ItemGroup>
