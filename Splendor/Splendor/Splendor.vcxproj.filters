@@ -23,6 +23,18 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{a144c2f7-4e64-4faf-ac97-d5d24d8172c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Primitives">
+      <UniqueIdentifier>{68f10611-4c74-46bf-9475-886a9f969d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Game Pieces">
+      <UniqueIdentifier>{cf7cad3c-58cb-41b6-b1df-5eaffb5c283b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Panels">
+      <UniqueIdentifier>{049c71b2-45a3-4f72-9c5a-99aa0324373a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Sessions">
+      <UniqueIdentifier>{e95c5891-27c2-4846-b032-acf252cb77d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Deck.cpp">
@@ -68,16 +80,28 @@
       <Filter>Utility\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="UIText.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="UIPanel.cpp">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="UIToken.cpp">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPreGameSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="UISelector.cpp">
+      <Filter>GUI\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="UIOptionsPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UICheckBox.cpp">
+      <Filter>GUI\Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,19 +145,31 @@
       <Filter>Utility\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="UIButton.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIText.h">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="UIColors.h">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="UIPanel.h">
-      <Filter>GUI</Filter>
+    <ClInclude Include="UIText.h">
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="UIToken.h">
-      <Filter>GUI</Filter>
+      <Filter>GUI\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPreGameSession.h">
+      <Filter>GUI\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="UISelector.h">
+      <Filter>GUI\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="UIOptionsPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UICheckBox.h">
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

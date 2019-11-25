@@ -1,10 +1,10 @@
 #include "SessionsManager.h"
 #include "PregameSetup.h"
-#include "Deck.h"
 #include "ExpansionCard.h"
 #include "UIButton.h"
 #include "UIColors.h"
 #include "UIToken.h"
+#include "UICheckBox.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -223,12 +223,15 @@ void SessionsManager::PreGameSession() const
 	Collider* bOToken = new UIToken(IToken::Type::BlackOnyx, sf::Vector2f(550, 100));
 	Collider* rRToken = new UIToken(IToken::Type::RedRuby, sf::Vector2f(700, 100));
 	Collider* goldToken = new UIToken(IToken::Type::Gold, sf::Vector2f(850, 100));
+	Collider* checkBox = new UICheckBox("AIASdasdasdasedawse Help", { 200,200 });
 
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
+			checkBox->HandleEvent(event);
+
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
@@ -239,6 +242,7 @@ void SessionsManager::PreGameSession() const
 		}
 
 		window->clear(UIColors::DarkBlue);
+		window->draw(*dynamic_cast<UICheckBox*>(checkBox));
 		window->draw(*dynamic_cast<UIToken*>(gEToken));
 		window->draw(*dynamic_cast<UIToken*>(bSToken));
 		window->draw(*dynamic_cast<UIToken*>(wDToken));

@@ -143,7 +143,11 @@
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
+    <ClCompile Include="UICheckBox.cpp" />
+    <ClCompile Include="UIOptionsPanel.cpp" />
     <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UIPreGameSession.cpp" />
+    <ClCompile Include="UISelector.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UIToken.cpp" />
   </ItemGroup>
@@ -162,8 +166,12 @@
     <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
+    <ClInclude Include="UICheckBox.h" />
     <ClInclude Include="UIColors.h" />
+    <ClInclude Include="UIOptionsPanel.h" />
     <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UIPreGameSession.h" />
+    <ClInclude Include="UISelector.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UIToken.h" />
   </ItemGroup>

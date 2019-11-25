@@ -11,7 +11,7 @@ public:
 
 	bool DetectMouseCollision(sf::Vector2i&& mousePosition) override;
 
-private:
+protected:
 	sf::Rect<int> m_body;
 };
 
