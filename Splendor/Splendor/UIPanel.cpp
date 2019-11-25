@@ -1,15 +1,15 @@
 #include "UIPanel.h"
 
-UIPanel::UIPanel(std::string&& name, sf::Vector2f size, bool isActive) :RectangleShape(size), m_name(std::move(name)), m_isActive(isActive) {}
+UIPanel::UIPanel(std::string&& title, sf::Vector2f size, bool isActive) :RectangleShape(size), m_title(std::move(title)), m_isActive(isActive) {}
 
-std::string UIPanel::GetName() const
+std::string UIPanel::GetTitle() const
 {
-	return m_name;
+	return m_title;
 }
 
-void UIPanel::SetName(const std::string& name)
+void UIPanel::SetTitle(const std::string& title)
 {
-	m_name = name;
+	m_title = title;
 }
 
 bool UIPanel::IsActive() const
