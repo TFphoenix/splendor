@@ -3,7 +3,7 @@
 #include "UISelector.h"
 #include "UIColors.h"
 
-class UICheckBox :public UISelector, public RectCollider, public sf::Drawable
+class UICheckBox :public UISelector, public RectCollider
 {
 public:
 	struct Design

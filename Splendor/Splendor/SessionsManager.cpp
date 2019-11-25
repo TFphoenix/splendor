@@ -200,16 +200,16 @@ void SessionsManager::MainMenuSession() const
 		window->draw(background);
 		window->draw(mainMenu);
 		window->draw(mainMenuText);
-		dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->Draw(window);
-		dynamic_cast<UIButton*>(menuButtons[Buttons::Tutorial])->Draw(window);
-		dynamic_cast<UIButton*>(menuButtons[Buttons::Settings])->Draw(window);
-		dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->Draw(window);
+		window->draw(*menuButtons[Buttons::NewGame]);
+		window->draw(*menuButtons[Buttons::Tutorial]);
+		window->draw(*menuButtons[Buttons::Settings]);
+		window->draw(*menuButtons[Buttons::Exit]);
 		if (exitMenuTriggered)
 		{
 			window->draw(exitMenu);
 			window->draw(exitMenuText);
-			dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->Draw(window);
-			dynamic_cast<UIButton*>(menuButtons[Buttons::ExitYes])->Draw(window);
+			window->draw(*menuButtons[Buttons::ExitNo]);
+			window->draw(*menuButtons[Buttons::ExitYes]);
 		}
 		window->display();
 	}
@@ -242,13 +242,13 @@ void SessionsManager::PreGameSession() const
 		}
 
 		window->clear(UIColors::DarkBlue);
-		window->draw(*dynamic_cast<UICheckBox*>(checkBox));
-		window->draw(*dynamic_cast<UIToken*>(gEToken));
-		window->draw(*dynamic_cast<UIToken*>(bSToken));
-		window->draw(*dynamic_cast<UIToken*>(wDToken));
-		window->draw(*dynamic_cast<UIToken*>(bOToken));
-		window->draw(*dynamic_cast<UIToken*>(rRToken));
-		window->draw(*dynamic_cast<UIToken*>(goldToken));
+		window->draw(*checkBox);
+		window->draw(*gEToken);
+		window->draw(*bSToken);
+		window->draw(*wDToken);
+		window->draw(*bOToken);
+		window->draw(*rRToken);
+		window->draw(*goldToken);
 		window->display();
 	}
 }

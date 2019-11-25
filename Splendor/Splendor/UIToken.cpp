@@ -2,15 +2,20 @@
 
 std::vector<sf::Texture> UIToken::s_tokenTextures;
 
-UIToken::UIToken(IToken::Type tokenType, const sf::Vector2f& position, float radius) :CircCollider(position, radius), CircleShape(radius)
+UIToken::UIToken(IToken::Type tokenType, const sf::Vector2f& position, float radius) :CircCollider(position, radius), m_body(radius)
 {
-	setOrigin(radius, radius);
-	setPosition(position);
+	m_body.setOrigin(radius, radius);
+	m_body.setPosition(position);
 	if (s_tokenTextures.empty())
 	{
 		LoadTextures();
 	}
-	setTexture(&s_tokenTextures[static_cast<int>(tokenType)]);
+	m_body.setTexture(&s_tokenTextures[static_cast<int>(tokenType)]);
+}
+
+void UIToken::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(m_body);
 }
 
 void UIToken::LoadTextures()

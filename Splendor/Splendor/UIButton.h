@@ -69,7 +69,7 @@ public:
 	void OnMouseLeftRelease() override;
 
 	// Graffix
-	void Draw(sf::RenderWindow* window);
+	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
 	void UpdateDesign();

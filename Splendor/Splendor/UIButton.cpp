@@ -83,6 +83,7 @@ m_currentState(initialState)
 	m_text.PositionText(m_body);
 
 	m_currentDesign = &m_noneDesign;
+	UpdateDesign();
 }
 
 UIButton::State UIButton::GetState() const
@@ -118,30 +119,35 @@ void UIButton::ChangeText(const std::string& newText)
 	m_noneDesign.m_textDesign.text = newText;
 	m_hoverDesign.m_textDesign.text = newText;
 	m_pressDesign.m_textDesign.text = newText;
+	UpdateDesign();
 }
 
 void UIButton::OnMouseEnter()
 {
 	m_currentState = State::Hover;
 	m_currentDesign = &m_hoverDesign;
+	UpdateDesign();
 }
 
 void UIButton::OnMouseLeave()
 {
 	m_currentState = State::None;
 	m_currentDesign = &m_noneDesign;
+	UpdateDesign();
 }
 
 void UIButton::OnMouseLeftClick()
 {
 	m_currentState = State::Press;
 	m_currentDesign = &m_pressDesign;
+	UpdateDesign();
 }
 
 void UIButton::OnMouseLeftRelease()
 {
 	m_currentState = State::Release;
 	m_currentDesign = &m_hoverDesign;
+	UpdateDesign();
 }
 
 void UIButton::UpdateDesign()
@@ -161,9 +167,8 @@ void UIButton::UpdateDesign()
 	m_text.setOutlineThickness(m_currentDesign->m_textDesign.outlineThickness);
 }
 
-void UIButton::Draw(sf::RenderWindow* window)
+void UIButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	UpdateDesign();
-	window->draw(m_body);
-	window->draw(m_text);
+	target.draw(m_body);
+	target.draw(m_text);
 }
