@@ -9,6 +9,8 @@ public:
 	RectCollider(const sf::Vector2i& position, const sf::Vector2i& size);
 	RectCollider(sf::Vector2i&& position, sf::Vector2i&& size);
 
+	sf::Rect<int> GetRect() const;
+	
 	bool DetectMouseCollision(sf::Vector2i&& mousePosition) override;
 
 protected:

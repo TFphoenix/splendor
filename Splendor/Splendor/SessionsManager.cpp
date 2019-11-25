@@ -3,8 +3,7 @@
 #include "ExpansionCard.h"
 #include "UIButton.h"
 #include "UIColors.h"
-#include "UIToken.h"
-#include "UICheckBox.h"
+#include "UIPreGameSession.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -188,6 +187,7 @@ void SessionsManager::MainMenuSession() const
 			if (dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->GetState() == UIButton::State::Release)
 			{
 				exitMenuTriggered = false;
+				dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->SwitchState(UIButton::State::None);
 				dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->SwitchState(UIButton::State::None);
 			}
 			if (dynamic_cast<UIButton*>(menuButtons[Buttons::ExitYes])->GetState() == UIButton::State::Release)
@@ -217,38 +217,27 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
-	Collider* gEToken = new UIToken(IToken::Type::GreenEmerald, sf::Vector2f(100, 100));
-	Collider* bSToken = new UIToken(IToken::Type::BlueSapphire, sf::Vector2f(250, 100));
-	Collider* wDToken = new UIToken(IToken::Type::WhiteDiamond, sf::Vector2f(400, 100));
-	Collider* bOToken = new UIToken(IToken::Type::BlackOnyx, sf::Vector2f(550, 100));
-	Collider* rRToken = new UIToken(IToken::Type::RedRuby, sf::Vector2f(700, 100));
-	Collider* goldToken = new UIToken(IToken::Type::Gold, sf::Vector2f(850, 100));
-	Collider* checkBox = new UICheckBox("AIASdasdasdasedawse Help", { 200,200 });
+	UIPreGameSession pregameSessionGUI(windowSize);
 
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
-			checkBox->HandleEvent(event);
-
-			if (event.type == sf::Event::KeyPressed)
+			pregameSessionGUI.PassEvent(event);
+			if (pregameSessionGUI.BackToMainMenu())
 			{
-				if (event.key.code == sf::Keyboard::Escape)
-				{
-					return;
-				}
+				return;
+			}
+			if (pregameSessionGUI.StartGame())
+			{
+				GameSession();
+				return;
 			}
 		}
 
 		window->clear(UIColors::DarkBlue);
-		window->draw(*checkBox);
-		window->draw(*gEToken);
-		window->draw(*bSToken);
-		window->draw(*wDToken);
-		window->draw(*bOToken);
-		window->draw(*rRToken);
-		window->draw(*goldToken);
+		window->draw(pregameSessionGUI);
 		window->display();
 	}
 }

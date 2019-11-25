@@ -12,6 +12,11 @@ RectCollider::RectCollider(const sf::Vector2i& position, const sf::Vector2i& siz
 RectCollider::RectCollider(sf::Vector2i&& position, sf::Vector2i&& size) :
 	m_body(position, size) {}
 
+sf::Rect<int> RectCollider::GetRect() const
+{
+	return m_body;
+}
+
 bool RectCollider::DetectMouseCollision(sf::Vector2i&& mousePosition)
 {
 	return m_body.contains(mousePosition);

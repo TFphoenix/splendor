@@ -8,3 +8,8 @@ UISelector::UISelector(const std::string& title, const sf::Vector2f& position, c
 	m_title.setPosition(position.x + size.x / 2.0f, (position.y + 0.3f * size.y / 2.0f));
 	m_title.AlignText(UIText::TextAlign::mid_center);
 }
+
+bool UISelector::IsChecked() const
+{
+	return m_isChecked;
+}

@@ -1,4 +1,5 @@
 #include "UIButton.h"
+#include "UIColors.h"
 
 UIButton::Design::Design(const Body& bodyDesign, const Text& textDesign) : m_bodyDesign(bodyDesign), m_textDesign(textDesign) {}
 
@@ -18,54 +19,54 @@ const UIButton::Design UIButton::DefaultDesign::NoneDesign = UIButton::Design
 {
 	Design::Body
 	{
-	sf::Color(130, 130, 130),
-	sf::Color(65, 65, 65),
+	sf::Color(0, 0, 0,0),
+	UIColors::GoldYellow,
 	4.0f
 	},
 	Design::Text
 	{
-	"None",
-	UIText::AvailableFonts::DosisLight,
+	"Button",
+	UIText::AvailableFonts::DosisBold,
 	30,
-	sf::Color(250,10,10),
-	sf::Color(255,255,255),
-	1.5f
+	UIColors::GoldYellow,
+	sf::Color(0,0,0),
+	0.0f
 	}
 };
 const UIButton::Design UIButton::DefaultDesign::HoverDesign = UIButton::Design
 {
 	Design::Body
 	{
-	sf::Color(200, 200, 200),
-	sf::Color(100, 100, 100),
-	4.0f
+	UIColors::GoldYellow,
+	sf::Color(255,255,255),
+	2.0f
 	},
 	Design::Text
 	{
-	"Hover",
-	UIText::AvailableFonts::DosisLight,
+	"Button",
+	UIText::AvailableFonts::DosisBold,
 	30,
-	sf::Color(10,255,10),
 	sf::Color(255,255,255),
-	3.0f
+	sf::Color(255,255,255),
+	0.0f
 	}
 };
 const UIButton::Design UIButton::DefaultDesign::PressDesign = UIButton::Design
 {
 	Design::Body
 	{
-	sf::Color(60, 60, 60),
-	sf::Color(30, 30, 30),
-	4.0f
+	UIColors::DarkYellow,
+	sf::Color(0,0,0),
+	0.0f
 	},
 	Design::Text
 	{
-	"Press",
-	UIText::AvailableFonts::DosisLight,
+	"Button",
+	UIText::AvailableFonts::DosisBold,
 	30,
-	sf::Color(10,10,255),
+	sf::Color(200,200,200),
 	sf::Color(255,255,255),
-	1.5f
+	0.0f
 	}
 };
 
@@ -107,6 +108,7 @@ void UIButton::SwitchState(State newState)
 	default:
 		break;
 	}
+	UpdateDesign();
 }
 
 UIButton::Design UIButton::GetDesign() const
