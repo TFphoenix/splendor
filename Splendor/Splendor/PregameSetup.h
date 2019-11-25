@@ -15,10 +15,24 @@ If playing with 3 players, then reduce all token piles to 5 by removing 2 from e
 class PregameSetup
 {
 public:
-	PregameSetup(uint16_t playerCount);
+	enum class GameMode
+	{
+		Local,
+		LAN
+	};
+
+public:
+	PregameSetup(uint16_t playerCount, GameMode gameMode, bool withTimer, bool withAI);
+
 	uint16_t GetPlayerCount() const;
+	GameMode GetGameMode() const;
+	bool IsTimer() const;
+	bool IsAI() const;
 
 private:
 	uint16_t m_playerCount;
+	GameMode m_gameMode;
+	bool m_withTimer;
+	bool m_withAI;
 };
 
