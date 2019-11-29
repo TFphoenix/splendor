@@ -30,7 +30,7 @@ private:
 private:
 	UIText m_title;
 	Type m_type;
-	Collider* m_lastOption;
+	std::pair<Collider*, sf::Drawable*> m_lastOption;
 	size_t m_lastCheckedID;
 };
 

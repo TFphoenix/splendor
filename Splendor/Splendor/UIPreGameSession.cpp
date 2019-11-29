@@ -45,12 +45,12 @@ UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
 	// Start Game Button
 	button.setPosition(windowSize.x - 350.0f, windowSize.y - 130.0f);
 	m_startGameButton = new UIButton(button);
-	dynamic_cast<UIButton*>(m_startGameButton)->ChangeText("Start Game");
+	m_startGameButton->ChangeText("Start Game");
 
 	// Main Menu Button
 	button.setPosition(windowSize.x - 670.0f, windowSize.y - 130.0f);
 	m_mainMenuButton = new UIButton(button);
-	dynamic_cast<UIButton*>(m_mainMenuButton)->ChangeText("Main Menu");
+	m_mainMenuButton->ChangeText("Main Menu");
 }
 
 UIPreGameSession::~UIPreGameSession()

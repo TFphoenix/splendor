@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Collider :public sf::Drawable
+class Collider
 {
 public:
 	void HandleEvent(const sf::Event& event);

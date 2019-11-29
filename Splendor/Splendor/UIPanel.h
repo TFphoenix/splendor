@@ -17,16 +17,16 @@ public:
 	void SetActive(bool active);
 
 	// Content
-	Collider* GetContent(size_t contentID) const;
+	std::pair<Collider*, sf::Drawable*> GetContent(size_t contentID) const;
 	size_t GetContentSize()const;
 
 protected:
 	// Content
-	void AddContent(Collider* contentItem);
+	void AddContent(std::pair<Collider*, sf::Drawable*> contentItem);
 
 private:
 	std::string m_titleString;
 	bool m_isActive;
-	std::vector<Collider*> m_content;
+	std::vector<std::pair<Collider*, sf::Drawable*>> m_content;
 };
 

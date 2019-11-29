@@ -23,8 +23,8 @@ private:
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;
 	UIOptionsPanel m_gameModePanel, m_playersPanel, m_otherSettingsPanel;
-	Collider* m_startGameButton;
-	Collider* m_mainMenuButton;
+	UIButton* m_startGameButton;
+	UIButton* m_mainMenuButton;
 
 };
 

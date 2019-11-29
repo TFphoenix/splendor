@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class UIButton :public RectCollider
+class UIButton :public RectCollider, public sf::Drawable
 {
 public:
 	enum class State
@@ -68,7 +68,7 @@ public:
 	void OnMouseLeftClick() override;
 	void OnMouseLeftRelease() override;
 
-	// Graffix
+	// Graphics
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:

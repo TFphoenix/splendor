@@ -22,7 +22,7 @@ void UIPanel::SetActive(bool active)
 	m_isActive = active;
 }
 
-Collider* UIPanel::GetContent(size_t contentID) const
+std::pair<Collider*, sf::Drawable*> UIPanel::GetContent(size_t contentID) const
 {
 	if (contentID < m_content.size())
 		return m_content[contentID];
@@ -34,7 +34,7 @@ size_t UIPanel::GetContentSize() const
 	return m_content.size();
 }
 
-void UIPanel::AddContent(Collider* contentItem)
+void UIPanel::AddContent(std::pair<Collider*, sf::Drawable*> contentItem)
 {
 	m_content.push_back(contentItem);
 }

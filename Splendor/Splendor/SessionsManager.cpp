@@ -76,10 +76,11 @@ void SessionsManager::MainMenuSession() const
 		ExitYes,
 		ExitNo
 	};
-	std::unordered_map<Buttons, Collider*> menuButtons;
+	std::unordered_map<Buttons, UIButton*> menuButtons;
 	sf::RectangleShape buttonShape(sf::Vector2f(300, 80));
 	sf::RectangleShape smallButtonShape(sf::Vector2f(100, 50));
 
+	// Buttons Design
 	UIButton::Design buttonNoneDesign = {
 		UIButton::Design::Body
 		{
@@ -135,25 +136,48 @@ void SessionsManager::MainMenuSession() const
 	// Main Menu Buttons
 	buttonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 150));
 	menuButtons[Buttons::NewGame] = new UIButton(buttonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->ChangeText("New Game");
+	menuButtons[Buttons::NewGame]->ChangeText("New Game");
 	buttonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 250));
 	menuButtons[Buttons::Tutorial] = new UIButton(buttonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::Tutorial])->ChangeText("Tutorial");
+	menuButtons[Buttons::Tutorial]->ChangeText("Tutorial");
 	buttonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 350));
 	menuButtons[Buttons::Settings] = new UIButton(buttonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::Settings])->ChangeText("Settings");
+	menuButtons[Buttons::Settings]->ChangeText("Settings");
 	buttonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 450));
 	menuButtons[Buttons::Exit] = new UIButton(buttonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->ChangeText("Exit Game");
+	menuButtons[Buttons::Exit]->ChangeText("Exit Game");
 
 	// Exit Menu Buttons
 	smallButtonShape.setPosition(sf::Vector2f(exitMenuPosition.x - smallButtonShape.getSize().x - 50, exitMenuPosition.y + 20));
 	menuButtons[Buttons::ExitYes] = new UIButton(smallButtonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::ExitYes])->ChangeText("Yes");
+	menuButtons[Buttons::ExitYes]->ChangeText("Yes");
 	smallButtonShape.setPosition(sf::Vector2f(exitMenuPosition.x + 50, exitMenuPosition.y + 20));
 	menuButtons[Buttons::ExitNo] = new UIButton(smallButtonShape, buttonNoneDesign, buttonHoverDesign, buttonPressDesign);
-	dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->ChangeText("No");
+	menuButtons[Buttons::ExitNo]->ChangeText("No");
 
+	// Drawable Main Menu Vector
+	std::vector<sf::Drawable*> drawableVectorMainMenu;
+	drawableVectorMainMenu.push_back(menuButtons[Buttons::NewGame]);
+	drawableVectorMainMenu.push_back(menuButtons[Buttons::Tutorial]);
+	drawableVectorMainMenu.push_back(menuButtons[Buttons::Settings]);
+	drawableVectorMainMenu.push_back(menuButtons[Buttons::Exit]);
+
+	// Drawable Exit Menu Vector
+	std::vector<sf::Drawable*> drawableVectorExitMenu;
+	drawableVectorExitMenu.push_back(menuButtons[Buttons::ExitNo]);
+	drawableVectorExitMenu.push_back(menuButtons[Buttons::ExitYes]);
+
+	// Collider Main Menu Vector
+	std::vector<Collider*> colliderVectorMainMenu;
+	colliderVectorMainMenu.push_back(menuButtons[Buttons::NewGame]);
+	colliderVectorMainMenu.push_back(menuButtons[Buttons::Tutorial]);
+	colliderVectorMainMenu.push_back(menuButtons[Buttons::Settings]);
+	colliderVectorMainMenu.push_back(menuButtons[Buttons::Exit]);
+
+	// Collider Exit Menu Vector
+	std::vector<Collider*> colliderVectorExitMenu;
+	colliderVectorExitMenu.push_back(menuButtons[Buttons::ExitNo]);
+	colliderVectorExitMenu.push_back(menuButtons[Buttons::ExitYes]);
 
 	// Main Menu Session
 	bool exitMenuTriggered = false;
@@ -164,33 +188,31 @@ void SessionsManager::MainMenuSession() const
 		{
 			if (exitMenuTriggered)
 			{
-				menuButtons[Buttons::ExitYes]->HandleEvent(event);
-				menuButtons[Buttons::ExitNo]->HandleEvent(event);
+				for (const auto& collider : colliderVectorExitMenu)
+					collider->HandleEvent(event);
 			}
 			else
 			{
-				menuButtons[Buttons::NewGame]->HandleEvent(event);
-				menuButtons[Buttons::Tutorial]->HandleEvent(event);
-				menuButtons[Buttons::Settings]->HandleEvent(event);
-				menuButtons[Buttons::Exit]->HandleEvent(event);
+				for (const auto& collider : colliderVectorMainMenu)
+					collider->HandleEvent(event);
 			}
 
-			if (dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->GetState() == UIButton::State::Release)
+			if (menuButtons[Buttons::NewGame]->GetState() == UIButton::State::Release)
 			{
-				dynamic_cast<UIButton*>(menuButtons[Buttons::NewGame])->SwitchState(UIButton::State::None);
+				menuButtons[Buttons::NewGame]->SwitchState(UIButton::State::None);
 				PreGameSession();
 			}
-			if (dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->GetState() == UIButton::State::Release)
+			if (menuButtons[Buttons::Exit]->GetState() == UIButton::State::Release)
 			{
 				exitMenuTriggered = true;
 			}
-			if (dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->GetState() == UIButton::State::Release)
+			if (menuButtons[Buttons::ExitNo]->GetState() == UIButton::State::Release)
 			{
 				exitMenuTriggered = false;
-				dynamic_cast<UIButton*>(menuButtons[Buttons::Exit])->SwitchState(UIButton::State::None);
-				dynamic_cast<UIButton*>(menuButtons[Buttons::ExitNo])->SwitchState(UIButton::State::None);
+				menuButtons[Buttons::Exit]->SwitchState(UIButton::State::None);
+				menuButtons[Buttons::ExitNo]->SwitchState(UIButton::State::None);
 			}
-			if (dynamic_cast<UIButton*>(menuButtons[Buttons::ExitYes])->GetState() == UIButton::State::Release)
+			if (menuButtons[Buttons::ExitYes]->GetState() == UIButton::State::Release)
 			{
 				return;
 			}

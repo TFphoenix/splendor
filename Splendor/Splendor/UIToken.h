@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class UIToken :public CircCollider
+class UIToken :public CircCollider, public sf::Drawable
 {
 public:
 	UIToken(IToken::Type tokenType, const sf::Vector2f& position = sf::Vector2f(0, 0), float radius = 50);
