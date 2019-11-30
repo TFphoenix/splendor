@@ -9,14 +9,22 @@
 class UIPreGameSession :public sf::Drawable
 {
 public:
+	enum class Events
+	{
+		None,
+		MainMenu,
+		StartGame
+	};
+
+public:
 	UIPreGameSession(const sf::Vector2u& windowSize);
 	~UIPreGameSession();
 
 	// Events
 	void PassEvent(const sf::Event& event);
-	bool BackToMainMenu() const;
-	bool StartGame() const;
+	Events GetEvent() const;
 
+	// Graphics
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:

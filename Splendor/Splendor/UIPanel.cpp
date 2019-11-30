@@ -22,14 +22,21 @@ void UIPanel::SetActive(bool active)
 	m_isActive = active;
 }
 
-std::pair<Collider*, sf::Drawable*> UIPanel::GetContent(size_t contentID) const
+Collider* UIPanel::GetContentCollider(unsigned contentID) const
 {
 	if (contentID < m_content.size())
-		return m_content[contentID];
-	return *m_content.end();
+		return m_content[contentID].first;
+	return nullptr;
 }
 
-size_t UIPanel::GetContentSize() const
+sf::Drawable* UIPanel::GetContentDrawable(unsigned contentID) const
+{
+	if (contentID < m_content.size())
+		return m_content[contentID].second;
+	return nullptr;
+}
+
+size_t UIPanel::ContentSize() const
 {
 	return m_content.size();
 }

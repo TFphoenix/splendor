@@ -144,6 +144,7 @@
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
     <ClCompile Include="UICheckBox.cpp" />
+    <ClCompile Include="UIMainMenuSession.cpp" />
     <ClCompile Include="UIOptionsPanel.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIPreGameSession.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="SessionsManager.h" />
     <ClInclude Include="UICheckBox.h" />
     <ClInclude Include="UIColors.h" />
+    <ClInclude Include="UIMainMenuSession.h" />
     <ClInclude Include="UIOptionsPanel.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIPreGameSession.h" />

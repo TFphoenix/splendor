@@ -1,7 +1,7 @@
 #include "UIPreGameSession.h"
 
 UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
-	// Game Mode panel
+	// Game Mode Panel
 	m_gameModePanel("Game Mode: ", UIOptionsPanel::Type::Radio,
 		sf::Vector2f(50.0f, 0.2f * windowSize.y + 30.0f),
 		sf::Vector2f(windowSize.x - 50.0f, 0.2f * windowSize.y)),
@@ -30,12 +30,12 @@ UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
 	m_gameModePanel.AddOption("Local");
 	m_gameModePanel.AddOption("LAN");
 
-	// Players panel
+	// Players Panel
 	m_playersPanel.AddOption("2");
 	m_playersPanel.AddOption("3");
 	m_playersPanel.AddOption("4");
 
-	// Other Settings panel
+	// Other Settings Panel
 	m_otherSettingsPanel.AddOption("Timer");
 	m_otherSettingsPanel.AddOption("A.I.");
 
@@ -68,14 +68,17 @@ void UIPreGameSession::PassEvent(const sf::Event& event)
 	m_mainMenuButton->HandleEvent(event);
 }
 
-bool UIPreGameSession::BackToMainMenu() const
+UIPreGameSession::Events UIPreGameSession::GetEvent() const
 {
-	return dynamic_cast<UIButton*>(m_mainMenuButton)->GetState() == UIButton::State::Release;
-}
-
-bool UIPreGameSession::StartGame() const
-{
-	return dynamic_cast<UIButton*>(m_startGameButton)->GetState() == UIButton::State::Release;
+	if (m_mainMenuButton->GetState() == UIButton::State::Release)
+	{
+		return Events::MainMenu;
+	}
+	if (m_startGameButton->GetState() == UIButton::State::Release)
+	{
+		return Events::StartGame;
+	}
+	return Events::None;
 }
 
 void UIPreGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) const

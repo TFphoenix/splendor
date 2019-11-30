@@ -17,8 +17,9 @@ public:
 	void SetActive(bool active);
 
 	// Content
-	std::pair<Collider*, sf::Drawable*> GetContent(size_t contentID) const;
-	size_t GetContentSize()const;
+	Collider* GetContentCollider(size_t contentID) const;
+	sf::Drawable* GetContentDrawable(size_t contentID) const;
+	size_t ContentSize()const;
 
 protected:
 	// Content

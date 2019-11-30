@@ -3,7 +3,8 @@
 UIOptionsPanel::UIOptionsPanel(const std::string& title, Type type, sf::Vector2f position, sf::Vector2f size, bool isActive) :
 	UIPanel(title, size, isActive),
 	m_title({ position.x,position.y + size.y / 2.0f }, UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, title, 0.4f * size.y),
-	m_type(type)
+	m_type(type),
+	m_lastCheckedID(0)
 {
 	// Text
 	setPosition(position);
@@ -17,22 +18,23 @@ void UIOptionsPanel::draw(sf::RenderTarget& target, sf::RenderStates states) con
 	if (IsActive())
 	{
 		target.draw(m_title);
-		for (size_t id = 0; id < GetContentSize(); ++id)
+		for (size_t id = 0; id < ContentSize(); ++id)
 		{
-			target.draw(*GetContent(id).second);
+			target.draw(*GetContentDrawable(id));
 		}
 	}
 }
 
 void UIOptionsPanel::AddOption(const std::string& optionName)
 {
+	auto& [collider, drawable] = m_lastOption;
 	const float yPosition = getPosition().y;
-	if (m_lastOption.first == nullptr)
+	if (collider == nullptr)
 	{
 		const auto titleBounds = m_title.getGlobalBounds();
 		UICheckBox* checkBox = new UICheckBox(optionName, { titleBounds.left + titleBounds.width,yPosition }, { 200,getSize().y });
-		m_lastOption.first = checkBox;
-		m_lastOption.second = checkBox;
+		collider = checkBox;
+		drawable = checkBox;
 		if (m_type == Type::Radio)
 		{
 			checkBox->ChangeState();
@@ -41,19 +43,19 @@ void UIOptionsPanel::AddOption(const std::string& optionName)
 	}
 	else
 	{
-		const auto lastBounds = dynamic_cast<UICheckBox*>(m_lastOption.first)->GetRect();
+		const auto lastBounds = dynamic_cast<UICheckBox*>(collider)->GetRect();
 		UICheckBox* checkBox = new UICheckBox(optionName, sf::Vector2f(lastBounds.left + lastBounds.width, yPosition), { 200,getSize().y });
-		m_lastOption.first = checkBox;
-		m_lastOption.second = checkBox;
+		collider = checkBox;
+		drawable = checkBox;
 	}
 	AddContent(m_lastOption);
 }
 
 void UIOptionsPanel::HandleEvent(const sf::Event& event)
 {
-	for (size_t id = 0; id < GetContentSize(); id++)
+	for (size_t id = 0; id < ContentSize(); id++)
 	{
-		GetContent(id).first->HandleEvent(event);
+		GetContentCollider(id)->HandleEvent(event);
 	}
 	if (event.type == sf::Event::MouseButtonPressed)
 	{
@@ -68,13 +70,13 @@ void UIOptionsPanel::UpdateOptions()
 {
 	if (m_type == Type::Radio)
 	{
-		for (size_t id = 0; id < GetContentSize(); ++id)
+		for (size_t id = 0; id < ContentSize(); ++id)
 		{
-			if (dynamic_cast<UICheckBox*>(GetContent(id).first)->IsChecked())
+			if (dynamic_cast<UICheckBox*>(GetContentCollider(id))->IsChecked())
 			{
 				if (id != m_lastCheckedID)
 				{
-					dynamic_cast<UICheckBox*>(GetContent(m_lastCheckedID).first)->ChangeState();
+					dynamic_cast<UICheckBox*>(GetContentCollider(m_lastCheckedID))->ChangeState();
 					m_lastCheckedID = id;
 				}
 			}
