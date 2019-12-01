@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="CircCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Hand.cpp" />
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="CircCollider.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Hand.h" />
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Deck.h" />

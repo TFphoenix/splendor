@@ -109,6 +109,7 @@
     <ClCompile Include="UIMainMenuSession.cpp">
       <Filter>GUI\Sessions</Filter>
     </ClCompile>
+    <ClCompile Include="Hand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -180,6 +181,7 @@
     <ClInclude Include="UIMainMenuSession.h">
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
+    <ClInclude Include="Hand.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">
