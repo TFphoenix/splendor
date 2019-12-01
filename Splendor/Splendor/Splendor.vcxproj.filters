@@ -110,6 +110,7 @@
       <Filter>GUI\Sessions</Filter>
     </ClCompile>
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="TokenPile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -182,6 +183,7 @@
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="TokenPile.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">

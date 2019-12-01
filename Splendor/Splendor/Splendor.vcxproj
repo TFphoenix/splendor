@@ -132,6 +132,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="RectCollider.cpp" />
+    <ClCompile Include="TokenPile.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="ExpansionCard.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="RectCollider.h" />
+    <ClInclude Include="TokenPile.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="ExpansionCard.h" />
