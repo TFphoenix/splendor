@@ -121,6 +121,9 @@
     <ClCompile Include="Hand.cpp">
       <Filter>Entities\Abstract</Filter>
     </ClCompile>
+    <ClCompile Include="UIGameSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -197,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="Hand.h">
       <Filter>Entities\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="UIGameSession.h">
+      <Filter>GUI\Sessions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

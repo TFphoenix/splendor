@@ -64,6 +64,17 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
+/*uint16_t playerCount;
+std::cin >> playerCount;
+
+try
+{
+	PregameSetup pregameSetup(playerCount);
+}
+catch (const char* errorMessage)
+{
+	std::cout << errorMessage;
+}*/
 	UIPreGameSession pregameSessionGUI(windowSize);
 
 	while (window->isOpen())
@@ -92,8 +103,6 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession() const
 {
-	window->clear(UIColors::DarkBlue);
-	window->display();
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -107,18 +116,9 @@ void SessionsManager::GameSession() const
 				}
 			}
 		}
+		window->clear(UIColors::DarkBlue);
+		window->display();
 	}
-	/*uint16_t playerCount;
-	std::cin >> playerCount;
-
-	try
-	{
-		PregameSetup pregameSetup(playerCount);
-	}
-	catch (const char* errorMessage)
-	{
-		std::cout << errorMessage;
-	}*/
 }
 
 void SessionsManager::TestSession() const
