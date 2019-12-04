@@ -17,9 +17,6 @@
     <Filter Include="Utility\Colliders">
       <UniqueIdentifier>{016a3cb1-33e0-49af-a279-2242ee035977}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Pieces">
-      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{a144c2f7-4e64-4faf-ac97-d5d24d8172c9}</UniqueIdentifier>
     </Filter>
@@ -38,26 +35,17 @@
     <Filter Include="Pregame">
       <UniqueIdentifier>{91c320cf-56fb-4408-b1fc-8daa359f09c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Game Pieces">
+      <UniqueIdentifier>{3b616ff9-6d4b-4fca-aa1a-227df5e290ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Abstract">
+      <UniqueIdentifier>{af4e6f3a-4020-45fb-90e7-92fdd5c57cc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="ExpansionCard.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="ICard.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="IToken.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="NobleCard.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="Token.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
     <ClCompile Include="Randomizer.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
@@ -103,34 +91,38 @@
     <ClCompile Include="PregameSetup.cpp">
       <Filter>Pregame</Filter>
     </ClCompile>
-    <ClCompile Include="GamePieces.cpp">
-      <Filter>Game Pieces</Filter>
-    </ClCompile>
     <ClCompile Include="UIMainMenuSession.cpp">
       <Filter>GUI\Sessions</Filter>
     </ClCompile>
-    <ClCompile Include="Hand.cpp" />
-    <ClCompile Include="TokenPile.cpp" />
+    <ClCompile Include="Deck.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpansionCard.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePieces.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="ICard.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="IToken.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="NobleCard.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="TokenPile.cpp">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Hand.cpp">
+      <Filter>Entities\Abstract</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Deck.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="ExpansionCard.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="ICard.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="IToken.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="NobleCard.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Token.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
     <ClInclude Include="Randomizer.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -176,14 +168,36 @@
     <ClInclude Include="PregameSetup.h">
       <Filter>Pregame</Filter>
     </ClInclude>
-    <ClInclude Include="GamePieces.h">
-      <Filter>Game Pieces</Filter>
-    </ClInclude>
     <ClInclude Include="UIMainMenuSession.h">
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
-    <ClInclude Include="Hand.h" />
-    <ClInclude Include="TokenPile.h" />
+    <ClInclude Include="Deck.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpansionCard.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePieces.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="ICard.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="IToken.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="NobleCard.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenPile.h">
+      <Filter>Entities\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.h">
+      <Filter>Entities\Abstract</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf">

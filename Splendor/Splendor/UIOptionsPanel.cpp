@@ -32,7 +32,7 @@ void UIOptionsPanel::AddOption(const std::string& optionName)
 	if (collider == nullptr)
 	{
 		const auto titleBounds = m_title.getGlobalBounds();
-		UICheckBox* checkBox = new UICheckBox(optionName, { titleBounds.left + titleBounds.width,yPosition }, { 200,getSize().y });
+		UICheckBox* checkBox = new UICheckBox(optionName, static_cast<UICheckBox::Type>(m_type), { titleBounds.left + titleBounds.width,yPosition }, { 200,getSize().y });
 		collider = checkBox;
 		drawable = checkBox;
 		if (m_type == Type::Radio)
@@ -44,7 +44,7 @@ void UIOptionsPanel::AddOption(const std::string& optionName)
 	else
 	{
 		const auto lastBounds = dynamic_cast<UICheckBox*>(collider)->GetRect();
-		UICheckBox* checkBox = new UICheckBox(optionName, sf::Vector2f(lastBounds.left + lastBounds.width, yPosition), { 200,getSize().y });
+		UICheckBox* checkBox = new UICheckBox(optionName, static_cast<UICheckBox::Type>(m_type), sf::Vector2f(lastBounds.left + lastBounds.width, yPosition), { 200,getSize().y });
 		collider = checkBox;
 		drawable = checkBox;
 	}
