@@ -25,6 +25,13 @@ public:
 private:
 	std::vector<sf::Drawable*> m_drawableVector;
 	std::vector<Collider*> m_colliderVector;
+	// m_infoPanel
+	// m_playersPanel
+	// m_tokensPanel
+	// m_noblesPanel
+	// m_expansionsPanel
+	// m_handPanel
+	// m_handPanelBackground
 
 };
 

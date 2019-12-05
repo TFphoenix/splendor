@@ -131,11 +131,11 @@
     <ClCompile Include="CircCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Hand.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="TokenPile.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -149,7 +149,7 @@
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
-    <ClCompile Include="UICheckBox.cpp" />
+    <ClCompile Include="UISelectorBox.cpp" />
     <ClCompile Include="UIGameSession.cpp" />
     <ClCompile Include="UIMainMenuSession.cpp" />
     <ClCompile Include="UIOptionsPanel.cpp" />
@@ -176,7 +176,7 @@
     <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
-    <ClInclude Include="UICheckBox.h" />
+    <ClInclude Include="UISelectorBox.h" />
     <ClInclude Include="UIColors.h" />
     <ClInclude Include="UIGameSession.h" />
     <ClInclude Include="UIMainMenuSession.h" />

@@ -51,6 +51,9 @@ void SessionsManager::MainMenuSession() const
 				break;
 			case UIMainMenuSession::Events::Exit:
 				return;
+			case UIMainMenuSession::Events::Test:
+				TestSession();
+				break;
 			default:
 				break;
 			}
@@ -64,17 +67,17 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
-/*uint16_t playerCount;
-std::cin >> playerCount;
+	/*uint16_t playerCount;
+	std::cin >> playerCount;
 
-try
-{
-	PregameSetup pregameSetup(playerCount);
-}
-catch (const char* errorMessage)
-{
-	std::cout << errorMessage;
-}*/
+	try
+	{
+		PregameSetup pregameSetup(playerCount);
+	}
+	catch (const char* errorMessage)
+	{
+		std::cout << errorMessage;
+	}*/
 	UIPreGameSession pregameSessionGUI(windowSize);
 
 	while (window->isOpen())
@@ -123,5 +126,5 @@ void SessionsManager::GameSession() const
 
 void SessionsManager::TestSession() const
 {
-
+	std::cout << "ENTERED TEST SESSION\n";
 }

@@ -1,6 +1,6 @@
-#include "UICheckBox.h"
+#include "UISelectorBox.h"
 
-UICheckBox::UICheckBox(const std::string& title, Type type, const sf::Vector2f& position, const sf::Vector2f& size, const Design& uncheckedDesign, const Design& checkedDesign) :
+UISelectorBox::UISelectorBox(const std::string& title, Type type, const sf::Vector2f& position, const sf::Vector2f& size, const Design& uncheckedDesign, const Design& checkedDesign) :
 	UISelector(title, position, size, false),
 	RectCollider(
 		sf::Vector2i(position.x + (size.x / 2.0f - 0.15f * size.y),
@@ -37,7 +37,7 @@ UICheckBox::UICheckBox(const std::string& title, Type type, const sf::Vector2f& 
 	UpdateDesign();
 }
 
-void UICheckBox::ChangeState()
+void UISelectorBox::ChangeState()
 {
 	if (m_isChecked)
 	{
@@ -52,19 +52,19 @@ void UICheckBox::ChangeState()
 	UpdateDesign();
 }
 
-void UICheckBox::OnMouseLeftClick()
+void UISelectorBox::OnMouseLeftClick()
 {
 	ChangeState();
 }
 
-void UICheckBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void UISelectorBox::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(m_title);
 	target.draw(m_box);
 	target.draw(m_checkSprite);
 }
 
-void UICheckBox::UpdateDesign()
+void UISelectorBox::UpdateDesign()
 {
 	m_box.setFillColor(m_currentDesign->fillColor);
 	m_box.setOutlineColor(m_currentDesign->outlineColor);

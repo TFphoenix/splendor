@@ -1,7 +1,7 @@
 #pragma once
 #include "UIPanel.h"
 #include "UIText.h"
-#include "UICheckBox.h"
+#include "UISelectorBox.h"
 
 class UIOptionsPanel :public UIPanel
 {

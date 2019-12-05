@@ -14,6 +14,7 @@ private:
 		Tutorial,
 		Settings,
 		Exit,
+		Test,
 		ExitYes,
 		ExitNo
 	};
@@ -25,7 +26,8 @@ public:
 		NewGame,
 		Tutorial,
 		Settings,
-		Exit
+		Exit,
+		Test
 	};
 	
 public:

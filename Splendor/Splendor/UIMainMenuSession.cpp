@@ -55,6 +55,9 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 450));
 	m_buttons[Buttons::Exit] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::Exit]->ChangeText("Exit Game");
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 550));
+	m_buttons[Buttons::Test] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
+	m_buttons[Buttons::Test]->ChangeText("Test Session");
 
 	// Exit Menu Buttons
 	smallButtonShape.setPosition(sf::Vector2f(exitMenuPosition.x - smallButtonShape.getSize().x - 50, exitMenuPosition.y + 20));
@@ -72,6 +75,7 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Tutorial]);
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Settings]);
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Exit]);
+	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Test]);
 	// Drawable Exit Menu Vector
 	m_exitMenuDrawableVector.push_back(&m_exitMenu);
 	m_exitMenuDrawableVector.push_back(m_exitMenuText);
@@ -83,6 +87,7 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Tutorial]);
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Settings]);
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Exit]);
+	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Test]);
 	// Collider Exit Menu Vector
 	m_exitMenuColliderVector.push_back(m_buttons[Buttons::ExitNo]);
 	m_exitMenuColliderVector.push_back(m_buttons[Buttons::ExitYes]);
@@ -128,6 +133,11 @@ UIMainMenuSession::Events UIMainMenuSession::GetEvent()
 	if (m_buttons[Buttons::Exit]->GetState() == UIButton::State::Release)
 	{
 		m_exitMenuTriggered = true;
+	}
+	if (m_buttons[Buttons::Test]->GetState() == UIButton::State::Release)
+	{
+		m_buttons[Buttons::Test]->SwitchState(UIButton::State::None);
+		return Events::Test;
 	}
 	if (m_buttons[Buttons::ExitNo]->GetState() == UIButton::State::Release)
 	{

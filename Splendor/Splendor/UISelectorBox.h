@@ -3,7 +3,7 @@
 #include "UISelector.h"
 #include "UIColors.h"
 
-class UICheckBox :public UISelector, public RectCollider, public sf::Drawable
+class UISelectorBox :public UISelector, public RectCollider, public sf::Drawable
 {
 public:
 	struct Design
@@ -18,7 +18,7 @@ public:
 	};
 
 public:
-	UICheckBox(const std::string& title, Type type = Type::Check, const sf::Vector2f& position = sf::Vector2f(0, 0), const sf::Vector2f& size = sf::Vector2f(100, 100), const Design& uncheckedDesign = Design{ UIColors::DarkBlue,UIColors::GoldYellow }, const Design& checkedDesign = Design{ UIColors::GoldYellow,sf::Color(255,255,255) });
+	UISelectorBox(const std::string& title, Type type = Type::Check, const sf::Vector2f& position = sf::Vector2f(0, 0), const sf::Vector2f& size = sf::Vector2f(100, 100), const Design& uncheckedDesign = Design{ UIColors::DarkBlue,UIColors::GoldYellow }, const Design& checkedDesign = Design{ UIColors::GoldYellow,sf::Color(255,255,255) });
 
 	void ChangeState() override;
 	void OnMouseLeftClick() override;

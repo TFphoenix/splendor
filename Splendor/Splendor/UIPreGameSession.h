@@ -2,7 +2,7 @@
 #include "UIText.h"
 #include "UIButton.h"
 #include "UIOptionsPanel.h"
-#include "UICheckBox.h"
+#include "UISelectorBox.h"
 #include "Collider.h"
 #include "UIColors.h"
 
