@@ -37,6 +37,20 @@ UISelectorBox::UISelectorBox(const std::string& title, Type type, const sf::Vect
 	UpdateDesign();
 }
 
+void UISelectorBox::SetState(bool state)
+{
+	m_isChecked = state;
+	if (state)
+	{
+		m_currentDesign = &m_checkedDesign;
+	}
+	else
+	{
+		m_currentDesign = &m_uncheckedDesign;
+	}
+	UpdateDesign();
+}
+
 void UISelectorBox::ChangeState()
 {
 	if (m_isChecked)

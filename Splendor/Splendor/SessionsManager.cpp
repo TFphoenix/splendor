@@ -107,7 +107,7 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession() const
 {
-	UICard test_card({ 0,0 }, { 100,200 });
+	UICard test_card({ 0,0 }, { 238,357 });
 	while (window->isOpen())
 	{
 		sf::Event event;

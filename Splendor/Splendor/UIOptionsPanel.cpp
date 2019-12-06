@@ -80,6 +80,13 @@ void UIOptionsPanel::UpdateOptions()
 					m_lastCheckedID = id;
 				}
 			}
+			else
+			{
+				if(id == m_lastCheckedID)
+				{
+					dynamic_cast<UISelectorBox*>(GetContentCollider(m_lastCheckedID))->SetState(true);
+				}
+			}
 		}
 	}
 }

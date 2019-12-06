@@ -20,6 +20,7 @@ public:
 public:
 	UISelectorBox(const std::string& title, Type type = Type::Check, const sf::Vector2f& position = sf::Vector2f(0, 0), const sf::Vector2f& size = sf::Vector2f(100, 100), const Design& uncheckedDesign = Design{ UIColors::DarkBlue,UIColors::GoldYellow }, const Design& checkedDesign = Design{ UIColors::GoldYellow,sf::Color(255,255,255) });
 
+	void SetState(bool state) override;
 	void ChangeState() override;
 	void OnMouseLeftClick() override;
 
