@@ -3,6 +3,7 @@
 #include "ICard.h"
 
 #include <SFML/Graphics.hpp>
+#include <mutex>
 
 class UICard :public RectCollider, public sf::RectangleShape
 {
@@ -18,6 +19,7 @@ public:
 private:
 	static void LoadTextures();
 	static void LoadSpecificTextures(std::string&& fileName, const std::string&& textureName, uint16_t count, TextureVector* into);
+	static void LoadSpecificTexture(const std::string& path, TextureVector* into);
 	//const sf::Texture& GetTexture(//ID);//Gets texture by DAO ID
 
 private:
@@ -28,6 +30,7 @@ private:
 	static inline TextureVector s_expansionL3Textures;
 	static inline TextureVector s_nobleTextures;
 	static inline bool s_texturesLoaded = false;
+	static inline std::mutex s_mutex;
 
 private:
 	//ID
