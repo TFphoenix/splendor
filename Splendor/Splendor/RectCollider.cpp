@@ -12,6 +12,9 @@ RectCollider::RectCollider(const sf::Vector2i& position, const sf::Vector2i& siz
 RectCollider::RectCollider(sf::Vector2i&& position, sf::Vector2i&& size) :
 	m_body(position, size) {}
 
+RectCollider::RectCollider(const sf::Vector2f& position, const sf::Vector2f& size) :
+	m_body(static_cast<sf::Vector2i>(position), static_cast<sf::Vector2i>(size)) {}
+
 sf::Rect<int> RectCollider::GetRect() const
 {
 	return m_body;

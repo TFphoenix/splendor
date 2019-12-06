@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <unordered_map>
+#include "UICard.h"
 
 SessionsManager::SessionsManager()
 {
@@ -106,6 +107,7 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession() const
 {
+	UICard test_card({ 0,0 }, { 100,200 });
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -120,6 +122,7 @@ void SessionsManager::GameSession() const
 			}
 		}
 		window->clear(UIColors::DarkBlue);
+		window->draw(test_card);
 		window->display();
 	}
 }

@@ -149,6 +149,7 @@
     <ClCompile Include="PregameSetup.cpp" />
     <ClCompile Include="SessionsManager.cpp" />
     <ClCompile Include="Splendor.cpp" />
+    <ClCompile Include="UICard.cpp" />
     <ClCompile Include="UISelectorBox.cpp" />
     <ClCompile Include="UIGameSession.cpp" />
     <ClCompile Include="UIMainMenuSession.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="NobleCard.h" />
     <ClInclude Include="PregameSetup.h" />
     <ClInclude Include="SessionsManager.h" />
+    <ClInclude Include="UICard.h" />
     <ClInclude Include="UISelectorBox.h" />
     <ClInclude Include="UIColors.h" />
     <ClInclude Include="UIGameSession.h" />
@@ -186,12 +188,6 @@
     <ClInclude Include="UISelector.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UIToken.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\external\Resources\Fonts\Dosis-Bold.ttf" />
-    <Font Include="..\external\Resources\Fonts\Dosis-Light.ttf" />
-    <Font Include="..\external\Resources\Fonts\PixellettersFull.ttf" />
-    <Font Include="..\external\Resources\Fonts\Splendor.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

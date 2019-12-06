@@ -6,9 +6,11 @@ class GamePieces
 public:
 	GamePieces() = delete;
 
+	// Getters
 	static uint16_t GetGemTokenCount();
 	static uint16_t GetNobleCardCount();
 
+	// Setters
 	static void SetGemTokenCount(uint16_t newGemTokenCount);
 	static void SetNobleCardCount(uint16_t newNobleCardCount);
 
@@ -20,14 +22,14 @@ public:
 
 	static inline const uint16_t s_NobleCardCount = 10;
 
-	static inline const uint16_t s_DevelopmentCardCount = 90;
-	static inline const uint16_t s_L1DevelopmentCardCount = 40;
-	static inline const uint16_t s_L2DevelopmentCardCount = 30;
-	static inline const uint16_t s_L3DevelopmentCardCount = 20;
+	static inline const uint16_t s_ExpansionCardCount = 90;
+	static inline const uint16_t s_L1ExpansionCardCount = 40;
+	static inline const uint16_t s_L2ExpansionCardCount = 30;
+	static inline const uint16_t s_L3ExpansionCardCount = 20;
 
 private:
 	// Updatable Pieces
-	static inline uint16_t uGemTokenCount;
-	static inline uint16_t uNobleCardCount;
+	static inline uint16_t s_uGemTokenCount;
+	static inline uint16_t s_uNobleCardCount;
 
 };

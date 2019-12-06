@@ -2,20 +2,20 @@
 
 uint16_t GamePieces::GetGemTokenCount()
 {
-	return uGemTokenCount;
+	return s_uGemTokenCount;
 }
 
 uint16_t GamePieces::GetNobleCardCount()
 {
-	return uNobleCardCount;
+	return s_uNobleCardCount;
 }
 
 void GamePieces::SetGemTokenCount(uint16_t newGemTokenCount)
 {
-	uGemTokenCount = newGemTokenCount;
+	s_uGemTokenCount = newGemTokenCount;
 }
 
 void GamePieces::SetNobleCardCount(uint16_t newNobleCardCount)
 {
-	uNobleCardCount = newNobleCardCount;
+	s_uNobleCardCount = newNobleCardCount;
 }

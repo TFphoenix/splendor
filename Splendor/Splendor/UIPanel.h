@@ -8,7 +8,7 @@ class UIPanel :public sf::RectangleShape
 {
 public:
 	// Constr.
-	UIPanel(const std::string& title, sf::Vector2f size = sf::Vector2f(0, 0), bool isActive = true);
+	UIPanel(const std::string& title, const sf::Vector2f& size = sf::Vector2f(0, 0), bool isActive = true);
 
 	// G&S
 	std::string GetTitle() const;
