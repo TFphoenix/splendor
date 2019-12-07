@@ -2,9 +2,11 @@
 #include "GamePieces.h"
 #include <thread>
 
-UICard::UICard(const sf::Vector2f& position, const sf::Vector2f& size) :
+UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::Vector2f& size) :
 	RectCollider(position, size),
-	RectangleShape(size)
+	RectangleShape(size),
+	m_id(id),
+	m_type(type)
 {
 	setPosition(position);
 	if (!s_texturesLoaded)
@@ -12,8 +14,17 @@ UICard::UICard(const sf::Vector2f& position, const sf::Vector2f& size) :
 		LoadTextures();
 		s_texturesLoaded = true;
 	}
-	// TEST
-	setTexture(s_nobleTextures[10]);
+	setTexture(GetTexture(id, type));
+}
+
+uint16_t UICard::GetID() const
+{
+	return m_id;
+}
+
+UICard::Type UICard::GetType() const
+{
+	return m_type;
 }
 
 void UICard::LoadTextures()
@@ -72,4 +83,23 @@ void UICard::LoadSpecificTexture(const std::string& path, TextureMap* into, uint
 	auto* cardTexture = new sf::Texture;
 	cardTexture->loadFromFile(path);
 	(*into)[atID] = cardTexture;
+}
+
+const sf::Texture* UICard::GetTexture(uint16_t id, Type type)
+{
+	switch (type)
+	{
+	case Type::Background:
+		return s_backgroundTextures[id];
+	case Type::ExpansionL1:
+		return s_expansionL1Textures[id];
+	case Type::ExpansionL2:
+		return s_expansionL2Textures[id];
+	case Type::ExpansionL3:
+		return s_expansionL3Textures[id];
+	case Type::Noble:
+		return s_nobleTextures[id];
+	default:
+		return nullptr;
+	}
 }
