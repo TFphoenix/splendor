@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CardsDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Hand.cpp">
@@ -161,6 +162,7 @@
     <ClCompile Include="UIToken.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CardsDAO.h" />
     <ClInclude Include="CircCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Hand.h" />

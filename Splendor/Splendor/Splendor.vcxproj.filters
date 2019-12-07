@@ -123,6 +123,7 @@
     <ClCompile Include="GamePieces.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="CardsDAO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -206,5 +207,6 @@
     <ClInclude Include="GamePieces.h">
       <Filter>Data</Filter>
     </ClInclude>
+    <ClInclude Include="CardsDAO.h" />
   </ItemGroup>
 </Project>

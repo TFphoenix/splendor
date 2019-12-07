@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+
+<NOBLE_CARDS>
+
+	<NOBLE>
+	
+		<ID>1</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>2</ID>
+		<NAME>Elisabeth Of Austria</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>0</GE>
+			<BS>3</BS>
+			<WD>3</WD>
+			<BO>3</BO>
+			<RR>0</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+	<NOBLE>
+		<ID>0</ID>
+		<NAME>Catherine de' Medici</NAME>
+		<PRESTIEGE>3</PRESTIEGE>
+		<RQUEST>
+			<GE>3</GE>
+			<BS>3</BS>
+			<WD>0</WD>
+			<BO>0</BO>
+			<RR>3</RR>
+		</RQUEST>
+	</NOBLE>
+	
+</NOBLE_CARDS>
+
+<EXPANSION_CARDS>
+
+	<LEVEL1>
+	
+		<EXPANSION>
+			<ID>1</ID>
+			<REWARD>BO</REWARD>
+			<REQUEST>
+				<GE>1</GE>
+				<BS>1</BS>
+				<WD>1</WD>
+				<BO>1</BO>
+				<RR>1</RR>
+			</REQUEST>
+		</EXPANSION>
+		
+		<EXPANSION>
+			<ID>2</ID>
+			<REWARD>BO</REWARD>
+			<REQUEST>
+				<GE>2</GE>
+				<BS>0</BS>
+				<WD>0</WD>
+				<BO>0</BO>
+				<RR>1</RR>
+			</REQUEST>
+		</EXPANSION>
+		
+		<EXPANSION>
+			<ID>1</ID>
+			<REWARD>BO</REWARD>
+			<REQUEST>
+				<GE>1</GE>
+				<BS>1</BS>
+				<WD>1</WD>
+				<BO>1</BO>
+				<RR>1</RR>
+			</REQUEST>
+		</EXPANSION>
+		
+	</LEVEL1>
+	
+	<LEVEL2>
+	</LEVEL2>
+	
+	<LEVEL3>
+	</LEVEL3>
+	
+</EXPANSION_CARDS>
