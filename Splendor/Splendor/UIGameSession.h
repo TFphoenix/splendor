@@ -19,6 +19,12 @@ public:
 	UIGameSession(const sf::Vector2u& windowSize);
 	~UIGameSession();
 
+	// UI Logic
+	void StartGame();
+	void StopGame();
+	void UpdateGame();
+	void NextTurn();
+	
 	// Events
 	void PassEvent(const sf::Event& event);
 	Events GetEvent() const;

@@ -115,6 +115,7 @@ void SessionsManager::GameSession() const
 	//UICard test_card(3, UICard::Type::Background, { 0,0 }, { 238,357 });
 	//UIInfoPanel info_panel("info", sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05));
 	UIGameSession gameSessionGUI(windowSize);
+	gameSessionGUI.StartGame();
 
 	while (window->isOpen())
 	{
@@ -125,11 +126,13 @@ void SessionsManager::GameSession() const
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:
-				return;
+				//return;
+				gameSessionGUI.NextTurn();
 			default:
 				break;
 			}
 		}
+		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
 		//window->draw(test_card);
 		window->draw(gameSessionGUI);

@@ -9,14 +9,29 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize) :
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_infoPanel));
 }
 
-UIGameSession::~UIGameSession()
+void UIGameSession::StartGame()
 {
-	// delete pointers
+	m_infoPanel.StartTimer();
+}
+
+void UIGameSession::StopGame()
+{
+	m_infoPanel.StopTimer();
+}
+
+void UIGameSession::UpdateGame()
+{
+	m_infoPanel.UpdateTime();
+}
+
+void UIGameSession::NextTurn()
+{
+	m_infoPanel.IncrementTurn();
 }
 
 void UIGameSession::PassEvent(const sf::Event& event)
 {
-	// iterate panel vector and call handleEvent(event) on them
+	// iterate panel vector and handle events
 	std::for_each(m_panels.begin(), m_panels.end(), [&event](UIPanel* panel)
 	{
 		panel->HandleEvent(event);
@@ -33,7 +48,7 @@ UIGameSession::Events UIGameSession::GetEvent() const
 
 void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	// iterate panel vector and call draw on them
+	// iterate panel vector and draw panels
 	std::for_each(m_panels.begin(), m_panels.end(), [&target](UIPanel* panel)
 		{
 			target.draw(*panel);

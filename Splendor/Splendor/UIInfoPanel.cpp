@@ -7,7 +7,6 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 	m_timeLabel(sf::Vector2f(m_timeTitle.getPosition().x + m_timeTitle.getGlobalBounds().width + s_padding, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "00:00:00"),
 	m_turnTitle(sf::Vector2f(position.x + m_timeLabel.getGlobalBounds().width + 300, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Turn: "),
 	m_turnLabel(sf::Vector2f(m_turnTitle.getPosition().x + m_turnTitle.getGlobalBounds().width + s_padding, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "0"),
-	m_timerRunning(false),
 	m_turn(0)
 {
 	// Re-scale UIText
@@ -41,34 +40,62 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 void UIInfoPanel::IncrementTurn()
 {
 	m_turn++;
+	UpdateTurnLabel();
 }
 
 void UIInfoPanel::UpdateTime()
 {
-	if (m_timerRunning)
+	if (m_timer.running)
 	{
-		m_currentTime = std::chrono::system_clock::now();
+		m_timer.currentTime = std::chrono::system_clock::now();
 		UpdateTimeLabel();
 	}
 }
 
 void UIInfoPanel::StartTimer()
 {
-	m_timerRunning = true;
-	m_startTime = std::chrono::system_clock::now();
+	m_timer.running = true;
+	m_timer.startTime = std::chrono::system_clock::now();
 }
 
 void UIInfoPanel::StopTimer()
 {
-	m_timerRunning = false;
+	m_timer.running = false;
 }
 
 bool UIInfoPanel::MenuButtonTriggered() const
 {
-	return m_menuButton->GetState() == UIButton::State::Release;
+	if (m_menuButton->GetState() == UIButton::State::Release)
+	{
+		m_menuButton->SwitchState(UIButton::State::None);
+		return true;
+	}
+	return false;
 }
 
 void UIInfoPanel::UpdateTimeLabel()
 {
-	//calculate elapsed time and convert it into string
+	//calculate elapsed time and convert it into strings
+	const std::chrono::duration<double> elapsedTime = m_timer.currentTime - m_timer.startTime;
+	std::string hour = std::to_string(static_cast<uint16_t>(elapsedTime.count() / 3600));
+	if (hour.size() < 2)
+	{
+		hour.insert(hour.begin(), '0');
+	}
+	std::string minute = std::to_string(static_cast<uint16_t>(elapsedTime.count() / 60) % 60);
+	if (minute.size() < 2)
+	{
+		minute.insert(minute.begin(), '0');
+	}
+	std::string second = std::to_string(static_cast<uint16_t>(elapsedTime.count()) % 60);
+	if (second.size() < 2)
+	{
+		second.insert(second.begin(), '0');
+	}
+	m_timeLabel.setString(hour + ':' + minute + ':' + second);
+}
+
+void UIInfoPanel::UpdateTurnLabel()
+{
+	m_turnLabel.setString(std::to_string(m_turn));
 }
