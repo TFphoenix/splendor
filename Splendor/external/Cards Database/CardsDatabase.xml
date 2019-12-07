@@ -6,7 +6,7 @@
 	
 		<ID>1</ID>
 		<NAME>Catherine de' Medici</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>3</GE>
 			<BS>3</BS>
@@ -19,7 +19,7 @@
 	<NOBLE>
 		<ID>2</ID>
 		<NAME>Elisabeth Of Austria</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>0</GE>
 			<BS>3</BS>
@@ -32,7 +32,7 @@
 	<NOBLE>
 		<ID>3</ID>
 		<NAME>Isabella I Of Castile</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>0</GE>
 			<BS>0</BS>
@@ -45,7 +45,7 @@
 	<NOBLE>
 		<ID>4</ID>
 		<NAME>Niccolo Machiavelli</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>0</GE>
 			<BS>4</BS>
@@ -58,7 +58,7 @@
 	<NOBLE>
 		<ID>5</ID>
 		<NAME>Suleiman The Magnificient</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>4</GE>
 			<BS>4</BS>
@@ -71,7 +71,7 @@
 	<NOBLE>
 		<ID>6</ID>
 		<NAME>Anne Of Brittany</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>3</GE>
 			<BS>3</BS>
@@ -84,7 +84,7 @@
 	<NOBLE>
 		<ID>7</ID>
 		<NAME>Charles V</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>0</GE>
 			<BS>0</BS>
@@ -97,7 +97,7 @@
 	<NOBLE>
 		<ID>8</ID>
 		<NAME>Francis I Of France</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>3</GE>
 			<BS>0</BS>
@@ -110,7 +110,7 @@
 	<NOBLE>
 		<ID>9</ID>
 		<NAME>Henry VIII</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>0</GE>
 			<BS>0</BS>
@@ -123,7 +123,7 @@
 	<NOBLE>
 		<ID>10</ID>
 		<NAME>Mary Stuart</NAME>
-		<PRESTIEGE>3</PRESTIEGE>
+		<PRESTIGE>3</PRESTIGE>
 		<RQUEST>
 			<GE>4</GE>
 			<BS>0</BS>
@@ -146,7 +146,7 @@
 				<GE>1</GE>
 				<BS>1</BS>
 				<WD>1</WD>
-				<BO>1</BO>
+				<BO>0</BO>
 				<RR>1</RR>
 			</REQUEST>
 		</EXPANSION>
@@ -226,7 +226,7 @@
 				<EXPANSION>
 			<ID>8</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>4</BS>
@@ -323,7 +323,7 @@
 				<EXPANSION>
 			<ID>16</ID>
 			<REWARD>BS</REWARD>
-				<PRESTIEGE>1</PRESTIEGE>
+				<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -420,7 +420,7 @@
 				<EXPANSION>
 			<ID>24</ID>
 			<REWARD>GE</REWARD>
-				<PRESTIEGE>1</PRESTIEGE>
+				<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -514,22 +514,12 @@
 			</REQUEST>
 		</EXPANSION>
 		
-				<EXPANSION>
-			<ID>32</ID>
-			<REWARD>RR</REWARD>
-			<REQUEST>
-				<GE>0</GE>
-				<BS>0</BS>
-				<WD>4</WD>
-				<BO>0</BO>
-				<RR>0</RR>
-			</REQUEST>
-		</EXPANSION>
+		
 		
 					<EXPANSION>
 			<ID>32</ID>
 			<REWARD>RR</REWARD>
-				<PRESTIEGE>1</PRESTIEGE>
+				<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -626,7 +616,7 @@
 				<EXPANSION>
 			<ID>40</ID>
 			<REWARD>WD</REWARD>
-				<PRESTIEGE>1</PRESTIEGE>
+				<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>4</GE>
 				<BS>0</BS>
@@ -643,7 +633,7 @@
 	<EXPANSION>
 			<ID>1</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>2</GE>
 				<BS>2</BS>
@@ -656,7 +646,7 @@
 		<EXPANSION>
 			<ID>2</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>0</BS>
@@ -669,7 +659,7 @@
 		<EXPANSION>
 			<ID>3</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>4</GE>
 				<BS>1</BS>
@@ -682,7 +672,7 @@
 		<EXPANSION>
 			<ID>4</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -695,7 +685,7 @@
 		<EXPANSION>
 			<ID>5</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>5</GE>
 				<BS>0</BS>
@@ -708,7 +698,7 @@
 		<EXPANSION>
 			<ID>6</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -721,7 +711,7 @@
 		<EXPANSION>
 			<ID>7</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>2</GE>
 				<BS>2</BS>
@@ -734,7 +724,7 @@
 			<EXPANSION>
 			<ID>8</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>2</BS>
@@ -747,7 +737,7 @@
 			<EXPANSION>
 			<ID>9</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -760,7 +750,7 @@
 			<EXPANSION>
 			<ID>10</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>5</BS>
@@ -773,7 +763,7 @@
 			<EXPANSION>
 			<ID>11</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>2</BS>
@@ -786,7 +776,7 @@
 			<EXPANSION>
 			<ID>12</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>6</BS>
@@ -799,7 +789,7 @@
 			<EXPANSION>
 			<ID>13</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>2</GE>
 				<BS>0</BS>
@@ -812,7 +802,7 @@
 		<EXPANSION>
 			<ID>14</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -825,7 +815,7 @@
 		<EXPANSION>
 			<ID>15</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>2</BS>
@@ -838,7 +828,7 @@
 		<EXPANSION>
 			<ID>16</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>5</GE>
 				<BS>0</BS>
@@ -851,7 +841,7 @@
 		<EXPANSION>
 			<ID>17</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>5</BS>
@@ -864,7 +854,7 @@
 		<EXPANSION>
 			<ID>18</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>6</GE>
 				<BS>0</BS>
@@ -877,7 +867,7 @@
 		<EXPANSION>
 			<ID>19</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -890,7 +880,7 @@
 			<EXPANSION>
 			<ID>20</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -903,7 +893,7 @@
 			<EXPANSION>
 			<ID>21</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>2</GE>
 				<BS>4</BS>
@@ -916,7 +906,7 @@
 			<EXPANSION>
 			<ID>22</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -929,7 +919,7 @@
 			<EXPANSION>
 			<ID>23</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -942,7 +932,7 @@
 			<EXPANSION>
 			<ID>24</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -955,7 +945,7 @@
 			<EXPANSION>
 			<ID>25</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>0</BS>
@@ -968,7 +958,7 @@
 				<EXPANSION>
 			<ID>26</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>1</PRESTIEGE>
+			<PRESTIGE>1</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>3</BS>
@@ -981,7 +971,7 @@
 				<EXPANSION>
 			<ID>27</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>1</GE>
 				<BS>0</BS>
@@ -994,7 +984,7 @@
 				<EXPANSION>
 			<ID>28</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1007,7 +997,7 @@
 				<EXPANSION>
 			<ID>29</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>2</PRESTIEGE>
+			<PRESTIGE>2</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1020,7 +1010,7 @@
 				<EXPANSION>
 			<ID>30</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1038,7 +1028,7 @@
 	<EXPANSION>
 			<ID>1</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>5</GE>
 				<BS>3</BS>
@@ -1051,7 +1041,7 @@
 		<EXPANSION>
 			<ID>2</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1064,7 +1054,7 @@
 		<EXPANSION>
 			<ID>3</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>0</BS>
@@ -1077,7 +1067,7 @@
 		<EXPANSION>
 			<ID>4</ID>
 			<REWARD>BO</REWARD>
-			<PRESTIEGE>5</PRESTIEGE>
+			<PRESTIGE>5</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1090,7 +1080,7 @@
 		<EXPANSION>
 			<ID>5</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>0</BS>
@@ -1103,7 +1093,7 @@
 			<EXPANSION>
 			<ID>6</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1116,7 +1106,7 @@
 			<EXPANSION>
 			<ID>7</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -1129,7 +1119,7 @@
 			<EXPANSION>
 			<ID>8</ID>
 			<REWARD>BS</REWARD>
-			<PRESTIEGE>5</PRESTIEGE>
+			<PRESTIGE>5</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -1142,7 +1132,7 @@
 			<EXPANSION>
 			<ID>9</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>3</BS>
@@ -1155,7 +1145,7 @@
 			<EXPANSION>
 			<ID>10</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>6</BS>
@@ -1168,7 +1158,7 @@
 			<EXPANSION>
 			<ID>11</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>7</BS>
@@ -1181,7 +1171,7 @@
 			<EXPANSION>
 			<ID>12</ID>
 			<REWARD>GE</REWARD>
-			<PRESTIEGE>5</PRESTIEGE>
+			<PRESTIGE>5</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>7</BS>
@@ -1194,7 +1184,7 @@
 			<EXPANSION>
 			<ID>13</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>5</BS>
@@ -1207,7 +1197,7 @@
 			<EXPANSION>
 			<ID>14</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>7</GE>
 				<BS>0</BS>
@@ -1220,7 +1210,7 @@
 			<EXPANSION>
 			<ID>15</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>6</GE>
 				<BS>3</BS>
@@ -1233,7 +1223,7 @@
 			<EXPANSION>
 			<ID>16</ID>
 			<REWARD>RR</REWARD>
-			<PRESTIEGE>5</PRESTIEGE>
+			<PRESTIGE>5</PRESTIGE>
 			<REQUEST>
 				<GE>7</GE>
 				<BS>0</BS>
@@ -1246,7 +1236,7 @@
 			<EXPANSION>
 			<ID>17</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>3</PRESTIEGE>
+			<PRESTIGE>3</PRESTIGE>
 			<REQUEST>
 				<GE>3</GE>
 				<BS>3</BS>
@@ -1259,7 +1249,7 @@
 		<EXPANSION>
 			<ID>18</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1272,7 +1262,7 @@
 		<EXPANSION>
 			<ID>19</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>4</PRESTIEGE>
+			<PRESTIGE>4</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>
@@ -1285,7 +1275,7 @@
 		<EXPANSION>
 			<ID>20</ID>
 			<REWARD>WD</REWARD>
-			<PRESTIEGE>5</PRESTIEGE>
+			<PRESTIGE>5</PRESTIGE>
 			<REQUEST>
 				<GE>0</GE>
 				<BS>0</BS>

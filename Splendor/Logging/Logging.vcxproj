@@ -20,36 +20,37 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{F1C35720-230A-464F-94B9-76ADB755C6D1}</ProjectGuid>
-    <RootNamespace>Splendor</RootNamespace>
+    <ProjectGuid>{219892E1-9231-433C-8EC8-A3A377EB4DDA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Logging</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -69,21 +70,30 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;LOGGING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external\SFML-2.5.1\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>SFML_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)\external\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;winmm.lib;opengl32.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -91,10 +101,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;LOGGING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -104,12 +117,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;LOGGING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,82 +135,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;LOGGING_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CardsDAO.cpp" />
-    <ClCompile Include="CircCollider.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Hand.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="RectCollider.cpp" />
-    <ClCompile Include="TokenPile.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="Deck.cpp" />
-    <ClCompile Include="ExpansionCard.cpp" />
-    <ClCompile Include="GamePieces.cpp" />
-    <ClCompile Include="Randomizer.cpp" />
-    <ClCompile Include="Token.cpp" />
-    <ClCompile Include="ICard.cpp" />
-    <ClCompile Include="IToken.cpp" />
-    <ClCompile Include="NobleCard.cpp" />
-    <ClCompile Include="PregameSetup.cpp" />
-    <ClCompile Include="SessionsManager.cpp" />
-    <ClCompile Include="Splendor.cpp" />
-    <ClCompile Include="UICard.cpp" />
-    <ClCompile Include="UISelectorBox.cpp" />
-    <ClCompile Include="UIGameSession.cpp" />
-    <ClCompile Include="UIMainMenuSession.cpp" />
-    <ClCompile Include="UIOptionsPanel.cpp" />
-    <ClCompile Include="UIPanel.cpp" />
-    <ClCompile Include="UIPreGameSession.cpp" />
-    <ClCompile Include="UISelector.cpp" />
-    <ClCompile Include="UIText.cpp" />
-    <ClCompile Include="UIToken.cpp" />
+    <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CardsDAO.h" />
-    <ClInclude Include="CircCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Hand.h" />
-    <ClInclude Include="RectCollider.h" />
-    <ClInclude Include="TokenPile.h" />
-    <ClInclude Include="UIButton.h" />
-    <ClInclude Include="Deck.h" />
-    <ClInclude Include="ExpansionCard.h" />
-    <ClInclude Include="GamePieces.h" />
-    <ClInclude Include="Randomizer.h" />
-    <ClInclude Include="Token.h" />
-    <ClInclude Include="ICard.h" />
-    <ClInclude Include="IToken.h" />
-    <ClInclude Include="NobleCard.h" />
-    <ClInclude Include="PregameSetup.h" />
-    <ClInclude Include="SessionsManager.h" />
-    <ClInclude Include="UICard.h" />
-    <ClInclude Include="UISelectorBox.h" />
-    <ClInclude Include="UIColors.h" />
-    <ClInclude Include="UIGameSession.h" />
-    <ClInclude Include="UIMainMenuSession.h" />
-    <ClInclude Include="UIOptionsPanel.h" />
-    <ClInclude Include="UIPanel.h" />
-    <ClInclude Include="UIPreGameSession.h" />
-    <ClInclude Include="UISelector.h" />
-    <ClInclude Include="UIText.h" />
-    <ClInclude Include="UIToken.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logging\Logging.vcxproj">
-      <Project>{219892e1-9231-433c-8ec8-a3a377eb4dda}</Project>
-    </ProjectReference>
+    <ClInclude Include="Logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

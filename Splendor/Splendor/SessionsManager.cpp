@@ -12,6 +12,7 @@
 #include <fstream>
 #include <unordered_map>
 #include "UICard.h"
+#include "../Logging/Logger.h"
 
 SessionsManager::SessionsManager()
 {
@@ -129,5 +130,8 @@ void SessionsManager::GameSession() const
 
 void SessionsManager::TestSession() const
 {
+	std::ofstream logFile("log.log", std::ios::app);
+	Logger logger(logFile, Logger::Level::Info);
+	logger.Log("Application started.", Logger::Level::Info);
 	std::cout << "ENTERED TEST SESSION\n";
 }
