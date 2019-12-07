@@ -1,26 +1,41 @@
 #include "UIGameSession.h"
 
-//UIGameSession::UIGameSession(const sf::Vector2u& windowSize)
-//{
-//	// instantiate UI components
-//}
-//
-//UIGameSession::~UIGameSession()
-//{
-//	// delete pointers
-//}
-//
-//void UIGameSession::PassEvent(const sf::Event& event)
-//{
-//	// iterate colliderVector and call handleEvent(event) on them -> use std::for_each() if you can
-//}
-//
-//UIGameSession::Events UIGameSession::GetEvent() const
-//{
-//	// evaluate states
-//}
-//
-//void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) const
-//{
-//	// iterate drawableVector and call draw on them -> use std::for_each() if you can
-//}
+UIGameSession::UIGameSession(const sf::Vector2u& windowSize) :
+	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05))
+{
+	// instantiate UI components
+
+	// Populate panel vector
+	m_panels.push_back(dynamic_cast<UIPanel*>(&m_infoPanel));
+}
+
+UIGameSession::~UIGameSession()
+{
+	// delete pointers
+}
+
+void UIGameSession::PassEvent(const sf::Event& event)
+{
+	// iterate panel vector and call handleEvent(event) on them
+	std::for_each(m_panels.begin(), m_panels.end(), [&event](UIPanel* panel)
+	{
+		panel->HandleEvent(event);
+	});
+}
+
+UIGameSession::Events UIGameSession::GetEvent() const
+{
+	// evaluate states
+	if (m_infoPanel.MenuButtonTriggered())
+		return Events::MenuButton;
+	return Events::None;
+}
+
+void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	// iterate panel vector and call draw on them
+	std::for_each(m_panels.begin(), m_panels.end(), [&target](UIPanel* panel)
+		{
+			target.draw(*panel);
+		});
+}

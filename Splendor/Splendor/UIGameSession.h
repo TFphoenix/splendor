@@ -1,4 +1,6 @@
 #pragma once
+#include "UIInfoPanel.h"
+
 #include <SFML/Graphics.hpp>
 
 class Collider;
@@ -9,6 +11,8 @@ public:
 	enum class Events
 	{
 		// possible events hapening in the scene
+		None,
+		MenuButton
 	};
 
 public:
@@ -23,9 +27,8 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
-	std::vector<sf::Drawable*> m_drawableVector;
-	std::vector<Collider*> m_colliderVector;
-	// m_infoPanel
+	std::vector<UIPanel*> m_panels;
+	UIInfoPanel m_infoPanel;
 	// m_playersPanel
 	// m_tokensPanel
 	// m_noblesPanel

@@ -24,24 +24,59 @@ void UIPanel::SetActive(bool active)
 
 Collider* UIPanel::GetContentCollider(unsigned contentID) const
 {
-	if (contentID < m_content.size())
-		return m_content[contentID].first;
+	if (contentID < m_colliderContent.size())
+		return m_colliderContent[contentID];
 	return nullptr;
 }
 
 sf::Drawable* UIPanel::GetContentDrawable(unsigned contentID) const
 {
-	if (contentID < m_content.size())
-		return m_content[contentID].second;
+	if (contentID < m_drawableContent.size())
+		return m_drawableContent[contentID];
 	return nullptr;
 }
 
-size_t UIPanel::ContentSize() const
+size_t UIPanel::ContentColliderSize() const
 {
-	return m_content.size();
+	return m_colliderContent.size();
+}
+
+size_t UIPanel::ContentDrawableSize() const
+{
+	return m_drawableContent.size();
+}
+
+void UIPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	if (IsActive())
+	{
+		for (size_t id = 0; id < ContentDrawableSize(); ++id)
+		{
+			target.draw(*m_drawableContent[id]);
+		}
+	}
+}
+
+void UIPanel::HandleEvent(const sf::Event& event)
+{
+	for (const auto& collider : m_colliderContent)
+	{
+		collider->HandleEvent(event);
+	}
 }
 
 void UIPanel::AddContent(std::pair<Collider*, sf::Drawable*> contentItem)
 {
-	m_content.push_back(contentItem);
+	m_colliderContent.push_back(contentItem.first);
+	m_drawableContent.push_back(contentItem.second);
+}
+
+void UIPanel::AddContent(Collider* contentCollider)
+{
+	m_colliderContent.push_back(contentCollider);
+}
+
+void UIPanel::AddContent(sf::Drawable* contentDrawable)
+{
+	m_drawableContent.push_back(contentDrawable);
 }

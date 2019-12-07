@@ -14,7 +14,7 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	m_mainMenu.setPosition(windowSize.x - m_mainMenu.getSize().x, windowSize.y - m_mainMenu.getSize().y);
 	const auto mainMenuPosition = m_mainMenu.getPosition();
 	const auto mainMenuSize = m_mainMenu.getSize();
-	m_mainMenu.setFillColor(sf::Color(0, 0, 0, 0));
+	m_mainMenu.setFillColor(UIColors::Transparent);
 
 	// Exit Menu
 	auto exitMenuPosition = m_exitMenu.getPosition();

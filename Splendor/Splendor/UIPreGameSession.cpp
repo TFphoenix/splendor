@@ -4,15 +4,15 @@ UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
 	// Game Mode Panel
 	m_gameModePanel("Game Mode: ", UIOptionsPanel::Type::Radio,
 		sf::Vector2f(50.0f, 0.2f * windowSize.y + 30.0f),
-		sf::Vector2f(windowSize.x - 50.0f, 0.2f * windowSize.y)),
+		sf::Vector2f(windowSize.x - 50.0f, 0.15f * windowSize.y)),
 	// Players Panel
 	m_playersPanel("Players: ", UIOptionsPanel::Type::Radio,
 		sf::Vector2f(50.0f, 0.4f * windowSize.y + 50.0f),
-		sf::Vector2f(windowSize.x - 50.0f, 0.2f * windowSize.y)),
+		sf::Vector2f(windowSize.x - 50.0f, 0.15f * windowSize.y)),
 	// Other Settings Panel
 	m_otherSettingsPanel("Other: ", UIOptionsPanel::Type::Check,
 		sf::Vector2f(50.0f, 0.6f * windowSize.y + 70.0f),
-		sf::Vector2f(windowSize.x - 50.0f, 0.2f * windowSize.y))
+		sf::Vector2f(windowSize.x - 50.0f, 0.15f * windowSize.y))
 {
 	// Title Background
 	m_titleBackground.setPosition(0, 0);

@@ -14,6 +14,7 @@ UISelectorBox::UISelectorBox(const std::string& title, Type type, const sf::Vect
 	m_box.setSize(sf::Vector2f(m_body.width, m_body.height));
 	m_box.setOutlineThickness(m_box.getSize().x / 8.0f);
 	m_currentDesign = &m_uncheckedDesign;
+	
 	// CheckBox Mark Sprite
 	m_checkTexture = new sf::Texture();
 	switch (m_type)
@@ -32,7 +33,7 @@ UISelectorBox::UISelectorBox(const std::string& title, Type type, const sf::Vect
 	m_checkSprite.setOrigin(m_checkTexture->getSize().x / 2.0f, m_checkTexture->getSize().y / 2.0f);
 	const float xSpriteRatio = m_box.getSize().x / m_checkTexture->getSize().x;
 	const float ySpriteRatio = m_box.getSize().y / m_checkTexture->getSize().y;
-	m_checkSprite.setScale(xSpriteRatio - 0.05f, ySpriteRatio - 0.05f);
+	m_checkSprite.setScale(xSpriteRatio - 0.02f, ySpriteRatio - 0.02f);
 	m_checkSprite.setPosition(m_box.getPosition().x + m_box.getSize().x / 2.0f, m_box.getPosition().y + m_box.getSize().y / 2.0f);
 	UpdateDesign();
 }

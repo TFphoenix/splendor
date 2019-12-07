@@ -5,16 +5,18 @@
 #include "UIColors.h"
 #include "UIMainMenuSession.h"
 #include "UIPreGameSession.h"
+#include "UIGameSession.h"
 #include "UICard.h"
 #include "CardDAO.h"
+#include "UICard.h"
+#include "UIInfoPanel.h"
+#include "../Logging/Logger.h"
 
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
 #include <fstream>
 #include <unordered_map>
-#include "UICard.h"
-#include "../Logging/Logger.h"
 
 SessionsManager::SessionsManager()
 {
@@ -102,7 +104,7 @@ void SessionsManager::PreGameSession() const
 			}
 		}
 
-		window->clear(UIColors::DarkBlue);
+		window->clear(UIColors::NavyBlue);
 		window->draw(pregameSessionGUI);
 		window->display();
 	}
@@ -110,22 +112,27 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession() const
 {
-	UICard test_card(3, UICard::Type::Background, { 0,0 }, { 238,357 });
+	//UICard test_card(3, UICard::Type::Background, { 0,0 }, { 238,357 });
+	//UIInfoPanel info_panel("info", sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05));
+	UIGameSession gameSessionGUI(windowSize);
+
 	while (window->isOpen())
 	{
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
-			if (event.type == sf::Event::KeyPressed)
+			gameSessionGUI.PassEvent(event);
+			switch (gameSessionGUI.GetEvent())
 			{
-				if (event.key.code == sf::Keyboard::Escape)
-				{
-					return;
-				}
+			case UIGameSession::Events::MenuButton:
+				return;
+			default:
+				break;
 			}
 		}
-		window->clear(UIColors::DarkBlue);
-		window->draw(test_card);
+		window->clear(UIColors::NavyBlue);
+		//window->draw(test_card);
+		window->draw(gameSessionGUI);
 		window->display();
 	}
 }

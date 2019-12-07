@@ -11,18 +11,8 @@ UIOptionsPanel::UIOptionsPanel(const std::string& title, Type type, sf::Vector2f
 	m_title.AlignText(UIText::TextAlign::mid_left);
 	m_lastOption.first = nullptr;
 	m_lastOption.second = nullptr;
-}
 
-void UIOptionsPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	if (IsActive())
-	{
-		target.draw(m_title);
-		for (size_t id = 0; id < ContentSize(); ++id)
-		{
-			target.draw(*GetContentDrawable(id));
-		}
-	}
+	AddContent(dynamic_cast<sf::Drawable*>(&m_title));
 }
 
 void UIOptionsPanel::AddOption(const std::string& optionName)
@@ -53,7 +43,7 @@ void UIOptionsPanel::AddOption(const std::string& optionName)
 
 void UIOptionsPanel::HandleEvent(const sf::Event& event)
 {
-	for (size_t id = 0; id < ContentSize(); id++)
+	for (size_t id = 0; id < ContentColliderSize(); id++)
 	{
 		GetContentCollider(id)->HandleEvent(event);
 	}
@@ -70,7 +60,7 @@ void UIOptionsPanel::UpdateOptions()
 {
 	if (m_type == Type::Radio)
 	{
-		for (size_t id = 0; id < ContentSize(); ++id)
+		for (size_t id = 0; id < ContentColliderSize(); ++id)
 		{
 			if (dynamic_cast<UISelectorBox*>(GetContentCollider(id))->IsChecked())
 			{
@@ -82,7 +72,7 @@ void UIOptionsPanel::UpdateOptions()
 			}
 			else
 			{
-				if(id == m_lastCheckedID)
+				if (id == m_lastCheckedID)
 				{
 					dynamic_cast<UISelectorBox*>(GetContentCollider(m_lastCheckedID))->SetState(true);
 				}

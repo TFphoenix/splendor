@@ -129,6 +129,9 @@
     <ClCompile Include="CardDAO.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="UIInfoPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="rapidxml_utils.hpp">
       <Filter>Data\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="UIInfoPanel.h">
+      <Filter>GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
