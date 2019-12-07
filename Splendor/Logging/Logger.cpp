@@ -1,8 +1,6 @@
 #include "Logger.h"
 
-Logger::Logger(std::ostream& out, Level minLogLevel): m_out(out), m_minLogLevel(minLogLevel)
-{
-}
+Logger::Logger(std::ostream& out, Level minLogLevel) : m_out(out), m_minLogLevel(minLogLevel) {}
 
 void Logger::Log(const std::string& message, Level level)
 {

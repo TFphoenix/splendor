@@ -132,7 +132,7 @@ void SessionsManager::GameSession() const
 
 void SessionsManager::TestSession() const
 {
-	std::ofstream logFile("log.log", std::ios::app);
+	std::ofstream logFile("LogFile.log", std::ios::app);
 	Logger logger(logFile, Logger::Level::Info);
 	logger.Log("Application started.", Logger::Level::Info);
 	std::cout << "ENTERED TEST SESSION\n";
