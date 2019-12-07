@@ -40,6 +40,9 @@
     <Filter Include="Data">
       <UniqueIdentifier>{9ecb53bd-efd2-4faf-9b2a-b727e4f77f7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\RapidXML">
+      <UniqueIdentifier>{1ae56c53-6716-4fca-8211-c23ea9f01baa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Randomizer.cpp">
@@ -123,7 +126,7 @@
     <ClCompile Include="GamePieces.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="CardsDAO.cpp">
+    <ClCompile Include="CardDAO.cpp">
       <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,8 +212,25 @@
     <ClInclude Include="GamePieces.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="CardsDAO.h">
+    <ClInclude Include="CardDAO.h">
       <Filter>Data</Filter>
     </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Data\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_iterators.hpp">
+      <Filter>Data\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Data\RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_utils.hpp">
+      <Filter>Data\RapidXML</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\external\Cards Database\CardsDatabase.xml">
+      <Filter>Data</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

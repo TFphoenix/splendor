@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CardsDAO.cpp" />
+    <ClCompile Include="CardDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Hand.cpp">
@@ -162,10 +162,14 @@
     <ClCompile Include="UIToken.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CardsDAO.h" />
+    <ClInclude Include="CardDAO.h" />
     <ClInclude Include="CircCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="rapidxml_iterators.hpp" />
+    <ClInclude Include="rapidxml_print.hpp" />
+    <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="TokenPile.h" />
     <ClInclude Include="UIButton.h" />
@@ -192,6 +196,7 @@
     <ClInclude Include="UIToken.h" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\external\Cards Database\CardsDatabase.xml" />
     <ProjectReference Include="..\Logging\Logging.vcxproj">
       <Project>{219892e1-9231-433c-8ec8-a3a377eb4dda}</Project>
     </ProjectReference>

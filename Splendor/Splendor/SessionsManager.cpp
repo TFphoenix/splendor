@@ -5,6 +5,8 @@
 #include "UIColors.h"
 #include "UIMainMenuSession.h"
 #include "UIPreGameSession.h"
+#include "UICard.h"
+#include "CardDAO.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -134,4 +136,5 @@ void SessionsManager::TestSession() const
 	Logger logger(logFile, Logger::Level::Info);
 	logger.Log("Application started.", Logger::Level::Info);
 	std::cout << "ENTERED TEST SESSION\n";
+	CardDAO c;
 }
