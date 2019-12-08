@@ -17,7 +17,6 @@ public:
 
 public:
 	UIGameSession(const sf::Vector2u& windowSize);
-	~UIGameSession();
 
 	// UI Logic
 	void StartGame();

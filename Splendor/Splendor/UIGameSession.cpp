@@ -1,6 +1,7 @@
 #include "UIGameSession.h"
 
 UIGameSession::UIGameSession(const sf::Vector2u& windowSize) :
+	// instantiate UI panels
 	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05))
 {
 	// instantiate UI components

@@ -10,6 +10,7 @@
 #include "CardDAO.h"
 #include "UICard.h"
 #include "UIInfoPanel.h"
+#include "UIPlayerPanel.h"
 #include "../Logging/Logger.h"
 
 #include <SFML/Graphics.hpp>
@@ -113,9 +114,12 @@ void SessionsManager::PreGameSession() const
 void SessionsManager::GameSession() const
 {
 	//UICard test_card(3, UICard::Type::Background, { 0,0 }, { 238,357 });
-	//UIInfoPanel info_panel("info", sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05));
 	UIGameSession gameSessionGUI(windowSize);
 	gameSessionGUI.StartGame();
+
+	// Tests
+	UIPlayerPanel playerPanel(UIPlayerPanel::Type::User, sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.2));
+	// ---
 
 	while (window->isOpen())
 	{
@@ -126,8 +130,7 @@ void SessionsManager::GameSession() const
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:
-				//return;
-				gameSessionGUI.NextTurn();
+				return;
 			default:
 				break;
 			}
@@ -136,6 +139,7 @@ void SessionsManager::GameSession() const
 		window->clear(UIColors::NavyBlue);
 		//window->draw(test_card);
 		window->draw(gameSessionGUI);
+		window->draw(playerPanel);
 		window->display();
 	}
 }

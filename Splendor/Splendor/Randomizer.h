@@ -1,6 +1,7 @@
 #pragma once
 #include <random>
 #include <vector>
+#include <array>
 
 class Randomizer
 {
@@ -11,6 +12,8 @@ public:
 	float Generate(float minim, float maxim);
 	template <class T>
 	static void Shuffle(std::vector<T>& container);
+	template <class T, std::size_t SIZE>
+	static void Shuffle(std::array<T, SIZE>& container);
 
 private:
 	std::random_device randomDevice;
@@ -19,6 +22,13 @@ private:
 
 template <class T>
 void Randomizer::Shuffle(std::vector<T>& container)
+{
+	auto rng = std::default_random_engine{};
+	std::shuffle(std::begin(container), std::end(container), rng);
+}
+
+template <class T, std::size_t SIZE>
+void Randomizer::Shuffle(std::array<T, SIZE>& container)
 {
 	auto rng = std::default_random_engine{};
 	std::shuffle(std::begin(container), std::end(container), rng);

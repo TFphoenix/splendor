@@ -23,17 +23,19 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 	m_menuButton->ChangeText("x");// future texture
 
 	//Background
-	sf::RectangleShape* background = new sf::RectangleShape(size);
-	background->setPosition(position);
-	background->setFillColor(UIColors::DarkBlue);
+	m_background.setSize(size);
+	m_background.setPosition(position);
+	m_background.setFillColor(UIColors::DarkBlue);
 
-	// Add content to panel
-	AddContent(dynamic_cast<Drawable*>(background));
+	// Add drawable content to panel
+	AddContent(dynamic_cast<Drawable*>(&m_background));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_timeTitle));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_timeLabel));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_turnTitle));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_turnLabel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_menuButton));
+
+	// Add collider content to panel
 	AddContent(dynamic_cast<Collider*>(m_menuButton));
 }
 

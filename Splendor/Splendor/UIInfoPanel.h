@@ -14,21 +14,6 @@ public:
 	{
 		bool running = false;
 		TimePoint startTime, currentTime;
-		//uint16_t hours = 0;
-		//uint16_t minutes = 0;
-		//double seconds = 0;
-
-		//void TransferTime()
-		//{
-		//	minutes = seconds / 60;
-		//	seconds = 0;
-		//	
-		//	if (minutes >= 60)
-		//	{
-		//		hours = 0;
-		//		hours += 1;
-		//	}
-		//}
 	};
 
 public:
@@ -55,6 +40,7 @@ private:
 	uint16_t m_turn;
 	UIText m_timeTitle, m_timeLabel;
 	UIText m_turnTitle, m_turnLabel;
+	sf::RectangleShape m_background;
 	UIButton* m_menuButton;
 };
 
