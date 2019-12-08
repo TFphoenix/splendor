@@ -1,7 +1,9 @@
 #pragma once
-#include "UIInfoPanel.h"
-
 #include <SFML/Graphics.hpp>
+
+#include "PregameSetup.h"
+#include "UIInfoPanel.h"
+#include "UIPlayersPanel.h"
 
 class Collider;
 
@@ -16,14 +18,14 @@ public:
 	};
 
 public:
-	UIGameSession(const sf::Vector2u& windowSize);
+	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup);
 
 	// UI Logic
 	void StartGame();
 	void StopGame();
 	void UpdateGame();
 	void NextTurn();
-	
+
 	// Events
 	void PassEvent(const sf::Event& event);
 	Events GetEvent() const;
@@ -32,9 +34,10 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
+	PregameSetup m_pregameSetup;
 	std::vector<UIPanel*> m_panels;
 	UIInfoPanel m_infoPanel;
-	// m_playersPanel
+	UIPlayersPanel m_playersPanel;
 	// m_tokensPanel
 	// m_noblesPanel
 	// m_expansionsPanel

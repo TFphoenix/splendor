@@ -6,7 +6,7 @@
 class UIPlayersPanel :public UIPanel
 {
 public:
-	UIPlayersPanel(const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
+	UIPlayersPanel(uint16_t playerCount, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
 
 private:
 	static inline const float s_paddingPercentage = 0.04f;

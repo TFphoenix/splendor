@@ -25,7 +25,6 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	// Textures
 	if (!s_texturesInitialized)
 	{
-		s_texturesInitialized = true;
 		LoadIconTextures();
 	}
 
@@ -113,4 +112,5 @@ void UIPlayerPanel::LoadIconTextures()
 			texture->loadFromFile(s_iconsTextureFile + "/user" + textureID + ".png");
 			++textureID;
 		});
+	s_texturesInitialized = true;
 }

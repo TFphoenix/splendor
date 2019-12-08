@@ -1,33 +1,23 @@
 #include "SessionsManager.h"
 #include "PregameSetup.h"
-#include "ExpansionCard.h"
-#include "UIButton.h"
 #include "UIColors.h"
 #include "UIMainMenuSession.h"
 #include "UIPreGameSession.h"
 #include "UIGameSession.h"
-#include "UICard.h"
 #include "CardDAO.h"
-#include "UICard.h"
-#include "UIInfoPanel.h"
-#include "UIPlayersPanel.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <iostream>
-#include <fstream>
-#include <unordered_map>
-
 SessionsManager::SessionsManager() :
-	logger(logFileStream, Logger::Level::Warning),
+	logger(logFileStream, Logger::Level::Error),
 	logFileStream(s_logFile, std::ios::app)
 {
 	logger.Log("Application started", Logger::Level::Info);
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 	logger.Log("Window created", Logger::Level::Info);
 
 	windowPosition = window->getPosition();
@@ -115,15 +105,10 @@ void SessionsManager::PreGameSession() const
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
 	logger.Log("Entered Game Session", Logger::Level::Info);
-	//UICard test_card(3, UICard::Type::Background, { 0,0 }, { 238,357 });
-	UIGameSession gameSessionGUI(windowSize);
+	UIGameSession gameSessionGUI(windowSize, pregameSetup);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 	gameSessionGUI.StartGame();
 	logger.Log("Game started", Logger::Level::Info);
-
-	// Tests
-	UIPlayersPanel playersPanel(sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.95));
-	// ---
 
 	while (window->isOpen())
 	{
@@ -131,7 +116,6 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 		while (window->pollEvent(event))
 		{
 			gameSessionGUI.PassEvent(event);
-			playersPanel.HandleEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:
@@ -142,16 +126,12 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 		}
 		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
-		//window->draw(test_card);
 		window->draw(gameSessionGUI);
-		window->draw(playersPanel);
 		window->display();
 	}
 }
 
 void SessionsManager::TestSession() const
 {
-
-	std::cout << "ENTERED TEST SESSION\n";
 	CardDAO c;
 }

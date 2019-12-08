@@ -1,13 +1,17 @@
 #include "UIGameSession.h"
 
-UIGameSession::UIGameSession(const sf::Vector2u& windowSize) :
+UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup) :
 	// instantiate UI panels
-	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05))
+	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05)),
+	m_playersPanel(m_pregameSetup.GetPlayerCount(), sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.95)),
+	// instantiate pregame Setup
+	m_pregameSetup(pregameSetup)
 {
 	// instantiate UI components
 
 	// Populate panel vector
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_infoPanel));
+	m_panels.push_back(dynamic_cast<UIPanel*>(&m_playersPanel));
 }
 
 void UIGameSession::StartGame()
@@ -41,7 +45,7 @@ void UIGameSession::PassEvent(const sf::Event& event)
 
 UIGameSession::Events UIGameSession::GetEvent() const
 {
-	// evaluate states
+	// Info Panel
 	if (m_infoPanel.MenuButtonTriggered())
 		return Events::MenuButton;
 	return Events::None;

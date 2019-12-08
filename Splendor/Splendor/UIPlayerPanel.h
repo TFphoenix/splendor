@@ -30,8 +30,6 @@ public:
 
 	void SetUserTexture(uint16_t textureID);
 	static void ShuffleTextures();
-
-private:
 	static void LoadIconTextures();
 
 private:
