@@ -163,6 +163,7 @@
     <ClCompile Include="UISelector.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UIToken.cpp" />
+    <ClCompile Include="UIVTokensPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardDAO.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="UISelector.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UIToken.h" />
+    <ClInclude Include="UIVTokensPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml" />

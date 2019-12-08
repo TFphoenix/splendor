@@ -18,6 +18,11 @@ void UIToken::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(m_body);
 }
 
+sf::CircleShape& UIToken::GetBody()
+{
+	return m_body;
+}
+
 void UIToken::LoadTextures()
 {
 	s_tokenTextures.resize(s_texturesCount);

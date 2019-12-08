@@ -4,6 +4,7 @@
 #include "PregameSetup.h"
 #include "UIInfoPanel.h"
 #include "UIPlayersPanel.h"
+#include "UIVTokensPanel.h"
 
 class Collider;
 
@@ -38,7 +39,7 @@ private:
 	std::vector<UIPanel*> m_panels;
 	UIInfoPanel m_infoPanel;
 	UIPlayersPanel m_playersPanel;
-	// m_tokensPanel
+	UIVTokensPanel m_tokensPanel;
 	// m_noblesPanel
 	// m_expansionsPanel
 	// m_handPanel
