@@ -1,6 +1,9 @@
 #include "UIPanel.h"
 
-UIPanel::UIPanel(const std::string& title, const sf::Vector2f& size, bool isActive) :RectangleShape(size), m_titleString(title), m_isActive(isActive) {}
+UIPanel::UIPanel(const std::string& title, const sf::Vector2f& size, const sf::Vector2f& position, bool isActive) : RectangleShape(size), m_titleString(title), m_isActive(isActive)
+{
+	setPosition(position);
+}
 
 std::string UIPanel::GetTitle() const
 {

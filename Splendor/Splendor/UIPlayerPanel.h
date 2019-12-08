@@ -15,10 +15,17 @@ public:
 	};
 
 public:
+	// Constr.
 	UIPlayerPanel(Type type, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
 
+	// G&S
+	bool GetTriggered() const;
+	void SetTriggered(bool triggered);
+
+	// Collider Propreties
 	void OnMouseEnter() override;
 	void OnMouseLeave() override;
+	void OnMouseLeftClick() override;
 	void OnMouseLeftRelease() override;
 
 private:
@@ -37,6 +44,7 @@ private:
 
 private:
 	Type m_type;
+	bool m_isTriggered;
 	sf::RectangleShape m_background;
 	sf::CircleShape m_profile;
 	UIText m_nameLabel;

@@ -1,18 +1,20 @@
 #include "UIPlayerPanel.h"
 #include "Randomizer.h"
 #include "UIColors.h"
+#include <iostream>
 
 UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::Vector2f& size, bool isActive) :
-	UIPanel("PlayerPanel", size),
+	UIPanel("PlayerPanel", size, position, isActive),
 	RectCollider(*dynamic_cast<sf::RectangleShape*>(this)),
 	m_type(type),
+	m_isTriggered(false),
 	// Graphic components
-	m_nameLabel(sf::Vector2f(position.x + s_percentage * size.x, position.y + s_padding * size.y), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "Player Name", s_fontSize + 10, UIColors::DarkBlue, UIColors::Transparent),
-	m_prestigeLabel(sf::Vector2f(position.x + s_percentage * size.x, m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Prestige Points: 0", s_fontSize - 10, UIColors::DarkBlue, UIColors::Transparent),
-	m_clickToViewLabel(sf::Vector2f(position.x + s_percentage * size.x, m_prestigeLabel.getGlobalBounds().top + m_prestigeLabel.getGlobalBounds().height + s_padding * size.y / 2), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "(Click to view hand)", s_fontSize - 10, UIColors::DarkBlue, UIColors::Transparent)
+	m_nameLabel(sf::Vector2f(position.x + s_percentage * size.x, position.y + s_padding * size.y), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "Player Name", s_fontSize + 10, UIColors::NeutralWhite, UIColors::Transparent),
+	m_prestigeLabel(sf::Vector2f(position.x + s_percentage * size.x, m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Prestige Points: 0", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent),
+	m_clickToViewLabel(sf::Vector2f(position.x + s_percentage * size.x, m_prestigeLabel.getGlobalBounds().top + m_prestigeLabel.getGlobalBounds().height + s_padding * size.y / 2), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "(Click to view hand)", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent)
 {
 	// Re-scale UIText
-	const auto scale = (size.y - 4 * size.y * s_padding) / (m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height);
+	const auto scale = (size.y - 2 * size.y * s_padding) / (m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height);
 	m_nameLabel.setScale(scale, scale);
 	m_prestigeLabel.setScale(scale, scale);
 	m_clickToViewLabel.setScale(scale, scale);
@@ -37,7 +39,9 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	//Background
 	m_background.setSize(size);
 	m_background.setPosition(position);
-	m_background.setFillColor(UIColors::GoldYellow);
+	m_background.setFillColor(UIColors::NeutralGray);
+	m_background.setOutlineColor(UIColors::GoldYellow);
+	m_background.setOutlineThickness(3);
 
 	// Add drawable content to panel
 	AddContent(dynamic_cast<Drawable*>(&m_background));
@@ -47,16 +51,39 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	AddContent(dynamic_cast<Drawable*>(&m_clickToViewLabel));
 }
 
+bool UIPlayerPanel::GetTriggered() const
+{
+	return m_isTriggered;
+}
+
+void UIPlayerPanel::SetTriggered(bool triggered)
+{
+	m_isTriggered = triggered;
+}
+
 void UIPlayerPanel::OnMouseEnter()
 {
+	m_background.setFillColor(UIColors::LightGray);
+	m_background.setOutlineColor(UIColors::NeutralWhite);
 }
 
 void UIPlayerPanel::OnMouseLeave()
 {
+	m_background.setFillColor(UIColors::NeutralGray);
+	m_background.setOutlineColor(UIColors::GoldYellow);
+}
+
+void UIPlayerPanel::OnMouseLeftClick()
+{
+	m_background.setFillColor(UIColors::DarkGray);
+	m_background.setOutlineColor(UIColors::LightGray);
 }
 
 void UIPlayerPanel::OnMouseLeftRelease()
 {
+	m_background.setFillColor(UIColors::LightGray);
+	m_background.setOutlineColor(UIColors::NeutralWhite);
+	m_isTriggered = true;
 }
 
 void UIPlayerPanel::LoadIconTextures()

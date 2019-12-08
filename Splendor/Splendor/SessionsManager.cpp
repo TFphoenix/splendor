@@ -118,7 +118,7 @@ void SessionsManager::GameSession() const
 	gameSessionGUI.StartGame();
 
 	// Tests
-	UIPlayerPanel playerPanel(UIPlayerPanel::Type::User, sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.2));
+	UIPlayerPanel playerPanel(UIPlayerPanel::Type::User, sf::Vector2f(0, windowSize.y * 0.1), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.2));
 	// ---
 
 	while (window->isOpen())
@@ -127,6 +127,7 @@ void SessionsManager::GameSession() const
 		while (window->pollEvent(event))
 		{
 			gameSessionGUI.PassEvent(event);
+			dynamic_cast<Collider*>(&playerPanel)->HandleEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:

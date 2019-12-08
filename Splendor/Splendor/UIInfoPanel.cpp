@@ -2,7 +2,7 @@
 #include "UIColors.h"
 
 UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size, bool isActive) :
-	UIPanel("InfoPanel", size, isActive),
+	UIPanel("InfoPanel", size, position, isActive),
 	m_timeTitle(sf::Vector2f(position.x + s_padding, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Time: "),
 	m_timeLabel(sf::Vector2f(m_timeTitle.getPosition().x + m_timeTitle.getGlobalBounds().width + s_padding, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "00:00:00"),
 	m_turnTitle(sf::Vector2f(position.x + m_timeLabel.getGlobalBounds().width + 300, position.y + s_padding), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Turn: "),
