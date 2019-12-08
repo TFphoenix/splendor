@@ -91,3 +91,13 @@ void UIPreGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) c
 	target.draw(*m_startGameButton);
 	target.draw(*m_mainMenuButton);
 }
+
+PregameSetup UIPreGameSession::GetPregameSetup() const
+{
+	const uint16_t playerCount = std::stoi(m_playersPanel.FirstChecked());
+	const PregameSetup::GameMode gameMode = m_gameModePanel.FirstChecked() == "LAN" ? PregameSetup::GameMode::LAN : PregameSetup::GameMode::Local;
+	const bool withTimer = m_otherSettingsPanel.IsChecked("Timer");
+	const bool withAI = m_otherSettingsPanel.IsChecked("A.I.");
+
+	return PregameSetup(playerCount, gameMode, withTimer, withAI);
+}

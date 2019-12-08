@@ -21,7 +21,8 @@ private:
 template <class cardType>
 void Deck<cardType>::ShuffleDeck()
 {
-	Randomizer::Shuffle(m_cards);
+	Randomizer rnd;
+	rnd.Shuffle(m_cards);
 }
 
 template <class cardType>

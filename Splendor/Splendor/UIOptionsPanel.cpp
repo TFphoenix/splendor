@@ -56,6 +56,32 @@ void UIOptionsPanel::HandleEvent(const sf::Event& event)
 	}
 }
 
+bool UIOptionsPanel::IsChecked(const std::string& optionName) const
+{
+	for (size_t id = 0; id < ContentColliderSize(); ++id)
+	{
+		const auto option = dynamic_cast<UISelectorBox*>(GetContentCollider(id));
+		if (option->GetName() == optionName)
+		{
+			return option->IsChecked();
+		}
+	}
+	throw std::invalid_argument("Invalid option name");
+}
+
+std::string UIOptionsPanel::FirstChecked() const
+{
+	for (size_t id = 0; id < ContentColliderSize(); ++id)
+	{
+		const auto option = dynamic_cast<UISelectorBox*>(GetContentCollider(id));
+		if (option->IsChecked())
+		{
+			return option->GetName();
+		}
+	}
+	return "";
+}
+
 void UIOptionsPanel::UpdateOptions()
 {
 	if (m_type == Type::Radio)

@@ -22,7 +22,7 @@ public:
 
 public:
 	Logger(std::ostream& out, Level minLogLevel);
-	void Log(const std::string& message, Level level);
+	void Log(const std::string& message, Level level) const;
 
 private:
 	std::ostream& m_out;

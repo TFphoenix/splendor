@@ -2,8 +2,8 @@
 
 void TokenPile::ShuffleDeck()
 {
-
-	Randomizer::Shuffle(t_token);
+	Randomizer randomizer;
+	randomizer.Shuffle(t_token);
 }
 
 Token TokenPile::DrawToken()

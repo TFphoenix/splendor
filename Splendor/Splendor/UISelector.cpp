@@ -9,6 +9,11 @@ UISelector::UISelector(const std::string& title, const sf::Vector2f& position, c
 	m_title.AlignText(UIText::TextAlign::mid_center);
 }
 
+std::string UISelector::GetName()
+{
+	return m_title.getString();
+}
+
 bool UISelector::GetState() const
 {
 	return m_isChecked;

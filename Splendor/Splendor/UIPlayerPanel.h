@@ -28,6 +28,9 @@ public:
 	void OnMouseLeftClick() override;
 	void OnMouseLeftRelease() override;
 
+	void SetUserTexture(uint16_t textureID);
+	static void ShuffleTextures();
+
 private:
 	static void LoadIconTextures();
 

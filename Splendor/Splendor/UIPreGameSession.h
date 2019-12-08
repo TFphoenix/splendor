@@ -1,10 +1,14 @@
 #pragma once
+// UI
 #include "UIText.h"
 #include "UIButton.h"
 #include "UIOptionsPanel.h"
 #include "UISelectorBox.h"
 #include "Collider.h"
 #include "UIColors.h"
+
+// Logic
+#include "PregameSetup.h"
 
 class UIPreGameSession :public sf::Drawable
 {
@@ -26,6 +30,9 @@ public:
 
 	// Graphics
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
+
+	// Logic
+	PregameSetup GetPregameSetup() const;
 
 private:
 	UIText m_title;

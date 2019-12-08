@@ -135,6 +135,9 @@
     <ClCompile Include="UIPlayerPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
+    <ClCompile Include="UIPlayersPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -237,6 +240,9 @@
       <Filter>GUI\Panels</Filter>
     </ClInclude>
     <ClInclude Include="UIPlayerPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPlayersPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,6 +22,10 @@ public:
 	//Auxiliary Handle Event Method
 	void HandleEvent(const sf::Event& event) override;
 
+	// Extract Results
+	bool IsChecked(const std::string& optionName) const;
+	std::string FirstChecked() const;
+
 private:
 	void UpdateOptions();
 

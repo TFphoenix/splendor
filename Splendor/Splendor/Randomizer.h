@@ -11,9 +11,9 @@ public:
 	int Generate(int minim, int maxim);
 	float Generate(float minim, float maxim);
 	template <class T>
-	static void Shuffle(std::vector<T>& container);
+	void Shuffle(std::vector<T>& container);
 	template <class T, std::size_t SIZE>
-	static void Shuffle(std::array<T, SIZE>& container);
+	void Shuffle(std::array<T, SIZE>& container);
 
 private:
 	std::random_device randomDevice;
@@ -23,13 +23,12 @@ private:
 template <class T>
 void Randomizer::Shuffle(std::vector<T>& container)
 {
-	auto rng = std::default_random_engine{};
-	std::shuffle(std::begin(container), std::end(container), rng);
+	std::shuffle(std::begin(container), std::end(container), m_MTwister);
 }
 
 template <class T, std::size_t SIZE>
 void Randomizer::Shuffle(std::array<T, SIZE>& container)
 {
 	auto rng = std::default_random_engine{};
-	std::shuffle(std::begin(container), std::end(container), rng);
+	std::shuffle(std::begin(container), std::end(container), m_MTwister);
 }

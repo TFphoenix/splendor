@@ -1,7 +1,6 @@
 #include "UIPlayerPanel.h"
 #include "Randomizer.h"
 #include "UIColors.h"
-#include <iostream>
 
 UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::Vector2f& size, bool isActive) :
 	UIPanel("PlayerPanel", size, position, isActive),
@@ -14,7 +13,7 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	m_clickToViewLabel(sf::Vector2f(position.x + s_percentage * size.x, m_prestigeLabel.getGlobalBounds().top + m_prestigeLabel.getGlobalBounds().height + s_padding * size.y / 2), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "(Click to view hand)", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent)
 {
 	// Re-scale UIText
-	const auto scale = (size.y - 2 * size.y * s_padding) / (m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height);
+	const auto scale = (size.x - 2 * s_padding * size.x) / (m_nameLabel.getGlobalBounds().left + m_nameLabel.getGlobalBounds().width);
 	m_nameLabel.setScale(scale, scale);
 	m_prestigeLabel.setScale(scale, scale);
 	m_clickToViewLabel.setScale(scale, scale);
@@ -34,7 +33,10 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	m_profile.setRadius((size.y - 2 * s_padding * size.y) / 2);
 	m_profile.setOrigin(m_profile.getRadius(), m_profile.getRadius());
 	m_profile.setPosition(position.x + (size.x * s_percentage) / 2, position.y + size.y / 2);
-	m_profile.setTexture(s_userIcons[0]);
+	if (type == Type::Computer)
+	{
+		m_profile.setTexture(s_computerIcon);
+	}
 
 	//Background
 	m_background.setSize(size);
@@ -86,6 +88,20 @@ void UIPlayerPanel::OnMouseLeftRelease()
 	m_isTriggered = true;
 }
 
+void UIPlayerPanel::SetUserTexture(uint16_t textureID)
+{
+	if (m_type == Type::User && textureID < 4)
+	{
+		m_profile.setTexture(s_userIcons[textureID]);
+	}
+}
+
+void UIPlayerPanel::ShuffleTextures()
+{
+	Randomizer randomizer;
+	randomizer.Shuffle(s_userIcons);
+}
+
 void UIPlayerPanel::LoadIconTextures()
 {
 	s_computerIcon = new sf::Texture;
@@ -97,5 +113,4 @@ void UIPlayerPanel::LoadIconTextures()
 			texture->loadFromFile(s_iconsTextureFile + "/user" + textureID + ".png");
 			++textureID;
 		});
-	Randomizer::Shuffle(s_userIcons);
 }
