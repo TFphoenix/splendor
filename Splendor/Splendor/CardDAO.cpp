@@ -15,21 +15,24 @@ CardDAO::CardDAO()
 	}
 }
 
-template <class T>
-T CardDAO::GetCard(Type type, uint16_t id)
+CardDAO::Noble CardDAO::GetNoble(uint16_t id)
 {
-	switch (type) {
-	case Type::Noble:
-		return s_nobleCards[id];
-	case Type::ExpansionL1:
-		return s_expansionL1Cards[id];
-	case Type::ExpansionL2:
-		return s_expansionL2Cards[id];
-	case Type::ExpansionL3:
-		return s_expansionL3Cards[id];
-	default:
-		return nullptr;
-	}
+	return s_nobleCards[id];
+}
+
+CardDAO::Expansion CardDAO::GetL1Expansion(uint16_t id)
+{
+	return s_expansionL1Cards[id];
+}
+
+CardDAO::Expansion CardDAO::GetL2Expansion(uint16_t id)
+{
+	return s_expansionL2Cards[id];
+}
+
+CardDAO::Expansion CardDAO::GetL3Expansion(uint16_t id)
+{
+	return s_expansionL3Cards[id];
 }
 
 void CardDAO::InitializeDatabase()

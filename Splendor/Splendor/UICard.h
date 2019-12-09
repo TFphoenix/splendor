@@ -15,10 +15,10 @@ public:
 	{
 		Unknown,
 		Background,
+		Noble,
 		ExpansionL1,
 		ExpansionL2,
-		ExpansionL3,
-		Noble
+		ExpansionL3
 	};
 
 public:

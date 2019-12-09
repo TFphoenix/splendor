@@ -14,6 +14,7 @@ public:
 	enum class Type
 	{
 		Unknown,
+		Background,
 		Noble,
 		ExpansionL1,
 		ExpansionL2,
@@ -42,8 +43,10 @@ public:
 	CardDAO();
 
 	// Manipulators
-	template <class T>
-	static T GetCard(Type type, uint16_t id);
+	static Noble GetNoble(uint16_t id);
+	static Expansion GetL1Expansion(uint16_t id);
+	static Expansion GetL2Expansion(uint16_t id);
+	static Expansion GetL3Expansion(uint16_t id);
 
 private:
 	// Database initializers
