@@ -22,7 +22,7 @@ UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
 	// Title
 	m_title.setString("New Game Setup");
 	m_title.setCharacterSize(80);
-	m_title.setFillColor(sf::Color(255, 255, 255));
+	m_title.setFillColor(UIColors::NeutralWhite);
 	m_title.setPosition(windowSize.x / 2.0f, 0.2f * windowSize.y / 2.0f);
 	m_title.AlignText(UIText::TextAlign::mid_center);
 

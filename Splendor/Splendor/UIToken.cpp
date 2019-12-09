@@ -1,9 +1,15 @@
 #include "UIToken.h"
+#include "UIColors.h"
 
 std::vector<sf::Texture> UIToken::s_tokenTextures;
 
-UIToken::UIToken(IToken::Type tokenType, const sf::Vector2f& position, float radius) :CircCollider(position, radius), m_body(radius)
+UIToken::UIToken(IToken::Type tokenType, const sf::Vector2f& position, float radius) :CircCollider(position, radius), m_type(tokenType), m_radius(radius), m_body(radius)
 {
+	// States
+	m_numb = false;
+	m_state = State::None;
+
+	// Body
 	m_body.setOrigin(radius, radius);
 	m_body.setPosition(position);
 	if (s_tokenTextures.empty())
@@ -11,6 +17,57 @@ UIToken::UIToken(IToken::Type tokenType, const sf::Vector2f& position, float rad
 		LoadTextures();
 	}
 	m_body.setTexture(&s_tokenTextures[static_cast<int>(tokenType)]);
+	m_body.setOutlineThickness(0.1f * radius);
+	m_body.setOutlineColor(UIColors::Transparent);
+	switch (tokenType)
+	{
+	case IToken::Type::GreenEmerald:
+		m_hoverColor = sf::Color::Green;
+		break;
+	case IToken::Type::BlueSapphire:
+		m_hoverColor = sf::Color::Blue;
+		break;
+	case IToken::Type::WhiteDiamond:
+		m_hoverColor = sf::Color::White;
+		break;
+	case IToken::Type::BlackOnyx:
+		m_hoverColor = sf::Color::Black;
+		break;
+	case IToken::Type::RedRuby:
+		m_hoverColor = sf::Color::Red;
+		break;
+	case IToken::Type::Gold:
+		m_hoverColor = sf::Color::Yellow;
+		break;
+	default:
+		m_hoverColor = UIColors::NeutralWhite;
+		break;
+	}
+}
+
+IToken::Type UIToken::GetType() const
+{
+	return m_type;
+}
+
+bool UIToken::GetNumb() const
+{
+	return m_numb;
+}
+
+void UIToken::SetNumb(bool numb)
+{
+	m_numb = numb;
+}
+
+UIToken::State UIToken::GetState() const
+{
+	return m_state;
+}
+
+void UIToken::SetState(State state)
+{
+	m_state = state;
 }
 
 void UIToken::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -18,9 +75,67 @@ void UIToken::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(m_body);
 }
 
-sf::CircleShape& UIToken::GetBody()
+sf::CircleShape UIToken::GetBody()
 {
 	return m_body;
+}
+
+void UIToken::OnMouseEnter()
+{
+	if (!m_numb)
+	{
+		m_state = State::Hover;
+		m_body.setRadius(m_radius + s_radiusPercentage * m_radius);
+		m_body.setOutlineColor(m_hoverColor - UIColors::QuarterTransparent);
+	}
+}
+
+void UIToken::OnMouseLeave()
+{
+	if (!m_numb)
+	{
+		m_state = State::None;
+		m_body.setRadius(m_radius);
+		m_body.setOutlineColor(UIColors::Transparent);
+	}
+}
+
+void UIToken::OnMouseLeftClick()
+{
+	if (!m_numb)
+	{
+		m_state = State::Press;
+		m_body.setRadius(m_radius - s_radiusPercentage * m_radius);
+		m_body.setOutlineColor(UIColors::Transparent);
+	}
+}
+
+void UIToken::OnMouseLeftRelease()
+{
+	if (!m_numb)
+	{
+		m_state = State::Release;
+		m_body.setRadius(m_radius + s_radiusPercentage * m_radius);
+		m_body.setOutlineColor(m_hoverColor - UIColors::QuarterTransparent);
+	}
+}
+
+void UIToken::SetPosition(float x, float y)
+{
+	m_body.setPosition(x, y);
+	ColliderBody().setPosition(x, y);
+}
+
+void UIToken::SetOrigin(float x, float y)
+{
+	m_body.setOrigin(x, y);
+	ColliderBody().setOrigin(x, y);
+}
+
+void UIToken::SetRadius(float radius)
+{
+	m_body.setRadius(radius);
+	ColliderBody().setRadius(radius);
 }
 
 void UIToken::LoadTextures()

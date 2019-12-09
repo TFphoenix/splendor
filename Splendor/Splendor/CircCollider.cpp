@@ -23,3 +23,8 @@ bool CircCollider::DetectMouseCollision(sf::Vector2i&& mousePosition)
 		+ (mousePosition.y - bodyPosition.y) * (mousePosition.y - bodyPosition.y));
 	return distance < m_body.getRadius();
 }
+
+sf::CircleShape& CircCollider::ColliderBody()
+{
+	return m_body;
+}

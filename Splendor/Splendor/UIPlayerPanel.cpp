@@ -8,9 +8,9 @@ UIPlayerPanel::UIPlayerPanel(Type type, const sf::Vector2f& position, const sf::
 	m_type(type),
 	m_isTriggered(false),
 	// Graphic components
-	m_nameLabel(sf::Vector2f(position.x + s_percentage * size.x, position.y + s_padding * size.y), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "Player Name", s_fontSize + 10, UIColors::NeutralWhite, UIColors::Transparent),
-	m_prestigeLabel(sf::Vector2f(position.x + s_percentage * size.x, m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height), UIText::TextAlign::classic, UIText::AvailableFonts::DosisBold, "Prestige Points: 0", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent),
-	m_clickToViewLabel(sf::Vector2f(position.x + s_percentage * size.x, m_prestigeLabel.getGlobalBounds().top + m_prestigeLabel.getGlobalBounds().height + s_padding * size.y / 2), UIText::TextAlign::classic, UIText::AvailableFonts::DosisLight, "(Click to view hand)", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent)
+	m_nameLabel(sf::Vector2f(position.x + s_percentage * size.x, position.y + s_padding * size.y), UIText::TextAlign::classic, UIText::AvailableFonts::LatoLight, "Player Name", s_fontSize + 10, UIColors::NeutralWhite, UIColors::Transparent),
+	m_prestigeLabel(sf::Vector2f(position.x + s_percentage * size.x, m_nameLabel.getGlobalBounds().top + m_nameLabel.getGlobalBounds().height), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "Prestige Points: 0", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent),
+	m_clickToViewLabel(sf::Vector2f(position.x + s_percentage * size.x, m_prestigeLabel.getGlobalBounds().top + m_prestigeLabel.getGlobalBounds().height + s_padding * size.y / 2), UIText::TextAlign::classic, UIText::AvailableFonts::LatoMediumItalic, "(Click to view hand)", s_fontSize - 10, UIColors::NeutralWhite, UIColors::Transparent)
 {
 	// Re-scale UIText
 	const auto scale = (size.x - 2 * s_padding * size.x) / (m_nameLabel.getGlobalBounds().left + m_nameLabel.getGlobalBounds().width);

@@ -29,6 +29,7 @@ void UIGameSession::StopGame()
 void UIGameSession::UpdateGame()
 {
 	m_infoPanel.UpdateTime();
+	m_tokensPanel.UpdateTokens();
 }
 
 void UIGameSession::NextTurn()

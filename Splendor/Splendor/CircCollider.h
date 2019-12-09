@@ -10,6 +10,9 @@ public:
 
 	bool DetectMouseCollision(sf::Vector2i&& mousePosition) override;
 
+protected:
+	sf::CircleShape& ColliderBody();
+
 private:
 	sf::CircleShape m_body;
 };

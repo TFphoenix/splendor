@@ -2,7 +2,7 @@
 
 UIOptionsPanel::UIOptionsPanel(const std::string& title, Type type, sf::Vector2f position, sf::Vector2f size, bool isActive) :
 	UIPanel(title, size, position, isActive),
-	m_title({ position.x,position.y + size.y / 2.0f }, UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, title, 0.4f * size.y),
+	m_title({ position.x,position.y + size.y / 2.0f }, UIText::TextAlign::mid_center, UIText::AvailableFonts::LatoBlack, title, 0.4f * size.y),
 	m_type(type),
 	m_lastCheckedID(0)
 {

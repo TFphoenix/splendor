@@ -9,7 +9,11 @@ public:
 		DosisLight,
 		DosisBold,
 		PixellettersFull,
-		Splendor
+		Splendor,
+		BerlinBold,
+		LatoBlack,
+		LatoLight,
+		LatoMediumItalic
 	};
 	enum class TextAlign
 	{
@@ -22,7 +26,7 @@ public:
 private:
 	static std::vector<sf::Font> s_availableFonts;
 	const inline static std::string s_fontsFile = "../external/Resources/Fonts/";
-	const inline static size_t s_fontsCount = 4;
+	const inline static size_t s_fontsCount = 8;
 
 public:
 	// Constr.

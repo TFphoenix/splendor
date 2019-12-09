@@ -43,6 +43,18 @@ void UIText::LoadFonts()
 			case AvailableFonts::Splendor:
 				font.loadFromFile(s_fontsFile + "Splendor.ttf");
 				break;
+			case AvailableFonts::BerlinBold:
+				font.loadFromFile(s_fontsFile + "Berlin-Bold.ttf");
+				break;
+			case AvailableFonts::LatoBlack:
+				font.loadFromFile(s_fontsFile + "Lato-Black.ttf");
+				break;
+			case AvailableFonts::LatoLight:
+				font.loadFromFile(s_fontsFile + "Lato-Light.ttf");
+				break;
+			case AvailableFonts::LatoMediumItalic:
+				font.loadFromFile(s_fontsFile + "Lato-MediumItalic.ttf");
+				break;
 			default:
 				font.loadFromFile(s_fontsFile + "Dosis-Light.ttf");
 				break;
