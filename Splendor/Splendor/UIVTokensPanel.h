@@ -20,7 +20,7 @@ public:
 	PickedArray& ExtractPickedTokens();
 
 private:
-	// picked tokens
+	// picked tokens array
 	bool PickedTokensFull() const;
 	void AddPickedToken(IToken::Type tokenType);
 

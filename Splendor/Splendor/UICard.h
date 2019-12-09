@@ -13,6 +13,7 @@ public:
 public:
 	enum class Type
 	{
+		Unknown,
 		Background,
 		ExpansionL1,
 		ExpansionL2,

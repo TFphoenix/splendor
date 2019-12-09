@@ -13,6 +13,7 @@ public:
 
 	enum class Type
 	{
+		Unknown,
 		Noble,
 		ExpansionL1,
 		ExpansionL2,
@@ -58,3 +59,10 @@ private:
 	static inline ExpansionMap s_expansionL3Cards;
 };
 
+struct CardData
+{
+	CardData(CardDAO::Type dataType = CardDAO::Type::Unknown, uint16_t dataID = 0);
+
+	CardDAO::Type type;
+	uint16_t id;
+};

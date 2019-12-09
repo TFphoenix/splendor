@@ -46,7 +46,7 @@ private:
 	static void LoadTextures();
 
 private:
-	const static inline float s_radiusPercentage = 0.05;
+	const static inline float s_radiusPercentage = 0.05f;
 	// Textures
 	const inline static std::string s_texturesFile = "../external/Resources/Textures/Tokens/";
 	static std::vector<sf::Texture> s_tokenTextures;

@@ -14,7 +14,12 @@ UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::V
 		LoadTextures();
 		s_texturesLoaded = true;
 	}
-	setTexture(GetTexture(id, type));
+
+	const sf::Texture* texture = GetTexture(id, type);
+	if (texture != nullptr)
+	{
+		setTexture(texture);
+	}
 }
 
 uint16_t UICard::GetID() const
@@ -90,16 +95,52 @@ const sf::Texture* UICard::GetTexture(uint16_t id, Type type)
 	switch (type)
 	{
 	case Type::Background:
-		return s_backgroundTextures[id];
+		try
+		{
+			return s_backgroundTextures[id];
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Wrong id or type");
+		}
 	case Type::ExpansionL1:
-		return s_expansionL1Textures[id];
+		try
+		{
+			return s_expansionL1Textures[id];
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Wrong id or type");
+		}
 	case Type::ExpansionL2:
-		return s_expansionL2Textures[id];
+		try {
+			return s_expansionL2Textures[id];
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Wrong id or type");
+		}
 	case Type::ExpansionL3:
-		return s_expansionL3Textures[id];
+		try
+		{
+			return s_expansionL3Textures[id];
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Wrong id or type");
+		}
 	case Type::Noble:
-		return s_nobleTextures[id];
-	default:
+		try
+		{
+			return s_nobleTextures[id];
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Wrong id or type");
+		}
+	case Type::Unknown:
 		return nullptr;
+	default:
+		throw std::invalid_argument("Wrong id or type");
 	}
 }

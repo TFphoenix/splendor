@@ -147,3 +147,5 @@ void CardDAO::InitializeSpecificData(Type type, rapidxml::xml_node<>* mainRoot)
 		currentNode = currentNode->next_sibling();
 	}
 }
+
+CardData::CardData(CardDAO::Type dataType, uint16_t dataID) :type(dataType), id(dataID) {}

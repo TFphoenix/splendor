@@ -152,6 +152,7 @@
     <ClCompile Include="Splendor.cpp" />
     <ClCompile Include="UICard.cpp" />
     <ClCompile Include="UIInfoPanel.cpp" />
+    <ClCompile Include="UICardsRowPanel.cpp" />
     <ClCompile Include="UIPlayerPanel.cpp" />
     <ClCompile Include="UIPlayersPanel.cpp" />
     <ClCompile Include="UISelectorBox.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="SessionsManager.h" />
     <ClInclude Include="UICard.h" />
     <ClInclude Include="UIInfoPanel.h" />
+    <ClInclude Include="UICardsRowPanel.h" />
     <ClInclude Include="UIPlayerPanel.h" />
     <ClInclude Include="UIPlayersPanel.h" />
     <ClInclude Include="UISelectorBox.h" />
