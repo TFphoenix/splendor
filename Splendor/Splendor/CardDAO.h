@@ -1,9 +1,10 @@
 #pragma once
 #include "IToken.h"
 #include "rapidxml.hpp"
-
+#include"Token.h" 
 #include <string>
 #include <unordered_map>
+#include "UICard.h"
 
 class CardDAO
 {
@@ -11,6 +12,8 @@ public:
 	using GemType = IToken::Type;
 	using RequestMap = std::unordered_map<GemType, uint16_t>;
 
+	
+	
 	enum class Type
 	{
 		Unknown,
@@ -26,7 +29,15 @@ public:
 		uint16_t prestige = 0;
 		RequestMap request;
 	};
+	struct Data
+	{
+		Data(CardDAO::Type dataType = CardDAO::Type::Unknown, uint16_t dataID = 0);
 
+		CardDAO::Type type;
+		uint16_t id;
+		
+	};
+	
 	struct Expansion
 	{
 		GemType reward = GemType::GreenEmerald;

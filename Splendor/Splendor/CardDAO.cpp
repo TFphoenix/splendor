@@ -24,7 +24,10 @@ CardDAO::Expansion CardDAO::GetL1Expansion(uint16_t id)
 {
 	return s_expansionL1Cards[id];
 }
-
+CardDAO::Data::Data(CardDAO::Type dataType, uint16_t dataID):type(dataType),id(dataID)
+{
+	
+}
 CardDAO::Expansion CardDAO::GetL2Expansion(uint16_t id)
 {
 	return s_expansionL2Cards[id];
