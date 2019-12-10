@@ -1,4 +1,5 @@
 #include "UIGameSession.h"
+#include "UISelectedCard.h"
 
 UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup) :
 	// instantiate UI panels
@@ -13,47 +14,51 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_pregameSetup(pregameSetup)
 {
 	// instantiate UI components
-	std::vector<CardData> nobles({
-		CardData(CardDAO::Type::Noble,3),
-		CardData(CardDAO::Type::Noble,1),
-		CardData(CardDAO::Type::Noble,6),
-		CardData(CardDAO::Type::Noble,8),
-		CardData(CardDAO::Type::Noble,10)
+	std::vector<UICard::Data> nobles({
+		UICard::Data(UICard::Type::Noble,3),
+		UICard::Data(UICard::Type::Noble,1),
+		UICard::Data(UICard::Type::Noble,6),
+		UICard::Data(UICard::Type::Noble,8),
+		UICard::Data(UICard::Type::Noble,10)
 		});
-	std::vector<CardData> eL3({
-		CardData(CardDAO::Type::Background,3),
-		CardData(CardDAO::Type::ExpansionL3,1),
-		CardData(CardDAO::Type::ExpansionL3,6),
-		CardData(CardDAO::Type::ExpansionL3,8),
-		CardData(CardDAO::Type::ExpansionL3,20)
+	std::vector<UICard::Data> eL3({
+		UICard::Data(UICard::Type::Background,3),
+		UICard::Data(UICard::Type::ExpansionL3,1),
+		UICard::Data(UICard::Type::ExpansionL3,6),
+		UICard::Data(UICard::Type::ExpansionL3,8),
+		UICard::Data(UICard::Type::ExpansionL3,20)
 		});
-	std::vector<CardData> eL2({
-		CardData(CardDAO::Type::Background,2),
-		CardData(CardDAO::Type::ExpansionL2,1),
-		CardData(CardDAO::Type::ExpansionL2,15),
-		CardData(CardDAO::Type::ExpansionL2,20),
-		CardData(CardDAO::Type::ExpansionL2,30)
+	std::vector<UICard::Data> eL2({
+		UICard::Data(UICard::Type::Background,2),
+		UICard::Data(UICard::Type::ExpansionL2,1),
+		UICard::Data(UICard::Type::ExpansionL2,15),
+		UICard::Data(UICard::Type::ExpansionL2,20),
+		UICard::Data(UICard::Type::ExpansionL2,30)
 		});
-	std::vector<CardData> eL1({
-		CardData(CardDAO::Type::Background,1),
-		CardData(CardDAO::Type::ExpansionL1,11),
-		CardData(CardDAO::Type::ExpansionL1,26),
-		CardData(CardDAO::Type::ExpansionL1,32),
-		CardData(CardDAO::Type::ExpansionL1,40)
+	std::vector<UICard::Data> eL1({
+		UICard::Data(UICard::Type::Background,1),
+		UICard::Data(UICard::Type::ExpansionL1,11),
+		UICard::Data(UICard::Type::ExpansionL1,26),
+		UICard::Data(UICard::Type::ExpansionL1,32),
+		UICard::Data(UICard::Type::ExpansionL1,40)
 		});
 	m_noblesPanel.SetCardsData(nobles);
+	m_noblesPanel.ReverseDrawOrder();
 	m_expansionsL3Panel.SetCardsData(eL3);
+	m_expansionsL3Panel.ReverseDrawOrder();
 	m_expansionsL2Panel.SetCardsData(eL2);
+	m_expansionsL2Panel.ReverseDrawOrder();
 	m_expansionsL1Panel.SetCardsData(eL1);
+	m_expansionsL1Panel.ReverseDrawOrder();
 
 	// Populate panel vector
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_infoPanel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_playersPanel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_tokensPanel));
-	m_panels.push_back(dynamic_cast<UIPanel*>(&m_noblesPanel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL1Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL2Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL3Panel));
+	m_panels.push_back(dynamic_cast<UIPanel*>(&m_noblesPanel));
 }
 
 void UIGameSession::StartGame()
@@ -101,4 +106,9 @@ void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 		{
 			target.draw(*panel);
 		});
+	// re-draw selected card on top of all drawables
+	if (UISelectedCard::Get() != nullptr)
+	{
+		target.draw(*UISelectedCard::Get());
+	}
 }

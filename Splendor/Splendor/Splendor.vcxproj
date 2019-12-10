@@ -155,6 +155,7 @@
     <ClCompile Include="UICardsRowPanel.cpp" />
     <ClCompile Include="UIPlayerPanel.cpp" />
     <ClCompile Include="UIPlayersPanel.cpp" />
+    <ClCompile Include="UISelectedCard.cpp" />
     <ClCompile Include="UISelectorBox.cpp" />
     <ClCompile Include="UIGameSession.cpp" />
     <ClCompile Include="UIMainMenuSession.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="UICardsRowPanel.h" />
     <ClInclude Include="UIPlayerPanel.h" />
     <ClInclude Include="UIPlayersPanel.h" />
+    <ClInclude Include="UISelectedCard.h" />
     <ClInclude Include="UISelectorBox.h" />
     <ClInclude Include="UIColors.h" />
     <ClInclude Include="UIGameSession.h" />

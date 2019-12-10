@@ -85,7 +85,7 @@ void UIToken::OnMouseEnter()
 	if (!m_numb)
 	{
 		m_state = State::Hover;
-		m_body.setRadius(m_radius + s_radiusPercentage * m_radius);
+		m_body.setScale(1.1, 1.1);
 		m_body.setOutlineColor(m_hoverColor - UIColors::QuarterTransparent);
 	}
 }
@@ -95,7 +95,7 @@ void UIToken::OnMouseLeave()
 	if (!m_numb)
 	{
 		m_state = State::None;
-		m_body.setRadius(m_radius);
+		m_body.setScale(1, 1);
 		m_body.setOutlineColor(UIColors::Transparent);
 	}
 }
@@ -105,7 +105,7 @@ void UIToken::OnMouseLeftClick()
 	if (!m_numb)
 	{
 		m_state = State::Press;
-		m_body.setRadius(m_radius - s_radiusPercentage * m_radius);
+		m_body.setScale(0.9, 0.9);
 		m_body.setOutlineColor(UIColors::Transparent);
 	}
 }
@@ -115,7 +115,7 @@ void UIToken::OnMouseLeftRelease()
 	if (!m_numb)
 	{
 		m_state = State::Release;
-		m_body.setRadius(m_radius + s_radiusPercentage * m_radius);
+		m_body.setScale(1.1, 1.1);
 		m_body.setOutlineColor(m_hoverColor - UIColors::QuarterTransparent);
 	}
 }

@@ -21,22 +21,50 @@ public:
 		ExpansionL3
 	};
 
+	struct Data
+	{
+		Data(Type dataType = UICard::Type::Unknown, uint16_t dataID = 0);
+
+		Type type;
+		uint16_t id;
+	};
+
+	enum class State
+	{
+		None,
+		Hover,
+		Press,
+		Release
+	};
+
 public:
+	// Constr.
 	UICard(uint16_t id, Type type, const sf::Vector2f& position = sf::Vector2f(0, 0), const sf::Vector2f& size = sf::Vector2f(0, 0));
 
-	// Manipulators
+	// Manipulators + G&S
 	uint16_t GetID() const;
 	Type GetType() const;
-	//void ChangeID(uint16_t newID);
-	//void ChangeType(Type newType);
+	Data GetData() const;
+	void SetData(Data data);
+	bool GetNumb() const;
+	void SetNumb(bool numb);
+
+	// Collider
+	void OnMouseOver() override;
+	void OnMouseEnter() override;
+	void OnMouseLeave() override;
+	void OnMouseLeftClick() override;
+	void OnMouseLeftRelease() override;
 
 private:
+	// Textures
 	static void LoadTextures();
 	static void LoadSpecificTextures(std::string&& fileName, const std::string&& textureName, uint16_t count, TextureMap* into);
 	static void LoadSpecificTexture(const std::string& path, TextureMap* into, uint16_t atID);
 	static const sf::Texture* GetTexture(uint16_t id, Type type);
 
 private:
+	// Textures
 	const inline static std::string s_texturesFile = "../external/Resources/Textures/Cards/";
 	static inline TextureMap s_backgroundTextures;
 	static inline TextureMap s_expansionL1Textures;
@@ -46,6 +74,12 @@ private:
 	static inline bool s_texturesLoaded = false;
 
 private:
-	uint16_t m_id;
-	Type m_type;
+	// Graphics
+	sf::Vector2f m_initialPosition;
+
+	// Logic
+	bool m_numb;
+	State m_state;
+	Data m_data;
 };
+

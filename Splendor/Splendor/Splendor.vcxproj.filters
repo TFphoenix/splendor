@@ -144,6 +144,7 @@
     <ClCompile Include="UICardsRowPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
+    <ClCompile Include="UISelectedCard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -257,6 +258,7 @@
     <ClInclude Include="UICardsRowPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="UISelectedCard.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml">

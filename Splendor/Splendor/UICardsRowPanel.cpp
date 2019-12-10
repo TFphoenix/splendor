@@ -21,9 +21,8 @@ UICardsRowPanel::UICardsRowPanel(uint16_t cardSlots, const sf::Vector2f& positio
 	uint16_t it = 0;
 	while (it < cardSlots)
 	{
-		// create card data & UI
-		m_cardsData.emplace_back(CardDAO::Type::Unknown, 0);
-		m_cards[it] = new UICard(2, UICard::Type::Noble, sf::Vector2f(position.x + s_xPaddingPercentage * size.x + static_cast<float>(it)* m_cardDistance, position.y + s_yPaddingPercentage * size.y), m_cardSize);
+		// create empty card data & UI
+		m_cards[it] = new UICard(0, UICard::Type::Unknown, sf::Vector2f(position.x + s_xPaddingPercentage * size.x + static_cast<float>(it)* m_cardDistance, position.y + s_yPaddingPercentage * size.y), m_cardSize);
 
 		// add card Collider and Drawable to panel
 		AddContent(dynamic_cast<Collider*>(m_cards[it]));
@@ -34,30 +33,27 @@ UICardsRowPanel::UICardsRowPanel(uint16_t cardSlots, const sf::Vector2f& positio
 	}
 }
 
-std::vector<CardData> UICardsRowPanel::GetCardsData() const
+std::vector<UICard::Data> UICardsRowPanel::GetCardsData() const
 {
-	return m_cardsData;
-}
-
-void UICardsRowPanel::SetCardsData(const std::vector<CardData>& cardsData)
-{
-	// re-initialize cards data vector
-	m_cardsData = cardsData;
-	// clear cards Collider and Drawable panel data
-	m_colliderContent.clear();
-	m_drawableContent.clear();
-
-	uint16_t it = 0;
-	while (it < m_cardSlots)
+	std::vector<UICard::Data> cardsData;
+	for (const auto& card : m_cards)
 	{
-		// re-initialize UICards
-		m_cards[it] = new UICard(m_cardsData[it].id, static_cast<UICard::Type>(m_cardsData[it].type), sf::Vector2f(getPosition().x + s_xPaddingPercentage * getSize().x + static_cast<float>(it)* m_cardDistance, getPosition().y + s_yPaddingPercentage * getSize().y), m_cardSize);
+		cardsData.push_back(card->GetData());
+	}
+	return cardsData;
+}
 
-		// add card Collider and Drawable to panel
-		AddContent(dynamic_cast<Collider*>(m_cards[it]));
-		AddContent(dynamic_cast<sf::Drawable*>(m_cards[it]));
-
-		// increment iterator
+void UICardsRowPanel::SetCardsData(const std::vector<UICard::Data>& cardsData)
+{
+	uint16_t it = 0;
+	for (const auto& card : m_cards)
+	{
+		card->SetData(cardsData[it]);
 		++it;
 	}
+}
+
+void UICardsRowPanel::ReverseDrawOrder()
+{
+	std::reverse(m_drawableContent.begin(), m_drawableContent.end());
 }

@@ -1,13 +1,21 @@
 #include "UICard.h"
 #include "GamePieces.h"
+#include "UIColors.h"
+#include "UISelectedCard.h"
+
 #include <thread>
+
+UICard::Data::Data(Type dataType, uint16_t dataID) :type(dataType), id(dataID) {}
 
 UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::Vector2f& size) :
 	RectCollider(position, size),
 	RectangleShape(size),
-	m_id(id),
-	m_type(type)
+	m_initialPosition(position),
+	m_numb(false),
+	m_state(State::None),
+	m_data(type, id)
 {
+	// Initialize
 	setPosition(position);
 	if (!s_texturesLoaded)
 	{
@@ -15,21 +23,102 @@ UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::V
 		s_texturesLoaded = true;
 	}
 
+	// Set texture
 	const sf::Texture* texture = GetTexture(id, type);
 	if (texture != nullptr)
 	{
 		setTexture(texture);
 	}
+
+	// Animation
+	setOutlineThickness(0.05f * size.x);
+	setOutlineColor(UIColors::Transparent);
 }
 
 uint16_t UICard::GetID() const
 {
-	return m_id;
+	return m_data.id;
 }
 
 UICard::Type UICard::GetType() const
 {
-	return m_type;
+	return m_data.type;
+}
+
+UICard::Data UICard::GetData() const
+{
+	return m_data;
+}
+
+void UICard::SetData(Data data)
+{
+	const sf::Texture* texture = GetTexture(data.id, data.type);
+	if (texture != nullptr)
+	{
+		m_data = data;
+		setTexture(texture);
+	}
+}
+
+bool UICard::GetNumb() const
+{
+	return m_numb;
+}
+
+void UICard::SetNumb(bool numb)
+{
+	m_numb = numb;
+}
+
+void UICard::OnMouseOver()
+{
+	if (!m_numb)
+	{
+		setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
+	}
+}
+
+void UICard::OnMouseEnter()
+{
+	if (!m_numb)
+	{
+		m_state = State::Hover;
+		setScale(2, 2);
+		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
+		UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
+	}
+}
+
+void UICard::OnMouseLeave()
+{
+	if (!m_numb)
+	{
+		m_state = State::None;
+		setScale(1, 1);
+		setOutlineColor(UIColors::Transparent);
+		setPosition(m_initialPosition);
+		UISelectedCard::Set(nullptr);
+	}
+}
+
+void UICard::OnMouseLeftClick()
+{
+	if (!m_numb)
+	{
+		m_state = State::Press;
+		setScale(1.8, 1.8);
+		setOutlineColor(UIColors::DarkYellow - UIColors::HalfTransparent);
+	}
+}
+
+void UICard::OnMouseLeftRelease()
+{
+	if (!m_numb)
+	{
+		m_state = State::Release;
+		setScale(2, 2);
+		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
+	}
 }
 
 void UICard::LoadTextures()
