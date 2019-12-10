@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="CardDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="UIVTokensPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="CardDAO.h" />
     <ClInclude Include="CircCollider.h" />
     <ClInclude Include="Collider.h" />
