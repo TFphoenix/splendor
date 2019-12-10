@@ -23,10 +23,11 @@ public:
 
 	struct Data
 	{
-		Data(Type dataType = UICard::Type::Unknown, uint16_t dataID = 0);
+		Data(Type dataType = UICard::Type::Unknown, uint16_t dataID = 0, bool isDataNumb = false);
 
 		Type type;
 		uint16_t id;
+		bool isNumb;
 	};
 
 	enum class State
@@ -80,6 +81,7 @@ private:
 	// Logic
 	bool m_numb;
 	State m_state;
-	Data m_data;
+	uint16_t m_id;
+	Type m_type;
 };
 

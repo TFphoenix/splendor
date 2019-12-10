@@ -15,28 +15,28 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 {
 	// instantiate UI components
 	std::vector<UICard::Data> nobles({
-		UICard::Data(UICard::Type::Noble,3),
-		UICard::Data(UICard::Type::Noble,1),
-		UICard::Data(UICard::Type::Noble,6),
-		UICard::Data(UICard::Type::Noble,8),
-		UICard::Data(UICard::Type::Noble,10)
+		UICard::Data(UICard::Type::Noble,3,true),
+		UICard::Data(UICard::Type::Noble,1,true),
+		UICard::Data(UICard::Type::Noble,6,true),
+		UICard::Data(UICard::Type::Noble,8,true),
+		UICard::Data(UICard::Type::Noble,10,true)
 		});
 	std::vector<UICard::Data> eL3({
-		UICard::Data(UICard::Type::Background,3),
+		UICard::Data(UICard::Type::Background,3,true),
 		UICard::Data(UICard::Type::ExpansionL3,1),
 		UICard::Data(UICard::Type::ExpansionL3,6),
 		UICard::Data(UICard::Type::ExpansionL3,8),
 		UICard::Data(UICard::Type::ExpansionL3,20)
 		});
 	std::vector<UICard::Data> eL2({
-		UICard::Data(UICard::Type::Background,2),
+		UICard::Data(UICard::Type::Background,2,true),
 		UICard::Data(UICard::Type::ExpansionL2,1),
 		UICard::Data(UICard::Type::ExpansionL2,15),
 		UICard::Data(UICard::Type::ExpansionL2,20),
 		UICard::Data(UICard::Type::ExpansionL2,30)
 		});
 	std::vector<UICard::Data> eL1({
-		UICard::Data(UICard::Type::Background,1),
+		UICard::Data(UICard::Type::Background,1,true),
 		UICard::Data(UICard::Type::ExpansionL1,11),
 		UICard::Data(UICard::Type::ExpansionL1,26),
 		UICard::Data(UICard::Type::ExpansionL1,32),

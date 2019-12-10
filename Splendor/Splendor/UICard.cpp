@@ -5,7 +5,7 @@
 
 #include <thread>
 
-UICard::Data::Data(Type dataType, uint16_t dataID) :type(dataType), id(dataID) {}
+UICard::Data::Data(Type dataType, uint16_t dataID, bool isDataNumb) :type(dataType), id(dataID), isNumb(isDataNumb) {}
 
 UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::Vector2f& size) :
 	RectCollider(position, size),
@@ -13,7 +13,8 @@ UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::V
 	m_initialPosition(position),
 	m_numb(false),
 	m_state(State::None),
-	m_data(type, id)
+	m_id(id),
+	m_type(type)
 {
 	// Initialize
 	setPosition(position);
@@ -37,17 +38,17 @@ UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::V
 
 uint16_t UICard::GetID() const
 {
-	return m_data.id;
+	return m_id;
 }
 
 UICard::Type UICard::GetType() const
 {
-	return m_data.type;
+	return m_type;
 }
 
 UICard::Data UICard::GetData() const
 {
-	return m_data;
+	return Data(m_type, m_id, m_numb);
 }
 
 void UICard::SetData(Data data)
@@ -55,7 +56,9 @@ void UICard::SetData(Data data)
 	const sf::Texture* texture = GetTexture(data.id, data.type);
 	if (texture != nullptr)
 	{
-		m_data = data;
+		m_id = data.id;
+		m_type = data.type;
+		m_numb = data.isNumb;
 		setTexture(texture);
 	}
 }
@@ -72,10 +75,7 @@ void UICard::SetNumb(bool numb)
 
 void UICard::OnMouseOver()
 {
-	if (!m_numb)
-	{
-		setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
-	}
+	setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
 }
 
 void UICard::OnMouseEnter()
@@ -83,10 +83,10 @@ void UICard::OnMouseEnter()
 	if (!m_numb)
 	{
 		m_state = State::Hover;
-		setScale(2, 2);
-		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
-		UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
+		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
 	}
+	setScale(2, 2);
+	UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
 }
 
 void UICard::OnMouseLeave()
@@ -94,11 +94,11 @@ void UICard::OnMouseLeave()
 	if (!m_numb)
 	{
 		m_state = State::None;
-		setScale(1, 1);
 		setOutlineColor(UIColors::Transparent);
-		setPosition(m_initialPosition);
-		UISelectedCard::Set(nullptr);
 	}
+	setScale(1, 1);
+	setPosition(m_initialPosition);
+	UISelectedCard::Set(nullptr);
 }
 
 void UICard::OnMouseLeftClick()
@@ -107,7 +107,7 @@ void UICard::OnMouseLeftClick()
 	{
 		m_state = State::Press;
 		setScale(1.8, 1.8);
-		setOutlineColor(UIColors::DarkYellow - UIColors::HalfTransparent);
+		setOutlineColor(UIColors::DarkYellow - UIColors::QuarterTransparent);
 	}
 }
 
