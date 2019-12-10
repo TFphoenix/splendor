@@ -11,8 +11,6 @@ class CardDAO
 public:
 	using GemType = IToken::Type;
 	using RequestMap = std::unordered_map<GemType, uint16_t>;
-
-	
 	
 	enum class Type
 	{
@@ -29,13 +27,13 @@ public:
 		uint16_t prestige = 0;
 		RequestMap request;
 	};
+	
 	struct Data
 	{
-		Data(CardDAO::Type dataType = CardDAO::Type::Unknown, uint16_t dataID = 0);
+		Data(Type dataType = Type::Unknown, uint16_t dataID = 0);
 
-		CardDAO::Type type;
+		Type type;
 		uint16_t id;
-		
 	};
 	
 	struct Expansion

@@ -12,7 +12,6 @@
 class Board
 {
 public:
-
 	Board(std::array <Deck<ExpansionCard>, 3 > cards,
 		std::array<TokenPile, 6>tokens,
 		std::array<std::optional<CardDAO::Data>, 5> nobles, 
