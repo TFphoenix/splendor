@@ -32,13 +32,11 @@ void UIVTokensPanel::UpdateTokens()
 	{
 		if (token->GetState() == UIToken::State::Release)
 		{
-			if (!PickedTokensFull())
+			token->SetState(UIToken::State::Hover);
+			// Add picked token
+			if (AddPickedToken(token->GetType()))
 			{
-				// Add to picked tokens
-				AddPickedToken(token->GetType());
-
 				// Update text
-				token->SetState(UIToken::State::Hover);
 				std::string newString(m_tokensText[it]->getString());
 				if (newString != "0")
 				{
@@ -56,23 +54,29 @@ UIVTokensPanel::PickedArray& UIVTokensPanel::ExtractPickedTokens()
 	return m_pickedTokens;
 }
 
-bool UIVTokensPanel::PickedTokensFull() const
+bool UIVTokensPanel::AddPickedToken(IToken::Type tokenType)
 {
 	if (m_pickedTokens[2].has_value())
-		return true;
-	if (!m_pickedTokens[1].has_value())
+	{
 		return false;
-	if (m_pickedTokens[0] == m_pickedTokens[1])
-		return true;
-	return false;
-}
-
-void UIVTokensPanel::AddPickedToken(IToken::Type tokenType)
-{
+	}
 	if (!m_pickedTokens[0].has_value())
+	{
 		m_pickedTokens[0] = tokenType;
-	else if (!m_pickedTokens[1].has_value())
+		return true;
+	}
+	if (!m_pickedTokens[1].has_value())
+	{
 		m_pickedTokens[1] = tokenType;
-	else
-		m_pickedTokens[2] = tokenType;
+		return true;
+	}
+	if (tokenType != m_pickedTokens[0] && tokenType != m_pickedTokens[1])
+	{
+		if (m_pickedTokens[0] != m_pickedTokens[1])
+		{
+			m_pickedTokens[2] = tokenType;
+			return true;
+		}
+	}
+	return false;
 }

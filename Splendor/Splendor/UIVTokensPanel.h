@@ -21,8 +21,7 @@ public:
 
 private:
 	// picked tokens array
-	bool PickedTokensFull() const;
-	void AddPickedToken(IToken::Type tokenType);
+	bool AddPickedToken(IToken::Type tokenType);
 
 private:
 	static inline const float s_xPaddingPercentage = 0.02f;
