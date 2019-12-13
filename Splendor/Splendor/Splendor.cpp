@@ -1,6 +1,6 @@
 #include "SessionsManager.h"
 
-int main()
+int test()	//MODIFIED
 {
 	SessionsManager SplendorSession;
 	SplendorSession.MainMenuSession();

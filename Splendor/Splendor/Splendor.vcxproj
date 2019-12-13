@@ -167,6 +167,7 @@
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UIToken.cpp" />
     <ClCompile Include="UIVTokensPanel.cpp" />
+    <ClCompile Include="Winsock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
