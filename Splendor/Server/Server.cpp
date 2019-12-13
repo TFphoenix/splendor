@@ -9,7 +9,8 @@
 #define logn(x) std::cout << (x) << "\n"
 #define imp(x) std::cout << "---------------" << (x) << "---------------" << "\n"
 
-int main() {
+//int main(){
+int singleConnectionServer() {
 
 	int port = 13010;								// Listening port # on the server
 
@@ -112,4 +113,6 @@ int main() {
 
 	// ** shut down winsock
 	WSACleanup();
+
+	return 0;
 }

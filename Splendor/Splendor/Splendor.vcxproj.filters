@@ -150,9 +150,6 @@
     <ClCompile Include="UISelectedCard.cpp">
       <Filter>GUI\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Winsock.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
