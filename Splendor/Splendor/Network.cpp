@@ -41,7 +41,7 @@ int udp() {
 			socket.receive(buffer, sizeof(buffer), bytesReceived, rIp, portNo);	//because we don't know where we are connecting from
 
 			if (bytesReceived > 0) {
-				computerID[portNo] = rIp;	
+				computerID[portNo] = rIp;
 			}
 			std::cout << "Answer > ";
 			std::cin >> answer;
@@ -68,7 +68,7 @@ int udp() {
 			}
 
 		} else {
-			
+
 			sf::IpAddress tempIp;
 			unsigned short tempPort;
 			socket.receive(buffer, sizeof(buffer), bytesReceived, tempIp, tempPort);
@@ -76,7 +76,7 @@ int udp() {
 			{
 				std::cout << "Received: " << buffer << std::endl;
 			}
-			
+
 		}
 
 	}
@@ -146,10 +146,96 @@ int tcp() {
 	return 0;
 }
 
+#include <SFML/Window/Window.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
+
+int game() {
+	sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+	sf::TcpSocket socket;
+	char connectionType;
+
+	std::cout << "(s) server" << std::endl << "(c) client" << std::endl;
+	std::cin >> connectionType;
+
+	if (connectionType == 's') {
+		sf::TcpListener listener;
+		listener.listen(PORT);
+		listener.accept(socket);
+	} else {
+		socket.connect(ip, PORT);
+	}
+
+	sf::RectangleShape rect1, rect2;
+
+	rect1.setSize(sf::Vector2f(20, 20));
+	rect2.setSize(sf::Vector2f(20, 20));
+
+	rect1.setFillColor(sf::Color::Red);
+	rect2.setFillColor(sf::Color::Blue);
+
+	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Packets");
+
+	sf::Vector2f prevPosition, p2Position;
+
+	socket.setBlocking(false);
+
+	bool update = false;
+
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape) {
+				window.close();
+			} else if (event.type == sf::Event::GainedFocus) {
+				update = true;
+			} else if (event.type == sf::Event::LostFocus) {
+				update = false;
+			}
+		}
+
+		prevPosition = rect1.getPosition();
+
+		if (update) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {	//sf::keyboard is not linked to a specific window, so when you input into one window, it affects both
+				rect1.move(0.5f, 0.0f);
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+				rect1.move(-0.5f, 0.0f);
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				rect1.move(0.0f, -0.5f);
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				rect1.move(0.0f, 0.5f);
+			}
+		}
+
+		sf::Packet packet;
+
+		if (prevPosition != rect1.getPosition()) {
+			packet << rect1.getPosition().x << rect1.getPosition().y;
+			socket.send(packet);
+		}
+
+		socket.receive(packet);
+		if (packet >> p2Position.x >> p2Position.y) {
+			rect2.setPosition(p2Position);
+		}
+
+		window.draw(rect1);
+		window.draw(rect2);
+
+		window.display();
+		window.clear();
+	}
+
+	return 0;
+}
+
 int main() {
 
 	//udp();
-	tcp();
+	//tcp();
+	game();
 
 	system("pause");
 	return 0;
