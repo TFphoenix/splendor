@@ -82,8 +82,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)\external\SFML-2.5.1\bin;$(SolutionDir)\external\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;winmm.lib;opengl32.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;winmm.lib;opengl32.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-network-s-d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
