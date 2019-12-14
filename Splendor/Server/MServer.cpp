@@ -3,8 +3,8 @@
 
 #include <WS2tcpip.h>
 
-int main() {
-	//int multipleConnectionServer() {
+//int main() {
+	int multipleConnectionServer() {
 
 	int port = 13010; // Listening port # on the server
 
