@@ -4,6 +4,7 @@
 #include "UIPanel.h"
 #include "UIButton.h"
 #include "UICardsRowPanel.h"
+#include "UIHTokensPanel.h"
 
 class UIHandPanel :public UIPanel
 {
@@ -23,7 +24,7 @@ private:
 	UIButton m_closeButton;
 	UICardsRowPanel m_expansionsPanel;
 	UICardsRowPanel m_noblesPanel;
-	//-----> horizontal tokenPanel
+	UIHTokensPanel m_tokensPanel;
 	//-----> horizontal resourcesPanel
 	
 };
