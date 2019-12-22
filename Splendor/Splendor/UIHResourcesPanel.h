@@ -20,7 +20,7 @@ private:
 	static inline const float s_resourcePercentage = 0.12f;
 
 private:
-	std::array<UIResource*, 6> m_resources;
-	std::array<UIText*, 6> m_resourcesText;
+	std::array<UIResource*, 5> m_resources;
+	std::array<UIText*, 5> m_resourcesText;
 };
 

@@ -10,6 +10,7 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL3Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.31), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL2Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.54), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL1Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.77), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
+	m_handPanel(static_cast<sf::Vector2f>(windowSize)),
 	// instantiate pregame Setup
 	m_pregameSetup(pregameSetup)
 {
@@ -59,6 +60,7 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL2Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL3Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_noblesPanel));
+	m_panels.push_back(dynamic_cast<UIPanel*>(&m_handPanel));
 }
 
 void UIGameSession::StartGame()

@@ -10,9 +10,14 @@
 class UIHandPanel :public UIPanel
 {
 public:
-	UIHandPanel(const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
+	UIHandPanel(const sf::Vector2f& size = { 1280,720 }, bool isActive = true);
 
-	//-----> ShowHand(UIPlayerPanel* playerPanel, )
+	//-----> SetUpHand(Player* playerPanel, ...)
+
+private:
+	static inline float s_sizeRatio = 0.7f;
+	static inline float s_lowPadding = 0.05f;
+	static inline float s_highPadding = 0.8f;
 
 private:
 	// Backgrounds
@@ -22,7 +27,7 @@ private:
 	std::array<sf::RectangleShape, 4> m_panelBackgrounds;
 
 	// GUI
-	UIButton m_closeButton;
+	UIButton* m_closeButton;
 	UICardsRowPanel m_expansionsPanel;
 	UICardsRowPanel m_noblesPanel;
 	UIHTokensPanel m_tokensPanel;

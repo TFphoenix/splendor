@@ -37,6 +37,7 @@ private:
 	static inline const float s_padding = 0.1f;
 	static inline const uint16_t s_fontSize = 40;
 	static inline const float s_percentage = 0.40f;
+	
 	// Textures
 	static inline const std::string s_iconsTextureFile = "../external/Resources/Textures/UI/";
 	static inline std::array<sf::Texture*, 4> s_userIcons;

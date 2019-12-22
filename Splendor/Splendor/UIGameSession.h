@@ -6,6 +6,7 @@
 #include "UIPlayersPanel.h"
 #include "UIVTokensPanel.h"
 #include "UICardsRowPanel.h"
+#include "UIHandPanel.h"
 
 class Collider;
 
@@ -45,8 +46,7 @@ private:
 	UICardsRowPanel m_expansionsL1Panel;
 	UICardsRowPanel m_expansionsL2Panel;
 	UICardsRowPanel m_expansionsL3Panel;
-	// m_handPanel
-	// m_handPanelBackground
+	UIHandPanel m_handPanel;
 
 };
 
