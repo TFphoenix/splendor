@@ -1,7 +1,7 @@
 #include "SessionsManager.h"
 
-//#include "Client.h"
-//#include "Server.h"
+#include "Client.h"
+#include "Server.h"
 
 int main()
 {

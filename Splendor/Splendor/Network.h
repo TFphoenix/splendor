@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Network.hpp>
+#include <SFML/Network/TcpSocket.hpp>
 
 class Network
 {
@@ -9,7 +10,7 @@ public:
 	~Network();
 public:
 
-	sf::IpAddress m_address;
+	//sf::IpAddress m_address;
 	int m_port;
 
 	char* m_buffer;
@@ -17,10 +18,6 @@ public:
 
 	std::string m_message;
 
-	bool Send(char* message, int message_size);
-	bool Receive(char* buffer, int buffer_size, int bytesReceived);
-	
 private:
 
 };
-
