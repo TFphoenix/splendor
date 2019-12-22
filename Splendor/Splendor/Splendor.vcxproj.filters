@@ -153,6 +153,7 @@
     <ClCompile Include="UISelectedCard.cpp">
       <Filter>GUI\Game Pieces</Filter>
     </ClCompile>
+    <ClCompile Include="UIHandPanel.cpp" />
     <ClCompile Include="Client.cpp">
       <Filter>Network</Filter>
     </ClCompile>
@@ -281,6 +282,7 @@
     <ClInclude Include="UISelectedCard.h">
       <Filter>GUI\Game Pieces</Filter>
     </ClInclude>
+    <ClInclude Include="UIHandPanel.h" />
     <ClInclude Include="Client.h">
       <Filter>Network</Filter>
     </ClInclude>

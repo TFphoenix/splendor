@@ -62,9 +62,12 @@ void UIPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void UIPanel::HandleEvent(const sf::Event& event)
 {
-	for (const auto& collider : m_colliderContent)
+	if (IsActive())
 	{
-		collider->HandleEvent(event);
+		for (const auto& collider : m_colliderContent)
+		{
+			collider->HandleEvent(event);
+		}
 	}
 }
 
