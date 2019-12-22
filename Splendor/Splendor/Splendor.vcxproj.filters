@@ -153,7 +153,6 @@
     <ClCompile Include="UISelectedCard.cpp">
       <Filter>GUI\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="UIHandPanel.cpp" />
     <ClCompile Include="Client.cpp">
       <Filter>Network</Filter>
     </ClCompile>
@@ -162,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="Server.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="UIHandPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UIHTokensPanel.cpp">
+      <Filter>GUI\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,7 +287,6 @@
     <ClInclude Include="UISelectedCard.h">
       <Filter>GUI\Game Pieces</Filter>
     </ClInclude>
-    <ClInclude Include="UIHandPanel.h" />
     <ClInclude Include="Client.h">
       <Filter>Network</Filter>
     </ClInclude>
@@ -291,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="Server.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="UIHandPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UIHTokensPanel.h">
+      <Filter>GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
