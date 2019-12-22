@@ -6,11 +6,8 @@
 class Network
 {
 public:
-	Network();
-	~Network();
-public:
 
-	//sf::IpAddress m_address;
+	sf::IpAddress m_address;
 	int m_port;
 
 	char* m_buffer;
