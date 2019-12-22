@@ -1,5 +1,7 @@
 #include "UIResource.h"
 
+std::vector<sf::Texture> UIResource::s_resourceTextures;
+
 UIResource::UIResource(IToken::Type tokenType, const sf::Vector2f& position, float radius) :CircleShape(radius), m_type(tokenType)
 {
 	// Body

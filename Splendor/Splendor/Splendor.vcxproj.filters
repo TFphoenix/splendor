@@ -171,7 +171,9 @@
     <ClCompile Include="UIResource.cpp">
       <Filter>GUI\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="UIHResourcesPanel.cpp" />
+    <ClCompile Include="UIHResourcesPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -309,7 +311,9 @@
     <ClInclude Include="UIResource.h">
       <Filter>GUI\Game Pieces</Filter>
     </ClInclude>
-    <ClInclude Include="UIHResourcesPanel.h" />
+    <ClInclude Include="UIHResourcesPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml">
