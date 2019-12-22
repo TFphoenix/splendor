@@ -131,11 +131,14 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CardDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Hand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="RectCollider.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="TokenPile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -172,13 +175,16 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="CardDAO.h" />
     <ClInclude Include="CircCollider.h" />
+    <ClInclude Include="Client.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="Network.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_iterators.hpp" />
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="RectCollider.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="TokenPile.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Deck.h" />
