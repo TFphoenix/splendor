@@ -3,7 +3,7 @@
 
 #include "IToken.h"
 
-class UIResource :public sf::Drawable
+class UIResource :public sf::CircleShape
 {
 public:
 	// Constr.
@@ -12,26 +12,16 @@ public:
 	// G&S
 	IToken::Type GetType() const;
 
-	// Graphics
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	sf::CircleShape GetBody();
-
-	// Manipulators
-	void SetPosition(float x, float y);
-	void SetOrigin(float x, float y);
-	void SetRadius(float radius);
-
 private:
 	static void LoadTextures();
 	
 private:
 	// Textures
 	const inline static std::string s_texturesFile = "../external/Resources/Textures/Resources/";
-	static std::array<sf::Texture, 5> s_resourceTextures;
+	static std::vector<sf::Texture> s_resourceTextures;
+	static inline const size_t s_texturesCount = 5;
 	
 private:
 	IToken::Type m_type;
-	float m_radius;
-	sf::CircleShape m_body;
 };
 
