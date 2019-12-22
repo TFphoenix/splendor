@@ -44,6 +44,8 @@ bool Server::Connect(int port) {
 			}
 		}
 	}
+
+	return false;
 }
 
 bool Server::Listen(int port) {
@@ -78,9 +80,9 @@ bool Server::Accept(sf::TcpSocket* client) {
 }
 
 bool Server::Receive(sf::Packet packet) {
-
+	return false;
 }
 
 bool Server::Send(sf::Packet packet) {
-
+	return false;
 }
