@@ -16,8 +16,8 @@ public:
 
 private:
 	static inline const float s_yPaddingPercentage = 0.02f;
-	static inline const float s_xPaddingPercentage = 0.04f;
-	static inline const float s_resourcePercentage = 0.12f;
+	static inline const float s_xPaddingPercentage = 0.05f;
+	static inline const float s_resourcePercentage = 0.14f;
 
 private:
 	std::array<UIResource*, 5> m_resources;

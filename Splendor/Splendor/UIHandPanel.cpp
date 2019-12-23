@@ -5,31 +5,64 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	UIPanel("UIHandPanel", size),
 	m_cover(size),
 	m_outerBackground(sf::Vector2f(size.x* s_sizeRatio, size.y* s_sizeRatio)),
-	m_innerBackground(sf::Vector2f(size.x - 2 * s_lowPadding * size.x, size.y - (s_lowPadding + s_highPadding) * size.y)),
+	m_innerBackground(sf::Vector2f(size.x* s_sizeRatio - 2 * s_lowPadding, size.y* s_sizeRatio - s_highPadding * size.y * s_sizeRatio - s_lowPadding)),
 	m_panelBackgrounds({
-		sf::RectangleShape(sf::Vector2f()),
-		sf::RectangleShape(sf::Vector2f()),
-		sf::RectangleShape(sf::Vector2f()),
-		sf::RectangleShape(sf::Vector2f())
-		}),
-	m_expansionsPanel(3),
-	m_noblesPanel(5),
-	m_tokensPanel(),
-	m_resourcesPanel()
+		sf::RectangleShape(sf::Vector2f(m_innerBackground.getSize().x - 2 * s_lowPadding - (1 - s_firstRowRatio) * m_innerBackground.getSize().x,m_innerBackground.getSize().y - s_lowPadding - (1 - s_columnRatio) * m_innerBackground.getSize().y)),
+		sf::RectangleShape(sf::Vector2f(m_innerBackground.getSize().x - s_lowPadding - s_firstRowRatio * m_innerBackground.getSize().x,m_innerBackground.getSize().y - s_lowPadding - (1 - s_columnRatio) * m_innerBackground.getSize().y)),
+		sf::RectangleShape(sf::Vector2f(m_innerBackground.getSize().x - 2 * s_lowPadding - (1 - s_secondRowRatio) * m_innerBackground.getSize().x,m_innerBackground.getSize().y - 2 * s_lowPadding - s_columnRatio * m_innerBackground.getSize().y)),
+		sf::RectangleShape(sf::Vector2f(m_innerBackground.getSize().x - s_lowPadding - s_secondRowRatio * m_innerBackground.getSize().x,m_innerBackground.getSize().y - 2 * s_lowPadding - s_columnRatio * m_innerBackground.getSize().y))
+		})
 {
 	// Cover
 	m_cover.setPosition(sf::Vector2f());
-	m_cover.setFillColor(UIColors::DarkGray - UIColors::HalfTransparent);
+	m_cover.setFillColor(UIColors::DarkGray - UIColors::QuarterTransparent);
 
 	// Outer Background
-	m_outerBackground.setPosition(sf::Vector2f(size.x - s_sizeRatio * size.x, size.y - s_sizeRatio * size.y));
+	m_outerBackground.setOrigin(m_outerBackground.getSize().x / 2, m_outerBackground.getSize().y / 2);
+	m_outerBackground.setPosition(size.x / 2, size.y / 2);
 	m_outerBackground.setFillColor(UIColors::GoldYellow);
 
 	// Inner Background
-	m_innerBackground.setPosition(sf::Vector2f(size.x - s_sizeRatio * size.x + s_lowPadding * size.x, size.y - s_sizeRatio * size.y + (1 - s_highPadding) * size.y));
+	m_innerBackground.setOrigin(m_innerBackground.getSize().x / 2, m_innerBackground.getSize().y);
+	m_innerBackground.setPosition(size.x / 2, size.y / 2 + m_outerBackground.getSize().y / 2 - s_lowPadding);
 	m_innerBackground.setFillColor(UIColors::DarkBlue);
 
-	// Sub-Panels
+	// Panel Backgrounds
+	for (auto& panel : m_panelBackgrounds)
+	{
+		panel.setFillColor(UIColors::NavyBlue);
+	}
+	const auto leftTopCorner = sf::Vector2f(m_innerBackground.getPosition().x - m_innerBackground.getSize().x / 2, m_innerBackground.getPosition().y - m_innerBackground.getSize().y);
+	m_panelBackgrounds[0].setPosition(leftTopCorner.x + s_lowPadding, leftTopCorner.y + s_lowPadding);
+	m_panelBackgrounds[1].setPosition(leftTopCorner.x + 2 * s_lowPadding + m_panelBackgrounds[0].getSize().x, leftTopCorner.y + s_lowPadding);
+	m_panelBackgrounds[2].setPosition(leftTopCorner.x + s_lowPadding, leftTopCorner.y + 2 * s_lowPadding + m_panelBackgrounds[0].getSize().y);
+	m_panelBackgrounds[3].setPosition(leftTopCorner.x + 2 * s_lowPadding + m_panelBackgrounds[2].getSize().x, leftTopCorner.y + 2 * s_lowPadding + m_panelBackgrounds[0].getSize().y);
+
+	// Panels
+	m_expansionsPanel = new UICardsRowPanel(3, m_panelBackgrounds[0].getPosition(), m_panelBackgrounds[0].getSize(), sf::Vector2f(0.025f, 0.075f));
+	m_noblesPanel = new UICardsRowPanel(5, m_panelBackgrounds[1].getPosition(), m_panelBackgrounds[1].getSize(), sf::Vector2f(0.025f, 0.075f));
+	m_resourcesPanel = new UIHResourcesPanel(m_panelBackgrounds[2].getPosition(), m_panelBackgrounds[2].getSize());
+	m_tokensPanel = new UIHTokensPanel(m_panelBackgrounds[3].getPosition(), m_panelBackgrounds[3].getSize());
+
+
+
+	// Dummy Data
+	std::vector<UICard::Data> nobles({
+		UICard::Data(UICard::Type::Noble,3,true),
+		UICard::Data(UICard::Type::Noble,1,true),
+		UICard::Data(UICard::Type::Noble,6,true),
+		UICard::Data(UICard::Type::Noble,8,true),
+		UICard::Data(UICard::Type::Noble,10,true)
+		});
+	std::vector<UICard::Data> expansions({
+		UICard::Data(UICard::Type::ExpansionL3,6),
+		UICard::Data(UICard::Type::ExpansionL3,8),
+		UICard::Data(UICard::Type::ExpansionL3,20)
+		});
+	m_noblesPanel->SetCardsData(nobles);
+	m_expansionsPanel->SetCardsData(expansions);
+
+
 
 	// Close Button
 
@@ -37,4 +70,13 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	AddContent(dynamic_cast<sf::Drawable*>(&m_cover));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_outerBackground));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_innerBackground));
+	for (auto& panel : m_panelBackgrounds)
+	{
+		AddContent(dynamic_cast<sf::Drawable*>(&panel));
+	}
+	AddContent(dynamic_cast<sf::Drawable*>(m_expansionsPanel));
+	AddContent(dynamic_cast<sf::Drawable*>(m_noblesPanel));
+	AddContent(dynamic_cast<sf::Drawable*>(m_resourcesPanel));
+	AddContent(dynamic_cast<sf::Drawable*>(m_tokensPanel));
+
 }

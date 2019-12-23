@@ -15,9 +15,12 @@ public:
 	//-----> SetUpHand(Player* playerPanel, ...)
 
 private:
-	static inline float s_sizeRatio = 0.7f;
-	static inline float s_lowPadding = 0.05f;
-	static inline float s_highPadding = 0.8f;
+	static inline float s_sizeRatio = 0.75f;// %
+	static inline float s_lowPadding = 10;// px
+	static inline float s_highPadding = 0.25f;// %
+	static inline float s_firstRowRatio = 0.6f;// %
+	static inline float s_secondRowRatio = 0.5f;// %
+	static inline float s_columnRatio = 0.75f;// %
 
 private:
 	// Backgrounds
@@ -28,10 +31,10 @@ private:
 
 	// GUI
 	UIButton* m_closeButton;
-	UICardsRowPanel m_expansionsPanel;
-	UICardsRowPanel m_noblesPanel;
-	UIHTokensPanel m_tokensPanel;
-	UIHResourcesPanel m_resourcesPanel;
+	UICardsRowPanel* m_expansionsPanel;
+	UICardsRowPanel* m_noblesPanel;
+	UIHResourcesPanel* m_resourcesPanel;
+	UIHTokensPanel* m_tokensPanel;
 
 };
 
