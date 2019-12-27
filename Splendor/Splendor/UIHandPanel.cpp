@@ -47,14 +47,14 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 
 
 	// Dummy Data
-	std::vector<UICard::Data> nobles({
+	const std::vector<UICard::Data> nobles({
 		UICard::Data(UICard::Type::Noble,3,true),
 		UICard::Data(UICard::Type::Noble,1,true),
 		UICard::Data(UICard::Type::Noble,6,true),
 		UICard::Data(UICard::Type::Noble,8,true),
 		UICard::Data(UICard::Type::Noble,10,true)
 		});
-	std::vector<UICard::Data> expansions({
+	const std::vector<UICard::Data> expansions({
 		UICard::Data(UICard::Type::ExpansionL3,6),
 		UICard::Data(UICard::Type::ExpansionL3,8),
 		UICard::Data(UICard::Type::ExpansionL3,20)
@@ -65,6 +65,27 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 
 
 	// Close Button
+	sf::RectangleShape buttonShape;
+	UIButton::Design buttonNoneDesign(
+		{
+			UIColors::DarkBlue,
+			UIColors::NeutralWhite,
+			3.0f
+		},
+		{
+			"",
+			UIText::AvailableFonts::DosisLight,
+			30,
+			UIColors::NeutralWhite,
+			UIColors::NeutralWhite,
+			1.5f
+		});
+	const float buttonSize = (m_outerBackground.getSize().y - m_innerBackground.getSize().y - 3 * s_lowPadding) / 2.0f;
+	buttonShape.setSize(sf::Vector2f(buttonSize, buttonSize));
+	buttonShape.setPosition(m_outerBackground.getPosition().x + m_outerBackground.getSize().x / 2.0f - buttonSize - s_lowPadding - 3.0f,
+		m_outerBackground.getPosition().y - m_outerBackground.getSize().y / 2.0f + s_lowPadding + 3.0f);
+	m_closeButton = new UIButton(buttonShape, buttonNoneDesign);
+	m_closeButton->ChangeText("x");
 
 	// Add content to UIPanel
 	AddContent(dynamic_cast<sf::Drawable*>(&m_cover));
@@ -78,5 +99,7 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	AddContent(dynamic_cast<sf::Drawable*>(m_noblesPanel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_resourcesPanel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_tokensPanel));
+	AddContent(dynamic_cast<sf::Drawable*>(m_closeButton));
+	AddContent(dynamic_cast<Collider*>(m_closeButton));
 
 }
