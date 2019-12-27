@@ -87,6 +87,17 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	m_closeButton = new UIButton(buttonShape, buttonNoneDesign);
 	m_closeButton->ChangeText("x");
 
+	// Profile - Image
+	m_profile.setRadius((m_outerBackground.getSize().y - m_innerBackground.getSize().y - 5 * s_lowPadding) / 2.0f);
+	m_profile.setPosition(m_outerBackground.getPosition().x - m_outerBackground.getSize().x / 2.0f + 2 * s_lowPadding,
+		m_outerBackground.getPosition().y - m_outerBackground.getSize().y / 2.0f + 2 * s_lowPadding);
+
+	// Profile - Labels
+	m_nameLabel = new UIText(sf::Vector2f(m_profile.getPosition().x + m_profile.getRadius() * 2 + s_lowPadding * 2,
+		m_profile.getPosition().y + s_lowPadding * 2), UIText::TextAlign::classic, UIText::AvailableFonts::LatoLight, "Player Name", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
+	m_prestigeLabel = new UIText(sf::Vector2f(m_profile.getPosition().x + m_profile.getRadius() * 2 + s_lowPadding * 2,
+		m_nameLabel->getPosition().y + m_nameLabel->getGlobalBounds().height + 2 * s_lowPadding), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "Prestige Points: 0", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
+
 	// Add content to UIPanel
 	AddContent(dynamic_cast<sf::Drawable*>(&m_cover));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_outerBackground));
@@ -101,5 +112,8 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	AddContent(dynamic_cast<sf::Drawable*>(m_tokensPanel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_closeButton));
 	AddContent(dynamic_cast<Collider*>(m_closeButton));
+	AddContent(dynamic_cast<sf::Drawable*>(&m_profile));
+	AddContent(dynamic_cast<sf::Drawable*>(m_nameLabel));
+	AddContent(dynamic_cast<sf::Drawable*>(m_prestigeLabel));
 
 }

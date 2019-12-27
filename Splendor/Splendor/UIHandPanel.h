@@ -29,12 +29,17 @@ private:
 	sf::RectangleShape m_innerBackground;
 	std::array<sf::RectangleShape, 4> m_panelBackgrounds;
 
-	// GUI
+	// Panels & Buttons
 	UIButton* m_closeButton;
 	UICardsRowPanel* m_expansionsPanel;
 	UICardsRowPanel* m_noblesPanel;
 	UIHResourcesPanel* m_resourcesPanel;
 	UIHTokensPanel* m_tokensPanel;
+
+	// Profile
+	sf::CircleShape m_profile;
+	UIText* m_nameLabel;
+	UIText* m_prestigeLabel;
 
 };
 
