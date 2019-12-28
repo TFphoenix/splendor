@@ -28,3 +28,20 @@ UIPlayersPanel::UIPlayersPanel(uint16_t playerCount, const sf::Vector2f& positio
 			AddContent(dynamic_cast<Collider*>(&panel.value()));
 	}
 }
+
+UIPlayerPanel* UIPlayersPanel::GetIfTriggered()
+{
+	UIPlayerPanel* triggeredPanel = nullptr;
+	for (auto& panel : m_playerPanels)
+	{
+		if (panel.has_value())
+		{
+			if (panel->GetTriggered())
+			{
+				triggeredPanel = &panel.value();
+			}
+			panel->SetTriggered(false);
+		}
+	}
+	return triggeredPanel;
+}

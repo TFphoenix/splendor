@@ -1,21 +1,22 @@
 #include "NobleCard.h"
-#include<iostream>
-#include<vector>
+#include "CardDAO.h"
 
-NobleCard::NobleCard(
-	uint16_t gERequirement,
-	uint16_t bSRequirement,
-	uint16_t wDRequirement,
-	uint16_t bORequirement,
-	uint16_t rRRequirement,
-	uint16_t prestigePoints,
-	bool isFaceUp) :
-	ICard(prestigePoints, isFaceUp)
+NobleCard::NobleCard(uint16_t id, bool isFaceUp) :
+	ICard(id, isFaceUp)
 {
-	m_expansionRequirements[IToken::Type::GreenEmerald] = gERequirement;
-	m_expansionRequirements[IToken::Type::BlueSapphire] = bSRequirement;
-	m_expansionRequirements[IToken::Type::WhiteDiamond] = wDRequirement;
-	m_expansionRequirements[IToken::Type::BlackOnyx] = bORequirement;
-	m_expansionRequirements[IToken::Type::RedRuby] = rRRequirement;
+	const CardDAO::Noble card = CardDAO::GetNoble(id);
+	m_prestigePoints = card.prestige;
+	m_requirements = card.request;
+	m_name = card.name;
+}
+
+ICard::GemsMap NobleCard::GetRequirements() const
+{
+	return m_requirements;
+}
+
+std::string NobleCard::GetName() const
+{
+	return m_name;
 }
 

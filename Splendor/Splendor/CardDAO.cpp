@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <iostream>// TEST
 #include <thread>
 
 CardDAO::CardDAO()

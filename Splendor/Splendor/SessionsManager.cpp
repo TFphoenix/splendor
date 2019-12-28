@@ -105,14 +105,19 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
+	// Initialization
 	logger.Log("Entered Game Session", Logger::Level::Info);
+	CardDAO cardsDatabase;
+	logger.Log("Initialized Cards Database", Logger::Level::Info);
 	UIGameSession gameSessionGUI(windowSize, pregameSetup);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 	gameSessionGUI.StartGame();
 	logger.Log("Game started", Logger::Level::Info);
 
+	// Game's loop
 	while (window->isOpen())
 	{
+		// Event Handling
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -125,6 +130,8 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 				break;
 			}
 		}
+
+		// Update & Display
 		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
 		window->draw(gameSessionGUI);

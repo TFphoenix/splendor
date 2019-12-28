@@ -1,23 +1,20 @@
 #pragma once
 #include "ICard.h"
-#include "IToken.h"
-
-#include <map>
 
 class NobleCard :ICard
 {
 public:
+	// Constr.
 	NobleCard(
-		uint16_t gERequirement,
-		uint16_t bSRequirement,
-		uint16_t wDRequirement,
-		uint16_t bORequirement,
-		uint16_t rRRequirement,
-		uint16_t prestigePoints = 3,
+		uint16_t id,
 		bool isFaceUp = false);
 
+	// G&S
+	GemsMap GetRequirements() const;
+	std::string GetName() const;
 
 private:
-	std::map<IToken::Type, uint16_t> m_expansionRequirements;
+	std::string m_name;
+	GemsMap m_requirements;
 };
 

@@ -1,12 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+// Pregame & Panels
 #include "PregameSetup.h"
 #include "UIInfoPanel.h"
 #include "UIPlayersPanel.h"
 #include "UIVTokensPanel.h"
 #include "UICardsRowPanel.h"
 #include "UIHandPanel.h"
+
+// Logic
+#include "Board.h"
 
 class Collider;
 
@@ -37,6 +41,7 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
+	// Pregame & Panels
 	PregameSetup m_pregameSetup;
 	std::vector<UIPanel*> m_panels;
 	UIInfoPanel m_infoPanel;
@@ -47,6 +52,13 @@ private:
 	UICardsRowPanel m_expansionsL2Panel;
 	UICardsRowPanel m_expansionsL3Panel;
 	UIHandPanel m_handPanel;
+
+	// UI Logic
+	bool m_openedHandPanel;
+
+	// Logic
+	/*Board* p_Board;
+	std::vector<Player*> p_Players;*/
 
 };
 

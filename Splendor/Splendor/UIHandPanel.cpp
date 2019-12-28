@@ -2,7 +2,7 @@
 #include "UIColors.h"
 
 UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
-	UIPanel("UIHandPanel", size),
+	UIPanel("UIHandPanel", size, sf::Vector2f(0, 0), isActive),
 	m_cover(size),
 	m_outerBackground(sf::Vector2f(size.x* s_sizeRatio, size.y* s_sizeRatio)),
 	m_innerBackground(sf::Vector2f(size.x* s_sizeRatio - 2 * s_lowPadding, size.y* s_sizeRatio - s_highPadding * size.y * s_sizeRatio - s_lowPadding)),
@@ -47,7 +47,7 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 
 
 	// Dummy Data
-	const std::vector<UICard::Data> nobles({
+	/*const std::vector<UICard::Data> nobles({
 		UICard::Data(UICard::Type::Noble,3,true),
 		UICard::Data(UICard::Type::Noble,0,true),
 		UICard::Data(UICard::Type::Noble,0,true),
@@ -56,11 +56,11 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 		});
 	const std::vector<UICard::Data> expansions({
 		UICard::Data(UICard::Type::ExpansionL3,6),
-		UICard::Data(UICard::Type::ExpansionL3,8),
-		UICard::Data(UICard::Type::ExpansionL3,20)
+		UICard::Data(UICard::Type::ExpansionL1,35),
+		UICard::Data(UICard::Type::ExpansionL2,20)
 		});
 	m_noblesPanel->SetCardsData(nobles);
-	m_expansionsPanel->SetCardsData(expansions);
+	m_expansionsPanel->SetCardsData(expansions);*/
 
 
 

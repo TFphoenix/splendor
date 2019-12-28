@@ -45,6 +45,7 @@ private:
 	static inline bool s_texturesInitialized = false;
 
 private:
+	// GUI
 	Type m_type;
 	bool m_isTriggered;
 	sf::RectangleShape m_background;
@@ -52,6 +53,9 @@ private:
 	UIText m_nameLabel;
 	UIText m_prestigeLabel;
 	UIText m_clickToViewLabel;
+
+	// Logic
+	//Player* p_player;
 
 };
 

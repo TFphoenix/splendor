@@ -10,7 +10,8 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL3Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.31), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL2Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.54), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL1Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.77), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
-	m_handPanel(static_cast<sf::Vector2f>(windowSize)),
+	m_handPanel(static_cast<sf::Vector2f>(windowSize), false),
+	m_openedHandPanel(false),
 	// instantiate pregame Setup
 	m_pregameSetup(pregameSetup)
 {
