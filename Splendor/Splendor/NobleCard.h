@@ -1,7 +1,7 @@
 #pragma once
 #include "ICard.h"
 
-class NobleCard :ICard
+class NobleCard : public ICard
 {
 public:
 	// Constr.

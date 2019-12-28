@@ -1,28 +1,60 @@
 #include "Hand.h"
 
-//Hand::Hand(std::vector<std::optional<ExpansionCard>> expansionCard, std::vector<std::optional<Token>> token): m_expansionCard(expansionCard),m_token(token)
-//{
-//}
+void Hand::AddResource(GemType type)
+{
+	++m_resources[type];
+}
 
-//void Hand::AddToken(std::vector<std::optional<Token>> token)
-//{
-//	if (m_token.size() <= 7)
-//		m_token = token;
-//	if (m_token.size() == 8 && token.size() == 2)
-//		m_token = token;
-//}
-//
-//void Hand::AddExpansionCard(std::optional<ExpansionCard> card)
-//{
-//	m_expansionCard.push_back(card);
-//}
-//
-//int Hand::GetSizeOfToken()
-//{
-//	return m_token.size();
-//}
-//
-//int Hand::GetSizeOfExpansionCard()
-//{
-//	return m_expansionCard.size();
-//}
+void Hand::AddToken(GemType type, uint16_t amount)
+{
+	m_tokens[type] += amount;
+}
+
+void Hand::RemoveToken(GemType type, uint16_t amount)
+{
+	if (m_tokens[type] < amount)
+		throw std::out_of_range("Amount of tokens to be removed out of range");
+	m_tokens[type] -= amount;
+}
+
+void Hand::AddExpansionCard(const ExpansionCard& card)
+{
+	for (auto& expansionCard : m_expansionCards)
+	{
+		if (!expansionCard.has_value())
+		{
+			expansionCard = card;
+			return;
+		}
+	}
+	throw std::out_of_range("Hand is full, can't add expansion card");
+}
+
+void Hand::RemoveExpansionCard(uint16_t id)
+{
+	for (auto& card : m_expansionCards)
+	{
+		if (card.has_value())
+		{
+			if (card.value().GetId() == id)
+			{
+				card.reset();
+				return;
+			}
+		}
+	}
+	throw std::invalid_argument("Expansion card with given id not found");
+}
+
+void Hand::AddNobleCard(const NobleCard& card)
+{
+	for (auto& nobleCard : m_nobleCards)
+	{
+		if (!nobleCard.has_value())
+		{
+			nobleCard = card;
+			return;
+		}
+	}
+	throw std::out_of_range("Hand is full, can't add noble card");
+}

@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 
-class ExpansionCard :ICard
+class ExpansionCard :public ICard
 {
 public:
 	enum class Level {
