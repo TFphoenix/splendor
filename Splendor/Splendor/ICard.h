@@ -12,7 +12,7 @@ public:
 
 public:
 	// Constr. & Destr.
-	ICard(uint16_t id, bool isFaceUp);
+	ICard(uint16_t id, bool isFaceUp, uint16_t prestigePoints = 0);
 	virtual ~ICard() = 0;
 
 	// G&S

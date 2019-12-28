@@ -8,7 +8,6 @@
 #include "UIGameSession.h"
 #include "CardDAO.h"
 #include "Player.h"
-#include "Deck.h"
 
 SessionsManager::SessionsManager() :
 	logger(logFileStream, Logger::Level::Error),
@@ -158,15 +157,4 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
-	CardDAO dao;
-	GamePieces::SetNobleCardCount(10);
-	try
-	{
-		Deck<ExpansionCard, 5> testDeck;
-		testDeck.ShuffleDeck();
-	}
-	catch (std::invalid_argument e)
-	{
-		std::cout << e.what();
-	}
 }

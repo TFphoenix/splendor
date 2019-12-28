@@ -2,6 +2,7 @@
 #include "Randomizer.h"
 #include "ExpansionCard.h"
 #include "NobleCard.h"
+#include "GamePieces.h"
 
 #include <string>
 #include <vector>

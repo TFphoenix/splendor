@@ -106,7 +106,7 @@ void UICard::OnMouseLeftClick()
 	if (!m_numb)
 	{
 		m_state = State::Press;
-		setScale(1.8, 1.8);
+		setScale(1.8f, 1.8f);
 		setOutlineColor(UIColors::DarkYellow - UIColors::QuarterTransparent);
 	}
 }

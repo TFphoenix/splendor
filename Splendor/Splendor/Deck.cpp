@@ -1,5 +1,4 @@
 #include "Deck.h"
-#include "GamePieces.h"
 
 template <>
 Deck<NobleCard>::Deck()

@@ -111,9 +111,6 @@
     <ClCompile Include="Token.cpp">
       <Filter>Entities\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="TokenPile.cpp">
-      <Filter>Entities\Game Pieces</Filter>
-    </ClCompile>
     <ClCompile Include="Hand.cpp">
       <Filter>Entities\Abstract</Filter>
     </ClCompile>
@@ -243,9 +240,6 @@
       <Filter>Entities\Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Token.h">
-      <Filter>Entities\Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="TokenPile.h">
       <Filter>Entities\Game Pieces</Filter>
     </ClInclude>
     <ClInclude Include="Hand.h">

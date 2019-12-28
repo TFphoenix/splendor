@@ -19,7 +19,6 @@ ExpansionCard::ExpansionCard(Level level, uint16_t id, bool isFaceUp) :
 		card = CardDAO::GetL3Expansion(id);
 		break;
 	default:
-		CardDAO::GetL1Expansion(0);
 		break;
 	}
 

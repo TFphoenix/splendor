@@ -1,8 +1,9 @@
 #include "ICard.h"
 
-ICard::ICard(uint16_t id, bool isFaceUp) :
+ICard::ICard(uint16_t id, bool isFaceUp, uint16_t prestigePoints) :
 	m_id(id),
-	m_isFaceUp(isFaceUp) {}
+	m_isFaceUp(isFaceUp),
+	m_prestigePoints(prestigePoints) {}
 
 ICard::~ICard() = default;
 
