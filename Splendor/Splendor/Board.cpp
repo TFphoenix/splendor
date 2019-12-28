@@ -1,6 +1,7 @@
 #include "Board.h"
 
-Board::Board()
+Board::Board():
+m_nobleDeck()
 {
 	// Shuffle Decks
 	m_nobleDeck.ShuffleDeck();
@@ -17,11 +18,11 @@ Board::Board()
 	{
 		slot = m_expansionL3Deck.DrawCard();
 	}
-	for (auto& slot : m_expansionL3Slots)
+	for (auto& slot : m_expansionL2Slots)
 	{
 		slot = m_expansionL2Deck.DrawCard();
 	}
-	for (auto& slot : m_expansionL3Slots)
+	for (auto& slot : m_expansionL1Slots)
 	{
 		slot = m_expansionL1Deck.DrawCard();
 	}
@@ -128,4 +129,56 @@ void Board::ReturnToken(IToken::Type type, uint16_t amount)
 	}
 
 	m_tokens[type] += amount;
+}
+
+std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
+{
+	std::vector<CardDAO::Data> dataToReturn;
+	switch (dataType)
+	{
+	case CardDAO::Type::Noble:
+		for (const auto& slot : m_nobleSlots)
+		{
+			if (slot.has_value())
+			{
+				dataToReturn.emplace_back(dataType, slot->GetId());
+			}
+		}
+		break;
+	case CardDAO::Type::ExpansionL1:
+		for (const auto& slot : m_expansionL1Slots)
+		{
+			if (slot.has_value())
+			{
+				dataToReturn.emplace_back(dataType, slot->GetId());
+			}
+		}
+		break;
+	case CardDAO::Type::ExpansionL2:
+		for (const auto& slot : m_expansionL2Slots)
+		{
+			if (slot.has_value())
+			{
+				dataToReturn.emplace_back(dataType, slot->GetId());
+			}
+		}
+		break;
+	case CardDAO::Type::ExpansionL3:
+		for (const auto& slot : m_expansionL3Slots)
+		{
+			if (slot.has_value())
+			{
+				dataToReturn.emplace_back(dataType, slot->GetId());
+			}
+		}
+		break;
+	default:
+		throw std::invalid_argument("Can't get card slots data of UNKNOWN type");;
+	}
+	return dataToReturn;
+}
+
+std::unordered_map<IToken::Type, uint16_t> Board::GetTokenData() const
+{
+	return m_tokens;
 }

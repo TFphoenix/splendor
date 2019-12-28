@@ -47,8 +47,47 @@ void UICardsRowPanel::SetCardsData(const std::vector<UICard::Data>& cardsData)
 	uint16_t it = 0;
 	for (const auto& card : m_cards)
 	{
-		card->SetData(cardsData[it]);
+		if (it < cardsData.size())
+			card->SetData(cardsData[it]);
+		else
+			card->SetData(UICard::Data());
 		++it;
+	}
+}
+
+void UICardsRowPanel::SetCardsData(const std::vector<CardDAO::Data>& cardsData, uint16_t withBackground, bool isDataNumb)
+{
+	uint16_t it = 0;
+
+	switch (withBackground)
+	{
+	case 1:
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 1, true));
+		break;
+	case 2:
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 2, true));
+		break;
+	case 3:
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 3, true));
+		break;
+	default:
+		break;
+	}
+
+	for (const auto& card : m_cards)
+	{
+		if (!withBackground || it)
+		{
+			if (it < cardsData.size())
+				card->SetData(UICard::Data(static_cast<UICard::Type>(static_cast<int>(cardsData[it].type)), cardsData[it].id, isDataNumb));
+			else
+				card->SetData(UICard::Data());
+			++it;
+		}
+		else
+		{
+			withBackground = 0;
+		}
 	}
 }
 

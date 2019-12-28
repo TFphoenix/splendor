@@ -112,7 +112,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
-	// Generate players according to Pregame Set-up
+	// Initialize Players
 	std::vector<Player> players;
 	for (size_t playerNr = 1; playerNr <= pregameSetup.GetPlayerCount(); ++playerNr)
 	{
@@ -120,10 +120,10 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	}
 
 	// Initialize Board
-
+	Board board;
 
 	// Initialize GUI
-	UIGameSession gameSessionGUI(windowSize, pregameSetup);
+	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
 

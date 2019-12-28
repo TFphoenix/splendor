@@ -1,10 +1,12 @@
 #include "UIGameSession.h"
 #include "UISelectedCard.h"
 
-UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup) :
+UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard) :
+	// instantiate Logic
+	p_board(pBoard),
 	// instantiate UI panels
 	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05)),
-	m_playersPanel(m_pregameSetup.GetPlayerCount(), sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.95)),
+	m_playersPanel(pPlayers, sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.95)),
 	m_tokensPanel(sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.05), sf::Vector2f(0.1 * windowSize.x, windowSize.y * 0.95)),
 	m_noblesPanel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.26)),
 	m_expansionsL3Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.31), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
@@ -12,45 +14,17 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL1Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.77), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_handPanel(static_cast<sf::Vector2f>(windowSize), false),
 	m_openedHandPanel(false),
-	// instantiate pregame Setup
+	// instantiate Pregame Set-up
 	m_pregameSetup(pregameSetup)
 {
-	// instantiate UI components
-	std::vector<UICard::Data> nobles({
-		UICard::Data(UICard::Type::Noble,3,true),
-		UICard::Data(UICard::Type::Noble,1,true),
-		UICard::Data(UICard::Type::Noble,6,true),
-		UICard::Data(UICard::Type::Noble,8,true),
-		UICard::Data(UICard::Type::Noble,10,true)
-		});
-	std::vector<UICard::Data> eL3({
-		UICard::Data(UICard::Type::Background,3,true),
-		UICard::Data(UICard::Type::ExpansionL3,1),
-		UICard::Data(UICard::Type::ExpansionL3,6),
-		UICard::Data(UICard::Type::ExpansionL3,8),
-		UICard::Data(UICard::Type::ExpansionL3,20)
-		});
-	std::vector<UICard::Data> eL2({
-		UICard::Data(UICard::Type::Background,2,true),
-		UICard::Data(UICard::Type::ExpansionL2,1),
-		UICard::Data(UICard::Type::ExpansionL2,15),
-		UICard::Data(UICard::Type::ExpansionL2,20),
-		UICard::Data(UICard::Type::ExpansionL2,30)
-		});
-	std::vector<UICard::Data> eL1({
-		UICard::Data(UICard::Type::Background,1,true),
-		UICard::Data(UICard::Type::ExpansionL1,11),
-		UICard::Data(UICard::Type::ExpansionL1,26),
-		UICard::Data(UICard::Type::ExpansionL1,32),
-		UICard::Data(UICard::Type::ExpansionL1,40)
-		});
-	m_noblesPanel.SetCardsData(nobles);
+	// Instantiate UI Card Rows
+	m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble), 0, true);
 	m_noblesPanel.ReverseDrawOrder();
-	m_expansionsL3Panel.SetCardsData(eL3);
+	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
 	m_expansionsL3Panel.ReverseDrawOrder();
-	m_expansionsL2Panel.SetCardsData(eL2);
+	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
 	m_expansionsL2Panel.ReverseDrawOrder();
-	m_expansionsL1Panel.SetCardsData(eL1);
+	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
 	m_expansionsL1Panel.ReverseDrawOrder();
 
 	// Populate panel vector

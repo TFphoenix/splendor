@@ -4,21 +4,20 @@
 
 #include <string>
 #include <unordered_map>
-//#include "UICard.h"
 
 class CardDAO
 {
 public:
 	using GemType = IToken::Type;
 	using RequestMap = std::unordered_map<GemType, uint16_t>;
-	
+
 	enum class Type
 	{
-		Unknown,
-		Noble,
-		ExpansionL1,
-		ExpansionL2,
-		ExpansionL3
+		Unknown = -1,
+		Noble = 0,
+		ExpansionL1 = 1,
+		ExpansionL2 = 2,
+		ExpansionL3 = 3
 	};
 
 	struct Noble
@@ -27,7 +26,7 @@ public:
 		uint16_t prestige = 0;
 		RequestMap request;
 	};
-	
+
 	struct Data
 	{
 		Data(Type dataType = Type::Unknown, uint16_t dataID = 0);
@@ -35,7 +34,7 @@ public:
 		Type type;
 		uint16_t id;
 	};
-	
+
 	struct Expansion
 	{
 		GemType reward = GemType::GreenEmerald;

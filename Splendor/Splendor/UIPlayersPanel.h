@@ -1,12 +1,15 @@
 #pragma once
+#include <optional>
+
 #include "UIPanel.h"
 #include "UIPlayerPanel.h"
-#include <optional>
+
+class Player;
 
 class UIPlayersPanel :public UIPanel
 {
 public:
-	UIPlayersPanel(uint16_t playerCount, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
+	UIPlayersPanel(std::vector<Player>* pPlayers, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
 
 	UIPlayerPanel* GetIfTriggered();
 

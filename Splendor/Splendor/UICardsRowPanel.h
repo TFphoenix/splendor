@@ -1,6 +1,7 @@
 #pragma once
 #include "UIPanel.h"
 #include "UICard.h"
+#include "CardDAO.h"
 
 #include <optional>
 
@@ -12,6 +13,7 @@ public:
 	// Logic
 	std::vector<UICard::Data> GetCardsData() const;
 	void SetCardsData(const std::vector<UICard::Data>& cardsData);
+	void SetCardsData(const std::vector<CardDAO::Data>& cardsData, uint16_t withBackground = 0, bool isDataNumb = false);
 
 	// Graphics
 	void ReverseDrawOrder();

@@ -11,6 +11,7 @@
 
 // Logic
 #include "Board.h"
+#include "Player.h"
 
 class Collider;
 
@@ -25,7 +26,7 @@ public:
 	};
 
 public:
-	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup);
+	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard);
 
 	// UI Logic
 	void StartGame();
@@ -57,8 +58,7 @@ private:
 	bool m_openedHandPanel;
 
 	// Logic
-	/*Board* p_Board;
-	std::vector<Player*> p_Players;*/
+	Board* p_board;
 
 };
 

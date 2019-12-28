@@ -11,11 +11,11 @@ template <class cardType, size_t level = NULL>
 class Deck
 {
 public:
-	Deck()
-	{
+	Deck();
+	/*{
 		if (level > 3)
 			throw std::invalid_argument(std::string("Failed to initialize deck of type <ExpansionCard, " + std::to_string(level) + ">"));
-	}
+	}*/
 
 	// Logic
 	void ShuffleDeck()
@@ -25,7 +25,7 @@ public:
 	}
 	cardType DrawCard()
 	{
-		cardType topCard = m_cards.front();
+		cardType topCard = m_cards.back();
 		m_cards.pop_back();
 		return topCard;
 	}

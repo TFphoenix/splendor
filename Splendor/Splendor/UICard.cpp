@@ -58,7 +58,7 @@ void UICard::SetData(Data data)
 	{
 		m_id = data.id;
 		m_type = data.type;
-		m_numb = data.isNumb;
+		m_numb = data.type == Type::Unknown ? true : data.isNumb;
 		setTexture(texture);
 	}
 }

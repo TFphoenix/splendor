@@ -13,12 +13,12 @@ public:
 public:
 	enum class Type
 	{
-		Unknown,
-		Background,
-		Noble,
-		ExpansionL1,
-		ExpansionL2,
-		ExpansionL3
+		Unknown = -1,
+		Background = 4,
+		Noble = 0,
+		ExpansionL1 = 1,
+		ExpansionL2 = 2,
+		ExpansionL3 = 3
 	};
 
 	struct Data

@@ -1,5 +1,6 @@
 #pragma once
 #include "Deck.h"
+#include "CardDAO.h"
 
 #include <cstdint>
 #include <array>
@@ -15,6 +16,10 @@ public:
 	NobleCard WinNoble(uint16_t id);
 	void TakeToken(IToken::Type type, uint16_t amount);
 	void ReturnToken(IToken::Type type, uint16_t amount);
+
+	// Getters
+	std::vector<CardDAO::Data> GetCardSlotsData(CardDAO::Type dataType) const;
+	std::unordered_map<IToken::Type, uint16_t> GetTokenData() const;
 
 private:
 	// Decks
