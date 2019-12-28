@@ -50,8 +50,20 @@ void UIGameSession::StopGame()
 
 void UIGameSession::UpdateGame()
 {
+	// Info
 	m_infoPanel.UpdateTime();
+
+	// Board
 	m_tokensPanel.UpdateTokens();
+
+	// Hand Panel
+	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
+	if (triggeredPanel != nullptr)
+	{
+		m_handPanel.SetUpHand(*triggeredPanel);
+		m_handPanel.SetActive(true);
+	}
+	m_handPanel.CheckForClose();
 }
 
 void UIGameSession::NextTurn()

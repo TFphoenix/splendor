@@ -1,6 +1,8 @@
 #include "UIHandPanel.h"
 #include "UIColors.h"
 
+#include "Player.h"// Logic
+
 UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	UIPanel("UIHandPanel", size, sf::Vector2f(0, 0), isActive),
 	m_cover(size),
@@ -43,26 +45,6 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	m_noblesPanel = new UICardsRowPanel(5, m_panelBackgrounds[1].getPosition(), m_panelBackgrounds[1].getSize(), sf::Vector2f(0.025f, 0.075f));
 	m_resourcesPanel = new UIHResourcesPanel(m_panelBackgrounds[2].getPosition(), m_panelBackgrounds[2].getSize());
 	m_tokensPanel = new UIHTokensPanel(m_panelBackgrounds[3].getPosition(), m_panelBackgrounds[3].getSize());
-
-
-
-	// Dummy Data
-	/*const std::vector<UICard::Data> nobles({
-		UICard::Data(UICard::Type::Noble,3,true),
-		UICard::Data(UICard::Type::Noble,0,true),
-		UICard::Data(UICard::Type::Noble,0,true),
-		UICard::Data(UICard::Type::Noble,0,true),
-		UICard::Data(UICard::Type::Noble,0,true)
-		});
-	const std::vector<UICard::Data> expansions({
-		UICard::Data(UICard::Type::ExpansionL3,6),
-		UICard::Data(UICard::Type::ExpansionL1,35),
-		UICard::Data(UICard::Type::ExpansionL2,20)
-		});
-	m_noblesPanel->SetCardsData(nobles);
-	m_expansionsPanel->SetCardsData(expansions);*/
-
-
 
 	// Close Button
 	sf::RectangleShape buttonShape;
@@ -118,4 +100,28 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	AddContent(dynamic_cast<sf::Drawable*>(m_nameLabel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_prestigeLabel));
 
+}
+
+void UIHandPanel::SetUpHand(const UIPlayerPanel& playerPanel)
+{
+	// Stats
+	m_profile.setTexture(new sf::Texture(playerPanel.GetUserTexture()));
+	m_nameLabel->setString(playerPanel.GetNameLabelString());
+	m_prestigeLabel->setString(playerPanel.GetPrestigeLabelString());
+
+	// Hand
+	const Hand playerHand = playerPanel.GetPlayer()->GetHand();
+	m_noblesPanel->SetCardsData(playerHand.GetNoblesData());
+	m_expansionsPanel->SetCardsData(playerHand.GetExpansionsData());
+	m_tokensPanel->UpdateTokens(playerHand.GetTokensData());
+	m_resourcesPanel->UpdateResources(playerHand.GetResourcesData());
+}
+
+void UIHandPanel::CheckForClose()
+{
+	if (m_closeButton->GetState() == UIButton::State::Release)
+	{
+		SetActive(false);
+		m_closeButton->SwitchState(UIButton::State::None);
+	}
 }

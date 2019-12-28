@@ -19,7 +19,7 @@ public:
 
 	// Getters
 	std::vector<CardDAO::Data> GetCardSlotsData(CardDAO::Type dataType) const;
-	std::unordered_map<IToken::Type, uint16_t> GetTokenData() const;
+	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
 
 private:
 	// Decks

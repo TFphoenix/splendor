@@ -178,7 +178,7 @@ std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
 	return dataToReturn;
 }
 
-std::unordered_map<IToken::Type, uint16_t> Board::GetTokenData() const
+std::unordered_map<IToken::Type, uint16_t> Board::GetTokensData() const
 {
 	return m_tokens;
 }

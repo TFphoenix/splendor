@@ -18,6 +18,7 @@ public:
 	// G&S
 	bool GetTriggered() const;
 	void SetTriggered(bool triggered);
+	Player* GetPlayer() const;
 
 	// Collider Propreties
 	void OnMouseEnter() override;
@@ -25,14 +26,21 @@ public:
 	void OnMouseLeftClick() override;
 	void OnMouseLeftRelease() override;
 
+	// GUI
 	void SetUserTexture(uint16_t textureID);
+	sf::Texture GetUserTexture() const;
+	std::string GetNameLabelString() const;
+	std::string GetPrestigeLabelString() const;
+
+public:
+	// GUI
 	static void ShuffleTextures();
 	static void LoadIconTextures();
 
 private:
 	// Dimensions
 	static inline const float s_padding = 0.1f;
-	static inline const uint16_t s_fontSize = 40;
+	static inline const uint16_t s_fontSize = 30;
 	static inline const float s_percentage = 0.40f;
 
 	// Textures

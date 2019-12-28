@@ -20,6 +20,11 @@ uint16_t Player::GetPrestigePoints() const
 	return m_prestigePoints;
 }
 
+Hand Player::GetHand() const
+{
+	return m_hand;
+}
+
 void Player::AddPrestigePoints(uint16_t amount)
 {
 	m_prestigePoints += amount;

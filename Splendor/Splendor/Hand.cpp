@@ -1,5 +1,58 @@
 #include "Hand.h"
 
+std::vector<CardDAO::Data> Hand::GetExpansionsData() const
+{
+	std::vector<CardDAO::Data> dataToReturn;
+
+	for (const auto& slot : m_expansionCards)
+	{
+		if (slot.has_value())
+		{
+			switch (slot->GetLevel())
+			{
+			case ExpansionCard::Level::Level1:
+				dataToReturn.emplace_back(CardDAO::Type::ExpansionL1, slot->GetId());
+				break;
+			case ExpansionCard::Level::Level2:
+				dataToReturn.emplace_back(CardDAO::Type::ExpansionL2, slot->GetId());
+				break;
+			case ExpansionCard::Level::Level3:
+				dataToReturn.emplace_back(CardDAO::Type::ExpansionL3, slot->GetId());
+				break;
+			default:
+				break;;
+			}
+		}
+	}
+
+	return dataToReturn;
+}
+
+std::vector<CardDAO::Data> Hand::GetNoblesData() const
+{
+	std::vector<CardDAO::Data> dataToReturn;
+
+	for (const auto& slot : m_nobleCards)
+	{
+		if (slot.has_value())
+		{
+			dataToReturn.emplace_back(CardDAO::Type::Noble, slot->GetId());
+		}
+	}
+
+	return dataToReturn;
+}
+
+Hand::GemsMap& Hand::GetResourcesData() const
+{
+	return m_resources;
+}
+
+Hand::GemsMap& Hand::GetTokensData() const
+{
+	return m_tokens;
+}
+
 void Hand::AddResource(GemType type)
 {
 	++m_resources[type];

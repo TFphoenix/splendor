@@ -1,18 +1,24 @@
 #pragma once
 #include <array>
 
+// GUI
 #include "UIPanel.h"
 #include "UIButton.h"
 #include "UICardsRowPanel.h"
 #include "UIHTokensPanel.h"
 #include "UIHResourcesPanel.h"
+#include "UIPlayerPanel.h"
+
 
 class UIHandPanel :public UIPanel
 {
 public:
+	// Constr.
 	UIHandPanel(const sf::Vector2f& size = { 1280,720 }, bool isActive = true);
 
-	//-----> SetUpHand(Player* playerPanel, ...)
+	// GUI
+	void SetUpHand(const UIPlayerPanel& playerPanel);
+	void CheckForClose();
 
 private:
 	static inline float s_sizeRatio = 0.75f;// %
