@@ -123,6 +123,9 @@ void UICard::OnMouseLeftRelease()
 
 void UICard::LoadTextures()
 {
+	// Null Texture
+	s_nullTexture = new sf::Texture;
+	s_nullTexture->loadFromFile(std::string(s_texturesFile + "NullTexture.png"));
 	// Background Textures
 	std::thread thread1(LoadSpecificTextures, "", "ExpansionCardBackground", 3, &s_backgroundTextures);
 	// Expansion L1 Textures
@@ -181,6 +184,11 @@ void UICard::LoadSpecificTexture(const std::string& path, TextureMap* into, uint
 
 const sf::Texture* UICard::GetTexture(uint16_t id, Type type)
 {
+	if (id == 0)
+	{
+		return s_nullTexture;
+	}
+
 	switch (type)
 	{
 	case Type::Background:

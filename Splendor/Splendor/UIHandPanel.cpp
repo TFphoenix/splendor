@@ -49,10 +49,10 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	// Dummy Data
 	const std::vector<UICard::Data> nobles({
 		UICard::Data(UICard::Type::Noble,3,true),
-		UICard::Data(UICard::Type::Noble,1,true),
-		UICard::Data(UICard::Type::Noble,6,true),
-		UICard::Data(UICard::Type::Noble,8,true),
-		UICard::Data(UICard::Type::Noble,10,true)
+		UICard::Data(UICard::Type::Noble,0,true),
+		UICard::Data(UICard::Type::Noble,0,true),
+		UICard::Data(UICard::Type::Noble,0,true),
+		UICard::Data(UICard::Type::Noble,0,true)
 		});
 	const std::vector<UICard::Data> expansions({
 		UICard::Data(UICard::Type::ExpansionL3,6),
@@ -93,10 +93,12 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 		m_outerBackground.getPosition().y - m_outerBackground.getSize().y / 2.0f + 2 * s_lowPadding);
 
 	// Profile - Labels
+	const float yProfileCenter = m_profile.getPosition().y + m_profile.getRadius();
 	m_nameLabel = new UIText(sf::Vector2f(m_profile.getPosition().x + m_profile.getRadius() * 2 + s_lowPadding * 2,
-		m_profile.getPosition().y + s_lowPadding * 2), UIText::TextAlign::classic, UIText::AvailableFonts::LatoLight, "Player Name", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
+		0), UIText::TextAlign::classic, UIText::AvailableFonts::LatoLight, "Player Name", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
 	m_prestigeLabel = new UIText(sf::Vector2f(m_profile.getPosition().x + m_profile.getRadius() * 2 + s_lowPadding * 2,
-		m_nameLabel->getPosition().y + m_nameLabel->getGlobalBounds().height + 2 * s_lowPadding), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "Prestige Points: 0", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
+		yProfileCenter + s_lowPadding), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "Prestige Points: 0", size.x / 48, UIColors::DarkBlue, UIColors::Transparent);
+	m_nameLabel->setPosition(m_nameLabel->getPosition().x, yProfileCenter - m_nameLabel->getGlobalBounds().height - s_lowPadding);
 
 	// Add content to UIPanel
 	AddContent(dynamic_cast<sf::Drawable*>(&m_cover));

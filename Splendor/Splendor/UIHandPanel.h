@@ -41,5 +41,8 @@ private:
 	UIText* m_nameLabel;
 	UIText* m_prestigeLabel;
 
+	// Info
+	sf::Texture* m_profilePicture;
+
 };
 

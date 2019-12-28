@@ -67,6 +67,7 @@ private:
 private:
 	// Textures
 	const inline static std::string s_texturesFile = "../external/Resources/Textures/Cards/";
+	static inline sf::Texture* s_nullTexture;
 	static inline TextureMap s_backgroundTextures;
 	static inline TextureMap s_expansionL1Textures;
 	static inline TextureMap s_expansionL2Textures;
