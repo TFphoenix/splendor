@@ -18,7 +18,7 @@ public:
 	ExpansionCard(
 		Level level,
 		uint16_t id,
-		bool isFaceUp = false);
+		bool isFaceUp = true);
 
 	// G&S
 	Level GetLevel() const;
@@ -26,7 +26,7 @@ public:
 	GemsMap GetCost() const;
 
 private:
-	Level m_level : 1;
+	Level m_level;
 	IToken::Type m_rewardType;
 	std::unordered_map<IToken::Type, uint16_t> m_cost;
 

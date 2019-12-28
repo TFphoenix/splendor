@@ -1,40 +1,39 @@
 #pragma once
-//#include "ExpansionCard.h"
-//#include "NobleCard.h"
 #include "Randomizer.h"
+#include "ExpansionCard.h"
+#include "NobleCard.h"
 
+#include <string>
 #include <vector>
 
-template <class cardType>
+template <class cardType, size_t level = NULL>
 class Deck
 {
 public:
-	void ShuffleDeck();
-	cardType DrawCard();
-	void AddCard(cardType&& card);
+	Deck()
+	{
+		if (level > 3)
+			throw std::invalid_argument(std::string("Failed to initialize deck of type <ExpansionCard, " + std::to_string(level) + ">"));
+	}
+
+	// Logic
+	void ShuffleDeck()
+	{
+		Randomizer rnd;
+		rnd.Shuffle(m_cards);
+	}
+	cardType DrawCard()
+	{
+		cardType topCard = m_cards.front();
+		m_cards.pop_back();
+		return topCard;
+	}
+	void AddCard(cardType&& card)
+	{
+		m_cards.push_back(std::move(card));
+	}
 
 private:
 	std::vector<cardType> m_cards;
 
 };
-
-template <class cardType>
-void Deck<cardType>::ShuffleDeck()
-{
-	Randomizer rnd;
-	rnd.Shuffle(m_cards);
-}
-
-template <class cardType>
-cardType Deck<cardType>::DrawCard()
-{
-	cardType topCard = m_cards.front();
-	m_cards.pop_back();
-	return topCard;
-}
-
-template <class cardType>
-void Deck<cardType>::AddCard(cardType&& card)
-{
-	m_cards.push_back(std::move(card));
-}

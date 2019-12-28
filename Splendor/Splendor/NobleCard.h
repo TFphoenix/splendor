@@ -7,7 +7,7 @@ public:
 	// Constr.
 	NobleCard(
 		uint16_t id,
-		bool isFaceUp = false);
+		bool isFaceUp = true);
 
 	// G&S
 	GemsMap GetRequirements() const;

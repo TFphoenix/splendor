@@ -2,6 +2,8 @@
 #include "UIPanel.h"
 #include "UICard.h"
 
+#include <optional>
+
 class UICardsRowPanel :public UIPanel
 {
 public:

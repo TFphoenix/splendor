@@ -177,7 +177,9 @@
     <ClCompile Include="NetworkMain.cpp">
       <Filter>Network</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities\Abstract</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -318,7 +320,9 @@
     <ClInclude Include="UIHResourcesPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Entities\Abstract</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml">

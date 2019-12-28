@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 #include "SessionsManager.h"
 #include "PregameSetup.h"
 #include "UIColors.h"
@@ -5,8 +7,8 @@
 #include "UIPreGameSession.h"
 #include "UIGameSession.h"
 #include "CardDAO.h"
-
-#include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "Deck.h"
 
 SessionsManager::SessionsManager() :
 	logger(logFileStream, Logger::Level::Error),
@@ -105,16 +107,31 @@ void SessionsManager::PreGameSession() const
 
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
-	// Initialization
 	logger.Log("Entered Game Session", Logger::Level::Info);
+
+	// Initialize Database
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
+
+	// Generate players according to Pregame Set-up
+	std::vector<Player> players;
+	for (size_t playerNr = 1; playerNr <= pregameSetup.GetPlayerCount(); ++playerNr)
+	{
+		players.emplace_back("Player " + std::to_string(playerNr));
+	}
+
+	// Initialize Board
+
+
+	// Initialize GUI
 	UIGameSession gameSessionGUI(windowSize, pregameSetup);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
+
+
+
+	// Game Loop
 	gameSessionGUI.StartGame();
 	logger.Log("Game started", Logger::Level::Info);
-
-	// Game's loop
 	while (window->isOpen())
 	{
 		// Event Handling
@@ -141,5 +158,15 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
-	CardDAO c;
+	CardDAO dao;
+	GamePieces::SetNobleCardCount(10);
+	try
+	{
+		Deck<ExpansionCard, 5> testDeck;
+		testDeck.ShuffleDeck();
+	}
+	catch (std::invalid_argument e)
+	{
+		std::cout << e.what();
+	}
 }
