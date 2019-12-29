@@ -1,8 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-// Pregame & Panels
-#include "PregameSetup.h"
+// GUI
 #include "UIInfoPanel.h"
 #include "UIPlayersPanel.h"
 #include "UIVTokensPanel.h"
@@ -10,6 +9,7 @@
 #include "UIHandPanel.h"
 
 // Logic
+#include "PregameSetup.h"
 #include "Board.h"
 #include "Player.h"
 
@@ -42,10 +42,7 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
-	// Pregame
-	PregameSetup m_pregameSetup;
-
-	// Panels
+	// GUI
 	std::vector<UIPanel*> m_panels;
 	UIInfoPanel m_infoPanel;
 	UIPlayersPanel m_playersPanel;
@@ -56,10 +53,8 @@ private:
 	UICardsRowPanel m_expansionsL3Panel;
 	UIHandPanel m_handPanel;
 
-	// UI Logic
-	bool m_openedHandPanel;
-
 	// Logic
+	PregameSetup m_pregameSetup;
 	Board* p_board;
 
 };

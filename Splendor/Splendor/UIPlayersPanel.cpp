@@ -15,12 +15,26 @@ UIPlayersPanel::UIPlayersPanel(std::vector<Player>* pPlayers, const sf::Vector2f
 		++iterator;
 	}
 
+	// Instantiate Player Pointer
+	sf::Texture* playerPointerTexture = new sf::Texture;
+	playerPointerTexture->loadFromFile(s_playerPointerFile);
+	m_playerPointer.setTexture(playerPointerTexture);
+	const float playerPointerSize = m_playerPanels[0]->getSize().y - 2 * s_playerPointerPadding * m_playerPanels[0]->getSize().y;
+	m_playerPointer.setSize(sf::Vector2f(playerPointerSize, playerPointerSize));
+	for (const auto& panel : m_playerPanels)
+	{
+		m_playerPointerPositions.push_back(panel->getPosition().y + s_playerPointerPadding * panel->getSize().y);
+	}
+	m_playerPointerIterator = 0;
+	m_playerPointer.setPosition(getPosition().x, m_playerPointerPositions[m_playerPointerIterator]);
+
 	// Add drawable content
 	for (auto& panel : m_playerPanels)
 	{
 		if (panel.has_value())
 			AddContent(dynamic_cast<sf::Drawable*>(&panel.value()));
 	}
+	AddContent(dynamic_cast<sf::Drawable*>(&m_playerPointer));
 
 	// Add collider content
 	for (auto& panel : m_playerPanels)
@@ -45,4 +59,12 @@ UIPlayerPanel* UIPlayersPanel::GetIfTriggered()
 		}
 	}
 	return triggeredPanel;
+}
+
+void UIPlayersPanel::pointToNextPlayer()
+{
+	++m_playerPointerIterator;
+	if (m_playerPointerIterator == m_playerPointerPositions.size())
+		m_playerPointerIterator = 0;
+	m_playerPointer.setPosition(getPosition().x, m_playerPointerPositions[m_playerPointerIterator]);
 }

@@ -13,7 +13,6 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL2Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.54), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL1Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.77), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_handPanel(static_cast<sf::Vector2f>(windowSize), false),
-	m_openedHandPanel(false),
 	// instantiate Pregame Set-up
 	m_pregameSetup(pregameSetup)
 {
@@ -36,6 +35,7 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL3Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_noblesPanel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_handPanel));
+
 }
 
 void UIGameSession::StartGame()
@@ -63,7 +63,6 @@ void UIGameSession::UpdateGame()
 		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(false); });
 		m_handPanel.SetUpHand(*triggeredPanel);
 		m_handPanel.SetActive(true);
-		m_openedHandPanel = true;
 	}
 	if (m_handPanel.CheckForClose())
 	{
@@ -74,6 +73,7 @@ void UIGameSession::UpdateGame()
 void UIGameSession::NextTurn()
 {
 	m_infoPanel.IncrementTurn();
+	m_playersPanel.pointToNextPlayer();
 }
 
 void UIGameSession::PassEvent(const sf::Event& event)
