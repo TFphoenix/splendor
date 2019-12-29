@@ -117,11 +117,13 @@ void UIHandPanel::SetUpHand(const UIPlayerPanel& playerPanel)
 	m_resourcesPanel->UpdateResources(playerHand.GetResourcesData());
 }
 
-void UIHandPanel::CheckForClose()
+bool UIHandPanel::CheckForClose()
 {
 	if (m_closeButton->GetState() == UIButton::State::Release)
 	{
 		SetActive(false);
 		m_closeButton->SwitchState(UIButton::State::None);
+		return true;
 	}
+	return false;
 }

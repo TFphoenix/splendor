@@ -18,7 +18,7 @@ public:
 
 	// GUI
 	void SetUpHand(const UIPlayerPanel& playerPanel);
-	void CheckForClose();
+	bool CheckForClose();
 
 private:
 	static inline float s_sizeRatio = 0.75f;// %

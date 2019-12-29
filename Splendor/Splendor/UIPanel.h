@@ -8,13 +8,15 @@ class UIPanel :public sf::RectangleShape
 {
 public:
 	// Constr.
-	UIPanel(const std::string& title, const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& position = sf::Vector2f(0, 0), bool isActive = true);
+	UIPanel(const std::string& title, const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& position = sf::Vector2f(0, 0), bool isActive = true, bool isInteractable = true);
 
 	// G&S
 	std::string GetTitle() const;
 	void SetTitle(const std::string& title);
 	bool IsActive() const;
 	void SetActive(bool active);
+	bool IsInteractable() const;
+	void SetInteractable(bool interactable);
 
 	// Content
 	Collider* GetContentCollider(size_t contentID) const;
@@ -41,5 +43,6 @@ protected:
 private:
 	std::string m_titleString;
 	bool m_isActive;
+	bool m_isInteractable;
 };
 

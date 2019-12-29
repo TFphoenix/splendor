@@ -42,8 +42,10 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
 private:
-	// Pregame & Panels
+	// Pregame
 	PregameSetup m_pregameSetup;
+
+	// Panels
 	std::vector<UIPanel*> m_panels;
 	UIInfoPanel m_infoPanel;
 	UIPlayersPanel m_playersPanel;

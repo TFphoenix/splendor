@@ -60,10 +60,15 @@ void UIGameSession::UpdateGame()
 	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
 	if (triggeredPanel != nullptr)
 	{
+		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(false); });
 		m_handPanel.SetUpHand(*triggeredPanel);
 		m_handPanel.SetActive(true);
+		m_openedHandPanel = true;
 	}
-	m_handPanel.CheckForClose();
+	if (m_handPanel.CheckForClose())
+	{
+		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(true); });
+	}
 }
 
 void UIGameSession::NextTurn()

@@ -1,6 +1,7 @@
 #include "UIPanel.h"
 
-UIPanel::UIPanel(const std::string& title, const sf::Vector2f& size, const sf::Vector2f& position, bool isActive) : RectangleShape(size), m_titleString(title), m_isActive(isActive)
+UIPanel::UIPanel(const std::string& title, const sf::Vector2f& size, const sf::Vector2f& position, bool isActive, bool isInteractable) :
+	RectangleShape(size), m_titleString(title), m_isActive(isActive), m_isInteractable(isInteractable)
 {
 	setPosition(position);
 }
@@ -23,6 +24,16 @@ bool UIPanel::IsActive() const
 void UIPanel::SetActive(bool active)
 {
 	m_isActive = active;
+}
+
+bool UIPanel::IsInteractable() const
+{
+	return m_isInteractable;
+}
+
+void UIPanel::SetInteractable(bool interactable)
+{
+	m_isInteractable = interactable;
 }
 
 Collider* UIPanel::GetContentCollider(unsigned contentID) const
@@ -62,7 +73,7 @@ void UIPanel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void UIPanel::HandleEvent(const sf::Event& event)
 {
-	if (IsActive())
+	if (IsActive() && IsInteractable())
 	{
 		for (const auto& collider : m_colliderContent)
 		{
