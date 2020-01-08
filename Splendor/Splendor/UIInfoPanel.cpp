@@ -17,10 +17,16 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 	m_turnLabel.setScale(scale, scale);
 
 	// Menu Button
-	sf::RectangleShape buttonShape(sf::Vector2f(0.05 * size.x, size.y - 2 * s_padding));
-	buttonShape.setPosition(position.x + size.x - buttonShape.getSize().x - s_padding, position.y + s_padding);
-	m_menuButton = new UIButton(buttonShape);
+	sf::RectangleShape buttonShape2(sf::Vector2f(0.05 * size.x, size.y - 2 * s_padding));
+	buttonShape2.setPosition(position.x + size.x - buttonShape2.getSize().x - s_padding, position.y + s_padding);
+	m_menuButton = new UIButton(buttonShape2);
 	m_menuButton->ChangeText("x");// future texture
+
+	// Pass Button
+	sf::RectangleShape buttonShape1(sf::Vector2f(0.05 * size.x, size.y - 2 * s_padding));
+	buttonShape1.setPosition(position.x + size.x - buttonShape1.getSize().x - buttonShape2.getSize().x - 4 * s_padding, position.y + s_padding);
+	m_passButton = new UIButton(buttonShape1);
+	m_passButton->ChangeText("Pass");
 
 	//Background
 	m_background.setSize(size);
@@ -34,9 +40,11 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 	AddContent(dynamic_cast<sf::Drawable*>(&m_turnTitle));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_turnLabel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_menuButton));
+	AddContent(dynamic_cast<sf::Drawable*>(m_passButton));
 
 	// Add collider content to panel
 	AddContent(dynamic_cast<Collider*>(m_menuButton));
+	AddContent(dynamic_cast<Collider*>(m_passButton));
 }
 
 void UIInfoPanel::IncrementTurn()
@@ -70,6 +78,16 @@ bool UIInfoPanel::MenuButtonTriggered() const
 	if (m_menuButton->GetState() == UIButton::State::Release)
 	{
 		m_menuButton->SwitchState(UIButton::State::None);
+		return true;
+	}
+	return false;
+}
+
+bool UIInfoPanel::PassButtonTriggered() const
+{
+	if (m_passButton->GetState() == UIButton::State::Release)
+	{
+		m_passButton->SwitchState(UIButton::State::Hover);
 		return true;
 	}
 	return false;

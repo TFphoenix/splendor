@@ -142,6 +142,9 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			{
 			case UIGameSession::Events::MenuButton:
 				return;
+			case UIGameSession::Events::PassButton:
+				gameSessionGUI.NextTurn();
+				break;
 			default:
 				break;
 			}

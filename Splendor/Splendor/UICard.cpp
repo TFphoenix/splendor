@@ -110,7 +110,7 @@ void UICard::OnMouseLeftClick()
 	{
 		m_state = State::Press;
 		setScale(1.8f, 1.8f);
-		setOutlineColor(UIColors::DarkYellow - UIColors::QuarterTransparent);
+		setOutlineColor(UIColors::DarkGreen - UIColors::QuarterTransparent);
 	}
 }
 
@@ -130,7 +130,7 @@ void UICard::OnMouseRightClick()
 	{
 		m_state = State::Press;
 		setScale(1.8f, 1.8f);
-		setOutlineColor(UIColors::DarkGreen - UIColors::QuarterTransparent);
+		setOutlineColor(UIColors::DarkYellow - UIColors::QuarterTransparent);
 	}
 }
 

@@ -26,6 +26,7 @@ private:
 	sf::RectangleShape m_playerPointer;
 	std::vector<float> m_playerPointerPositions;
 	size_t m_playerPointerIterator;
+	size_t m_playerPointerSize;
 
 };
 

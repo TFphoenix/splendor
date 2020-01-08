@@ -14,6 +14,7 @@ UIPlayersPanel::UIPlayersPanel(std::vector<Player>* pPlayers, const sf::Vector2f
 		m_playerPanels[iterator].value().SetUserTexture(iterator);
 		++iterator;
 	}
+	m_playerPointerSize = iterator;
 
 	// Instantiate Player Pointer
 	sf::Texture* playerPointerTexture = new sf::Texture;
@@ -64,7 +65,7 @@ UIPlayerPanel* UIPlayersPanel::GetIfTriggered()
 void UIPlayersPanel::pointToNextPlayer()
 {
 	++m_playerPointerIterator;
-	if (m_playerPointerIterator == m_playerPointerPositions.size())
+	if (m_playerPointerIterator == m_playerPointerSize)
 		m_playerPointerIterator = 0;
 	m_playerPointer.setPosition(getPosition().x, m_playerPointerPositions[m_playerPointerIterator]);
 }

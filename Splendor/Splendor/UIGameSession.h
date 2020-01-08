@@ -22,7 +22,8 @@ public:
 	{
 		// possible events hapening in the scene
 		None,
-		MenuButton
+		MenuButton,
+		PassButton
 	};
 
 public:

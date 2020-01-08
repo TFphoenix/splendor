@@ -90,6 +90,8 @@ UIGameSession::Events UIGameSession::GetEvent() const
 	// Info Panel
 	if (m_infoPanel.MenuButtonTriggered())
 		return Events::MenuButton;
+	if (m_infoPanel.PassButtonTriggered())
+		return Events::PassButton;
 	return Events::None;
 }
 

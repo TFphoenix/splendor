@@ -27,6 +27,7 @@ public:
 
 	// Events
 	bool MenuButtonTriggered() const;
+	bool PassButtonTriggered() const;
 
 private:
 	void UpdateTimeLabel();
@@ -42,5 +43,6 @@ private:
 	UIText m_turnTitle, m_turnLabel;
 	sf::RectangleShape m_background;
 	UIButton* m_menuButton;
+	UIButton* m_passButton;
 };
 
