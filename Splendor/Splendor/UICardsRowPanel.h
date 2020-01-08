@@ -14,6 +14,8 @@ public:
 	std::vector<UICard::Data> GetCardsData() const;
 	void SetCardsData(const std::vector<UICard::Data>& cardsData);
 	void SetCardsData(const std::vector<CardDAO::Data>& cardsData, uint16_t withBackground = 0, bool isDataNumb = false);
+	std::optional<std::pair<UICard::Data, UICard::State>> CheckForPickedCard();
+	std::optional<UICard::Data> CheckForWonNoble(std::unordered_map<IToken::Type, uint16_t>& resources);
 
 	// Graphics
 	void ReverseDrawOrder();
@@ -23,7 +25,6 @@ private:
 	sf::Vector2f m_cardSize;
 	float m_cardDistance;
 	std::vector<UICard*> m_cards;
-	std::optional<UICard::Data> m_pickedCard;
 
 };
 

@@ -1,9 +1,12 @@
 #include "UIGameSession.h"
 #include "UISelectedCard.h"
 
-UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard) :
+#include <iostream>
+
+UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard, std::reference_wrapper<Player>& rActivePlayer) :
 	// instantiate Logic
 	p_board(pBoard),
+	r_activePlayer(rActivePlayer),
 	// instantiate UI panels
 	m_infoPanel(sf::Vector2f(0, 0), sf::Vector2f(windowSize.x, windowSize.y * 0.05)),
 	m_playersPanel(pPlayers, sf::Vector2f(0, windowSize.y * 0.05), sf::Vector2f(windowSize.x * 0.3, windowSize.y * 0.95)),
@@ -55,6 +58,8 @@ void UIGameSession::UpdateGame()
 
 	// Board
 	m_tokensPanel.UpdateTokens();
+	//auto wonNoble=m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetResources());
+	//auto pickedCard = m_expansionsL1Panel
 
 	// Hand Panel
 	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
@@ -68,12 +73,19 @@ void UIGameSession::UpdateGame()
 	{
 		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(true); });
 	}
+
 }
 
 void UIGameSession::NextTurn()
 {
 	m_infoPanel.IncrementTurn();
 	m_playersPanel.pointToNextPlayer();
+	std::cout << r_activePlayer.get().GetName() << "\n";
+}
+
+void UIGameSession::SetActivePlayer(std::reference_wrapper<Player> activePlayerReference)
+{
+	r_activePlayer = activePlayerReference;
 }
 
 void UIGameSession::PassEvent(const sf::Event& event)

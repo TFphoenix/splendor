@@ -17,8 +17,8 @@ SessionsManager::SessionsManager() :
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	logger.Log("Window created", Logger::Level::Info);
 
@@ -118,12 +118,14 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	{
 		players.emplace_back("Player " + std::to_string(playerNr));
 	}
+	size_t activePlayerIterator = 0;
+	std::reference_wrapper<Player> activePlayer = players[activePlayerIterator];
 
 	// Initialize Board
 	Board board;
 
 	// Initialize GUI
-	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board);
+	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
 
@@ -144,11 +146,17 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 				return;
 			case UIGameSession::Events::PassButton:
 				gameSessionGUI.NextTurn();
+				++activePlayerIterator;
+				if (activePlayerIterator == pregameSetup.GetPlayerCount())
+					activePlayerIterator = 0;
+				activePlayer = players[activePlayerIterator];
 				break;
 			default:
 				break;
 			}
 		}
+
+		// Game Logic
 
 		// Update & Display
 		gameSessionGUI.UpdateGame();

@@ -91,6 +91,48 @@ void UICardsRowPanel::SetCardsData(const std::vector<CardDAO::Data>& cardsData, 
 	}
 }
 
+std::optional<std::pair<UICard::Data, UICard::State>> UICardsRowPanel::CheckForPickedCard()
+{
+	for (const auto& card : m_cards)
+	{
+		if (card->GetState() == UICard::State::LeftRelease)
+		{
+			card->SetState(UICard::State::Hover);
+			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), card->GetState()));
+		}
+
+		if (card->GetState() == UICard::State::RightRelease)
+		{
+			card->SetState(UICard::State::Hover);
+			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), card->GetState()));
+		}
+	}
+
+	return std::nullopt;
+}
+
+std::optional<UICard::Data> UICardsRowPanel::CheckForWonNoble(std::unordered_map<IToken::Type, uint16_t>& resources)
+{
+	for (const auto& card : m_cards)
+	{
+		if (card->GetType() != UICard::Type::Noble)
+			return std::nullopt;
+
+		auto cardData = CardDAO::GetNoble(card->GetID());
+		bool won = true;
+		for (size_t tokenType = 0; tokenType < IToken::s_typeCount - 1; ++tokenType)
+		{
+			if (resources[static_cast<IToken::Type>(tokenType)] < cardData.request[static_cast<IToken::Type>(tokenType)])
+				won = false;
+		}
+
+		if (won)
+			return std::optional<UICard::Data>(card->GetData());
+	}
+
+	return std::nullopt;
+}
+
 void UICardsRowPanel::ReverseDrawOrder()
 {
 	std::reverse(m_drawableContent.begin(), m_drawableContent.end());

@@ -35,7 +35,8 @@ public:
 		None,
 		Hover,
 		Press,
-		Release
+		LeftRelease,
+		RightRelease
 	};
 
 public:
@@ -49,6 +50,8 @@ public:
 	void SetData(Data data);
 	bool GetNumb() const;
 	void SetNumb(bool numb);
+	State GetState() const;
+	void SetState(const State& state);
 
 	// Collider
 	void OnMouseOver() override;

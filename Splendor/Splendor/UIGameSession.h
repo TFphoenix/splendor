@@ -27,13 +27,14 @@ public:
 	};
 
 public:
-	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard);
+	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard, std::reference_wrapper<Player>& rActivePlayer);
 
 	// UI Logic
 	void StartGame();
 	void StopGame();
 	void UpdateGame();
 	void NextTurn();
+	void SetActivePlayer(std::reference_wrapper<Player> activePlayerReference);
 
 	// Events
 	void PassEvent(const sf::Event& event);
@@ -57,6 +58,7 @@ private:
 	// Logic
 	PregameSetup m_pregameSetup;
 	Board* p_board;
+	std::reference_wrapper<Player>& r_activePlayer;
 
 };
 

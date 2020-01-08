@@ -73,6 +73,16 @@ void UICard::SetNumb(bool numb)
 	m_numb = numb;
 }
 
+UICard::State UICard::GetState() const
+{
+	return m_state;
+}
+
+void UICard::SetState(const State& state)
+{
+	m_state = state;
+}
+
 void UICard::OnMouseOver()
 {
 	setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
@@ -118,7 +128,7 @@ void UICard::OnMouseLeftRelease()
 {
 	if (!m_numb)
 	{
-		m_state = State::Release;
+		m_state = State::LeftRelease;
 		setScale(2, 2);
 		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
 	}
@@ -138,7 +148,7 @@ void UICard::OnMouseRightRelease()
 {
 	if (!m_numb)
 	{
-		m_state = State::Release;
+		m_state = State::RightRelease;
 		setScale(2, 2);
 		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
 	}

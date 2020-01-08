@@ -12,6 +12,7 @@ public:
 		RedRuby = 4,
 		Gold = 5
 	};
+	inline const static size_t s_typeCount = static_cast<size_t>(Type::Gold);
 
 public:
 	virtual ~IToken() = 0;
