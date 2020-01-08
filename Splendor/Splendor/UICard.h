@@ -56,6 +56,8 @@ public:
 	void OnMouseLeave() override;
 	void OnMouseLeftClick() override;
 	void OnMouseLeftRelease() override;
+	void OnMouseRightClick() override;
+	void OnMouseRightRelease() override;
 
 private:
 	// Textures

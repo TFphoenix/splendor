@@ -101,8 +101,13 @@ void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 			target.draw(*panel);
 		});
 	// re-draw selected card on top of all drawables
-	if (UISelectedCard::Get() != nullptr)
+	if (UISelectedCard::Get().first != nullptr)
 	{
-		target.draw(*UISelectedCard::Get());
+		target.draw(*UISelectedCard::Get().first);
+	}
+	// draw selected card text
+	if (UISelectedCard::Get().second != nullptr)
+	{
+		target.draw(*UISelectedCard::Get().second);
 	}
 }

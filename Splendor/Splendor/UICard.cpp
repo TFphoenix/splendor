@@ -76,6 +76,7 @@ void UICard::SetNumb(bool numb)
 void UICard::OnMouseOver()
 {
 	setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
+	UISelectedCard::UpdateText(getPosition());
 }
 
 void UICard::OnMouseEnter()
@@ -84,6 +85,7 @@ void UICard::OnMouseEnter()
 	{
 		m_state = State::Hover;
 		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
+		UISelectedCard::DisplayText(true);
 	}
 	setScale(2, 2);
 	UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
@@ -95,6 +97,7 @@ void UICard::OnMouseLeave()
 	{
 		m_state = State::None;
 		setOutlineColor(UIColors::Transparent);
+		UISelectedCard::DisplayText(false);
 	}
 	setScale(1, 1);
 	setPosition(m_initialPosition);
@@ -112,6 +115,26 @@ void UICard::OnMouseLeftClick()
 }
 
 void UICard::OnMouseLeftRelease()
+{
+	if (!m_numb)
+	{
+		m_state = State::Release;
+		setScale(2, 2);
+		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
+	}
+}
+
+void UICard::OnMouseRightClick()
+{
+	if (!m_numb)
+	{
+		m_state = State::Press;
+		setScale(1.8f, 1.8f);
+		setOutlineColor(UIColors::DarkGreen - UIColors::QuarterTransparent);
+	}
+}
+
+void UICard::OnMouseRightRelease()
 {
 	if (!m_numb)
 	{
