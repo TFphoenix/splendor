@@ -18,7 +18,7 @@ public:
 	std::string GetName() const;
 	Type GetType() const;
 	uint16_t GetPrestigePoints() const;
-	Hand GetHand() const;
+	Hand& GetHand();
 
 	// Logic
 	void AddPrestigePoints(uint16_t amount);

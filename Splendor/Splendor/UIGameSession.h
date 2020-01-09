@@ -54,6 +54,7 @@ private:
 	UICardsRowPanel m_expansionsL2Panel;
 	UICardsRowPanel m_expansionsL3Panel;
 	UIHandPanel m_handPanel;
+	std::vector<std::reference_wrapper<UICardsRowPanel>> m_expansionPanels;
 
 	// Logic
 	PregameSetup m_pregameSetup;

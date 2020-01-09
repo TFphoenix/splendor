@@ -25,7 +25,7 @@ UIVTokensPanel::UIVTokensPanel(const sf::Vector2f& position, const sf::Vector2f&
 	m_tokensText[5]->setString(std::to_string(GamePieces::s_GoldTokenCount));
 }
 
-void UIVTokensPanel::UpdateTokens()
+void UIVTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& boardTokens)
 {
 	uint16_t it = 0;
 	for (const auto& token : m_tokens)
@@ -34,14 +34,17 @@ void UIVTokensPanel::UpdateTokens()
 		{
 			token->SetState(UIToken::State::Hover);
 			// Add picked token
-			if (AddPickedToken(token->GetType()))
+			if (boardTokens[token->GetType()] != 0)
 			{
-				// Update text
-				std::string newString(m_tokensText[it]->getString());
-				if (newString != "0")
+				if (AddPickedToken(token->GetType()))
 				{
-					newString[0]--;
-					m_tokensText[it]->setString(newString);
+					// Update text
+					std::string newString(m_tokensText[it]->getString());
+					if (newString != "0")
+					{
+						newString[0]--;
+						m_tokensText[it]->setString(newString);
+					}
 				}
 			}
 		}
@@ -54,6 +57,33 @@ UIVTokensPanel::PickedArray& UIVTokensPanel::ExtractPickedTokens()
 	return m_pickedTokens;
 }
 
+void UIVTokensPanel::NumbAll()
+{
+	for (auto& token : m_tokens)
+	{
+		token->SetNumb(true);
+	}
+}
+
+void UIVTokensPanel::UnNumb()
+{
+	for (auto& token : m_tokens)
+	{
+		token->SetNumb(false);
+	}
+	m_tokens[5]->SetNumb(true);
+}
+
+bool UIVTokensPanel::GetHasPicked() const
+{
+	return m_hasPicked;
+}
+
+void UIVTokensPanel::SetHasPicked(bool hasPicked)
+{
+	m_hasPicked = hasPicked;
+}
+
 bool UIVTokensPanel::AddPickedToken(IToken::Type tokenType)
 {
 	if (m_pickedTokens[2].has_value())
@@ -62,6 +92,7 @@ bool UIVTokensPanel::AddPickedToken(IToken::Type tokenType)
 	}
 	if (!m_pickedTokens[0].has_value())
 	{
+		m_hasPicked = true;
 		m_pickedTokens[0] = tokenType;
 		return true;
 	}

@@ -20,7 +20,7 @@ uint16_t Player::GetPrestigePoints() const
 	return m_prestigePoints;
 }
 
-Hand Player::GetHand() const
+Hand& Player::GetHand()
 {
 	return m_hand;
 }

@@ -16,6 +16,7 @@ public:
 	void SetCardsData(const std::vector<CardDAO::Data>& cardsData, uint16_t withBackground = 0, bool isDataNumb = false);
 	std::optional<std::pair<UICard::Data, UICard::State>> CheckForPickedCard();
 	std::optional<UICard::Data> CheckForWonNoble(std::unordered_map<IToken::Type, uint16_t>& resources);
+	void NumbAll();
 
 	// Graphics
 	void ReverseDrawOrder();

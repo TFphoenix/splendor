@@ -28,6 +28,9 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL2Panel.ReverseDrawOrder();
 	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
 	m_expansionsL1Panel.ReverseDrawOrder();
+	m_expansionPanels.emplace_back(std::ref(m_expansionsL3Panel));
+	m_expansionPanels.emplace_back(std::ref(m_expansionsL2Panel));
+	m_expansionPanels.emplace_back(std::ref(m_expansionsL1Panel));
 
 	// Populate panel vector
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_infoPanel));
@@ -56,10 +59,40 @@ void UIGameSession::UpdateGame()
 	// Info
 	m_infoPanel.UpdateTime();
 
-	// Board
-	m_tokensPanel.UpdateTokens();
-	//auto wonNoble=m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetResources());
-	//auto pickedCard = m_expansionsL1Panel
+	// Tokens Panel
+	m_tokensPanel.UpdateTokens(std::forward<std::unordered_map<IToken::Type, uint16_t>>(p_board->GetTokensData()));
+	if (m_tokensPanel.GetHasPicked())
+	{
+		m_tokensPanel.SetHasPicked(false);
+		std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+	}
+
+	// Card Panels
+	std::optional<std::pair<UICard::Data, UICard::State>> pickedCard;
+	for (auto& expansionPanel : m_expansionPanels)
+	{
+		if (pickedCard.has_value())
+			continue;
+		pickedCard = expansionPanel.get().CheckForPickedCard();
+	}
+	if (pickedCard.has_value())
+	{
+		switch (pickedCard.value().second)
+		{
+		case UICard::State::LeftRelease:
+			std::cout << "Picked card LEFT CLICK";
+			m_tokensPanel.NumbAll();
+			break;
+		case UICard::State::RightRelease:
+			std::cout << "Picked card RIGHT CLICK";
+			m_tokensPanel.NumbAll();
+			break;
+		default:
+			break;
+		}
+		m_tokensPanel.NumbAll();
+		std::cout << "\n";
+	}
 
 	// Hand Panel
 	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
@@ -78,9 +111,35 @@ void UIGameSession::UpdateGame()
 
 void UIGameSession::NextTurn()
 {
+	// UI Logic
 	m_infoPanel.IncrementTurn();
-	m_playersPanel.pointToNextPlayer();
+	m_playersPanel.PointToNextPlayer();
+	m_tokensPanel.UnNumb();
+	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
+	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
+	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
 	std::cout << r_activePlayer.get().GetName() << "\n";
+
+	// Validate Active Player Changes
+	// Nobles
+	const auto wonNoble = m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetHand().GetResourcesData());
+	if (wonNoble.has_value())
+	{
+		m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble), 0, true);
+		std::cout << "WON NOBLE\n";
+	}
+	// Tokens
+	auto& pickedTokens = m_tokensPanel.ExtractPickedTokens();
+	for (auto& token : pickedTokens)
+	{
+		if (token.has_value())
+		{
+			r_activePlayer.get().GetHand().AddToken(token.value());
+			p_board->TakeToken(token.value());
+			token.reset();
+		}
+	}
+
 }
 
 void UIGameSession::SetActivePlayer(std::reference_wrapper<Player> activePlayerReference)

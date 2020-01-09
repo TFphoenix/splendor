@@ -14,8 +14,8 @@ public:
 	// Logic
 	ExpansionCard TakeExpansion(ExpansionCard::Level level, uint16_t id);
 	NobleCard WinNoble(uint16_t id);
-	void TakeToken(IToken::Type type, uint16_t amount);
-	void ReturnToken(IToken::Type type, uint16_t amount);
+	void TakeToken(IToken::Type type, uint16_t amount = 1);
+	void ReturnToken(IToken::Type type, uint16_t amount = 1);
 
 	// Getters
 	std::vector<CardDAO::Data> GetCardSlotsData(CardDAO::Type dataType) const;

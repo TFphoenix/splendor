@@ -97,14 +97,16 @@ std::optional<std::pair<UICard::Data, UICard::State>> UICardsRowPanel::CheckForP
 	{
 		if (card->GetState() == UICard::State::LeftRelease)
 		{
+			const auto state = card->GetState();
 			card->SetState(UICard::State::Hover);
-			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), card->GetState()));
+			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), state));
 		}
 
 		if (card->GetState() == UICard::State::RightRelease)
 		{
+			const auto state = card->GetState();
 			card->SetState(UICard::State::Hover);
-			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), card->GetState()));
+			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), state));
 		}
 	}
 
@@ -131,6 +133,14 @@ std::optional<UICard::Data> UICardsRowPanel::CheckForWonNoble(std::unordered_map
 	}
 
 	return std::nullopt;
+}
+
+void UICardsRowPanel::NumbAll()
+{
+	for (auto& card : m_cards)
+	{
+		card->SetNumb(true);
+	}
 }
 
 void UICardsRowPanel::ReverseDrawOrder()

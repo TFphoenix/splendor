@@ -26,7 +26,7 @@ public:
 
 	// Manipulators
 	void AddResource(GemType type);
-	void AddToken(GemType type, uint16_t amount);
+	void AddToken(GemType type, uint16_t amount = 1);
 	void RemoveToken(GemType type, uint16_t amount);
 	void AddExpansionCard(const ExpansionCard& card);
 	void RemoveExpansionCard(uint16_t id);

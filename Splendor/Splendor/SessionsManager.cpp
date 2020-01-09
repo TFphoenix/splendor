@@ -129,6 +129,20 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
 
+	// Test
+	players[0].GetHand().AddResource(Hand::GemType::GreenEmerald);
+	players[0].GetHand().AddResource(Hand::GemType::GreenEmerald);
+	players[0].GetHand().AddResource(Hand::GemType::GreenEmerald);
+	players[0].GetHand().AddResource(Hand::GemType::BlueSapphire);
+	players[0].GetHand().AddResource(Hand::GemType::BlueSapphire);
+	players[0].GetHand().AddResource(Hand::GemType::BlueSapphire);
+	players[0].GetHand().AddResource(Hand::GemType::RedRuby);
+	players[0].GetHand().AddResource(Hand::GemType::RedRuby);
+	players[0].GetHand().AddResource(Hand::GemType::RedRuby);
+
+
+
+	
 
 	// Game Loop
 	gameSessionGUI.StartGame();

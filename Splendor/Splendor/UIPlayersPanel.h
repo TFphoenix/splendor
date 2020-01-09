@@ -13,7 +13,7 @@ public:
 
 	// UI Logic
 	UIPlayerPanel* GetIfTriggered();
-	void pointToNextPlayer();
+	void PointToNextPlayer();
 
 private:
 	static inline const float s_paddingPercentage = 0.04f;

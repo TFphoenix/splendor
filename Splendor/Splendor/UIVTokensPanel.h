@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <optional>
+#include <unordered_map>
 
 #include "UIPanel.h"
 #include "UIToken.h"
@@ -16,8 +17,14 @@ public:
 	UIVTokensPanel(const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 100,1024 }, bool isActive = true);
 
 	// Logic
-	void UpdateTokens();
+	void UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& boardTokens);
 	PickedArray& ExtractPickedTokens();
+	void NumbAll();
+	void UnNumb();
+
+	// G&S
+	bool GetHasPicked() const;
+	void SetHasPicked(bool hasPicked);
 
 private:
 	// picked tokens array
@@ -32,6 +39,7 @@ private:
 	std::array<UIToken*, 6> m_tokens;
 	std::array<UIText*, 6> m_tokensText;
 	PickedArray m_pickedTokens;
+	bool m_hasPicked;
 
 };
 

@@ -1,7 +1,7 @@
 #include "Board.h"
 
-Board::Board():
-m_nobleDeck()
+Board::Board() :
+	m_nobleDeck()
 {
 	// Shuffle Decks
 	m_nobleDeck.ShuffleDeck();
@@ -28,16 +28,10 @@ m_nobleDeck()
 	}
 
 	// Populate Token Slots
-	for (auto& element : m_tokens)
+	m_tokens[IToken::Type::Gold] = GamePieces::s_GoldTokenCount;
+	for (uint16_t tokenIt = 0; tokenIt < IToken::s_typeCount - 1; ++tokenIt)
 	{
-		if (element.first == IToken::Type::Gold)
-		{
-			element.second = GamePieces::s_GoldTokenCount;
-		}
-		else
-		{
-			element.second = GamePieces::GetGemTokenCount();
-		}
+		m_tokens[static_cast<IToken::Type>(tokenIt)] = GamePieces::GetGemTokenCount();
 	}
 }
 

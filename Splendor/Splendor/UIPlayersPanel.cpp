@@ -62,7 +62,7 @@ UIPlayerPanel* UIPlayersPanel::GetIfTriggered()
 	return triggeredPanel;
 }
 
-void UIPlayersPanel::pointToNextPlayer()
+void UIPlayersPanel::PointToNextPlayer()
 {
 	++m_playerPointerIterator;
 	if (m_playerPointerIterator == m_playerPointerSize)
