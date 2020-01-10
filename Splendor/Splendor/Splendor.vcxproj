@@ -253,6 +253,9 @@
     <ClInclude Include="UIVTokensPanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SplendorTests\SplendorTests.vcxproj">
+      <Project>{0f31694c-ba26-40a0-9f2d-065e230aa1eb}</Project>
+    </ProjectReference>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml" />
     <ProjectReference Include="..\Logging\Logging.vcxproj">
       <Project>{219892e1-9231-433c-8ec8-a3a377eb4dda}</Project>
