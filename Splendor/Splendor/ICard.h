@@ -13,7 +13,11 @@ public:
 public:
 	// Constr. & Destr.
 	ICard(uint16_t id, bool isFaceUp, uint16_t prestigePoints = 0);
-	virtual ~ICard() = 0;
+	ICard& operator=(ICard&& other);
+	ICard& operator=(const ICard& other);
+	ICard(ICard&& other);
+	ICard(const ICard &other);
+	virtual ~ICard();
 
 	// G&S
 	uint16_t GetId() const;
