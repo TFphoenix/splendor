@@ -5,13 +5,18 @@ class NobleCard : public ICard
 {
 public:
 	// Constr.
-	NobleCard(
-		uint16_t id,
-		bool isFaceUp = true);
+	NobleCard(uint16_t id = 0, bool isFaceUp = true);
+	NobleCard(const NobleCard& other);
+	NobleCard(NobleCard&& other);
+	~NobleCard() = default;
+	NobleCard& operator =(const NobleCard& other);
+	NobleCard& operator =(NobleCard&& other);
+
 
 	// G&S
 	GemsMap GetRequirements() const;
 	std::string GetName() const;
+
 
 private:
 	std::string m_name;

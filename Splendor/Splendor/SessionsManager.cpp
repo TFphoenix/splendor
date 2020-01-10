@@ -182,4 +182,8 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
+	NobleCard noble(1);
+	NobleCard noble2(2);
+	noble = std::move(noble2);
+	
 }
