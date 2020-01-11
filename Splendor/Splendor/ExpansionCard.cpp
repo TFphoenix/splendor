@@ -28,6 +28,44 @@ ExpansionCard::ExpansionCard(Level level, uint16_t id, bool isFaceUp) :
 	m_cost = card.request;
 }
 
+ExpansionCard::ExpansionCard(const ExpansionCard& other) :ICard(other.m_id, other.m_isFaceUp)
+{
+	*this = other;
+}
+
+ExpansionCard::ExpansionCard(ExpansionCard&& other): ICard(other.m_id, other.m_isFaceUp)
+{
+	*this = std::move(other);
+}
+
+ExpansionCard& ExpansionCard::operator=(const ExpansionCard& other)
+{
+	m_level = other.m_level;
+	m_cost = other.m_cost;
+	m_rewardType = other.m_rewardType;
+	m_isFaceUp = other.m_isFaceUp;
+	m_id = other.m_id;
+
+	return *this;
+}
+
+ExpansionCard& ExpansionCard::operator=(ExpansionCard&& other)
+{
+	m_level = other.m_level;
+	m_cost = other.m_cost;
+	m_rewardType = other.m_rewardType;
+
+	m_isFaceUp = other.m_isFaceUp;
+	m_id = other.m_id;
+
+	return *this;
+	
+}
+
+ExpansionCard::~ExpansionCard()
+{
+}
+
 ExpansionCard::Level ExpansionCard::GetLevel() const
 {
 	return m_level;

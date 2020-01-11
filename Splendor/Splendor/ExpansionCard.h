@@ -15,10 +15,12 @@ public:
 
 public:
 	// Constr.
-	ExpansionCard(
-		Level level,
-		uint16_t id,
-		bool isFaceUp = true);
+	ExpansionCard(Level level,uint16_t id=0,bool isFaceUp = true);
+	ExpansionCard(const ExpansionCard& other);
+	ExpansionCard(ExpansionCard&& other);
+	ExpansionCard& operator=(const ExpansionCard& other);
+	ExpansionCard& operator=(ExpansionCard&& other);
+	~ExpansionCard();
 
 	// G&S
 	Level GetLevel() const;
