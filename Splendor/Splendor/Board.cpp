@@ -35,9 +35,8 @@ Board::Board() :
 	}
 }
 
-ExpansionCard Board::TakeExpansion(ExpansionCard::Level level, uint16_t id)
+void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 {
-	std::optional<ExpansionCard> cardToReturn;
 	switch (level)
 	{
 	case ExpansionCard::Level::Level1:
@@ -47,7 +46,8 @@ ExpansionCard Board::TakeExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.swap(cardToReturn);
+					card.emplace(m_expansionL1Deck.DrawCard());
+					return;
 				}
 			}
 		}
@@ -59,7 +59,8 @@ ExpansionCard Board::TakeExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.swap(cardToReturn);
+					card.emplace(m_expansionL2Deck.DrawCard());
+					return;
 				}
 			}
 		}
@@ -71,7 +72,8 @@ ExpansionCard Board::TakeExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.swap(cardToReturn);
+					card.emplace(m_expansionL3Deck.DrawCard());
+					return;
 				}
 			}
 		}
@@ -79,9 +81,7 @@ ExpansionCard Board::TakeExpansion(ExpansionCard::Level level, uint16_t id)
 	default:
 		throw std::invalid_argument("Can't take expansion of undefined level");
 	}
-	if (!cardToReturn.has_value())
-		throw std::invalid_argument("Card not found");
-	return cardToReturn.value();
+	throw std::invalid_argument("Card not found");
 }
 
 NobleCard Board::WinNoble(uint16_t id)

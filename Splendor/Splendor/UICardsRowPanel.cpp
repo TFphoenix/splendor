@@ -83,6 +83,7 @@ void UICardsRowPanel::SetCardsData(const std::vector<CardDAO::Data>& cardsData, 
 				card->SetData(UICard::Data(static_cast<UICard::Type>(static_cast<int>(cardsData[it].type)), cardsData[it].id, isDataNumb));
 			else
 				card->SetData(UICard::Data());
+			card->Activate();
 			++it;
 		}
 		else

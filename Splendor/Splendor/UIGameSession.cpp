@@ -85,12 +85,17 @@ void UIGameSession::UpdateGame()
 			std::cout << "Picked card LEFT CLICK\n";
 			try
 			{
-				// Save card's prestige points
+				// Save picked card data
 				const auto prestigePoints = pickedCardLogicPiece.GetPrestigePoints();
+				const auto level = pickedCardLogicPiece.GetLevel();
+				const auto id = pickedCardLogicPiece.GetId();
 
 				// Return & sync tokens
 				p_board->ReturnTokens(r_activePlayer.get().GetHand().BuyExpansionCard(std::move(pickedCardLogicPiece)));
 				m_tokensPanel.SyncTokens(p_board->GetTokensData());
+
+				// Replace card in board
+				p_board->ReplaceExpansion(level, id);
 
 				// Add card's prestige points
 				r_activePlayer.get().AddPrestigePoints(prestigePoints);
@@ -107,13 +112,24 @@ void UIGameSession::UpdateGame()
 				std::cout << exception.what() << "\n";
 				pickedCard->first->TriggerWarning();
 			}
+			catch (std::exception & exception)
+			{
+				std::cout << exception.what() << "\n";
+			}
 			break;
 		case UICard::State::RightRelease:// Hold Card
 			std::cout << "Picked card RIGHT CLICK\n";
 			try {
+				// Save picked card data
+				const auto level = pickedCardLogicPiece.GetLevel();
+				const auto id = pickedCardLogicPiece.GetId();
+				
 				// Transfer card to hand
 				r_activePlayer.get().GetHand().AddExpansionCard(std::move(pickedCardLogicPiece));
 
+				// Replace card in board
+				p_board->ReplaceExpansion(level, id);
+				
 				// Deactivate UI
 				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();

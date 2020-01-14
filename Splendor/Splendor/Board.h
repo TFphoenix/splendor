@@ -12,7 +12,7 @@ public:
 	Board();
 
 	// Logic
-	ExpansionCard TakeExpansion(ExpansionCard::Level level, uint16_t id);
+	void ReplaceExpansion(ExpansionCard::Level level, uint16_t id);
 	NobleCard WinNoble(uint16_t id);
 	void TakeToken(IToken::Type type, uint16_t amount = 1);
 	void ReturnToken(IToken::Type type, uint16_t amount = 1);
