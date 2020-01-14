@@ -31,6 +31,7 @@ public:
 	sf::Texture GetUserTexture() const;
 	std::string GetNameLabelString() const;
 	std::string GetPrestigeLabelString() const;
+	void AddPrestigePoints(uint16_t prestigePoints);
 
 public:
 	// GUI

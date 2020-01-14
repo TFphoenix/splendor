@@ -77,6 +77,7 @@ void UIGameSession::UpdateGame()
 	}
 	if (pickedCard.has_value())
 	{
+		// Create logic ExpansionCard for pickedCard
 		ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
 		switch (pickedCard.value().second)
 		{
@@ -84,8 +85,18 @@ void UIGameSession::UpdateGame()
 			std::cout << "Picked card LEFT CLICK\n";
 			try
 			{
+				// Save card's prestige points
+				const auto prestigePoints = pickedCardLogicPiece.GetPrestigePoints();
+
+				// Return & sync tokens
 				p_board->ReturnTokens(r_activePlayer.get().GetHand().BuyExpansionCard(std::move(pickedCardLogicPiece)));
 				m_tokensPanel.SyncTokens(p_board->GetTokensData());
+
+				// Add card's prestige points
+				r_activePlayer.get().AddPrestigePoints(prestigePoints);
+				m_playersPanel.AddPrestigePointsToCurrentPlayer(prestigePoints);
+
+				// Deactivate UI
 				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();
 				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
@@ -121,7 +132,7 @@ void UIGameSession::UpdateGame()
 		std::cout << "\n";
 	}
 
-	// Hand Panel
+	// Player Hand Panels
 	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
 	if (triggeredPanel != nullptr)
 	{

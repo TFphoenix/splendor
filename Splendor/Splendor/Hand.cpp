@@ -76,7 +76,7 @@ void Hand::AddExpansionCard(ExpansionCard&& card)
 	{
 		if (!expansionCard.has_value())
 		{
-			expansionCard = card;
+			expansionCard = std::move(card);
 			return;
 		}
 	}
@@ -140,6 +140,7 @@ Hand::GemsMap Hand::BuyExpansionCard(ExpansionCard&& expansionCard)
 		throw std::length_error("Not enough resources to buy expansion card");
 
 	// Buy
+	m_resources[expansionCard.GetRewardType()]++;
 	tokensToReturn[IToken::Type::Gold] = goldSupplement;
 	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount; ++gemTypeIterator)
 	{

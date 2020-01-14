@@ -69,3 +69,8 @@ void UIPlayersPanel::PointToNextPlayer()
 		m_playerPointerIterator = 0;
 	m_playerPointer.setPosition(getPosition().x, m_playerPointerPositions[m_playerPointerIterator]);
 }
+
+void UIPlayersPanel::AddPrestigePointsToCurrentPlayer(uint16_t prestigePoints)
+{
+	m_playerPanels[m_playerPointerIterator]->AddPrestigePoints(prestigePoints);
+}

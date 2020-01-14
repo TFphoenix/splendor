@@ -14,6 +14,7 @@ public:
 	// UI Logic
 	UIPlayerPanel* GetIfTriggered();
 	void PointToNextPlayer();
+	void AddPrestigePointsToCurrentPlayer(uint16_t prestigePoints);
 
 private:
 	static inline const float s_paddingPercentage = 0.04f;

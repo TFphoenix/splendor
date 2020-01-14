@@ -2,6 +2,8 @@
 #include "Randomizer.h"
 #include "UIColors.h"
 
+#include <sstream>
+
 UIPlayerPanel::UIPlayerPanel(Player* pPlayer, const sf::Vector2f& position, const sf::Vector2f& size, bool isActive) :
 	UIPanel("PlayerPanel", size, position, isActive),
 	RectCollider(*dynamic_cast<sf::RectangleShape*>(this)),
@@ -114,6 +116,20 @@ std::string UIPlayerPanel::GetNameLabelString() const
 std::string UIPlayerPanel::GetPrestigeLabelString() const
 {
 	return m_prestigeLabel.getString();
+}
+
+void UIPlayerPanel::AddPrestigePoints(uint16_t prestigePoints)
+{
+	std::stringstream sStream(m_prestigeLabel.getString());
+	std::string firstPart, secondPart;
+	sStream >> firstPart;
+	sStream >> secondPart;
+	firstPart = firstPart + " " + secondPart;
+	sStream >> secondPart;
+	uint16_t prestige = std::stoi(secondPart);
+	prestige += prestigePoints;
+	secondPart = std::to_string(prestige);
+	m_prestigeLabel.setString(firstPart + " " + secondPart);
 }
 
 void UIPlayerPanel::ShuffleTextures()
