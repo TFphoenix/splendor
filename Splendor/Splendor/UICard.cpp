@@ -14,7 +14,8 @@ UICard::UICard(uint16_t id, Type type, const sf::Vector2f& position, const sf::V
 	m_numb(false),
 	m_state(State::None),
 	m_id(id),
-	m_type(type)
+	m_type(type),
+	m_warning(false)
 {
 	// Initialize
 	setPosition(position);
@@ -83,6 +84,25 @@ void UICard::SetState(const State& state)
 	m_state = state;
 }
 
+void UICard::TriggerWarning()
+{
+	m_warning = true;
+	setOutlineColor(UIColors::WarningRed);
+}
+
+void UICard::Deactivate()
+{
+	setFillColor(UIColors::Transparent);
+	setOutlineColor(UIColors::Transparent);
+	UISelectedCard::DisplayText(false);
+	UISelectedCard::Set(nullptr);
+}
+
+void UICard::Activate()
+{
+	setFillColor(UIColors::OpaqueWhite);
+}
+
 void UICard::OnMouseOver()
 {
 	setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
@@ -108,6 +128,12 @@ void UICard::OnMouseLeave()
 		m_state = State::None;
 		setOutlineColor(UIColors::Transparent);
 		UISelectedCard::DisplayText(false);
+	}
+
+	if (m_warning)
+	{
+		m_warning = false;
+		setOutlineColor(UIColors::Transparent);
 	}
 	setScale(1, 1);
 	setPosition(m_initialPosition);

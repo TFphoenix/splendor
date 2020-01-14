@@ -52,6 +52,9 @@ public:
 	void SetNumb(bool numb);
 	State GetState() const;
 	void SetState(const State& state);
+	void TriggerWarning();
+	void Deactivate();
+	void Activate();
 
 	// Collider
 	void OnMouseOver() override;
@@ -83,6 +86,7 @@ private:
 private:
 	// Graphics
 	sf::Vector2f m_initialPosition;
+	bool m_warning;
 
 	// Logic
 	bool m_numb;

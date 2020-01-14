@@ -68,7 +68,7 @@ void UIGameSession::UpdateGame()
 	}
 
 	// Card Panels
-	std::optional<std::pair<UICard::Data, UICard::State>> pickedCard;
+	std::optional<std::pair<UICard*, UICard::State>> pickedCard;
 	for (auto& expansionPanel : m_expansionPanels)
 	{
 		if (pickedCard.has_value())
@@ -79,13 +79,17 @@ void UIGameSession::UpdateGame()
 	{
 		switch (pickedCard.value().second)
 		{
-		case UICard::State::LeftRelease:
+		case UICard::State::LeftRelease:// Buy Card
 			std::cout << "Picked card LEFT CLICK";
 			m_tokensPanel.NumbAll();
+			std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+			pickedCard->first->TriggerWarning();
 			break;
-		case UICard::State::RightRelease:
+		case UICard::State::RightRelease:// Hold Card
 			std::cout << "Picked card RIGHT CLICK";
 			m_tokensPanel.NumbAll();
+			std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+			pickedCard->first->Deactivate();
 			break;
 		default:
 			break;

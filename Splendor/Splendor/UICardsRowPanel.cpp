@@ -1,4 +1,5 @@
 #include "UICardsRowPanel.h"
+#include "UISelectedCard.h"
 
 UICardsRowPanel::UICardsRowPanel(uint16_t cardSlots, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Vector2f& padding, bool isActive) :
 	UIPanel("CardsRow", size, position, isActive),
@@ -91,22 +92,15 @@ void UICardsRowPanel::SetCardsData(const std::vector<CardDAO::Data>& cardsData, 
 	}
 }
 
-std::optional<std::pair<UICard::Data, UICard::State>> UICardsRowPanel::CheckForPickedCard()
+std::optional<std::pair<UICard*, UICard::State>> UICardsRowPanel::CheckForPickedCard()
 {
-	for (const auto& card : m_cards)
+	for (auto& card : m_cards)
 	{
-		if (card->GetState() == UICard::State::LeftRelease)
+		if (card->GetState() == UICard::State::LeftRelease || card->GetState() == UICard::State::RightRelease)
 		{
 			const auto state = card->GetState();
 			card->SetState(UICard::State::Hover);
-			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), state));
-		}
-
-		if (card->GetState() == UICard::State::RightRelease)
-		{
-			const auto state = card->GetState();
-			card->SetState(UICard::State::Hover);
-			return std::optional<std::pair<UICard::Data, UICard::State>>(std::make_pair(card->GetData(), state));
+			return std::optional<std::pair<UICard*, UICard::State>>(std::make_pair(card, state));
 		}
 	}
 
@@ -141,6 +135,8 @@ void UICardsRowPanel::NumbAll()
 	{
 		card->SetNumb(true);
 	}
+	UISelectedCard::Set(nullptr);
+	UISelectedCard::DisplayText(false);
 }
 
 void UICardsRowPanel::ReverseDrawOrder()
