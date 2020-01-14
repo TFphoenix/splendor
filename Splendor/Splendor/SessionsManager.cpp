@@ -128,7 +128,16 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
-
+	// Test
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
 
 	
 

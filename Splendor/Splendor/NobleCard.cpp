@@ -39,7 +39,8 @@ NobleCard& NobleCard::operator=(const NobleCard& other)
 	m_requirements = other.m_requirements;
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
-	
+	m_prestigePoints = other.m_prestigePoints;
+
 	return *this;
 }
 
@@ -49,6 +50,7 @@ NobleCard& NobleCard::operator=(NobleCard&& other)
 	m_requirements = other.m_requirements;
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
+	m_prestigePoints = other.m_prestigePoints;
 
 	new(&other) NobleCard;
 

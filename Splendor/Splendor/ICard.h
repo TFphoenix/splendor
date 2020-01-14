@@ -23,7 +23,7 @@ public:
 	uint16_t GetId() const;
 	bool GetIsFaceUp() const;
 	void SetIsFaceUp(bool isFaceUp);
-	uint16_t GetPrestigePoints();
+	uint16_t GetPrestigePoints() const;
 
 protected:
 	// G&S

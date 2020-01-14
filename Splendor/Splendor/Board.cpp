@@ -99,7 +99,7 @@ NobleCard Board::WinNoble(uint16_t id)
 	}
 	if (!cardToReturn.has_value())
 		throw std::invalid_argument("Card not found");
-	return cardToReturn.value();
+	return std::move(cardToReturn.value());
 }
 
 void Board::TakeToken(IToken::Type type, uint16_t amount)

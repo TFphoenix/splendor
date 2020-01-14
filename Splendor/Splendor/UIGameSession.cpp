@@ -172,21 +172,16 @@ void UIGameSession::UpdateGame()
 
 void UIGameSession::NextTurn()
 {
-	// UI Logic
-	m_infoPanel.IncrementTurn();
-	m_playersPanel.PointToNextPlayer();
-	m_tokensPanel.UnNumb();
-	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
-	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
-	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
-	std::cout << r_activePlayer.get().GetName() << "\n";
-
 	// Validate Active Player Changes
 	// Nobles
 	const auto wonNoble = m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetHand().GetResourcesData());
 	if (wonNoble.has_value())
 	{
+		auto&& nobleCard = p_board->WinNoble(wonNoble.value().id);
 		m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble), 0, true);
+		r_activePlayer.get().AddPrestigePoints(nobleCard.GetPrestigePoints());
+		m_playersPanel.AddPrestigePointsToCurrentPlayer(nobleCard.GetPrestigePoints());
+		r_activePlayer.get().GetHand().AddNobleCard(std::move(nobleCard));
 		std::cout << "WON NOBLE\n";
 	}
 	// Reset picked Tokens buffer
@@ -199,6 +194,14 @@ void UIGameSession::NextTurn()
 		}
 	}
 
+	// UI Logic
+	m_infoPanel.IncrementTurn();
+	m_playersPanel.PointToNextPlayer();
+	m_tokensPanel.UnNumb();
+	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
+	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
+	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
+	std::cout << r_activePlayer.get().GetName() << "\n";
 }
 
 void UIGameSession::SetActivePlayer(std::reference_wrapper<Player> activePlayerReference)

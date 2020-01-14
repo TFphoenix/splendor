@@ -31,7 +31,7 @@ public:
 	void RemoveToken(GemType type, uint16_t amount);
 	void AddExpansionCard(ExpansionCard&& card);
 	void RemoveExpansionCard(uint16_t id);
-	void AddNobleCard(const NobleCard& card);
+	void AddNobleCard(NobleCard&& card);
 	GemsMap BuyExpansionCard(ExpansionCard&& expansionCard);
 
 private:

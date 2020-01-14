@@ -43,8 +43,10 @@ ExpansionCard& ExpansionCard::operator=(const ExpansionCard& other)
 	m_level = other.m_level;
 	m_cost = other.m_cost;
 	m_rewardType = other.m_rewardType;
+	
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
+	m_prestigePoints = other.m_prestigePoints;
 
 	return *this;
 }
@@ -57,6 +59,7 @@ ExpansionCard& ExpansionCard::operator=(ExpansionCard&& other)
 
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
+	m_prestigePoints = other.m_prestigePoints;
 
 	return *this;
 	

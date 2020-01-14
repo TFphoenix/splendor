@@ -7,26 +7,26 @@ ICard::ICard(uint16_t id, bool isFaceUp, uint16_t prestigePoints) :
 
 ICard::~ICard() = default;
 
-ICard& ICard::operator=(ICard&& other)
+ICard& ICard::operator=(ICard && other)
 {
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
 	return *this;
 }
 
-ICard& ICard::operator=(const ICard& other)
+ICard& ICard::operator=(const ICard & other)
 {
 	m_isFaceUp = other.m_isFaceUp;
 	m_id = other.m_id;
 	return *this;
 }
 
-ICard::ICard(ICard&& other)
+ICard::ICard(ICard && other)
 {
 	*this = std::move(other);
 }
 
-ICard::ICard(const ICard& other)
+ICard::ICard(const ICard & other)
 {
 	*this = other;
 }
@@ -51,7 +51,7 @@ void ICard::SetIsFaceUp(bool isFaceUp)
 	m_isFaceUp = isFaceUp;
 }
 
-uint16_t ICard::GetPrestigePoints()
+uint16_t ICard::GetPrestigePoints() const
 {
 	return m_prestigePoints;
 }

@@ -99,7 +99,7 @@ void Hand::RemoveExpansionCard(uint16_t id)
 	throw std::invalid_argument("Expansion card with given id not found");
 }
 
-void Hand::AddNobleCard(const NobleCard& card)
+void Hand::AddNobleCard(NobleCard&& card)
 {
 	for (auto& nobleCard : m_nobleCards)
 	{
