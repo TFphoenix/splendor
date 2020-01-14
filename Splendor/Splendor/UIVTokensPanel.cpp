@@ -40,15 +40,21 @@ void UIVTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& b
 				{
 					// Update text
 					std::string newString(m_tokensText[it]->getString());
-					if (newString != "0")
-					{
-						newString[0]--;
-						m_tokensText[it]->setString(newString);
-					}
+					newString[0]--;
+					m_tokensText[it]->setString(newString);
 				}
 			}
 		}
 		++it;
+	}
+}
+
+void UIVTokensPanel::SyncTokens(std::unordered_map<IToken::Type, uint16_t>&& boardTokens)
+{
+	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount; ++gemTypeIterator)
+	{
+		const auto gemType = static_cast<IToken::Type>(gemTypeIterator);
+		m_tokensText[gemTypeIterator]->setString(std::to_string(boardTokens[gemType]));
 	}
 }
 

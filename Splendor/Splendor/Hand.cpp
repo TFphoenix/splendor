@@ -112,22 +112,41 @@ void Hand::AddNobleCard(const NobleCard& card)
 	throw std::out_of_range("Hand is full, can't add noble card");
 }
 
-bool Hand::HasEnoughResourcesFor(const ExpansionCard& expansionCard) const
+Hand::GemsMap Hand::BuyExpansionCard(ExpansionCard&& expansionCard)
 {
+	// Verify
+	GemsMap tokensToReturn;
 	uint16_t goldSupplement = 0;
-	for (uint16_t gemType = 0; gemType < IToken::s_typeCount - 1; ++gemType)
+	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount - 1; ++gemTypeIterator)
 	{
-		const auto needing = expansionCard.GetCost()[static_cast<IToken::Type>(gemType)];
-		const auto having = m_tokens[static_cast<IToken::Type>(gemType)] + m_resources[static_cast<IToken::Type>(gemType)];
+		const auto gemType = static_cast<IToken::Type>(gemTypeIterator);
+		const auto needing = expansionCard.GetCost()[gemType];
+		const auto resourcesStock = m_resources[gemType];
+		const auto tokensStock = m_tokens[gemType];
+		const auto having = resourcesStock + tokensStock;
 		if (needing > having)
 		{
 			goldSupplement += needing - having;
+			tokensToReturn[gemType] = tokensStock;
+		}
+		else if (resourcesStock < needing)
+		{
+			tokensToReturn[gemType] = needing - resourcesStock;
 		}
 	}
 
-	if (goldSupplement <= m_tokens[IToken::Type::Gold])
-		return true;
-	return false;
+	// Error
+	if (goldSupplement > m_tokens[IToken::Type::Gold])
+		throw std::length_error("Not enough resources to buy expansion card");
+
+	// Buy
+	tokensToReturn[IToken::Type::Gold] = goldSupplement;
+	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount; ++gemTypeIterator)
+	{
+		const auto gemType = static_cast<IToken::Type>(gemTypeIterator);
+		m_tokens[gemType] -= tokensToReturn[gemType];
+	}
+	return tokensToReturn;
 }
 
 bool Hand::IsFull() const

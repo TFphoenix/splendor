@@ -18,6 +18,7 @@ public:
 
 	// Logic
 	void UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& boardTokens);
+	void SyncTokens(std::unordered_map<IToken::Type, uint16_t>&& boardTokens);
 	PickedArray& ExtractPickedTokens();
 	void NumbAll();
 	void UnNumb();

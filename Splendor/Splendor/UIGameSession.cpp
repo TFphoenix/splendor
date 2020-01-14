@@ -60,7 +60,7 @@ void UIGameSession::UpdateGame()
 	m_infoPanel.UpdateTime();
 
 	// Tokens Panel
-	m_tokensPanel.UpdateTokens(std::forward<std::unordered_map<IToken::Type, uint16_t>>(p_board->GetTokensData()));
+	m_tokensPanel.UpdateTokens(p_board->GetTokensData());
 	if (m_tokensPanel.GetHasPicked())
 	{
 		m_tokensPanel.SetHasPicked(false);
@@ -82,14 +82,18 @@ void UIGameSession::UpdateGame()
 		{
 		case UICard::State::LeftRelease:// Buy Card
 			std::cout << "Picked card LEFT CLICK\n";
-			if (r_activePlayer.get().GetHand().HasEnoughResourcesFor(pickedCardLogicPiece))
+			try
 			{
+				p_board->ReturnTokens(r_activePlayer.get().GetHand().BuyExpansionCard(std::move(pickedCardLogicPiece)));
+				m_tokensPanel.SyncTokens(p_board->GetTokensData());
+				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();
 				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
-				// BUY CARD -> extract tokens from hand + add resources to hand
 			}
-			else
+			catch (std::length_error & exception)
 			{
+				// Not enough resources
+				std::cout << exception.what() << "\n";
 				pickedCard->first->TriggerWarning();
 			}
 			break;
@@ -106,6 +110,7 @@ void UIGameSession::UpdateGame()
 			}
 			catch (std::out_of_range & exception)
 			{
+				// Hand Full
 				std::cout << exception.what() << "\n";
 				pickedCard->first->TriggerWarning();
 			}

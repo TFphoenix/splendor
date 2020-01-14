@@ -125,6 +125,15 @@ void Board::ReturnToken(IToken::Type type, uint16_t amount)
 	m_tokens[type] += amount;
 }
 
+void Board::ReturnTokens(std::unordered_map<IToken::Type, uint16_t>&& tokens)
+{
+	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount; ++gemTypeIterator)
+	{
+		const auto gemType = static_cast<IToken::Type>(gemTypeIterator);
+		m_tokens[gemType] += tokens[gemType];
+	}
+}
+
 std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
 {
 	std::vector<CardDAO::Data> dataToReturn;

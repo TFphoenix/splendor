@@ -32,7 +32,7 @@ public:
 	void AddExpansionCard(ExpansionCard&& card);
 	void RemoveExpansionCard(uint16_t id);
 	void AddNobleCard(const NobleCard& card);
-	bool HasEnoughResourcesFor(const ExpansionCard& expansionCard) const;
+	GemsMap BuyExpansionCard(ExpansionCard&& expansionCard);
 
 private:
 	mutable GemsMap m_resources;
