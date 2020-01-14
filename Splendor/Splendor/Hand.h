@@ -23,14 +23,16 @@ public:
 	std::vector<CardDAO::Data> GetNoblesData() const;
 	GemsMap& GetResourcesData() const;
 	GemsMap& GetTokensData() const;
+	bool IsFull() const;
 
 	// Manipulators
 	void AddResource(GemType type);
 	void AddToken(GemType type, uint16_t amount = 1);
 	void RemoveToken(GemType type, uint16_t amount);
-	void AddExpansionCard(const ExpansionCard& card);
+	void AddExpansionCard(ExpansionCard&& card);
 	void RemoveExpansionCard(uint16_t id);
 	void AddNobleCard(const NobleCard& card);
+	bool HasEnoughResourcesFor(const ExpansionCard& expansionCard) const;
 
 private:
 	mutable GemsMap m_resources;

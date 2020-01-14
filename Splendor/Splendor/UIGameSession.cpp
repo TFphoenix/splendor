@@ -77,24 +77,42 @@ void UIGameSession::UpdateGame()
 	}
 	if (pickedCard.has_value())
 	{
+		ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
 		switch (pickedCard.value().second)
 		{
 		case UICard::State::LeftRelease:// Buy Card
-			std::cout << "Picked card LEFT CLICK";
-			m_tokensPanel.NumbAll();
-			std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
-			pickedCard->first->TriggerWarning();
+			std::cout << "Picked card LEFT CLICK\n";
+			if (r_activePlayer.get().GetHand().HasEnoughResourcesFor(pickedCardLogicPiece))
+			{
+				m_tokensPanel.NumbAll();
+				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+				// BUY CARD -> extract tokens from hand + add resources to hand
+			}
+			else
+			{
+				pickedCard->first->TriggerWarning();
+			}
 			break;
 		case UICard::State::RightRelease:// Hold Card
-			std::cout << "Picked card RIGHT CLICK";
-			m_tokensPanel.NumbAll();
-			std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
-			pickedCard->first->Deactivate();
+			std::cout << "Picked card RIGHT CLICK\n";
+			try {
+				// Transfer card to hand
+				r_activePlayer.get().GetHand().AddExpansionCard(std::move(pickedCardLogicPiece));
+
+				// Deactivate UI
+				pickedCard->first->Deactivate();
+				m_tokensPanel.NumbAll();
+				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+			}
+			catch (std::out_of_range & exception)
+			{
+				std::cout << exception.what() << "\n";
+				pickedCard->first->TriggerWarning();
+			}
 			break;
 		default:
 			break;
 		}
-		m_tokensPanel.NumbAll();
 		std::cout << "\n";
 	}
 

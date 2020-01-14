@@ -70,7 +70,7 @@ void Hand::RemoveToken(GemType type, uint16_t amount)
 	m_tokens[type] -= amount;
 }
 
-void Hand::AddExpansionCard(const ExpansionCard& card)
+void Hand::AddExpansionCard(ExpansionCard&& card)
 {
 	for (auto& expansionCard : m_expansionCards)
 	{
@@ -110,4 +110,27 @@ void Hand::AddNobleCard(const NobleCard& card)
 		}
 	}
 	throw std::out_of_range("Hand is full, can't add noble card");
+}
+
+bool Hand::HasEnoughResourcesFor(const ExpansionCard& expansionCard) const
+{
+	uint16_t goldSupplement = 0;
+	for (uint16_t gemType = 0; gemType < IToken::s_typeCount - 1; ++gemType)
+	{
+		const auto needing = expansionCard.GetCost()[static_cast<IToken::Type>(gemType)];
+		const auto having = m_tokens[static_cast<IToken::Type>(gemType)] + m_resources[static_cast<IToken::Type>(gemType)];
+		if (needing > having)
+		{
+			goldSupplement += needing - having;
+		}
+	}
+
+	if (goldSupplement <= m_tokens[IToken::Type::Gold])
+		return true;
+	return false;
+}
+
+bool Hand::IsFull() const
+{
+	return m_expansionCards[2].has_value();
 }
