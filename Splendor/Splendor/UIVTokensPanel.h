@@ -22,6 +22,7 @@ public:
 	PickedArray& ExtractPickedTokens();
 	void NumbAll();
 	void UnNumb();
+	std::optional<IToken::Type>& GetLastPicked();
 
 	// G&S
 	bool GetHasPicked() const;
@@ -41,6 +42,7 @@ private:
 	std::array<UIText*, 6> m_tokensText;
 	PickedArray m_pickedTokens;
 	bool m_hasPicked;
+	std::optional<IToken::Type> m_lastPicked;
 
 };
 

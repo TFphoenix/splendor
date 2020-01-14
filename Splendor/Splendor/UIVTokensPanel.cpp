@@ -38,6 +38,9 @@ void UIVTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& b
 			{
 				if (AddPickedToken(token->GetType()))
 				{
+					// Update lastPicked
+					m_lastPicked.emplace(token->GetType());
+
 					// Update text
 					std::string newString(m_tokensText[it]->getString());
 					newString[0]--;
@@ -78,6 +81,11 @@ void UIVTokensPanel::UnNumb()
 		token->SetNumb(false);
 	}
 	m_tokens[5]->SetNumb(true);
+}
+
+std::optional<IToken::Type>& UIVTokensPanel::GetLastPicked()
+{
+	return m_lastPicked;
 }
 
 bool UIVTokensPanel::GetHasPicked() const

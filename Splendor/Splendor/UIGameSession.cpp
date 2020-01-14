@@ -61,6 +61,13 @@ void UIGameSession::UpdateGame()
 
 	// Tokens Panel
 	m_tokensPanel.UpdateTokens(p_board->GetTokensData());
+	if (m_tokensPanel.GetLastPicked().has_value())
+	{
+		auto& token = m_tokensPanel.GetLastPicked();
+		r_activePlayer.get().GetHand().AddToken(token.value());
+		p_board->TakeToken(token.value());
+		token.reset();
+	}
 	if (m_tokensPanel.GetHasPicked())
 	{
 		m_tokensPanel.SetHasPicked(false);
@@ -123,13 +130,13 @@ void UIGameSession::UpdateGame()
 				// Save picked card data
 				const auto level = pickedCardLogicPiece.GetLevel();
 				const auto id = pickedCardLogicPiece.GetId();
-				
+
 				// Transfer card to hand
 				r_activePlayer.get().GetHand().AddExpansionCard(std::move(pickedCardLogicPiece));
 
 				// Replace card in board
 				p_board->ReplaceExpansion(level, id);
-				
+
 				// Deactivate UI
 				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();
@@ -182,14 +189,12 @@ void UIGameSession::NextTurn()
 		m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble), 0, true);
 		std::cout << "WON NOBLE\n";
 	}
-	// Tokens
+	// Reset picked Tokens buffer
 	auto& pickedTokens = m_tokensPanel.ExtractPickedTokens();
 	for (auto& token : pickedTokens)
 	{
 		if (token.has_value())
 		{
-			r_activePlayer.get().GetHand().AddToken(token.value());
-			p_board->TakeToken(token.value());
 			token.reset();
 		}
 	}
