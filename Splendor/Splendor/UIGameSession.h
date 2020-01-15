@@ -7,6 +7,7 @@
 #include "UIVTokensPanel.h"
 #include "UICardsRowPanel.h"
 #include "UIHandPanel.h"
+#include "UITokenAlertPanel.h"
 
 // Logic
 #include "PregameSetup.h"
@@ -54,12 +55,14 @@ private:
 	UICardsRowPanel m_expansionsL2Panel;
 	UICardsRowPanel m_expansionsL3Panel;
 	UIHandPanel m_handPanel;
+	UITokenAlertPanel m_tokenAlertPanel;
 	std::vector<std::reference_wrapper<UICardsRowPanel>> m_expansionPanels;
 
 	// Logic
 	PregameSetup m_pregameSetup;
 	Board* p_board;
 	std::reference_wrapper<Player>& r_activePlayer;
+	Hand* p_exceedingHand;
 
 };
 

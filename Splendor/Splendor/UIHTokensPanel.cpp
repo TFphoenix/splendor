@@ -4,7 +4,7 @@ UIHTokensPanel::UIHTokensPanel(const sf::Vector2f& position, const sf::Vector2f&
 	UIPanel("UIHTokensPanel", size, position, isActive)
 {
 	const auto tokenRadius = s_tokenPercentage * size.x / 2;
-	for (uint16_t tokenIt = 0; tokenIt < 6; ++tokenIt)
+	for (uint16_t tokenIt = 0; tokenIt < IToken::s_typeCount; ++tokenIt)
 	{
 		// UIToken
 		m_tokens[tokenIt] = new UIToken(static_cast<IToken::Type>(tokenIt), sf::Vector2f(0, 0), tokenRadius);
@@ -21,8 +21,6 @@ UIHTokensPanel::UIHTokensPanel(const sf::Vector2f& position, const sf::Vector2f&
 		m_tokensText[tokenIt]->setPosition(sf::Vector2f(tokenBody.getPosition().x + tokenRadius / 1.5, tokenBody.getPosition().y + tokenRadius / 1.5));
 		AddContent(dynamic_cast<sf::Drawable*>(m_tokensText[tokenIt]));
 	}
-	m_tokens[5]->SetNumb(true);
-	m_tokensText[5]->setString("0");
 }
 
 void UIHTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>& tokens)
@@ -31,4 +29,47 @@ void UIHTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>& to
 	{
 		m_tokensText[tokenTextIndex]->setString(std::to_string(tokens[m_tokens[tokenTextIndex]->GetType()]));
 	}
+}
+
+void UIHTokensPanel::ResetTokens()
+{
+	for (size_t tokenTextIndex = 0; tokenTextIndex < m_tokensText.size(); ++tokenTextIndex)
+	{
+		m_tokensText[tokenTextIndex]->setString("0");
+	}
+}
+
+void UIHTokensPanel::NumbAll()
+{
+	for (auto& token : m_tokens)
+	{
+		token->SetNumb(true);
+	}
+}
+
+void UIHTokensPanel::UnNumb()
+{
+	for (auto& token : m_tokens)
+	{
+		token->SetNumb(false);
+	}
+}
+
+std::optional<IToken::Type> UIHTokensPanel::GetPickedToken()
+{
+	std::optional<IToken::Type> pickedToken;
+
+	size_t it = 0;
+	for (auto& token : m_tokens)
+	{
+		if (token->GetState() == UIToken::State::Release)
+		{
+			token->SetState(UIToken::State::Hover);
+			if (m_tokensText[it]->getString()[0] != '0')
+				pickedToken.emplace(token->GetType());
+		}
+		++it;
+	}
+
+	return pickedToken;
 }

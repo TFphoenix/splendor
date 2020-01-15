@@ -19,6 +19,7 @@ public:
 	static inline const uint16_t s_TokenCount = 40;
 	static inline const uint16_t s_GemTokenCount = 7;
 	static inline const uint16_t s_GoldTokenCount = 5;
+	static inline const uint16_t s_HeldTokensLimit = 10;
 
 	static inline const uint16_t s_NobleCardCount = 10;
 

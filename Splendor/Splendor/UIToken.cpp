@@ -57,6 +57,7 @@ bool UIToken::GetNumb() const
 
 void UIToken::SetNumb(bool numb)
 {
+	OnMouseLeave();
 	m_numb = numb;
 }
 

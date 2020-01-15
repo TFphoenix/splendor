@@ -177,6 +177,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Entities\Abstract</Filter>
     </ClCompile>
+    <ClCompile Include="UITokenAlertPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Entities\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="UITokenAlertPanel.h">
+      <Filter>GUI\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

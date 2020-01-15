@@ -14,6 +14,10 @@ public:
 
 	// Logic
 	void UpdateTokens(std::unordered_map<IToken::Type, uint16_t>& tokens);
+	void ResetTokens();
+	void NumbAll();
+	void UnNumb();
+	std::optional<IToken::Type> GetPickedToken();
 
 private:
 	static inline const float s_yPaddingPercentage = 0.02f;
@@ -21,7 +25,9 @@ private:
 	static inline const float s_tokenPercentage = 0.12f;
 
 private:
+	// GUI
 	std::array<UIToken*, 6> m_tokens;
 	std::array<UIText*, 6> m_tokensText;
+
 };
 

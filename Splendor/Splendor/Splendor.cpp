@@ -11,7 +11,7 @@ int main() {
 	//Server server = Server();
 	//Client client;
 
-	std::string ip("127.0.0.1");
+	const std::string ip("127.0.0.1");
 	int port = 27015;
 
 	sf::IpAddress ipAddress(ip);

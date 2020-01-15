@@ -24,11 +24,13 @@ public:
 	GemsMap& GetResourcesData() const;
 	GemsMap& GetTokensData() const;
 	bool IsFull() const;
+	bool ExceedsTokenLimit() const;
 
 	// Manipulators
 	void AddResource(GemType type);
 	void AddToken(GemType type, uint16_t amount = 1);
 	void RemoveToken(GemType type, uint16_t amount);
+	void RemoveTokens(GemsMap&& tokens);
 	void AddExpansionCard(ExpansionCard&& card);
 	void RemoveExpansionCard(uint16_t id);
 	void AddNobleCard(NobleCard&& card);

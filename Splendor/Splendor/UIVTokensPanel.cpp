@@ -5,7 +5,7 @@ UIVTokensPanel::UIVTokensPanel(const sf::Vector2f& position, const sf::Vector2f&
 	UIPanel("UIVTokensPanel", size, position, isActive)
 {
 	const auto tokenRadius = s_tokenPercentage * size.y / 2;
-	for (uint16_t tokenIt = 0; tokenIt < 6; ++tokenIt)
+	for (uint16_t tokenIt = 0; tokenIt < IToken::s_typeCount; ++tokenIt)
 	{
 		// UIToken
 		m_tokens[tokenIt] = new UIToken(static_cast<IToken::Type>(tokenIt), sf::Vector2f(0, 0), tokenRadius);

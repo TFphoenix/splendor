@@ -30,4 +30,3 @@ private:
 	Logger logger;
 	std::ofstream logFileStream;
 };
-

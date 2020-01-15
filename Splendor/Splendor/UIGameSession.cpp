@@ -16,6 +16,8 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_expansionsL2Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.54), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_expansionsL1Panel(5, sf::Vector2f(windowSize.x * 0.4, windowSize.y * 0.77), sf::Vector2f(windowSize.x * 0.6, windowSize.y * 0.23)),
 	m_handPanel(static_cast<sf::Vector2f>(windowSize), false),
+	m_tokenAlertPanel(static_cast<sf::Vector2f>(windowSize), false),
+	p_exceedingHand(nullptr),
 	// instantiate Pregame Set-up
 	m_pregameSetup(pregameSetup)
 {
@@ -40,6 +42,7 @@ UIGameSession::UIGameSession(const sf::Vector2u& windowSize, const PregameSetup&
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL2Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_expansionsL3Panel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_noblesPanel));
+	m_panels.push_back(dynamic_cast<UIPanel*>(&m_tokenAlertPanel));
 	m_panels.push_back(dynamic_cast<UIPanel*>(&m_handPanel));
 
 }
@@ -187,24 +190,45 @@ void UIGameSession::UpdateGame()
 		std::cout << "\n";
 	}
 
-	// Player Hand Panels
+	// Player Hand Panel
 	const auto triggeredPanel = m_playersPanel.GetIfTriggered();
 	if (triggeredPanel != nullptr)
 	{
-		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(false); });
+		std::for_each(m_panels.begin(), m_panels.end(), [](UIPanel* panel) {panel->SetInteractable(false); });
 		m_handPanel.SetUpHand(*triggeredPanel);
 		m_handPanel.SetActive(true);
+		m_handPanel.SetInteractable(true);
 	}
 	if (m_handPanel.CheckForClose())
 	{
 		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(true); });
 	}
 
+	// Token Alert Panel
+	if (m_tokensPanel.IsActive())
+	{
+		m_tokenAlertPanel.Update();
+
+		if (m_tokenAlertPanel.GetConfirmed())
+		{
+			// Transfer tokens
+			p_board->ReturnTokens(m_tokenAlertPanel.GetTokensToReturn());
+			p_exceedingHand->RemoveTokens(m_tokenAlertPanel.GetTokensToReturn());
+			p_exceedingHand = nullptr;
+			m_tokensPanel.SyncTokens(p_board->GetTokensData());
+
+			// UI
+			std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(true); });
+			m_tokenAlertPanel.SetConfirmed(false);
+			m_tokenAlertPanel.SetActive(false);
+			m_tokenAlertPanel.SetInteractable(false);
+		}
+	}
 }
 
 void UIGameSession::NextTurn()
 {
-	// Validate Active Player Changes
+	/// Validate Active Player Changes
 	// Nobles
 	const auto wonNoble = m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetHand().GetResourcesData());
 	if (wonNoble.has_value())
@@ -216,6 +240,7 @@ void UIGameSession::NextTurn()
 		r_activePlayer.get().GetHand().AddNobleCard(std::move(nobleCard));
 		std::cout << "WON NOBLE\n";
 	}
+
 	// Reset picked Tokens buffer
 	auto& pickedTokens = m_tokensPanel.ExtractPickedTokens();
 	for (auto& token : pickedTokens)
@@ -224,6 +249,17 @@ void UIGameSession::NextTurn()
 		{
 			token.reset();
 		}
+	}
+
+	// Check if active player token stock exceeds token limit
+	if (r_activePlayer.get().GetHand().ExceedsTokenLimit())
+	{
+		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(false); });
+		m_tokenAlertPanel.SetActive(true);
+		m_tokenAlertPanel.SetInteractable(true);
+
+		p_exceedingHand = &r_activePlayer.get().GetHand();
+		m_tokenAlertPanel.SetInitialTokens(p_exceedingHand->GetTokensData());
 	}
 
 	// UI Logic

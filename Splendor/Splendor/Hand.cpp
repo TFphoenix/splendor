@@ -1,4 +1,5 @@
 #include "Hand.h"
+#include "GamePieces.h"
 
 std::vector<CardDAO::Data> Hand::GetExpansionsData() const
 {
@@ -68,6 +69,17 @@ void Hand::RemoveToken(GemType type, uint16_t amount)
 	if (m_tokens[type] < amount)
 		throw std::out_of_range("Amount of tokens to be removed out of range");
 	m_tokens[type] -= amount;
+}
+
+void Hand::RemoveTokens(GemsMap&& tokens)
+{
+	for (uint16_t gemTypeIterator = 0; gemTypeIterator < IToken::s_typeCount; ++gemTypeIterator)
+	{
+		const auto gemType = static_cast<IToken::Type>(gemTypeIterator);
+		if (m_tokens[gemType] < tokens[gemType])
+			throw std::out_of_range("Amount of tokens to be removed out of range");
+		m_tokens[gemType] -= tokens[gemType];
+	}
 }
 
 void Hand::AddExpansionCard(ExpansionCard&& card)
@@ -153,4 +165,18 @@ Hand::GemsMap Hand::BuyExpansionCard(ExpansionCard&& expansionCard)
 bool Hand::IsFull() const
 {
 	return m_expansionCards[2].has_value();
+}
+
+bool Hand::ExceedsTokenLimit() const
+{
+	uint16_t tokenCount = 0;
+
+	for (const auto& token : m_tokens)
+	{
+		tokenCount += token.second;
+	}
+
+	if (tokenCount > GamePieces::s_HeldTokensLimit)
+		return true;
+	return false;
 }
