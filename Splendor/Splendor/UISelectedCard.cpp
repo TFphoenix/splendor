@@ -7,16 +7,31 @@ void UISelectedCard::Set(sf::Drawable* card)
 
 void UISelectedCard::UpdateText(const sf::Vector2f& position)
 {
-	const auto textBounds = s_text.getLocalBounds();
-	s_text.setPosition(position - sf::Vector2f(textBounds.width + s_textDistance, 0));
+	// Full Text
+	const auto textBounds1 = s_textFull.getLocalBounds();
+	s_textFull.setPosition(position - sf::Vector2f(textBounds1.width + s_textDistance, 0));
+
+	// Half Text
+	const auto textBounds2 = s_textHalf.getLocalBounds();
+	s_textHalf.setPosition(position - sf::Vector2f(textBounds2.width + s_textDistance, 0));
 }
 
-void UISelectedCard::DisplayText(bool displayText)
+void UISelectedCard::DisplayText(TextType displayText)
 {
 	s_displayText = displayText;
 }
 
 std::pair<sf::Drawable*, sf::Drawable*> UISelectedCard::Get()
 {
-	return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(s_displayText ? &s_text : nullptr));
+	switch (s_displayText)
+	{
+	case TextType::None:
+		return std::make_pair(s_selectedCard, nullptr);
+	case TextType::Half:
+		return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(&s_textHalf));
+	case TextType::Full:
+		return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(&s_textFull));
+	default:
+		return std::make_pair(s_selectedCard, nullptr);
+	}
 }

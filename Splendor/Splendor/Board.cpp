@@ -84,6 +84,21 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 	throw std::invalid_argument("Card not found");
 }
 
+ExpansionCard Board::DrawExpansionFromDeck(uint16_t deck)
+{
+	switch (deck)
+	{
+	case 1:
+		return m_expansionL1Deck.DrawCard();
+	case 2:
+		return m_expansionL2Deck.DrawCard();
+	case 3:
+		return m_expansionL3Deck.DrawCard();
+	default:
+		throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
+	}
+}
+
 NobleCard Board::WinNoble(uint16_t id)
 {
 	std::optional<NobleCard> cardToReturn;

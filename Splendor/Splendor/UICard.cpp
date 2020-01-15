@@ -94,7 +94,7 @@ void UICard::Deactivate()
 {
 	setFillColor(UIColors::Transparent);
 	setOutlineColor(UIColors::Transparent);
-	UISelectedCard::DisplayText(false);
+	UISelectedCard::DisplayText(UISelectedCard::TextType::None);
 	UISelectedCard::Set(nullptr);
 }
 
@@ -115,7 +115,7 @@ void UICard::OnMouseEnter()
 	{
 		m_state = State::Hover;
 		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
-		UISelectedCard::DisplayText(true);
+		m_type == Type::Background ? UISelectedCard::DisplayText(UISelectedCard::TextType::Half) : UISelectedCard::DisplayText(UISelectedCard::TextType::Full);
 	}
 	setScale(2, 2);
 	UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
@@ -127,7 +127,7 @@ void UICard::OnMouseLeave()
 	{
 		m_state = State::None;
 		setOutlineColor(UIColors::Transparent);
-		UISelectedCard::DisplayText(false);
+		UISelectedCard::DisplayText(UISelectedCard::TextType::None);
 	}
 
 	if (m_warning)
@@ -142,7 +142,7 @@ void UICard::OnMouseLeave()
 
 void UICard::OnMouseLeftClick()
 {
-	if (!m_numb)
+	if (!m_numb && m_type != Type::Background)
 	{
 		m_state = State::Press;
 		setScale(1.8f, 1.8f);
@@ -152,7 +152,7 @@ void UICard::OnMouseLeftClick()
 
 void UICard::OnMouseLeftRelease()
 {
-	if (!m_numb)
+	if (!m_numb && m_type != Type::Background)
 	{
 		m_state = State::LeftRelease;
 		setScale(2, 2);

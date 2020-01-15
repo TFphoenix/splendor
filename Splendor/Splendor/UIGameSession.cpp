@@ -84,14 +84,19 @@ void UIGameSession::UpdateGame()
 	}
 	if (pickedCard.has_value())
 	{
-		// Create logic ExpansionCard for pickedCard
-		ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
 		switch (pickedCard.value().second)
 		{
 		case UICard::State::LeftRelease:/// Buy Card
 			std::cout << "Picked card LEFT CLICK\n";
+			// Background
+			if (pickedCard->first->GetType() == UICard::Type::Background)
+				break;
+			// Expansion Card
 			try
 			{
+				// Create logic ExpansionCard for pickedCard
+				ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
+
 				// Save picked card data
 				const auto prestigePoints = pickedCardLogicPiece.GetPrestigePoints();
 				const auto level = pickedCardLogicPiece.GetLevel();
@@ -121,12 +126,34 @@ void UIGameSession::UpdateGame()
 			}
 			catch (std::exception & exception)
 			{
+				// Other possible exception
 				std::cout << exception.what() << "\n";
 			}
 			break;
 		case UICard::State::RightRelease:/// Hold Card
 			std::cout << "Picked card RIGHT CLICK\n";
+			// Background
+			if (pickedCard->first->GetType() == UICard::Type::Background)
+			{
+				// Hand is full
+				if (r_activePlayer.get().GetHand().IsFull())
+					break;
+
+				// Transfer expansion card from board to active player hand
+				r_activePlayer.get().GetHand().AddExpansionCard(p_board->DrawExpansionFromDeck(pickedCard->first->GetID()));
+
+				// Deactivate UI
+				pickedCard->first->OnMouseLeave();
+				m_tokensPanel.NumbAll();
+				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+
+				break;
+			}
+			// Expansion Card
 			try {
+				// Create logic ExpansionCard for pickedCard
+				ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
+
 				// Save picked card data
 				const auto level = pickedCardLogicPiece.GetLevel();
 				const auto id = pickedCardLogicPiece.GetId();

@@ -63,13 +63,13 @@ void UICardsRowPanel::SetCardsData(const std::vector<CardDAO::Data>& cardsData, 
 	switch (withBackground)
 	{
 	case 1:
-		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 1, true));
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 1, false));
 		break;
 	case 2:
-		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 2, true));
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 2, false));
 		break;
 	case 3:
-		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 3, true));
+		m_cards[0]->SetData(UICard::Data(UICard::Type::Background, 3, false));
 		break;
 	default:
 		break;
@@ -137,7 +137,7 @@ void UICardsRowPanel::NumbAll()
 		card->SetNumb(true);
 	}
 	UISelectedCard::Set(nullptr);
-	UISelectedCard::DisplayText(false);
+	UISelectedCard::DisplayText(UISelectedCard::TextType::None);
 }
 
 void UICardsRowPanel::ReverseDrawOrder()

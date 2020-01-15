@@ -13,6 +13,7 @@ public:
 
 	// Logic
 	void ReplaceExpansion(ExpansionCard::Level level, uint16_t id);
+	ExpansionCard DrawExpansionFromDeck(uint16_t deck);
 	NobleCard WinNoble(uint16_t id);
 	void TakeToken(IToken::Type type, uint16_t amount = 1);
 	void ReturnToken(IToken::Type type, uint16_t amount = 1);
