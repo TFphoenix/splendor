@@ -36,7 +36,7 @@ void UIVTokensPanel::UpdateTokens(std::unordered_map<IToken::Type, uint16_t>&& b
 			// Add picked token
 			if (boardTokens[token->GetType()] != 0)
 			{
-				if (AddPickedToken(token->GetType()))
+				if (AddPickedToken(token->GetType(), boardTokens[token->GetType()]))
 				{
 					// Update lastPicked
 					m_lastPicked.emplace(token->GetType());
@@ -106,23 +106,25 @@ void UIVTokensPanel::SetHasPicked(bool hasPicked)
 	m_hasPicked = hasPicked;
 }
 
-bool UIVTokensPanel::AddPickedToken(IToken::Type tokenType)
+bool UIVTokensPanel::AddPickedToken(IToken::Type tokenType, uint16_t availableTokens)
 {
-	if (m_pickedTokens[2].has_value())
+	if (m_pickedTokens[2].has_value())// all slots full
 	{
 		return false;
 	}
-	if (!m_pickedTokens[0].has_value())
+	if (!m_pickedTokens[0].has_value())// all slots empty
 	{
 		m_hasPicked = true;
 		m_pickedTokens[0] = tokenType;
 		return true;
 	}
-	if (!m_pickedTokens[1].has_value())
+	if (!m_pickedTokens[1].has_value())// second slot empty
 	{
+		if (tokenType == m_pickedTokens[0] && availableTokens < 3)// pick only if there are 4+ tokens of the same type availible
+			return false;
 		m_pickedTokens[1] = tokenType;
 		return true;
-	}
+	}// third slot empty
 	if (tokenType != m_pickedTokens[0] && tokenType != m_pickedTokens[1])
 	{
 		if (m_pickedTokens[0] != m_pickedTokens[1])
