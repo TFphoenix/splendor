@@ -88,7 +88,7 @@ void UIGameSession::UpdateGame()
 		ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedCard.value().first->GetType())), pickedCard.value().first->GetID());
 		switch (pickedCard.value().second)
 		{
-		case UICard::State::LeftRelease:// Buy Card
+		case UICard::State::LeftRelease:/// Buy Card
 			std::cout << "Picked card LEFT CLICK\n";
 			try
 			{
@@ -124,7 +124,7 @@ void UIGameSession::UpdateGame()
 				std::cout << exception.what() << "\n";
 			}
 			break;
-		case UICard::State::RightRelease:// Hold Card
+		case UICard::State::RightRelease:/// Hold Card
 			std::cout << "Picked card RIGHT CLICK\n";
 			try {
 				// Save picked card data
@@ -136,6 +136,11 @@ void UIGameSession::UpdateGame()
 
 				// Replace card in board
 				p_board->ReplaceExpansion(level, id);
+
+				// Pick a gold token
+				p_board->TakeToken(IToken::Type::Gold);
+				r_activePlayer.get().GetHand().AddToken(IToken::Type::Gold);
+				m_tokensPanel.TakeGoldToken();
 
 				// Deactivate UI
 				pickedCard->first->Deactivate();

@@ -23,6 +23,7 @@ public:
 	void NumbAll();
 	void UnNumb();
 	std::optional<IToken::Type>& GetLastPicked();
+	void TakeGoldToken();
 
 	// G&S
 	bool GetHasPicked() const;

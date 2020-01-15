@@ -168,6 +168,8 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 		}
 
 		// Game Logic
+		// (Transfer everything to a Game Controller)
+		// ...
 
 		// Update & Display
 		gameSessionGUI.UpdateGame();

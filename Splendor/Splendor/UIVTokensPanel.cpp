@@ -88,6 +88,14 @@ std::optional<IToken::Type>& UIVTokensPanel::GetLastPicked()
 	return m_lastPicked;
 }
 
+void UIVTokensPanel::TakeGoldToken()
+{
+	// Update text
+	std::string newString(m_tokensText[IToken::s_typeCount - 1]->getString());
+	newString[0]--;
+	m_tokensText[IToken::s_typeCount - 1]->setString(newString);
+}
+
 bool UIVTokensPanel::GetHasPicked() const
 {
 	return m_hasPicked;
