@@ -140,6 +140,15 @@ void UICardsRowPanel::NumbAll()
 	UISelectedCard::DisplayText(UISelectedCard::TextType::None);
 }
 
+void UICardsRowPanel::DisableDeckBackground()
+{
+	if (m_cards[0]->GetType() == UICard::Type::Background)
+	{
+		m_cards[0]->Deactivate();
+		m_cards[0]->SetNumb(true);
+	}
+}
+
 void UICardsRowPanel::ReverseDrawOrder()
 {
 	std::reverse(m_drawableContent.begin(), m_drawableContent.end());

@@ -46,7 +46,13 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.emplace(m_expansionL1Deck.DrawCard());
+					try {
+						card.emplace(m_expansionL1Deck.DrawCard());
+					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
 					return;
 				}
 			}
@@ -59,7 +65,13 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.emplace(m_expansionL2Deck.DrawCard());
+					try {
+						card.emplace(m_expansionL2Deck.DrawCard());
+					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
 					return;
 				}
 			}
@@ -72,7 +84,13 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 			{
 				if (card->GetId() == id)
 				{
-					card.emplace(m_expansionL3Deck.DrawCard());
+					try {
+						card.emplace(m_expansionL3Deck.DrawCard());
+					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
 					return;
 				}
 			}
@@ -199,4 +217,19 @@ std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
 std::unordered_map<IToken::Type, uint16_t> Board::GetTokensData() const
 {
 	return m_tokens;
+}
+
+bool Board::IsExpansionDeckEmpty(uint16_t deckLevel)
+{
+	switch (deckLevel)
+	{
+	case 1:
+		return m_expansionL1Deck.IsEmpty();
+	case 2:
+		return m_expansionL2Deck.IsEmpty();
+	case 3:
+		return m_expansionL3Deck.IsEmpty();
+	default:
+		throw std::invalid_argument("Invalid expansion deck level");
+	}
 }

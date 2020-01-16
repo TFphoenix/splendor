@@ -17,8 +17,9 @@ public:
 	std::optional<std::pair<UICard*, UICard::State>> CheckForPickedCard();
 	std::optional<UICard::Data> CheckForWonNoble(std::unordered_map<IToken::Type, uint16_t>& resources);
 	void NumbAll();
+	void DisableDeckBackground();
 
-	// Graphics
+	// GUI
 	void ReverseDrawOrder();
 
 private:
