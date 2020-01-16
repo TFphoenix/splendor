@@ -9,6 +9,7 @@
 #include "UIGameSession.h"
 #include "CardDAO.h"
 #include "Player.h"
+#include "Audio.h" 
 
 SessionsManager::SessionsManager() :
 	logger(logFileStream, Logger::Level::Error),
@@ -25,6 +26,7 @@ SessionsManager::SessionsManager() :
 
 	windowPosition = window->getPosition();
 	windowSize = window->getSize();
+	
 }
 
 SessionsManager::~SessionsManager()
@@ -35,13 +37,23 @@ SessionsManager::~SessionsManager()
 
 void SessionsManager::MainMenuSession() const
 {
+
 	logger.Log("Entered Main Menu Session", Logger::Level::Info);
 	UIMainMenuSession mainMenuSessionGUI(windowSize);
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
+	Audio audio = Audio();
+	audio.GetMusic("menuMusic").setVolume(10);
+	audio.GetMusic("menuMusic").setLoop(true);
+	audio.GetMusic("menuMusic").play();
+	
 
 	while (window->isOpen())
 	{
 		sf::Event event;
+	
+	
+	
+		
 		while (window->pollEvent(event))
 		{
 			mainMenuSessionGUI.PassEvent(event);
@@ -58,6 +70,7 @@ void SessionsManager::MainMenuSession() const
 				break;
 			case UIMainMenuSession::Events::Exit:
 				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
+				
 				return;
 			case UIMainMenuSession::Events::Test:
 				TestSession();
