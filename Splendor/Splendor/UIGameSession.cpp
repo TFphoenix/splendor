@@ -143,7 +143,16 @@ void UIGameSession::UpdateGame()
 					break;
 
 				// Transfer expansion card from board to active player hand
-				r_activePlayer.get().GetHand().AddExpansionCard(p_board->DrawExpansionFromDeck(pickedCard->first->GetID()));
+				try {
+					r_activePlayer.get().GetHand().AddExpansionCard(p_board->DrawExpansionFromDeck(pickedCard->first->GetID()));
+				}
+				catch (std::out_of_range & exception)
+				{
+					// Empty Deck
+					std::cout << exception.what() << "\n";
+					pickedCard.value().first->TriggerWarning();
+					break;
+				}
 
 				// Pick a gold token
 				try {
@@ -286,6 +295,18 @@ void UIGameSession::NextTurn()
 	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
 	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
 	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
+	if (p_board->IsExpansionDeckEmpty(3))
+	{
+		m_expansionsL3Panel.DisableDeckBackground();
+	}
+	if (p_board->IsExpansionDeckEmpty(2))
+	{
+		m_expansionsL2Panel.DisableDeckBackground();
+	}
+	if (p_board->IsExpansionDeckEmpty(1))
+	{
+		m_expansionsL1Panel.DisableDeckBackground();
+	}
 	std::cout << r_activePlayer.get().GetName() << "\n";
 }
 

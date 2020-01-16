@@ -22,6 +22,7 @@ public:
 	// Getters
 	std::vector<CardDAO::Data> GetCardSlotsData(CardDAO::Type dataType) const;
 	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
+	bool IsExpansionDeckEmpty(uint16_t deckLevel);
 
 private:
 	// Decks

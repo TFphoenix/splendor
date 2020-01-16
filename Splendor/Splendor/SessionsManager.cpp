@@ -42,7 +42,7 @@ void SessionsManager::MainMenuSession() const
 	UIMainMenuSession mainMenuSessionGUI(windowSize);
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
 	Audio audio = Audio();
-	audio.GetMusic("menuMusic").setVolume(10);
+	audio.GetMusic("menuMusic").setVolume(100);
 	audio.GetMusic("menuMusic").setLoop(true);
 	audio.GetMusic("menuMusic").play();
 	
@@ -50,10 +50,6 @@ void SessionsManager::MainMenuSession() const
 	while (window->isOpen())
 	{
 		sf::Event event;
-	
-	
-	
-		
 		while (window->pollEvent(event))
 		{
 			mainMenuSessionGUI.PassEvent(event);
