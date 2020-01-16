@@ -233,3 +233,8 @@ bool Board::IsExpansionDeckEmpty(uint16_t deckLevel)
 		throw std::invalid_argument("Invalid expansion deck level");
 	}
 }
+
+Deck<NobleCard> Board::GetNobleDeck() const
+{
+	return m_nobleDeck;
+}

@@ -43,6 +43,12 @@ public:
 		return m_cards.empty();
 	}
 
+	//Getters for unit testing
+	size_t GetNumberOfCards() const
+	{
+		return m_cards.size();
+	}
+
 private:
 	std::vector<cardType> m_cards;
 

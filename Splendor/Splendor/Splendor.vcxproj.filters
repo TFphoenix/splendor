@@ -43,9 +43,6 @@
     <Filter Include="Data\RapidXML">
       <UniqueIdentifier>{1ae56c53-6716-4fca-8211-c23ea9f01baa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Network">
-      <UniqueIdentifier>{9a9ba380-d85b-4a63-a43d-285b9c0b4395}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Randomizer.cpp">
@@ -150,15 +147,6 @@
     <ClCompile Include="UISelectedCard.cpp">
       <Filter>GUI\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Server.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="UIHandPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
@@ -170,9 +158,6 @@
     </ClCompile>
     <ClCompile Include="UIHResourcesPanel.cpp">
       <Filter>GUI\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkMain.cpp">
-      <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Entities\Abstract</Filter>
@@ -298,15 +283,6 @@
     </ClInclude>
     <ClInclude Include="UISelectedCard.h">
       <Filter>GUI\Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Server.h">
-      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="UIHandPanel.h">
       <Filter>GUI\Panels</Filter>

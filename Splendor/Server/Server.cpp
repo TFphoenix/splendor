@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 //Server
@@ -6,31 +7,71 @@
 int main()
 {
 
-	std::cout << "Server running" << std::endl;
-	sf::TcpListener listener1, listener2;
-	sf::TcpSocket socket1, socket2;
+	int port = 2000;
+
+	sf::TcpListener listener;
 	sf::Packet packet;
-	//bool done = false;
-	//std::vector < sf::TcpSocket* > clients;
-	//
+	sf::TcpSocket socket;
 
+	std::cout << "Server is running and accepting connections on port " << port << std::endl;
 
-	listener1.listen(2001);
-	listener1.accept(socket1);
+	listener.listen(port);
+	listener.accept(socket);
+	std::cout << "New client connected: " << socket.getRemoteAddress() << std::endl;
 
-	/*listener2.listen(2001);
-	listener2.accept(socket2);*/
+	std::string message;
+	char command;
 
-	packet << "Connected to server";
-	socket1.send(packet);
+	while (true)
+	{
 
+		std::cout << "command >";
+		std::cin >> command;
+		if (command == 'x')
+		{
+			break;
+		}
 
-	/*socket2.send(packet);*/
+		// send
+		std::cin >> message;
+		packet << message;
+		socket.send(packet);
 
-	packet.clear();
-
-	socket1.receive(packet);
-
+		packet.clear();
+		
+		// receive	
+		socket.receive(packet);
+		std::string buffer;
+		packet >> buffer;
+		std::cout << "The client said: " << buffer << std::endl;
+	}
 
 	return 0;
 }
+
+/*
+std::cout << "Server running" << std::endl;
+sf::TcpListener listener1,listener2;
+sf::TcpSocket socket1,socket2;
+sf::Packet packet;
+//bool done = false;
+//std::vector < sf::TcpSocket* > clients;
+//
+
+
+listener1.listen(2001);
+listener1.accept(socket1);
+
+//listener2.listen(2001);
+//listener2.accept(socket2);
+
+packet << "Connected to server";
+socket1.send(packet);
+
+
+//socket2.send(packet);
+
+packet.clear();
+
+socket1.receive(packet);
+*/
