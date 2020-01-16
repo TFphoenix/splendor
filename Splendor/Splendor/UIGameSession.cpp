@@ -145,6 +145,17 @@ void UIGameSession::UpdateGame()
 				// Transfer expansion card from board to active player hand
 				r_activePlayer.get().GetHand().AddExpansionCard(p_board->DrawExpansionFromDeck(pickedCard->first->GetID()));
 
+				// Pick a gold token
+				try {
+					p_board->TakeToken(IToken::Type::Gold);
+					r_activePlayer.get().GetHand().AddToken(IToken::Type::Gold);
+					m_tokensPanel.TakeGoldToken();
+				}
+				catch (std::out_of_range & exception)
+				{
+					// Not enough gold tokens on board
+				}
+
 				// Deactivate UI
 				pickedCard->first->OnMouseLeave();
 				m_tokensPanel.NumbAll();
@@ -168,9 +179,15 @@ void UIGameSession::UpdateGame()
 				p_board->ReplaceExpansion(level, id);
 
 				// Pick a gold token
-				p_board->TakeToken(IToken::Type::Gold);
-				r_activePlayer.get().GetHand().AddToken(IToken::Type::Gold);
-				m_tokensPanel.TakeGoldToken();
+				try {
+					p_board->TakeToken(IToken::Type::Gold);
+					r_activePlayer.get().GetHand().AddToken(IToken::Type::Gold);
+					m_tokensPanel.TakeGoldToken();
+				}
+				catch (std::out_of_range & exception)
+				{
+					// Not enough gold tokens on board
+				}
 
 				// Deactivate UI
 				pickedCard->first->Deactivate();

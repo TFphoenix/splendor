@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "SessionsManager.h"
 #include "PregameSetup.h"
@@ -17,8 +18,8 @@ SessionsManager::SessionsManager() :
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	logger.Log("Window created", Logger::Level::Info);
 
@@ -132,14 +133,40 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
 	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
 	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 
-	
+
 
 	// Game Loop
 	gameSessionGUI.StartGame();
@@ -181,8 +208,8 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
-	ExpansionCard ex1(ExpansionCard::Level::Level1);
-	ExpansionCard ex2(ExpansionCard::Level::Level2);
-	ex1 = std::move(ex2);
-	
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("sound.wav"))
+		std::cout << "Successfully Loaded!\n";
+	return;
 }
