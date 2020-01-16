@@ -303,6 +303,13 @@ void UIGameSession::UpdateGame()
 
 void UIGameSession::NextTurn()
 {
+	/// Win Condition
+	if (r_activePlayer.get().GetPrestigePoints() >= GamePieces::s_winingPrestigePoints)
+	{
+		std::cout << r_activePlayer.get().GetName() << " WON THE GAME!\n";
+		StopGame();
+	}
+
 	/// Validate Active Player Changes
 	// Nobles
 	const auto wonNoble = m_noblesPanel.CheckForWonNoble(r_activePlayer.get().GetHand().GetResourcesData());

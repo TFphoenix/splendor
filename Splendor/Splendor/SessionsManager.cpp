@@ -139,7 +139,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
 	// Test
-	/*players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
@@ -173,7 +173,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);*/
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 
 
 

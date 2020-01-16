@@ -33,7 +33,7 @@ namespace SplendorTests
 			std::cout << two;
 
 			Board board;
-			const Deck<NobleCard> nobleDeck = board.GetNobleDeck();
+			const auto nobleDeck = board.GetNobleDeck();
 			const int numberOfNobleCards = nobleDeck.GetNumberOfCards();
 
 			Assert::IsTrue(numberOfNobleCards == nobleCount, L"Number of nobles is not equal to player count (3) + 1!");
