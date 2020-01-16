@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(std::string&& name, Type type) :
+Player::Player(uint16_t id, std::string&& name, Type type) :
+	m_id(id),
 	m_name(std::move(name)),
 	m_type(type),
 	m_prestigePoints(0) {}
@@ -23,6 +24,11 @@ uint16_t Player::GetPrestigePoints() const
 Hand& Player::GetHand()
 {
 	return m_hand;
+}
+
+uint16_t Player::GetId() const
+{
+	return m_id;
 }
 
 void Player::AddPrestigePoints(uint16_t amount)

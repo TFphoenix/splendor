@@ -9,7 +9,7 @@ class UICardsRowPanel :public UIPanel
 {
 public:
 	UICardsRowPanel(uint16_t cardSlots, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, const sf::Vector2f& padding = { 0.1f,0.05f }, bool isActive = true);
-
+	
 	// Logic
 	std::vector<UICard::Data> GetCardsData() const;
 	void SetCardsData(const std::vector<UICard::Data>& cardsData);
@@ -17,7 +17,9 @@ public:
 	std::optional<std::pair<UICard*, UICard::State>> CheckForPickedCard();
 	std::optional<UICard::Data> CheckForWonNoble(std::unordered_map<IToken::Type, uint16_t>& resources);
 	void NumbAll();
+	void UnNumbAll();
 	void DisableDeckBackground();
+	void InHandAll();
 
 	// GUI
 	void ReverseDrawOrder();

@@ -45,6 +45,11 @@ UIPlayersPanel::UIPlayersPanel(std::vector<Player>* pPlayers, const sf::Vector2f
 	}
 }
 
+std::string UIPlayersPanel::GetCurrentPlayerName() const
+{
+	return m_playerPanels[m_playerPointerIterator].value().GetNameLabelString();
+}
+
 UIPlayerPanel* UIPlayersPanel::GetIfTriggered()
 {
 	UIPlayerPanel* triggeredPanel = nullptr;

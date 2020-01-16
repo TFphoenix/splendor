@@ -85,10 +85,13 @@ UITokenAlertPanel::GemsMap UITokenAlertPanel::GetTokensToReturn() const
 
 void UITokenAlertPanel::HandleEvent(const sf::Event& event)
 {
-	m_tokensChosen->HandleEvent(event);
-	m_tokensToChoose->HandleEvent(event);
-	m_confirmButton->HandleEvent(event);
-	m_resetButton->HandleEvent(event);
+	if (IsActive() && IsInteractable())
+	{
+		m_tokensChosen->HandleEvent(event);
+		m_tokensToChoose->HandleEvent(event);
+		m_confirmButton->HandleEvent(event);
+		m_resetButton->HandleEvent(event);
+	}
 }
 
 void UITokenAlertPanel::Update()

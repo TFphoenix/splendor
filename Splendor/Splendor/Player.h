@@ -12,18 +12,20 @@ public:
 
 public:
 	// Constr.
-	Player(std::string&& name, Type type = Type::User);
+	Player(uint16_t id, std::string&& name, Type type = Type::User);
 
 	// G&S
 	std::string GetName() const;
 	Type GetType() const;
 	uint16_t GetPrestigePoints() const;
 	Hand& GetHand();
+	uint16_t GetId() const;
 
 	// Logic
 	void AddPrestigePoints(uint16_t amount);
 
 private:
+	uint16_t m_id;
 	std::string m_name;
 	Type m_type;
 	uint16_t m_prestigePoints;

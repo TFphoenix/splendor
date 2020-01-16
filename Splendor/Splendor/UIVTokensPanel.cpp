@@ -83,6 +83,11 @@ void UIVTokensPanel::UnNumb()
 	m_tokens[5]->SetNumb(true);
 }
 
+bool UIVTokensPanel::IsNumb()
+{
+	return m_tokens[0]->GetNumb();
+}
+
 std::optional<IToken::Type>& UIVTokensPanel::GetLastPicked()
 {
 	return m_lastPicked;

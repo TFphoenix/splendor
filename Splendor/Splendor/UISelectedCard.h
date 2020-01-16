@@ -10,7 +10,8 @@ public:
 	{
 		None,
 		Half,
-		Full
+		Full,
+		InHand
 	};
 
 public:
@@ -25,6 +26,7 @@ private:
 	inline static sf::Drawable* s_selectedCard = nullptr;
 	inline static UIText s_textFull = UIText(sf::Vector2f(), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "LEFT CLICK TO BUY\nRIGHT CLICK TO HOLD", 40, UIColors::GoldYellow, UIColors::OpaqueBlack, 3);
 	inline static UIText s_textHalf = UIText(sf::Vector2f(), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "RIGHT CLICK TO HOLD", 40, UIColors::GoldYellow, UIColors::OpaqueBlack, 3);
+	inline static UIText s_textInHand = UIText(sf::Vector2f(), UIText::TextAlign::classic, UIText::AvailableFonts::LatoBlack, "LEFT CLICK TO BUY", 40, UIColors::GoldYellow, UIColors::OpaqueBlack, 3);
 
 	inline static TextType s_displayText = TextType::None;
 	const inline static uint16_t s_textDistance = 20;// px

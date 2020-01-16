@@ -140,12 +140,28 @@ void UICardsRowPanel::NumbAll()
 	UISelectedCard::DisplayText(UISelectedCard::TextType::None);
 }
 
+void UICardsRowPanel::UnNumbAll()
+{
+	for (auto& card : m_cards)
+	{
+		if (card->GetData().id != 0) card->SetNumb(false);
+	}
+}
+
 void UICardsRowPanel::DisableDeckBackground()
 {
 	if (m_cards[0]->GetType() == UICard::Type::Background)
 	{
 		m_cards[0]->Deactivate();
 		m_cards[0]->SetNumb(true);
+	}
+}
+
+void UICardsRowPanel::InHandAll()
+{
+	for (auto& card : m_cards)
+	{
+		card->SetInHand(true);
 	}
 }
 

@@ -14,6 +14,9 @@ void UISelectedCard::UpdateText(const sf::Vector2f& position)
 	// Half Text
 	const auto textBounds2 = s_textHalf.getLocalBounds();
 	s_textHalf.setPosition(position - sf::Vector2f(textBounds2.width + s_textDistance, 0));
+
+	// InHand Text
+	s_textInHand.setPosition(position + sf::Vector2f(s_textDistance, 0));
 }
 
 void UISelectedCard::DisplayText(TextType displayText)
@@ -31,6 +34,8 @@ std::pair<sf::Drawable*, sf::Drawable*> UISelectedCard::Get()
 		return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(&s_textHalf));
 	case TextType::Full:
 		return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(&s_textFull));
+	case TextType::InHand:
+		return std::make_pair(s_selectedCard, dynamic_cast<sf::Drawable*>(&s_textInHand));
 	default:
 		return std::make_pair(s_selectedCard, nullptr);
 	}

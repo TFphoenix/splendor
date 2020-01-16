@@ -22,6 +22,7 @@ public:
 	PickedArray& ExtractPickedTokens();
 	void NumbAll();
 	void UnNumb();
+	bool IsNumb();
 	std::optional<IToken::Type>& GetLastPicked();
 	void TakeGoldToken();
 

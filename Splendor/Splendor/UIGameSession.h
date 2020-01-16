@@ -29,7 +29,7 @@ public:
 
 public:
 	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard, std::reference_wrapper<Player>& rActivePlayer);
-
+	
 	// UI Logic
 	void StartGame();
 	void StopGame();

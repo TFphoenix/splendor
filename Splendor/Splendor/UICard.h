@@ -55,6 +55,7 @@ public:
 	void TriggerWarning();
 	void Deactivate();
 	void Activate();
+	void SetInHand(bool inHand);
 
 	// Collider
 	void OnMouseOver() override;
@@ -90,6 +91,7 @@ private:
 
 	// Logic
 	bool m_numb;
+	bool m_inHand;
 	State m_state;
 	uint16_t m_id;
 	Type m_type;

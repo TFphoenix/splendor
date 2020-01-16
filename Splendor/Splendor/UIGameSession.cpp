@@ -140,7 +140,10 @@ void UIGameSession::UpdateGame()
 			{
 				// Hand is full
 				if (r_activePlayer.get().GetHand().IsFull())
+				{
+					pickedCard->first->TriggerWarning();
 					break;
+				}
 
 				// Transfer expansion card from board to active player hand
 				try {
@@ -223,11 +226,57 @@ void UIGameSession::UpdateGame()
 		std::for_each(m_panels.begin(), m_panels.end(), [](UIPanel* panel) {panel->SetInteractable(false); });
 		m_handPanel.SetUpHand(*triggeredPanel);
 		m_handPanel.SetActive(true);
-		m_handPanel.SetInteractable(true);
+		if (triggeredPanel->GetPlayer()->GetId() == r_activePlayer.get().GetId()) m_handPanel.SetInteractable(true);
 	}
-	if (m_handPanel.CheckForClose())
+	if (m_handPanel.CheckForClose())// closed
 	{
 		std::for_each(m_panels.begin(), m_panels.end() - 1, [](UIPanel* panel) {panel->SetInteractable(true); });
+	}
+	else if (m_handPanel.IsActive())// opened
+	{
+		if (!m_tokensPanel.IsNumb())// allowed to buy
+		{
+			auto pickedExpansion = m_handPanel.GetPickedExpansion();
+			if (pickedExpansion.has_value())
+			{
+				// Buy ExpansionCard from hand
+				try {
+					// Create logic ExpansionCard for pickedCard
+					ExpansionCard pickedCardLogicPiece(static_cast<ExpansionCard::Level>(static_cast<uint16_t>(pickedExpansion.value()->GetType())), pickedExpansion.value()->GetID());
+
+					// Save picked card data
+					const auto prestigePoints = pickedCardLogicPiece.GetPrestigePoints();
+
+					// Return & sync tokens
+					p_board->ReturnTokens(r_activePlayer.get().GetHand().BuyExpansionCard(std::move(pickedCardLogicPiece)));
+					m_tokensPanel.SyncTokens(p_board->GetTokensData());
+
+					// Add card's prestige points
+					r_activePlayer.get().AddPrestigePoints(prestigePoints);
+					m_playersPanel.AddPrestigePointsToCurrentPlayer(prestigePoints);
+
+					// Sync Hand
+					r_activePlayer.get().GetHand().RemoveExpansionCard(pickedExpansion.value()->GetID());
+					m_handPanel.SyncHand();
+
+					// Deactivate UI
+					pickedExpansion.value()->Deactivate();
+					m_handPanel.NumbAllExpansions();
+					m_tokensPanel.NumbAll();
+					std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+				}
+				catch (std::length_error & exception)
+				{
+					// Not enough resources
+					std::cout << exception.what() << "\n";
+					pickedExpansion.value()->TriggerWarning();
+				}
+			}
+		}
+		else// not allowed to buy
+		{
+			m_handPanel.NumbAllExpansions();
+		}
 	}
 
 	// Token Alert Panel

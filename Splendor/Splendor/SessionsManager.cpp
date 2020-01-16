@@ -26,7 +26,7 @@ SessionsManager::SessionsManager() :
 
 	windowPosition = window->getPosition();
 	windowSize = window->getSize();
-	
+
 }
 
 SessionsManager::~SessionsManager()
@@ -44,8 +44,8 @@ void SessionsManager::MainMenuSession() const
 	Audio audio = Audio();
 	audio.GetMusic("menuMusic").setVolume(100);
 	audio.GetMusic("menuMusic").setLoop(true);
-	audio.GetMusic("menuMusic").play();
-	
+	//audio.GetMusic("menuMusic").play();
+
 
 	while (window->isOpen())
 	{
@@ -66,7 +66,7 @@ void SessionsManager::MainMenuSession() const
 				break;
 			case UIMainMenuSession::Events::Exit:
 				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
-				
+
 				return;
 			case UIMainMenuSession::Events::Test:
 				TestSession();
@@ -126,7 +126,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	std::vector<Player> players;
 	for (size_t playerNr = 1; playerNr <= pregameSetup.GetPlayerCount(); ++playerNr)
 	{
-		players.emplace_back("Player " + std::to_string(playerNr));
+		players.emplace_back(playerNr, "Player " + std::to_string(playerNr));
 	}
 	size_t activePlayerIterator = 0;
 	std::reference_wrapper<Player> activePlayer = players[activePlayerIterator];
@@ -139,7 +139,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
 	// Test
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
+	/*players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
@@ -173,7 +173,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);*/
 
 
 

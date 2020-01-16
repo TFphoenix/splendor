@@ -16,9 +16,19 @@ public:
 	// Constr.
 	UIHandPanel(const sf::Vector2f& size = { 1280,720 }, bool isActive = true);
 
+	// G&S
+	std::string GetPlayerName() const;
+	UICardsRowPanel& GetExpansionsPanel() const;
+
+	// Logic
+	void HandleEvent(const sf::Event& event) override;
+	std::optional<UICard*> GetPickedExpansion() const;
+
 	// GUI
-	void SetUpHand(const UIPlayerPanel& playerPanel);
+	void SetUpHand(UIPlayerPanel& playerPanel);
+	void SyncHand();
 	bool CheckForClose();
+	void NumbAllExpansions();
 
 private:
 	static inline float s_sizeRatio = 0.75f;// %
@@ -49,6 +59,9 @@ private:
 
 	// Info
 	sf::Texture* m_profilePicture;
+
+	// Player Panel
+	UIPlayerPanel* m_playerPanel;
 
 };
 

@@ -11,9 +11,14 @@ class UIPlayersPanel :public UIPanel
 public:
 	UIPlayersPanel(std::vector<Player>* pPlayers, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, bool isActive = true);
 
-	// UI Logic
-	UIPlayerPanel* GetIfTriggered();
+	// G&S
+	std::string GetCurrentPlayerName() const;
+
+	// UI
 	void PointToNextPlayer();
+
+	// Logic
+	UIPlayerPanel* GetIfTriggered();
 	void AddPrestigePointsToCurrentPlayer(uint16_t prestigePoints);
 
 private:

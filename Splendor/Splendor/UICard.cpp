@@ -103,8 +103,14 @@ void UICard::Activate()
 	setFillColor(UIColors::OpaqueWhite);
 }
 
+void UICard::SetInHand(bool inHand)
+{
+	m_inHand = inHand;
+}
+
 void UICard::OnMouseOver()
 {
+	if (m_inHand) return;
 	setPosition(sf::Mouse::getPosition().x - getSize().x, sf::Mouse::getPosition().y - getSize().y);
 	UISelectedCard::UpdateText(getPosition());
 }
@@ -115,8 +121,21 @@ void UICard::OnMouseEnter()
 	{
 		m_state = State::Hover;
 		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
-		m_type == Type::Background ? UISelectedCard::DisplayText(UISelectedCard::TextType::Half) : UISelectedCard::DisplayText(UISelectedCard::TextType::Full);
+		if (!m_inHand)
+		{
+			m_type == Type::Background ? UISelectedCard::DisplayText(UISelectedCard::TextType::Half) : UISelectedCard::DisplayText(UISelectedCard::TextType::Full);
+		}
+		else
+		{
+			// inHand set-up
+			UISelectedCard::DisplayText(UISelectedCard::TextType::InHand);
+			UISelectedCard::UpdateText(sf::Vector2f(getPosition().x + getSize().x, getPosition().y));
+			return;
+		}
 	}
+
+	if (m_inHand) return;
+
 	setScale(2, 2);
 	UISelectedCard::Set(dynamic_cast<sf::Drawable*>(this));
 }
@@ -135,6 +154,9 @@ void UICard::OnMouseLeave()
 		m_warning = false;
 		setOutlineColor(UIColors::Transparent);
 	}
+
+	if (m_inHand) return;
+
 	setScale(1, 1);
 	setPosition(m_initialPosition);
 	UISelectedCard::Set(nullptr);
@@ -144,6 +166,12 @@ void UICard::OnMouseLeftClick()
 {
 	if (!m_numb && m_type != Type::Background)
 	{
+		if (m_inHand)
+		{
+			m_state = State::Press;
+			setOutlineColor(UIColors::DarkGreen - UIColors::QuarterTransparent);
+			return;
+		}
 		m_state = State::Press;
 		setScale(1.8f, 1.8f);
 		setOutlineColor(UIColors::DarkGreen - UIColors::QuarterTransparent);
@@ -154,14 +182,22 @@ void UICard::OnMouseLeftRelease()
 {
 	if (!m_numb && m_type != Type::Background)
 	{
+		if (m_inHand)
+		{
+			m_state = State::LeftRelease;
+			setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
+			return;
+		}
 		m_state = State::LeftRelease;
 		setScale(2, 2);
-		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
+		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
 	}
 }
 
 void UICard::OnMouseRightClick()
 {
+	if (m_inHand) return;
+
 	if (!m_numb)
 	{
 		m_state = State::Press;
@@ -172,11 +208,13 @@ void UICard::OnMouseRightClick()
 
 void UICard::OnMouseRightRelease()
 {
+	if (m_inHand) return;
+
 	if (!m_numb)
 	{
 		m_state = State::RightRelease;
 		setScale(2, 2);
-		setOutlineColor(UIColors::GoldYellow - UIColors::HalfTransparent);
+		setOutlineColor(UIColors::GoldYellow - UIColors::QuarterTransparent);
 	}
 }
 

@@ -42,6 +42,7 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 
 	// Panels
 	m_expansionsPanel = new UICardsRowPanel(3, m_panelBackgrounds[0].getPosition(), m_panelBackgrounds[0].getSize(), sf::Vector2f(0.025f, 0.075f));
+	m_expansionsPanel->NumbAll();
 	m_noblesPanel = new UICardsRowPanel(5, m_panelBackgrounds[1].getPosition(), m_panelBackgrounds[1].getSize(), sf::Vector2f(0.025f, 0.075f));
 	m_resourcesPanel = new UIHResourcesPanel(m_panelBackgrounds[2].getPosition(), m_panelBackgrounds[2].getSize());
 	m_tokensPanel = new UIHTokensPanel(m_panelBackgrounds[3].getPosition(), m_panelBackgrounds[3].getSize());
@@ -95,15 +96,46 @@ UIHandPanel::UIHandPanel(const sf::Vector2f& size, bool isActive) :
 	AddContent(dynamic_cast<sf::Drawable*>(m_resourcesPanel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_tokensPanel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_closeButton));
-	AddContent(dynamic_cast<Collider*>(m_closeButton));
 	AddContent(dynamic_cast<sf::Drawable*>(&m_profile));
 	AddContent(dynamic_cast<sf::Drawable*>(m_nameLabel));
 	AddContent(dynamic_cast<sf::Drawable*>(m_prestigeLabel));
 
 }
 
-void UIHandPanel::SetUpHand(const UIPlayerPanel& playerPanel)
+std::string UIHandPanel::GetPlayerName() const
 {
+	return m_nameLabel->getString();
+}
+
+UICardsRowPanel& UIHandPanel::GetExpansionsPanel() const
+{
+	return *m_expansionsPanel;
+}
+
+void UIHandPanel::HandleEvent(const sf::Event& event)
+{
+	if (IsActive())
+	{
+		m_closeButton->HandleEvent(event);
+		if (IsInteractable())
+		{
+			m_expansionsPanel->HandleEvent(event);
+		}
+	}
+}
+
+std::optional<UICard*> UIHandPanel::GetPickedExpansion() const
+{
+	const auto pickedCard = m_expansionsPanel->CheckForPickedCard();
+	if (!pickedCard.has_value()) return std::nullopt;
+	return std::optional<UICard*>(pickedCard.value().first);
+}
+
+void UIHandPanel::SetUpHand(UIPlayerPanel& playerPanel)
+{
+	// Player Panel
+	m_playerPanel = &playerPanel;
+
 	// Stats
 	m_profile.setTexture(new sf::Texture(playerPanel.GetUserTexture()));
 	m_nameLabel->setString(playerPanel.GetNameLabelString());
@@ -113,8 +145,15 @@ void UIHandPanel::SetUpHand(const UIPlayerPanel& playerPanel)
 	const Hand playerHand = playerPanel.GetPlayer()->GetHand();
 	m_noblesPanel->SetCardsData(playerHand.GetNoblesData());
 	m_expansionsPanel->SetCardsData(playerHand.GetExpansionsData());
+	m_expansionsPanel->InHandAll();
+	m_expansionsPanel->UnNumbAll();
 	m_tokensPanel->UpdateTokens(playerHand.GetTokensData());
 	m_resourcesPanel->UpdateResources(playerHand.GetResourcesData());
+}
+
+void UIHandPanel::SyncHand()
+{
+	SetUpHand(*m_playerPanel);
 }
 
 bool UIHandPanel::CheckForClose()
@@ -126,4 +165,9 @@ bool UIHandPanel::CheckForClose()
 		return true;
 	}
 	return false;
+}
+
+void UIHandPanel::NumbAllExpansions()
+{
+	m_expansionsPanel->NumbAll();
 }
