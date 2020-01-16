@@ -24,6 +24,9 @@ public:
 	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
 	bool IsExpansionDeckEmpty(uint16_t deckLevel);
 
+	// Getters for unit testing
+	Deck<NobleCard> GetNobleDeck() const;
+	
 private:
 	// Decks
 	Deck<NobleCard> m_nobleDeck;
