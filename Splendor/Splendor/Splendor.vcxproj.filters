@@ -180,6 +180,9 @@
     <ClCompile Include="UITokenAlertPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="UITokenAlertPanel.h">
       <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

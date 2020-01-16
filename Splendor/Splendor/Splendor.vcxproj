@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CardDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="UIVTokensPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CardDAO.h" />
     <ClInclude Include="CircCollider.h" />
