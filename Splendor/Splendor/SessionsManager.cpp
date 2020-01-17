@@ -23,8 +23,8 @@ SessionsManager::SessionsManager() :
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	logger.Log("Window created", Logger::Level::Info);
 
@@ -152,36 +152,12 @@ void SessionsManager::TutorialSession() const
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
 	logger.Log("Entered Game Session", Logger::Level::Info);
-	
-	// Testing Networking
-	NetworkPacket networkPacket(14, "Adi", 65.);
-	std::cout << networkPacket;
-	
-	Network network;
-	switch (pregameSetup.GetGameMode())
-	{
-		case PregameSetup::GameMode::Client:
-			{
-				network.InitialiseClient();
-				break;
-			}
-		case PregameSetup::GameMode::Server:
-			{
-				network.InitialiseServer();
-				network.AcceptConnection();
-				break;
-			}
-		default:
-			{
-				break;
-			}
-	}
 
 	// Initialize Database
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
-	// Stopping menu music & playing in-game music
+	//Game Music sound on
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 
@@ -238,6 +214,10 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 
+	
+	Hand hand = players[0].GetHand();
+	networkPacket.SetHandData(hand.ConvertToPackage());
+
 
 
 	// Game Loop
@@ -253,18 +233,24 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			switch (gameSessionGUI.GetEvent())
 			{
 				case UIGameSession::Events::MenuButton:
-					SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-					SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-					return;
+					{
+						SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+						SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+						return;
+					}
 				case UIGameSession::Events::PassButton:
-					gameSessionGUI.NextTurn();
-					++activePlayerIterator;
-					if (activePlayerIterator == pregameSetup.GetPlayerCount())
-						activePlayerIterator = 0;
-					activePlayer = players[activePlayerIterator];
-					break;
+					{
+						gameSessionGUI.NextTurn();
+						++activePlayerIterator;
+						if (activePlayerIterator == pregameSetup.GetPlayerCount())
+							activePlayerIterator = 0;
+						activePlayer = players[activePlayerIterator];
+						break;
+					}
 				default:
-					break;
+					{
+						break;
+					}
 			}
 		}
 

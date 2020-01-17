@@ -35,10 +35,13 @@ void Network::SendData(NetworkPacket networkPacket)
 	m_packet.clear();
 }
 
-void Network::ReceiveData(NetworkPacket & networkPacket)
+void Network::ReceiveData(NetworkPacket& networkPacket)
 {
 	m_socket.receive(m_packet);
 	m_packet >> networkPacket;
+	std::cout << "Received:";
+	std::cout << networkPacket;
+	std::cout << std::endl;
 	m_packet.clear();
 }
 
