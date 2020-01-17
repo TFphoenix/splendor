@@ -25,6 +25,14 @@ namespace SplendorTests
 			Assert::IsTrue(m_expansionL3Deck.GetNumberOfCards() == GamePieces::s_L3ExpansionCardCount);
 		}
 
+		TEST_METHOD(NobleDeckInitialization) {
+			const Deck<NobleCard> m_nobleDeck;
+			Assert::IsTrue(m_nobleDeck.GetNumberOfCards() == GamePieces::s_NobleCardCount);
+		}
+
+		TEST_METHOD(UndefinitedDeckInitialization) {
 		
+			Assert::ExpectException<std::invalid_argument>([](){const Deck<ExpansionCard, NULL> deck;});
+		}
 	};
 }
