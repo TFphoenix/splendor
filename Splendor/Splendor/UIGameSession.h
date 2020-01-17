@@ -36,6 +36,7 @@ public:
 	void UpdateGame();
 	void NextTurn();
 	void NextTurnOnline();
+	void PointToNextPlayer();
 	void SetActivePlayer(std::reference_wrapper<Player> activePlayerReference);
 
 	// Events

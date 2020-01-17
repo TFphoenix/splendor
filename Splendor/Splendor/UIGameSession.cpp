@@ -325,7 +325,7 @@ void UIGameSession::NextTurn()
 
 	/// UI Logic
 	m_infoPanel.IncrementTurn();
-	m_playersPanel.PointToNextPlayer();
+	PointToNextPlayer();
 	PrepareUI();
 }
 
@@ -341,6 +341,11 @@ void UIGameSession::NextTurnOnline()
 	/// UI Logic
 	m_infoPanel.IncrementTurn();
 	PrepareUI();
+}
+
+void UIGameSession::PointToNextPlayer()
+{
+	m_playersPanel.PointToNextPlayer();
 }
 
 void UIGameSession::CheckForExceedingTokens()

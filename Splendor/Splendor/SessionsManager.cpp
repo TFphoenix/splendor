@@ -323,7 +323,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 		isSending = false;
 		network.InitialiseServer();
 		network.AcceptConnection();
-		gameSessionGUI.NextTurn();
+		gameSessionGUI.PointToNextPlayer();
 		++activePlayerIterator;
 		activePlayer = players[activePlayerIterator];
 		break;
@@ -360,7 +360,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 			}
 			case UIGameSession::Events::PassButton:
 			{
-				gameSessionGUI.NextTurn();
+				gameSessionGUI.NextTurnOnline();
 				++activePlayerIterator;
 				if (activePlayerIterator == pregameSetup.GetPlayerCount())
 					activePlayerIterator = 0;
