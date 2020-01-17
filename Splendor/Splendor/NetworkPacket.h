@@ -8,7 +8,7 @@ class NetworkPacket
 {
 
 public:
-	//hand
+	// Hand
 	std::string m_handResources;
 	std::string m_handTokens;
 	std::string m_handExpansions;
@@ -16,45 +16,42 @@ public:
 
 	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
 
-	//board
-	std::string m_boardNobleDeckString;
-	std::string m_boardExpansionsDeckString;
+	// Board
 	std::string m_boardTokensString;
 	std::string m_boardNobleSlotsString;
 	std::string m_boardExpansionsSlotsString;
 
-	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
-	
+	void SetBoardData(const std::tuple<std::string, std::string, std::string>& boardData);
+
+	// Decks
+	std::string m_boardNobleDeckString;
+	std::string m_boardExpansionL1DeckString;
+	std::string m_boardExpansionL2DeckString;
+	std::string m_boardExpansionL3DeckString;
+
+	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
+
 	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& packet)
 	{
 		//hand data
+		out << "Hand Data: ";
 		out << packet.m_handResources << " ";
 		out << packet.m_handTokens << " ";
 		out << packet.m_handExpansions << " ";
-		out << packet.m_handNoble << ".";
+		out << packet.m_handNoble << "\n";
 		//board data
-		out << packet.m_boardNobleDeckString << " ";
-		out << packet.m_boardExpansionsDeckString << " ";
+		out << "Board Data: ";
 		out << packet.m_boardTokensString << " ";
 		out << packet.m_boardNobleSlotsString << " ";
-		out << packet.m_boardExpansionsSlotsString;
-		return out;
-	}
+		out << packet.m_boardExpansionsSlotsString << "\n";
+		//decks data
+		out << "Decks Data: ";
+		out << packet.m_boardNobleDeckString << " ";
+		out << packet.m_boardExpansionL1DeckString << " ";
+		out << packet.m_boardExpansionL2DeckString << " ";
+		out << packet.m_boardExpansionL3DeckString << "\n";
 
-	friend std::istream& operator >>(std::istream& in, NetworkPacket& packet)
-	{
-		//hand data
-		in >> packet.m_handResources;
-		in >> packet.m_handTokens;
-		in >> packet.m_handExpansions;
-		in >> packet.m_handNoble;
-		//board data
-		in >> packet.m_boardNobleDeckString;
-		in >> packet.m_boardExpansionsDeckString;
-		in >> packet.m_boardTokensString;
-		in >> packet.m_boardNobleSlotsString;
-		in >> packet.m_boardExpansionsSlotsString;
-		return in;
+		return out;
 	}
 };
 
