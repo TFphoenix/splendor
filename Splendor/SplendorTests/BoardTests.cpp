@@ -59,6 +59,6 @@ namespace SplendorTests
 			const auto expansionCard = board.DrawExpansionFromDeck(2);
 			Assert::ExpectException<std::invalid_argument>([&board,&expansionCard]() {board.ReplaceExpansion(expansionCard.GetLevel(), expansionCard.GetId()); });
 		}
-		
+
 	};
 }

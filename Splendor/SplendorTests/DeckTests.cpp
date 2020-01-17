@@ -101,7 +101,7 @@ namespace SplendorTests
 
 			Assert::IsTrue(func());
 		}
-		TEST_METHOD(NobleDeckOverflow){
+		TEST_METHOD(NobleDeckOverflow) {
 			Deck<NobleCard> nobleCard;
 			uint16_t amount = GamePieces::s_NobleCardCount + 1;
 			const auto func = [&nobleCard, &amount]()
