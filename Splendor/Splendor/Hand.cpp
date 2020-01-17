@@ -162,7 +162,7 @@ Hand::GemsMap Hand::BuyExpansionCard(ExpansionCard&& expansionCard)
 	return tokensToReturn;
 }
 
-void Hand::ConvertToPackage() const
+std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertToPackage() const
 {
 	// Resources
 	std::string resourcesString;
@@ -186,7 +186,7 @@ void Hand::ConvertToPackage() const
 			resourcesString += "R";
 			break;
 		case IToken::Type::Gold:
-			resourcesString += "R";
+			resourcesString += "G";
 			break;
 		default:
 			throw std::domain_error("Error converting resources to package");
@@ -216,7 +216,7 @@ void Hand::ConvertToPackage() const
 			tokensString += "R";
 			break;
 		case IToken::Type::Gold:
-			tokensString += "R";
+			tokensString += "G";
 			break;
 		default:
 			throw std::domain_error("Error converting tokens to package");
@@ -257,6 +257,9 @@ void Hand::ConvertToPackage() const
 			nobleCardsString += std::to_string(nobleCard.value().GetId()) + ' ';
 		}
 	}
+
+	// Return package
+	return std::make_tuple(resourcesString, tokensString, expansionCardsString, nobleCardsString);
 }
 
 bool Hand::IsFull() const

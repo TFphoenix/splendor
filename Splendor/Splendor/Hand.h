@@ -37,7 +37,7 @@ public:
 	GemsMap BuyExpansionCard(ExpansionCard&& expansionCard);
 
 	// Networking
-	void ConvertToPackage() const;
+	std::tuple < std::string, std::string, std::string, std::string > ConvertToPackage() const;
 
 private:
 	mutable GemsMap m_resources;

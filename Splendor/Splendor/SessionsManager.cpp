@@ -41,16 +41,13 @@ SessionsManager::~SessionsManager()
 
 void SessionsManager::MainMenuSession() const
 {
-
 	logger.Log("Entered Main Menu Session", Logger::Level::Info);
 	UIMainMenuSession mainMenuSessionGUI(windowSize);
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
 
+	// Set-up sound system and play main menu music
 	SoundSystem::LoadFromFile();
 	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-
-
-
 
 	while (window->isOpen())
 	{
@@ -63,13 +60,11 @@ void SessionsManager::MainMenuSession() const
 			{
 				case UIMainMenuSession::Events::NewGame:
 					logger.Log("Starting PreGame Session...", Logger::Level::Info);
-
 					PreGameSession();
 					break;
 				case UIMainMenuSession::Events::Tutorial:
 					// Tutorial Session
 					logger.Log("Starting Tutorial Session...", Logger::Level::Info);
-
 					TutorialSession();
 					break;
 				case UIMainMenuSession::Events::Settings:
@@ -78,10 +73,8 @@ void SessionsManager::MainMenuSession() const
 				case UIMainMenuSession::Events::Exit:
 					SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 					logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
-
 					return;
 				case UIMainMenuSession::Events::Test:
-
 					TestSession();
 					break;
 				default:
@@ -97,7 +90,6 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
-
 	logger.Log("Entered PreGame Session", Logger::Level::Info);
 	UIPreGameSession pregameSessionGUI(windowSize);
 	logger.Log("Initialized PreGame GUI", Logger::Level::Info);
@@ -162,7 +154,6 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	logger.Log("Entered Game Session", Logger::Level::Info);
 	
 	// Testing Networking
-	//
 	NetworkPacket networkPacket(14, "Adi", 65.);
 	std::cout << networkPacket;
 	
@@ -186,12 +177,11 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			}
 	}
 
-
 	// Initialize Database
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
-	//Game Music sound on
+	// Stopping menu music & playing in-game music
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 
