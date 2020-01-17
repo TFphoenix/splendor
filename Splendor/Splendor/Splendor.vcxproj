@@ -141,14 +141,9 @@
     <ClCompile Include="Hand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RectCollider.cpp" />
-    <ClCompile Include="Server.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -192,6 +187,7 @@
     <ClInclude Include="CircCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="Network.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_iterators.hpp" />

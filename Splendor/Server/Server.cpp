@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-//Server
+//SERVER
 #include <SFML/Network.hpp>
 
 int main()
@@ -33,6 +33,9 @@ int main()
 
 	sf::Packet packetReceive;
 	std::string msg;
+
+	//SessionsManager SplendorSession;
+	//SplendorSession.MainMenuSession();
 
 	while (!quit)
 	{

@@ -43,6 +43,9 @@
     <Filter Include="Data\RapidXML">
       <UniqueIdentifier>{1ae56c53-6716-4fca-8211-c23ea9f01baa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{2162647a-fc5c-4f69-9279-083a2695967f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Randomizer.cpp">
@@ -171,6 +174,8 @@
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Network</Filter>
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="UITutorialSession.cpp">
       <Filter>GUI\Sessions</Filter>
@@ -312,6 +317,8 @@
     <ClInclude Include="Audio.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Network</Filter>
     <ClInclude Include="UITutorialSession.h">
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
