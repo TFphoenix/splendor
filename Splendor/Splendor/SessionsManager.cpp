@@ -308,7 +308,6 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	Network network;
 	NetworkPacket networkPacket;
 	bool isSending;
-	bool offlineMode = false;
 
 	switch (pregameSetup.GetGameMode())
 	{
@@ -316,6 +315,8 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	{
 		isSending = true;
 		network.InitialiseClient();
+		networkPacket.SetDecksData(board.ConvertDecksToPackage());
+		network.SendData(networkPacket);
 		break;
 	}
 	case PregameSetup::GameMode::Server:
@@ -323,14 +324,12 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 		isSending = false;
 		network.InitialiseServer();
 		network.AcceptConnection();
+		network.ReceiveData(networkPacket);
+
+		// Point to server player
 		gameSessionGUI.PointToNextPlayer();
 		++activePlayerIterator;
 		activePlayer = players[activePlayerIterator];
-		break;
-	}
-	case PregameSetup::GameMode::Offline:
-	{
-		offlineMode = true;
 		break;
 	}
 	default:
@@ -361,34 +360,29 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 			case UIGameSession::Events::PassButton:
 			{
 				gameSessionGUI.NextTurnOnline();
-				++activePlayerIterator;
+				/*++activePlayerIterator;
 				if (activePlayerIterator == pregameSetup.GetPlayerCount())
 					activePlayerIterator = 0;
 				activePlayer = players[activePlayerIterator];
-				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
+				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";*/
 
-				if (offlineMode == false)
+				if (isSending)
 				{
-					if (isSending)
-					{
-						isSending = false;
-						networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-						network.SendData(networkPacket);
-					}
+					isSending = false;
+					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+					networkPacket.SetBoardData(board.ConvertBoardToPackage());
+					network.SendData(networkPacket);
 				}
 				break;
 			}
 			default:
 			{
-				if (offlineMode == false)
+				if (isSending == false)
 				{
-					if (isSending == false)
-					{
-						isSending = true;
-						network.ReceiveData(networkPacket);
-					}
-					break;
+					isSending = true;
+					network.ReceiveData(networkPacket);
 				}
+				break;
 			}
 			}
 		}

@@ -39,68 +39,68 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 {
 	switch (level)
 	{
-		case ExpansionCard::Level::Level1:
-			for (auto& card : m_expansionL1Slots)
+	case ExpansionCard::Level::Level1:
+		for (auto& card : m_expansionL1Slots)
+		{
+			if (card.has_value())
 			{
-				if (card.has_value())
+				if (card->GetId() == id)
 				{
-					if (card->GetId() == id)
+					try
 					{
-						try
-						{
-							card.emplace(m_expansionL1Deck.DrawCard());
-						}
-						catch (std::out_of_range & exception)
-						{
-							card.reset();
-						}
-						return;
+						card.emplace(m_expansionL1Deck.DrawCard());
 					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
+					return;
 				}
 			}
-			break;
-		case ExpansionCard::Level::Level2:
-			for (auto& card : m_expansionL2Slots)
+		}
+		break;
+	case ExpansionCard::Level::Level2:
+		for (auto& card : m_expansionL2Slots)
+		{
+			if (card.has_value())
 			{
-				if (card.has_value())
+				if (card->GetId() == id)
 				{
-					if (card->GetId() == id)
+					try
 					{
-						try
-						{
-							card.emplace(m_expansionL2Deck.DrawCard());
-						}
-						catch (std::out_of_range & exception)
-						{
-							card.reset();
-						}
-						return;
+						card.emplace(m_expansionL2Deck.DrawCard());
 					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
+					return;
 				}
 			}
-			break;
-		case ExpansionCard::Level::Level3:
-			for (auto& card : m_expansionL3Slots)
+		}
+		break;
+	case ExpansionCard::Level::Level3:
+		for (auto& card : m_expansionL3Slots)
+		{
+			if (card.has_value())
 			{
-				if (card.has_value())
+				if (card->GetId() == id)
 				{
-					if (card->GetId() == id)
+					try
 					{
-						try
-						{
-							card.emplace(m_expansionL3Deck.DrawCard());
-						}
-						catch (std::out_of_range & exception)
-						{
-							card.reset();
-						}
-						return;
+						card.emplace(m_expansionL3Deck.DrawCard());
 					}
+					catch (std::out_of_range & exception)
+					{
+						card.reset();
+					}
+					return;
 				}
 			}
-			break;
-		default:
-			throw std::invalid_argument("Can't take expansion of undefined level");
+		}
+		break;
+	default:
+		throw std::invalid_argument("Can't take expansion of undefined level");
 	}
 	throw std::invalid_argument("Card not found");
 }
@@ -109,14 +109,14 @@ ExpansionCard Board::DrawExpansionFromDeck(uint16_t deck)
 {
 	switch (deck)
 	{
-		case 1:
-			return m_expansionL1Deck.DrawCard();
-		case 2:
-			return m_expansionL2Deck.DrawCard();
-		case 3:
-			return m_expansionL3Deck.DrawCard();
-		default:
-			throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
+	case 1:
+		return m_expansionL1Deck.DrawCard();
+	case 2:
+		return m_expansionL2Deck.DrawCard();
+	case 3:
+		return m_expansionL3Deck.DrawCard();
+	default:
+		throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
 	}
 }
 
@@ -175,44 +175,44 @@ std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
 	std::vector<CardDAO::Data> dataToReturn;
 	switch (dataType)
 	{
-		case CardDAO::Type::Noble:
-			for (const auto& slot : m_nobleSlots)
+	case CardDAO::Type::Noble:
+		for (const auto& slot : m_nobleSlots)
+		{
+			if (slot.has_value())
 			{
-				if (slot.has_value())
-				{
-					dataToReturn.emplace_back(dataType, slot->GetId());
-				}
+				dataToReturn.emplace_back(dataType, slot->GetId());
 			}
-			break;
-		case CardDAO::Type::ExpansionL1:
-			for (const auto& slot : m_expansionL1Slots)
+		}
+		break;
+	case CardDAO::Type::ExpansionL1:
+		for (const auto& slot : m_expansionL1Slots)
+		{
+			if (slot.has_value())
 			{
-				if (slot.has_value())
-				{
-					dataToReturn.emplace_back(dataType, slot->GetId());
-				}
+				dataToReturn.emplace_back(dataType, slot->GetId());
 			}
-			break;
-		case CardDAO::Type::ExpansionL2:
-			for (const auto& slot : m_expansionL2Slots)
+		}
+		break;
+	case CardDAO::Type::ExpansionL2:
+		for (const auto& slot : m_expansionL2Slots)
+		{
+			if (slot.has_value())
 			{
-				if (slot.has_value())
-				{
-					dataToReturn.emplace_back(dataType, slot->GetId());
-				}
+				dataToReturn.emplace_back(dataType, slot->GetId());
 			}
-			break;
-		case CardDAO::Type::ExpansionL3:
-			for (const auto& slot : m_expansionL3Slots)
+		}
+		break;
+	case CardDAO::Type::ExpansionL3:
+		for (const auto& slot : m_expansionL3Slots)
+		{
+			if (slot.has_value())
 			{
-				if (slot.has_value())
-				{
-					dataToReturn.emplace_back(dataType, slot->GetId());
-				}
+				dataToReturn.emplace_back(dataType, slot->GetId());
 			}
-			break;
-		default:
-			throw std::invalid_argument("Can't get card slots data of UNKNOWN type");;
+		}
+		break;
+	default:
+		throw std::invalid_argument("Can't get card slots data of UNKNOWN type");;
 	}
 	return dataToReturn;
 }
@@ -226,14 +226,14 @@ bool Board::IsExpansionDeckEmpty(uint16_t deckLevel)
 {
 	switch (deckLevel)
 	{
-		case 1:
-			return m_expansionL1Deck.IsEmpty();
-		case 2:
-			return m_expansionL2Deck.IsEmpty();
-		case 3:
-			return m_expansionL3Deck.IsEmpty();
-		default:
-			throw std::invalid_argument("Invalid expansion deck level");
+	case 1:
+		return m_expansionL1Deck.IsEmpty();
+	case 2:
+		return m_expansionL2Deck.IsEmpty();
+	case 3:
+		return m_expansionL3Deck.IsEmpty();
+	default:
+		throw std::invalid_argument("Invalid expansion deck level");
 	}
 }
 
@@ -242,7 +242,7 @@ Deck<NobleCard> Board::GetNobleDeck() const
 	return m_nobleDeck;
 }
 
-std::tuple<std::string, std::string, std::string> Board::ConvertBoardToPackage() const
+std::tuple<std::string, std::string, std::string, std::string, std::string> Board::ConvertBoardToPackage() const
 {
 	// Tokens
 	std::string tokensString;
@@ -250,28 +250,28 @@ std::tuple<std::string, std::string, std::string> Board::ConvertBoardToPackage()
 	{
 		switch (token.first)
 		{
-			case IToken::Type::GreenEmerald:
-				tokensString += "E";
-				break;
-			case IToken::Type::BlueSapphire:
-				tokensString += "S";
-				break;
-			case IToken::Type::WhiteDiamond:
-				tokensString += "D";
-				break;
-			case IToken::Type::BlackOnyx:
-				tokensString += "O";
-				break;
-			case IToken::Type::RedRuby:
-				tokensString += "R";
-				break;
-			case IToken::Type::Gold:
-				tokensString += "G";
-				break;
-			default:
-				throw std::domain_error("Error converting tokens to package");
+		case IToken::Type::GreenEmerald:
+			tokensString += "E";
+			break;
+		case IToken::Type::BlueSapphire:
+			tokensString += "S";
+			break;
+		case IToken::Type::WhiteDiamond:
+			tokensString += "D";
+			break;
+		case IToken::Type::BlackOnyx:
+			tokensString += "O";
+			break;
+		case IToken::Type::RedRuby:
+			tokensString += "R";
+			break;
+		case IToken::Type::Gold:
+			tokensString += "G";
+			break;
+		default:
+			throw std::domain_error("Error converting tokens to package");
 		}
-		tokensString += std::to_string(token.second) + ' ';
+		tokensString += std::to_string(token.second);
 	}
 
 	// Noble Slots
@@ -280,29 +280,61 @@ std::tuple<std::string, std::string, std::string> Board::ConvertBoardToPackage()
 	{
 		if (nobleSlot.has_value())
 		{
-			nobleSlotsString += std::to_string(nobleSlot.value().GetId()) + ' ';
+			nobleSlotsString += std::to_string(nobleSlot.value().GetId()) + '-';
 		}
 	}
 
 	// Expansions slots
-	std::array<std::optional<ExpansionCard>, 4> m_expansionL3Slots;
-	std::array<std::optional<ExpansionCard>, 4> m_expansionL2Slots;
-	std::array<std::optional<ExpansionCard>, 4> m_expansionL1Slots;
-	std::string expansionsSlotsString = ""; // TODO
+	std::string expansionL1SlotsString;
+	for (const auto& expansion : m_expansionL1Slots)
+	{
+		expansionL1SlotsString += std::to_string(expansion->GetId()) + '-';
+	}
+	std::string expansionL2SlotsString;
+	for (const auto& expansion : m_expansionL1Slots)
+	{
+		expansionL2SlotsString += std::to_string(expansion->GetId()) + '-';
+	}
+	std::string expansionL3SlotsString;
+	for (const auto& expansion : m_expansionL1Slots)
+	{
+		expansionL3SlotsString += std::to_string(expansion->GetId()) + '-';
+	}
 
-	return std::make_tuple(tokensString, nobleSlotsString, expansionsSlotsString);
+	return std::make_tuple(tokensString, nobleSlotsString, expansionL1SlotsString, expansionL2SlotsString, expansionL3SlotsString);
 }
 
 std::tuple<std::string, std::string, std::string, std::string> Board::ConvertDecksToPackage() const
 {
-	// Decks
-	std::string nobleDeckString = ""; // TODO
+	// Noble Deck
+	std::string nobleDeckString;
+	for (const auto& card : m_nobleDeck.GetCards())
+	{
+		nobleDeckString += std::to_string(card.GetId()) + '-';
+	}
 
-	// Expansions
-	std::string expansionsL1DeckString = "";
-	std::string expansionsL2DeckString = "";
-	std::string expansionsL3DeckString = "";// TODO
+	// Expansion Level 1 Deck
+	std::string expansionsL1DeckString;
+	for (const auto& card : m_expansionL1Deck.GetCards())
+	{
+		expansionsL1DeckString += std::to_string(card.GetId()) + '-';
+	}
+
+	// Expansion Level 2 Deck
+	std::string expansionsL2DeckString;
+	for (const auto& card : m_expansionL2Deck.GetCards())
+	{
+		expansionsL2DeckString += std::to_string(card.GetId()) + '-';
+	}
+
+	// Expansion Level 3 Deck
+	std::string expansionsL3DeckString;
+	for (const auto& card : m_expansionL3Deck.GetCards())
+	{
+		expansionsL3DeckString += std::to_string(card.GetId()) + '-';
+	}
 
 	return std::make_tuple(nobleDeckString, expansionsL1DeckString, expansionsL2DeckString, expansionsL3DeckString);
 }
+
 

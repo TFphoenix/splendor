@@ -19,9 +19,11 @@ public:
 	// Board
 	std::string m_boardTokensString;
 	std::string m_boardNobleSlotsString;
-	std::string m_boardExpansionsSlotsString;
+	std::string m_boardExpansionL1SlotsString;
+	std::string m_boardExpansionL2SlotsString;
+	std::string m_boardExpansionL3SlotsString;
 
-	void SetBoardData(const std::tuple<std::string, std::string, std::string>& boardData);
+	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
 
 	// Decks
 	std::string m_boardNobleDeckString;
@@ -45,7 +47,7 @@ public:
 		out << "Board Data: ";
 		out << packet.m_boardTokensString << " ";
 		out << packet.m_boardNobleSlotsString << " ";
-		out << packet.m_boardExpansionsSlotsString << "\n";
+		out << packet.m_boardExpansionL1SlotsString << "\n";
 		//decks data
 		out << "Decks Data: ";
 		out << packet.m_boardNobleDeckString << " ";

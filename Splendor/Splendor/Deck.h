@@ -48,6 +48,11 @@ public:
 		return m_cards.size();
 	}
 
+	std::vector<cardType> GetCards() const
+	{
+		return m_cards;
+	}
+
 private:
 	std::vector<cardType> m_cards;
 

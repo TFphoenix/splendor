@@ -9,12 +9,14 @@ void NetworkPacket::SetHandData(const std::tuple<std::string, std::string, std::
 	m_handNoble = nobleString;
 }
 
-void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std::string>& boardData)
+void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData)
 {
-	auto& [tokensString, nobleSlotsString, expansionsSlotsString] = boardData;
+	auto& [tokensString, nobleSlotsString, expansionL1SlotsString, expansionL2SlotsString, expansionL3SlotsString] = boardData;
 	m_boardTokensString = tokensString;
 	m_boardNobleSlotsString = nobleSlotsString;
-	m_boardExpansionsSlotsString = expansionsSlotsString;
+	m_boardExpansionL1SlotsString = expansionL1SlotsString;
+	m_boardExpansionL2SlotsString = expansionL2SlotsString;
+	m_boardExpansionL3SlotsString = expansionL3SlotsString;
 }
 
 void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std::string, std::string>& decksData)
@@ -37,7 +39,9 @@ void NetworkPacket::ClearData()
 	// Board
 	m_boardTokensString = "";
 	m_boardNobleSlotsString = "";
-	m_boardExpansionsSlotsString = "";
+	m_boardExpansionL1SlotsString = "";
+	m_boardExpansionL2SlotsString = "";
+	m_boardExpansionL3SlotsString = "";
 
 	// Decks
 	m_boardNobleDeckString = "";
@@ -56,7 +60,9 @@ sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 	//board data
 	packet << networkPacket.m_boardTokensString;
 	packet << networkPacket.m_boardNobleSlotsString;
-	packet << networkPacket.m_boardExpansionsSlotsString;
+	packet << networkPacket.m_boardExpansionL1SlotsString;
+	packet << networkPacket.m_boardExpansionL2SlotsString;
+	packet << networkPacket.m_boardExpansionL3SlotsString;
 	//decks data
 	packet << networkPacket.m_boardNobleDeckString;
 	packet << networkPacket.m_boardExpansionL1DeckString;
@@ -76,7 +82,9 @@ sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 	//board data
 	packet >> networkPacket.m_boardTokensString;
 	packet >> networkPacket.m_boardNobleSlotsString;
-	packet >> networkPacket.m_boardExpansionsSlotsString;
+	packet >> networkPacket.m_boardExpansionL1SlotsString;
+	packet >> networkPacket.m_boardExpansionL2SlotsString;
+	packet >> networkPacket.m_boardExpansionL3SlotsString;
 	//decks data
 	packet >> networkPacket.m_boardNobleDeckString;
 	packet >> networkPacket.m_boardExpansionL1DeckString;
