@@ -1,7 +1,9 @@
 #include "pch.h"
-#include "CppUnitTest.h"
-
 #include "Board.h"
+
+#include "CppUnitTest.h"
+#include "GamePieces.h"
+#include "PregameSetup.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -17,5 +19,22 @@ namespace SplendorTests
 			Board board;
 		}
 
+		TEST_METHOD(TokenOverflow) {
+			PregameSetup pregameSetup(4, PregameSetup::GameMode::Local, false, false);
+			Board board;
+			uint16_t amount = GamePieces::s_GemTokenCount + 1;
+			auto func = [&board,&amount]()
+			{
+				while (amount)
+				{
+
+					board.TakeToken(IToken::Type::BlackOnyx);
+					--amount;
+				}
+			};
+
+			Assert::ExpectException<std::out_of_range>(func);
+
+		}
 	};
 }
