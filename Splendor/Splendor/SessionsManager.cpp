@@ -58,27 +58,27 @@ void SessionsManager::MainMenuSession() const
 			mainMenuSessionGUI.PassEvent(event);
 			switch (mainMenuSessionGUI.GetEvent())
 			{
-				case UIMainMenuSession::Events::NewGame:
-					logger.Log("Starting PreGame Session...", Logger::Level::Info);
-					PreGameSession();
-					break;
-				case UIMainMenuSession::Events::Tutorial:
-					// Tutorial Session
-					logger.Log("Starting Tutorial Session...", Logger::Level::Info);
-					TutorialSession();
-					break;
-				case UIMainMenuSession::Events::Settings:
-					// Settings Session
-					break;
-				case UIMainMenuSession::Events::Exit:
-					SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
-					logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
-					return;
-				case UIMainMenuSession::Events::Test:
-					TestSession();
-					break;
-				default:
-					break;
+			case UIMainMenuSession::Events::NewGame:
+				logger.Log("Starting PreGame Session...", Logger::Level::Info);
+				PreGameSession();
+				break;
+			case UIMainMenuSession::Events::Tutorial:
+				// Tutorial Session
+				logger.Log("Starting Tutorial Session...", Logger::Level::Info);
+				TutorialSession();
+				break;
+			case UIMainMenuSession::Events::Settings:
+				// Settings Session
+				break;
+			case UIMainMenuSession::Events::Exit:
+				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
+				return;
+			case UIMainMenuSession::Events::Test:
+				TestSession();
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -102,15 +102,15 @@ void SessionsManager::PreGameSession() const
 			pregameSessionGUI.PassEvent(event);
 			switch (pregameSessionGUI.GetEvent())
 			{
-				case UIPreGameSession::Events::MainMenu:
-					logger.Log("Exiting PreGame Session...", Logger::Level::Info);
-					return;
-				case UIPreGameSession::Events::StartGame:
-					logger.Log("Starting Game Session...", Logger::Level::Info);
-					GameSession(pregameSessionGUI.GetPregameSetup());
-					return;
-				default:
-					break;
+			case UIPreGameSession::Events::MainMenu:
+				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
+				return;
+			case UIPreGameSession::Events::StartGame:
+				logger.Log("Starting Game Session...", Logger::Level::Info);
+				GameSession(pregameSessionGUI.GetPregameSetup());
+				return;
+			default:
+				break;
 			}
 		}
 
@@ -134,11 +134,11 @@ void SessionsManager::TutorialSession() const
 			tutorialSessionGUI.PassEvent(event);
 			switch (tutorialSessionGUI.GetEvent())
 			{
-				case UITutorialSession::Events::MainMenu:
-					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-					return;
-				default:
-					break;
+			case UITutorialSession::Events::MainMenu:
+				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+				return;
+			default:
+				break;
 			}
 		}
 
@@ -222,31 +222,33 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 
-	// Testing Networking
-	//
-	NetworkPacket networkPacket;
-
-	Hand hand = players[0].GetHand();
-	networkPacket.SetHandData(hand.ConvertToPackage());
-
+	// Networking
 	Network network;
+	NetworkPacket networkPacket;
+	bool isSending;
+
 	switch (pregameSetup.GetGameMode())
 	{
-		case PregameSetup::GameMode::Client:
-			{
-				network.InitialiseClient();
-				break;
-			}
-		case PregameSetup::GameMode::Server:
-			{
-				network.InitialiseServer();
-				network.AcceptConnection();
-				break;
-			}
-		default:
-			{
-				break;
-			}
+	case PregameSetup::GameMode::Client:
+	{
+		isSending = true;
+		network.InitialiseClient();
+		break;
+	}
+	case PregameSetup::GameMode::Server:
+	{
+		isSending = false;
+		network.InitialiseServer();
+		network.AcceptConnection();
+		gameSessionGUI.NextTurn();
+		++activePlayerIterator;
+		activePlayer = players[activePlayerIterator];
+		break;
+	}
+	default:
+	{
+		throw std::invalid_argument("Undefined connection");
+	}
 	}
 
 	// Game Loop
@@ -261,30 +263,40 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-				case UIGameSession::Events::MenuButton:
-					{
-						SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-						SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-						return;
-					}
-				case UIGameSession::Events::PassButton:
-					{
-						gameSessionGUI.NextTurn();
-						++activePlayerIterator;
-						if (activePlayerIterator == pregameSetup.GetPlayerCount())
-							activePlayerIterator = 0;
-						activePlayer = players[activePlayerIterator];
-						
-						network.ReceiveData(networkPacket);
-						networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-						network.SendData(networkPacket);
-						
-						break;
-					}
-				default:
-					{
-						break;
-					}
+			case UIGameSession::Events::MenuButton:
+			{
+				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+				return;
+			}
+			case UIGameSession::Events::PassButton:
+			{
+				gameSessionGUI.NextTurn();
+				++activePlayerIterator;
+				if (activePlayerIterator == pregameSetup.GetPlayerCount())
+					activePlayerIterator = 0;
+				activePlayer = players[activePlayerIterator];
+
+				if (isSending)
+				{
+					network.SendData(networkPacket);
+					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+					//network.ReceiveData(networkPacket);
+				}
+				else
+				{
+					network.ReceiveData(networkPacket);
+					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+					//network.SendData(networkPacket);
+				}
+
+
+				break;
+			}
+			default:
+			{
+				break;
+			}
 			}
 		}
 
