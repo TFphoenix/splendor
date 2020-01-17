@@ -28,7 +28,7 @@ bool Network::InitialiseClient()
 	return true;
 }
 
-void Network::SendData(NetworkPacket networkPacket)
+void Network::SendData(NetworkPacket& networkPacket)
 {
 	m_packet << networkPacket;
 	m_socket.send(m_packet);

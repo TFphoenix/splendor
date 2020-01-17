@@ -25,10 +25,7 @@ public:
 	void AcceptConnection();
 	bool InitialiseClient();
 
-	void SendData();
-	void ReceiveData();
-
-	void SendData(NetworkPacket networkPacket);
-	void ReceiveData(NetworkPacket & networkPacket);
+	void SendData(NetworkPacket& networkPacket);
+	void ReceiveData(NetworkPacket& networkPacket);
 };
 
