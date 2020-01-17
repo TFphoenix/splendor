@@ -5,6 +5,7 @@
 #include <SFML/Network/TcpSocket.hpp>
 #include <SFML/Network/Packet.hpp>
 #include <SFML/Network/TcpListener.hpp>
+#include "NetworkPacket.h"
 
 class Network
 {
@@ -27,5 +28,7 @@ public:
 	void SendData();
 	void ReceiveData();
 
+	void SendData(NetworkPacket networkPacket);
+	void ReceiveData(NetworkPacket & networkPacket);
 };
 

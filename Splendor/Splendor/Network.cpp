@@ -27,3 +27,18 @@ bool Network::InitialiseClient()
 
 	return true;
 }
+
+void Network::SendData(NetworkPacket networkPacket)
+{
+	m_packet << networkPacket;
+	m_socket.send(m_packet);
+	m_packet.clear();
+}
+
+void Network::ReceiveData(NetworkPacket & networkPacket)
+{
+	m_socket.receive(m_packet);
+	m_packet >> networkPacket;
+	m_packet.clear();
+}
+

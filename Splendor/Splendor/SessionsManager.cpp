@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "SoundSystem.h"
 #include "Network.h"
+#include "NetworkPacket.h"
 
 
 SessionsManager::SessionsManager() :
@@ -58,32 +59,33 @@ void SessionsManager::MainMenuSession() const
 		while (window->pollEvent(event))
 		{
 			mainMenuSessionGUI.PassEvent(event);
-			switch (mainMenuSessionGUI.GetEvent()) {
-			case UIMainMenuSession::Events::NewGame:
-				logger.Log("Starting PreGame Session...", Logger::Level::Info);
+			switch (mainMenuSessionGUI.GetEvent())
+			{
+				case UIMainMenuSession::Events::NewGame:
+					logger.Log("Starting PreGame Session...", Logger::Level::Info);
 
-				PreGameSession();
-				break;
-			case UIMainMenuSession::Events::Tutorial:
-				// Tutorial Session
-				logger.Log("Starting Tutorial Session...", Logger::Level::Info);
+					PreGameSession();
+					break;
+				case UIMainMenuSession::Events::Tutorial:
+					// Tutorial Session
+					logger.Log("Starting Tutorial Session...", Logger::Level::Info);
 
-				TutorialSession();
-				break;
-			case UIMainMenuSession::Events::Settings:
-				// Settings Session
-				break;
-			case UIMainMenuSession::Events::Exit:
-				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
-				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
+					TutorialSession();
+					break;
+				case UIMainMenuSession::Events::Settings:
+					// Settings Session
+					break;
+				case UIMainMenuSession::Events::Exit:
+					SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+					logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
 
-				return;
-			case UIMainMenuSession::Events::Test:
+					return;
+				case UIMainMenuSession::Events::Test:
 
-				TestSession();
-				break;
-			default:
-				break;
+					TestSession();
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -108,15 +110,15 @@ void SessionsManager::PreGameSession() const
 			pregameSessionGUI.PassEvent(event);
 			switch (pregameSessionGUI.GetEvent())
 			{
-			case UIPreGameSession::Events::MainMenu:
-				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
-				return;
-			case UIPreGameSession::Events::StartGame:
-				logger.Log("Starting Game Session...", Logger::Level::Info);
-				GameSession(pregameSessionGUI.GetPregameSetup());
-				return;
-			default:
-				break;
+				case UIPreGameSession::Events::MainMenu:
+					logger.Log("Exiting PreGame Session...", Logger::Level::Info);
+					return;
+				case UIPreGameSession::Events::StartGame:
+					logger.Log("Starting Game Session...", Logger::Level::Info);
+					GameSession(pregameSessionGUI.GetPregameSetup());
+					return;
+				default:
+					break;
 			}
 		}
 
@@ -140,11 +142,11 @@ void SessionsManager::TutorialSession() const
 			tutorialSessionGUI.PassEvent(event);
 			switch (tutorialSessionGUI.GetEvent())
 			{
-			case UITutorialSession::Events::MainMenu:
-				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-				return;
-			default:
-				break;
+				case UITutorialSession::Events::MainMenu:
+					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+					return;
+				default:
+					break;
 			}
 		}
 
@@ -158,23 +160,30 @@ void SessionsManager::TutorialSession() const
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
 	logger.Log("Entered Game Session", Logger::Level::Info);
+	
 	// Testing Networking
+	//
+	NetworkPacket networkPacket(14, "Adi", 65.);
+	std::cout << networkPacket;
+	
 	Network network;
 	switch (pregameSetup.GetGameMode())
 	{
-	case PregameSetup::GameMode::Client:
-	{
-		network.InitialiseClient();
-		break;
-	}
-	case PregameSetup::GameMode::Server:
-	{
-		network.InitialiseServer();
-		network.AcceptConnection();
-		break;
-	}
-	default:
-		break;
+		case PregameSetup::GameMode::Client:
+			{
+				network.InitialiseClient();
+				break;
+			}
+		case PregameSetup::GameMode::Server:
+			{
+				network.InitialiseServer();
+				network.AcceptConnection();
+				break;
+			}
+		default:
+			{
+				break;
+			}
 	}
 
 
@@ -253,19 +262,19 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-			case UIGameSession::Events::MenuButton:
-				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-				return;
-			case UIGameSession::Events::PassButton:
-				gameSessionGUI.NextTurn();
-				++activePlayerIterator;
-				if (activePlayerIterator == pregameSetup.GetPlayerCount())
-					activePlayerIterator = 0;
-				activePlayer = players[activePlayerIterator];
-				break;
-			default:
-				break;
+				case UIGameSession::Events::MenuButton:
+					SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+					SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+					return;
+				case UIGameSession::Events::PassButton:
+					gameSessionGUI.NextTurn();
+					++activePlayerIterator;
+					if (activePlayerIterator == pregameSetup.GetPlayerCount())
+						activePlayerIterator = 0;
+					activePlayer = players[activePlayerIterator];
+					break;
+				default:
+					break;
 			}
 		}
 

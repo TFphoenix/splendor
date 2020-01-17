@@ -130,6 +130,9 @@
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkPacket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rapidxml.hpp">
@@ -272,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="SoundSystem.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkPacket.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
