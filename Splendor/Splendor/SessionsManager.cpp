@@ -214,6 +214,13 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
+	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 
 	// Testing Networking
 	//
@@ -228,14 +235,12 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 		case PregameSetup::GameMode::Client:
 			{
 				network.InitialiseClient();
-				network.SendData(networkPacket);
 				break;
 			}
 		case PregameSetup::GameMode::Server:
 			{
 				network.InitialiseServer();
 				network.AcceptConnection();
-				network.ReceiveData(networkPacket);
 				break;
 			}
 		default:
@@ -269,6 +274,11 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 						if (activePlayerIterator == pregameSetup.GetPlayerCount())
 							activePlayerIterator = 0;
 						activePlayer = players[activePlayerIterator];
+						
+						network.ReceiveData(networkPacket);
+						networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+						network.SendData(networkPacket);
+						
 						break;
 					}
 				default:
