@@ -171,6 +171,10 @@
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="UITutorialSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">
@@ -307,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="UITutorialSession.h">
+      <Filter>GUI\Sessions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

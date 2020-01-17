@@ -7,6 +7,7 @@
 #include "UIMainMenuSession.h"
 #include "UIPreGameSession.h"
 #include "UIGameSession.h"
+#include "UITutorialSession.h"
 #include "CardDAO.h"
 #include "Player.h"
 #include "SoundSystem.h"
@@ -64,6 +65,9 @@ void SessionsManager::MainMenuSession() const
 				break;
 			case UIMainMenuSession::Events::Tutorial:
 				// Tutorial Session
+				logger.Log("Starting Tutorial Session...", Logger::Level::Info);
+
+				TutorialSession();
 				break;
 			case UIMainMenuSession::Events::Settings:
 				// Settings Session
@@ -119,6 +123,35 @@ void SessionsManager::PreGameSession() const
 		window->draw(pregameSessionGUI);
 		window->display();
 	}
+}
+
+void SessionsManager::TutorialSession() const
+{
+	logger.Log("Entered Tutorial Session", Logger::Level::Info);
+	UITutorialSession tutorialSessionGUI(windowSize);
+	logger.Log("Initialized Tutorial GUI", Logger::Level::Info);
+
+	while (window->isOpen())
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			tutorialSessionGUI.PassEvent(event);
+			switch (tutorialSessionGUI.GetEvent())
+			{
+			case UITutorialSession::Events::MainMenu:
+				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+				return;
+			default:
+				break;
+			}
+		}
+
+		window->clear(UIColors::NavyBlue);
+		window->draw(tutorialSessionGUI);
+		window->display();
+	}
+
 }
 
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
