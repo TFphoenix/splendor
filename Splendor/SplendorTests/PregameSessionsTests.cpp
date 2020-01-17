@@ -33,8 +33,7 @@ namespace SplendorTests
 			std::cout << two;
 
 			Board board;
-			const auto nobleDeck = board.GetNobleDeck();
-			const int numberOfNobleCards = nobleDeck.GetNumberOfCards();
+			const int numberOfNobleCards = board.GetCardSlotsData(CardDAO::Type::Noble).size();
 
 			Assert::IsTrue(numberOfNobleCards == nobleCount, L"Number of nobles is not equal to player count (3) + 1!");
 		}
