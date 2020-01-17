@@ -1,8 +1,8 @@
 #include "NetworkPacket.h"
 
-void NetworkPacket::SetHandData(std::tuple<std::string, std::string, std::string, std::string> handData)
+void NetworkPacket::SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData)
 {
-	auto [resourcesString, tokensString, expansionString, nobleString] = handData;
+	auto& [resourcesString, tokensString, expansionString, nobleString] = handData;
 	m_handResources = resourcesString;
 	m_handTokens = tokensString;
 	m_handExpansions = expansionString;

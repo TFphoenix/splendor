@@ -6,15 +6,15 @@
 
 class NetworkPacket
 {
-	
+
 public:
 	//hand
 	std::string m_handResources;
 	std::string m_handTokens;
 	std::string m_handExpansions;
 	std::string m_handNoble;
-	
-	void SetHandData(std::tuple<std::string, std::string, std::string, std::string> handData);
+
+	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
 
 	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& c)
 	{

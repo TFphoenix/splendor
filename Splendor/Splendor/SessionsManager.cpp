@@ -146,7 +146,6 @@ void SessionsManager::TutorialSession() const
 		window->draw(tutorialSessionGUI);
 		window->display();
 	}
-
 }
 
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
@@ -178,7 +177,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
-	// Test
+	// Dummy Data
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
 	players[0].GetHand().AddResource(IToken::Type::RedRuby);
@@ -279,22 +278,19 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 				if (isSending)
 				{
+					isSending = false;
+					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
 					network.SendData(networkPacket);
-					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-					//network.ReceiveData(networkPacket);
 				}
-				else
-				{
-					network.ReceiveData(networkPacket);
-					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-					//network.SendData(networkPacket);
-				}
-
-
 				break;
 			}
 			default:
 			{
+				if (isSending == false)
+				{
+					isSending = true;
+					network.ReceiveData(networkPacket);
+				}
 				break;
 			}
 			}
@@ -314,7 +310,4 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
-	//SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-
-
 }
