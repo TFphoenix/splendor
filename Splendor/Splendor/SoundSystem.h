@@ -18,10 +18,11 @@ public:
 		BuyCardSFX,
 		HoldCardSFX,
 		WinNobleSFX,
+		OverSFX,
 		CheckBoxSFX,
-		ButtonOverSFX
+		WrongSFX
 	};
-	static inline const uint16_t s_soundTypeSize = 7;
+	static inline const uint16_t s_soundTypeSize = 8;
 
 	enum class MusicType
 	{

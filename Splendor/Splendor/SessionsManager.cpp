@@ -160,6 +160,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	//Game Music sound on
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
+	SoundSystem::SetMusicVolume(60);
 
 	// Initialize Players
 	std::vector<Player> players;

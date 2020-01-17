@@ -1,5 +1,6 @@
 #include "UIButton.h"
 #include "UIColors.h"
+#include "SoundSystem.h"
 
 UIButton::Design::Design(const Body& bodyDesign, const Text& textDesign) : m_bodyDesign(bodyDesign), m_textDesign(textDesign) {}
 
@@ -129,6 +130,7 @@ void UIButton::OnMouseEnter()
 	m_currentState = State::Hover;
 	m_currentDesign = &m_hoverDesign;
 	UpdateDesign();
+	SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
 }
 
 void UIButton::OnMouseLeave()
@@ -143,6 +145,7 @@ void UIButton::OnMouseLeftClick()
 	m_currentState = State::Press;
 	m_currentDesign = &m_pressDesign;
 	UpdateDesign();
+	SoundSystem::PlaySFX(SoundSystem::SoundType::ButtonSFX);
 }
 
 void UIButton::OnMouseLeftRelease()

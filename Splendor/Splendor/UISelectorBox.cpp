@@ -1,4 +1,5 @@
 #include "UISelectorBox.h"
+#include "SoundSystem.h"
 
 UISelectorBox::UISelectorBox(const std::string& title, Type type, const sf::Vector2f& position, const sf::Vector2f& size, const Design& uncheckedDesign, const Design& checkedDesign) :
 	UISelector(title, position, size, false),
@@ -70,6 +71,7 @@ void UISelectorBox::ChangeState()
 void UISelectorBox::OnMouseLeftClick()
 {
 	ChangeState();
+	SoundSystem::PlaySFX(SoundSystem::SoundType::CheckBoxSFX);
 }
 
 void UISelectorBox::draw(sf::RenderTarget& target, sf::RenderStates states) const

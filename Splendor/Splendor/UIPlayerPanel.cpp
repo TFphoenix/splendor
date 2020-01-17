@@ -1,6 +1,7 @@
 #include "UIPlayerPanel.h"
 #include "Randomizer.h"
 #include "UIColors.h"
+#include "SoundSystem.h"
 
 #include <sstream>
 
@@ -74,6 +75,7 @@ void UIPlayerPanel::OnMouseEnter()
 {
 	m_background.setFillColor(UIColors::LightGray);
 	m_background.setOutlineColor(UIColors::NeutralWhite);
+	SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
 }
 
 void UIPlayerPanel::OnMouseLeave()
@@ -86,6 +88,7 @@ void UIPlayerPanel::OnMouseLeftClick()
 {
 	m_background.setFillColor(UIColors::DarkGray);
 	m_background.setOutlineColor(UIColors::LightGray);
+	SoundSystem::PlaySFX(SoundSystem::SoundType::ButtonSFX);
 }
 
 void UIPlayerPanel::OnMouseLeftRelease()

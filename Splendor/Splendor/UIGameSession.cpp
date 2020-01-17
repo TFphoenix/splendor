@@ -1,5 +1,6 @@
 #include "UIGameSession.h"
 #include "UISelectedCard.h"
+#include "SoundSystem.h"
 
 #include <iostream>
 
@@ -120,6 +121,9 @@ void UIGameSession::UpdateGame()
 				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();
 				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+
+				// Sound SFX
+				SoundSystem::PlaySFX(SoundSystem::SoundType::BuyCardSFX);
 			}
 			catch (std::length_error & exception)
 			{
@@ -173,6 +177,9 @@ void UIGameSession::UpdateGame()
 				m_tokensPanel.NumbAll();
 				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
 
+				// Sound SFX
+				SoundSystem::PlaySFX(SoundSystem::SoundType::HoldCardSFX);
+
 				break;
 			}
 			// Expansion Card
@@ -205,6 +212,9 @@ void UIGameSession::UpdateGame()
 				pickedCard->first->Deactivate();
 				m_tokensPanel.NumbAll();
 				std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+
+				// Sound SFX
+				SoundSystem::PlaySFX(SoundSystem::SoundType::HoldCardSFX);
 			}
 			catch (std::out_of_range & exception)
 			{
@@ -264,6 +274,9 @@ void UIGameSession::UpdateGame()
 					m_handPanel.NumbAllExpansions();
 					m_tokensPanel.NumbAll();
 					std::for_each(m_expansionPanels.begin(), m_expansionPanels.end(), [](std::reference_wrapper<UICardsRowPanel>& panel) {panel.get().NumbAll(); });
+
+					// Sound SFX
+					SoundSystem::PlaySFX(SoundSystem::SoundType::BuyCardSFX);
 				}
 				catch (std::length_error & exception)
 				{
@@ -320,6 +333,7 @@ void UIGameSession::NextTurn()
 		r_activePlayer.get().AddPrestigePoints(nobleCard.GetPrestigePoints());
 		m_playersPanel.AddPrestigePointsToCurrentPlayer(nobleCard.GetPrestigePoints());
 		r_activePlayer.get().GetHand().AddNobleCard(std::move(nobleCard));
+		SoundSystem::PlaySFX(SoundSystem::SoundType::WinNobleSFX);
 		std::cout << "WON NOBLE\n";
 	}
 

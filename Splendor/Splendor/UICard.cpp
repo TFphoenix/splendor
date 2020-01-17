@@ -2,6 +2,7 @@
 #include "GamePieces.h"
 #include "UIColors.h"
 #include "UISelectedCard.h"
+#include "SoundSystem.h"
 
 #include <thread>
 
@@ -88,6 +89,7 @@ void UICard::TriggerWarning()
 {
 	m_warning = true;
 	setOutlineColor(UIColors::WarningRed);
+	SoundSystem::PlaySFX(SoundSystem::SoundType::WrongSFX);
 }
 
 void UICard::Deactivate()
@@ -132,6 +134,7 @@ void UICard::OnMouseEnter()
 			UISelectedCard::UpdateText(sf::Vector2f(getPosition().x + getSize().x, getPosition().y));
 			return;
 		}
+		SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
 	}
 
 	if (m_inHand) return;

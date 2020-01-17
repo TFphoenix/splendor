@@ -1,5 +1,6 @@
 #include "UIToken.h"
 #include "UIColors.h"
+#include "SoundSystem.h"
 
 std::vector<sf::Texture> UIToken::s_tokenTextures;
 
@@ -88,6 +89,7 @@ void UIToken::OnMouseEnter()
 		m_state = State::Hover;
 		m_body.setScale(1.1, 1.1);
 		m_body.setOutlineColor(m_hoverColor - UIColors::QuarterTransparent);
+		SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
 	}
 }
 
@@ -108,6 +110,7 @@ void UIToken::OnMouseLeftClick()
 		m_state = State::Press;
 		m_body.setScale(0.9, 0.9);
 		m_body.setOutlineColor(UIColors::Transparent);
+		SoundSystem::PlaySFX(SoundSystem::SoundType::TokenSFX);
 	}
 }
 
