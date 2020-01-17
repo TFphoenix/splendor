@@ -36,6 +36,9 @@ public:
 	void AddNobleCard(NobleCard&& card);
 	GemsMap BuyExpansionCard(ExpansionCard&& expansionCard);
 
+	// Networking
+	void ConvertToPackage() const;
+
 private:
 	mutable GemsMap m_resources;
 	mutable GemsMap m_tokens;

@@ -162,6 +162,103 @@ Hand::GemsMap Hand::BuyExpansionCard(ExpansionCard&& expansionCard)
 	return tokensToReturn;
 }
 
+void Hand::ConvertToPackage() const
+{
+	// Resources
+	std::string resourcesString;
+	for (const auto& resource : m_resources)
+	{
+		switch (resource.first)
+		{
+		case IToken::Type::GreenEmerald:
+			resourcesString += "E";
+			break;
+		case IToken::Type::BlueSapphire:
+			resourcesString += "S";
+			break;
+		case IToken::Type::WhiteDiamond:
+			resourcesString += "D";
+			break;
+		case IToken::Type::BlackOnyx:
+			resourcesString += "O";
+			break;
+		case IToken::Type::RedRuby:
+			resourcesString += "R";
+			break;
+		case IToken::Type::Gold:
+			resourcesString += "R";
+			break;
+		default:
+			throw std::domain_error("Error converting resources to package");
+		}
+		resourcesString += std::to_string(resource.second) + ' ';
+	}
+
+	// Tokens
+	std::string tokensString;
+	for (const auto& token : m_tokens)
+	{
+		switch (token.first)
+		{
+		case IToken::Type::GreenEmerald:
+			tokensString += "E";
+			break;
+		case IToken::Type::BlueSapphire:
+			tokensString += "S";
+			break;
+		case IToken::Type::WhiteDiamond:
+			tokensString += "D";
+			break;
+		case IToken::Type::BlackOnyx:
+			tokensString += "O";
+			break;
+		case IToken::Type::RedRuby:
+			tokensString += "R";
+			break;
+		case IToken::Type::Gold:
+			tokensString += "R";
+			break;
+		default:
+			throw std::domain_error("Error converting tokens to package");
+		}
+		tokensString += std::to_string(token.second) + ' ';
+	}
+
+	// Expansion Cards
+	std::string expansionCardsString;
+	for (const auto& expansionCard : m_expansionCards)
+	{
+		if (expansionCard.has_value())
+		{
+			switch (expansionCard.value().GetLevel())
+			{
+			case ExpansionCard::Level::Level1:
+				expansionCardsString += "1";
+				break;
+			case ExpansionCard::Level::Level2:
+				expansionCardsString += "2";
+				break;
+			case ExpansionCard::Level::Level3:
+				expansionCardsString += "3";
+				break;
+			default:
+				throw std::domain_error("Error converting expansion cards to package");;
+			}
+			expansionCardsString += std::to_string(expansionCard.value().GetId()) + ' ';
+		}
+	}
+
+	// Noble Cards
+	std::string nobleCardsString;
+	for (const auto& nobleCard : m_nobleCards)
+	{
+		if (nobleCard.has_value())
+		{
+			nobleCardsString += std::to_string(nobleCard.value().GetId()) + ' ';
+		}
+	}
+}
+
 bool Hand::IsFull() const
 {
 	return m_expansionCards[2].has_value();
