@@ -133,7 +133,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CardDAO.cpp" />
     <ClCompile Include="CircCollider.cpp" />
@@ -181,7 +180,6 @@
     <ClCompile Include="UIVTokensPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CardDAO.h" />
     <ClInclude Include="CircCollider.h" />
@@ -194,6 +192,7 @@
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="RectCollider.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="ExpansionCard.h" />

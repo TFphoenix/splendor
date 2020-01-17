@@ -43,7 +43,7 @@ namespace SplendorTests
 			const int tokenCount = playerCount + 1;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
 
 			Board board;
 			const int numberOfToken = board.GetTokensData()[IToken::Type::BlueSapphire];

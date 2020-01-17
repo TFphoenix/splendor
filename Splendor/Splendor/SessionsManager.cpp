@@ -11,6 +11,7 @@
 #include "CardDAO.h"
 #include "Player.h"
 #include "SoundSystem.h"
+#include "Network.h"
 
 
 SessionsManager::SessionsManager() :
@@ -46,9 +47,9 @@ void SessionsManager::MainMenuSession() const
 
 	SoundSystem::LoadFromFile();
 	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-	
 
-	
+
+
 
 	while (window->isOpen())
 	{
@@ -78,7 +79,7 @@ void SessionsManager::MainMenuSession() const
 
 				return;
 			case UIMainMenuSession::Events::Test:
-				
+
 				TestSession();
 				break;
 			default:
@@ -157,6 +158,25 @@ void SessionsManager::TutorialSession() const
 void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 {
 	logger.Log("Entered Game Session", Logger::Level::Info);
+	// Testing Networking
+	Network network;
+	switch (pregameSetup.GetGameMode())
+	{
+	case PregameSetup::GameMode::Client:
+	{
+		network.InitialiseClient();
+		break;
+	}
+	case PregameSetup::GameMode::Server:
+	{
+		network.InitialiseServer();
+		network.AcceptConnection();
+		break;
+	}
+	default:
+		break;
+	}
+
 
 	// Initialize Database
 	CardDAO cardsDatabase;
@@ -264,6 +284,6 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 void SessionsManager::TestSession() const
 {
 	//SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-	
-		
+
+
 }

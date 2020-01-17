@@ -1,97 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="GUI">
-      <UniqueIdentifier>{1db8a406-86fa-4d98-9ca0-275a7caab89a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utility">
-      <UniqueIdentifier>{09eb9967-5ca3-4efa-a93a-dd6290d0828a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main">
-      <UniqueIdentifier>{379be94f-5060-44f6-9834-e1aedba7e7be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utility\Colliders">
-      <UniqueIdentifier>{016a3cb1-33e0-49af-a279-2242ee035977}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Primitives">
-      <UniqueIdentifier>{68f10611-4c74-46bf-9475-886a9f969d8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Game Pieces">
-      <UniqueIdentifier>{cf7cad3c-58cb-41b6-b1df-5eaffb5c283b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Panels">
-      <UniqueIdentifier>{049c71b2-45a3-4f72-9c5a-99aa0324373a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Sessions">
-      <UniqueIdentifier>{e95c5891-27c2-4846-b032-acf252cb77d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pregame">
-      <UniqueIdentifier>{91c320cf-56fb-4408-b1fc-8daa359f09c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{79932a42-7573-4727-a0db-74563271cbd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Game Pieces">
-      <UniqueIdentifier>{3b616ff9-6d4b-4fca-aa1a-227df5e290ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Abstract">
-      <UniqueIdentifier>{af4e6f3a-4020-45fb-90e7-92fdd5c57cc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data">
-      <UniqueIdentifier>{9ecb53bd-efd2-4faf-9b2a-b727e4f77f7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\RapidXML">
-      <UniqueIdentifier>{1ae56c53-6716-4fca-8211-c23ea9f01baa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network">
-      <UniqueIdentifier>{2162647a-fc5c-4f69-9279-083a2695967f}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Randomizer.cpp">
-      <Filter>Utility</Filter>
+    <ClCompile Include="CardDAO.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="SessionsManager.cpp">
-      <Filter>Main</Filter>
+    <ClCompile Include="GamePieces.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="Splendor.cpp">
-      <Filter>Main</Filter>
+    <ClCompile Include="Hand.cpp">
+      <Filter>Entities\Abstract</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Utility\Colliders</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities\Abstract</Filter>
     </ClCompile>
-    <ClCompile Include="RectCollider.cpp">
-      <Filter>Utility\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="CircCollider.cpp">
-      <Filter>Utility\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp">
-      <Filter>GUI\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="UIText.cpp">
-      <Filter>GUI\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="UIToken.cpp">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="UIPanel.cpp">
-      <Filter>GUI\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="UIPreGameSession.cpp">
-      <Filter>GUI\Sessions</Filter>
-    </ClCompile>
-    <ClCompile Include="UISelector.cpp">
-      <Filter>GUI\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="UIOptionsPanel.cpp">
-      <Filter>GUI\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="PregameSetup.cpp">
-      <Filter>Pregame</Filter>
-    </ClCompile>
-    <ClCompile Include="UIMainMenuSession.cpp">
-      <Filter>GUI\Sessions</Filter>
+    <ClCompile Include="Board.cpp">
+      <Filter>Entities\Abstract</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Entities\Game Pieces</Filter>
@@ -111,121 +34,130 @@
     <ClCompile Include="Token.cpp">
       <Filter>Entities\Game Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Hand.cpp">
-      <Filter>Entities\Abstract</Filter>
+    <ClCompile Include="UICard.cpp">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="UIToken.cpp">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="UIResource.cpp">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="UISelectedCard.cpp">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPreGameSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMainMenuSession.cpp">
+      <Filter>GUI\Sessions</Filter>
     </ClCompile>
     <ClCompile Include="UIGameSession.cpp">
       <Filter>GUI\Sessions</Filter>
     </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>GUI\Primitives</Filter>
+    </ClCompile>
     <ClCompile Include="UISelectorBox.cpp">
       <Filter>GUI\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="UICard.cpp">
-      <Filter>GUI\Game Pieces</Filter>
+    <ClCompile Include="UISelector.cpp">
+      <Filter>GUI\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="GamePieces.cpp">
-      <Filter>Data</Filter>
+    <ClCompile Include="UIText.cpp">
+      <Filter>GUI\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="CardDAO.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
-    <ClCompile Include="UIInfoPanel.cpp">
+    <ClCompile Include="UIVTokensPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="UIPlayerPanel.cpp">
+    <ClCompile Include="UITokenAlertPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
     <ClCompile Include="UIPlayersPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="UIVTokensPanel.cpp">
+    <ClCompile Include="UIPlayerPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="UICardsRowPanel.cpp">
+    <ClCompile Include="UIOptionsPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Entities\Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="UISelectedCard.cpp">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="UIHandPanel.cpp">
+    <ClCompile Include="UIInfoPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
     <ClCompile Include="UIHTokensPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="UIResource.cpp">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClCompile>
     <ClCompile Include="UIHResourcesPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Entities\Abstract</Filter>
-    </ClCompile>
-    <ClCompile Include="UITokenAlertPanel.cpp">
+    <ClCompile Include="UIHandPanel.cpp">
       <Filter>GUI\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
+    <ClCompile Include="UICardsRowPanel.cpp">
+      <Filter>GUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionsManager.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Splendor.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="CircCollider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="RectCollider.cpp">
+      <Filter>Utility\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Randomizer.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PregameSetup.cpp">
+      <Filter>Pregame</Filter>
+    </ClCompile>
+    <ClCompile Include="UITutorialSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPanel.cpp">
+      <Filter>GUI\Panels</Filter>
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
-      <Filter>Network</Filter>
-    <ClCompile Include="Server.cpp" />
-    <ClCompile Include="UITutorialSession.cpp">
-      <Filter>GUI\Sessions</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Randomizer.h">
-      <Filter>Utility</Filter>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Data\RapidXML</Filter>
     </ClInclude>
-    <ClInclude Include="SessionsManager.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="rapidxml_iterators.hpp">
+      <Filter>Data\RapidXML</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Utility\Colliders</Filter>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Data\RapidXML</Filter>
     </ClInclude>
-    <ClInclude Include="RectCollider.h">
-      <Filter>Utility\Colliders</Filter>
+    <ClInclude Include="rapidxml_utils.hpp">
+      <Filter>Data\RapidXML</Filter>
     </ClInclude>
-    <ClInclude Include="CircCollider.h">
-      <Filter>Utility\Colliders</Filter>
+    <ClInclude Include="CardDAO.h">
+      <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h">
-      <Filter>GUI\Primitives</Filter>
+    <ClInclude Include="GamePieces.h">
+      <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="UIColors.h">
-      <Filter>GUI\Primitives</Filter>
+    <ClInclude Include="Hand.h">
+      <Filter>Entities\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="UIText.h">
-      <Filter>GUI\Primitives</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Entities\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="UIToken.h">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="UIPanel.h">
-      <Filter>GUI\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="UIPreGameSession.h">
-      <Filter>GUI\Sessions</Filter>
-    </ClInclude>
-    <ClInclude Include="UISelector.h">
-      <Filter>GUI\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="UIOptionsPanel.h">
-      <Filter>GUI\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="PregameSetup.h">
-      <Filter>Pregame</Filter>
-    </ClInclude>
-    <ClInclude Include="UIMainMenuSession.h">
-      <Filter>GUI\Sessions</Filter>
+    <ClInclude Include="Board.h">
+      <Filter>Entities\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Entities\Game Pieces</Filter>
@@ -245,83 +177,149 @@
     <ClInclude Include="Token.h">
       <Filter>Entities\Game Pieces</Filter>
     </ClInclude>
-    <ClInclude Include="Hand.h">
-      <Filter>Entities\Abstract</Filter>
+    <ClInclude Include="UICard.h">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="UIToken.h">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="UIResource.h">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="UISelectedCard.h">
+      <Filter>GUI\Game Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPreGameSession.h">
+      <Filter>GUI\Sessions</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMainMenuSession.h">
+      <Filter>GUI\Sessions</Filter>
     </ClInclude>
     <ClInclude Include="UIGameSession.h">
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>GUI\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="UIColors.h">
+      <Filter>GUI\Primitives</Filter>
+    </ClInclude>
     <ClInclude Include="UISelectorBox.h">
       <Filter>GUI\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="UICard.h">
-      <Filter>GUI\Game Pieces</Filter>
+    <ClInclude Include="UISelector.h">
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="GamePieces.h">
-      <Filter>Data</Filter>
+    <ClInclude Include="UIText.h">
+      <Filter>GUI\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="CardDAO.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml.hpp">
-      <Filter>Data\RapidXML</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml_iterators.hpp">
-      <Filter>Data\RapidXML</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml_print.hpp">
-      <Filter>Data\RapidXML</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml_utils.hpp">
-      <Filter>Data\RapidXML</Filter>
-    </ClInclude>
-    <ClInclude Include="UIInfoPanel.h">
+    <ClInclude Include="UIVTokensPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="UIPlayerPanel.h">
+    <ClInclude Include="UITokenAlertPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
     <ClInclude Include="UIPlayersPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="UIVTokensPanel.h">
+    <ClInclude Include="UIPlayerPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="UICardsRowPanel.h">
+    <ClInclude Include="UIOptionsPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Entities\Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="UISelectedCard.h">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="UIHandPanel.h">
+    <ClInclude Include="UIInfoPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
     <ClInclude Include="UIHTokensPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="UIResource.h">
-      <Filter>GUI\Game Pieces</Filter>
-    </ClInclude>
     <ClInclude Include="UIHResourcesPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Entities\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="UITokenAlertPanel.h">
+    <ClInclude Include="UIHandPanel.h">
       <Filter>GUI\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Utility</Filter>
+    <ClInclude Include="UICardsRowPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionsManager.h">
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Network.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="CircCollider.h">
+      <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="RectCollider.h">
+      <Filter>Utility\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Randomizer.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PregameSetup.h">
+      <Filter>Pregame</Filter>
+    </ClInclude>
     <ClInclude Include="UITutorialSession.h">
       <Filter>GUI\Sessions</Filter>
     </ClInclude>
+    <ClInclude Include="UIPanel.h">
+      <Filter>GUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{7fbf9e86-fd6e-4a63-bdfc-5144cd6d5812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\RapidXML">
+      <UniqueIdentifier>{483cebd2-48fa-423e-b31c-632d610ebe59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{2b247f05-f960-442b-98b0-c053e091d3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Abstract">
+      <UniqueIdentifier>{a9c8b880-88b6-4001-bb75-ad0f8cdae974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Game Pieces">
+      <UniqueIdentifier>{a3d31fb1-d442-4bc5-94d7-cc0c3e10b8f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{13f83d32-e71c-4212-b853-e142b51e4257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Game Pieces">
+      <UniqueIdentifier>{6cfa8a4b-6f1d-4fe3-96de-54c2ed67b147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Panels">
+      <UniqueIdentifier>{04b9cef0-674c-4c4c-bfb6-9201671fdc2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Primitives">
+      <UniqueIdentifier>{440d6a8c-4671-4292-8cdb-1e04d927223c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Sessions">
+      <UniqueIdentifier>{16fbf69f-836b-40f4-be99-6a6072fddf15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{fff874e3-364d-4106-b4ca-baf1c2a6253b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{62e6eb97-6d05-4040-bfd8-1333ff1797da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pregame">
+      <UniqueIdentifier>{5abd92e7-40ab-437e-bbfd-da5af92b58ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{6ef10781-aa28-4cbc-8967-6dc4d5e221ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Colliders">
+      <UniqueIdentifier>{70db4b02-b81a-4f91-ab6d-09e95b47b45b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\external\Cards Database\CardsDatabase.xml">
