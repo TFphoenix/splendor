@@ -15,7 +15,8 @@ public:
 	void MainMenuSession() const;
 	void PreGameSession() const;
 	void TutorialSession() const;
-	void GameSession(const PregameSetup& pregameSetup) const;
+	void GameSessionOffline(const PregameSetup& pregameSetup) const;
+	void GameSessionOnline(const PregameSetup& pregameSetup) const;
 	void TestSession() const;
 
 private:

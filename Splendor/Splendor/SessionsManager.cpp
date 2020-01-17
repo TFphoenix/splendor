@@ -103,12 +103,20 @@ void SessionsManager::PreGameSession() const
 			switch (pregameSessionGUI.GetEvent())
 			{
 			case UIPreGameSession::Events::MainMenu:
+			{
 				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
 				return;
+			}
 			case UIPreGameSession::Events::StartGame:
+			{
 				logger.Log("Starting Game Session...", Logger::Level::Info);
-				GameSession(pregameSessionGUI.GetPregameSetup());
+				const PregameSetup& pregameSetup = pregameSessionGUI.GetPregameSetup();
+				if (pregameSetup.GetGameMode() == PregameSetup::GameMode::Offline)
+					GameSessionOffline(pregameSetup);
+				else
+					GameSessionOnline(pregameSetup);
 				return;
+			}
 			default:
 				break;
 			}
@@ -148,7 +156,82 @@ void SessionsManager::TutorialSession() const
 	}
 }
 
-void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
+void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
+{
+	logger.Log("Entered Game Session", Logger::Level::Info);
+
+	// Initialize Database
+	CardDAO cardsDatabase;
+	logger.Log("Initialized Cards Database", Logger::Level::Info);
+
+	//Game Music sound on
+	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
+	SoundSystem::SetMusicVolume(60);
+
+	// Initialize Players
+	std::vector<Player> players;
+	for (size_t playerNr = 1; playerNr <= pregameSetup.GetPlayerCount(); ++playerNr)
+	{
+		players.emplace_back(playerNr, "Player " + std::to_string(playerNr));
+	}
+	size_t activePlayerIterator = 0;
+	std::reference_wrapper<Player> activePlayer = players[activePlayerIterator];
+
+	// Initialize Board
+	Board board;
+
+	// Initialize GUI
+	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
+	logger.Log("Initialized Game GUI", Logger::Level::Info);
+
+
+
+
+
+	// Game Loop
+	gameSessionGUI.StartGame();
+	std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
+	logger.Log("Game started", Logger::Level::Info);
+	while (window->isOpen())
+	{
+		// Event Handling
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			gameSessionGUI.PassEvent(event);
+			switch (gameSessionGUI.GetEvent())
+			{
+			case UIGameSession::Events::MenuButton:
+				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+				return;
+			case UIGameSession::Events::PassButton:
+				gameSessionGUI.NextTurn();
+				++activePlayerIterator;
+				if (activePlayerIterator == pregameSetup.GetPlayerCount())
+					activePlayerIterator = 0;
+				activePlayer = players[activePlayerIterator];
+				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
+				break;
+			default:
+				break;
+			}
+		}
+
+		// Game Logic
+		// (Transfer everything to a Game Controller)
+		// ...
+
+		// Update & Display
+		gameSessionGUI.UpdateGame();
+		window->clear(UIColors::NavyBlue);
+		window->draw(gameSessionGUI);
+		window->display();
+	}
+}
+
+void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 {
 	logger.Log("Entered Game Session", Logger::Level::Info);
 
