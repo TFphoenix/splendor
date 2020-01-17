@@ -5,40 +5,40 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 
-std::string ipAddress = "84.232.140.47";
-
 int main()
 {
 
-	std::string ipAddress("169.254.161.225");
+	std::string ipAddress("172.27.3.50");
 	sf::TcpSocket socket;
-	sf::Packet packet;
-	
-	socket.connect(ipAddress, 2000);
 
+	std::string clientName("Adi");
+
+	int port = 13010;
+	socket.connect(ipAddress, port);
+
+	bool quit = false;
 	std::string message;
-	char command;
-	
-	while (true)
-	{
-		std::cout << "command >";
-		std::cin >> command;
-		if (command == 'x')
-		{
-			break;
-		}
+	sf::Packet packet;
 
-		std::cin >> message;
+	while (!quit)
+	{
+
+		std::cout << ", your message: ";
+		std::getline(std::cin, message);
 		packet << message;
 		socket.send(packet);
 
 		packet.clear();
+		message.clear();
 
 		// receive	
 		socket.receive(packet);
-		std::string buffer;
-		packet >> buffer;
-		std::cout << "The server said: " << buffer << std::endl;
+		packet >> message;
+		std::cout << clientName << " " << message << std::endl;
+
+		packet.clear();
+		message.clear();
+
 	}
 
 	return 0;

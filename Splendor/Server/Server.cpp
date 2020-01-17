@@ -7,44 +7,81 @@
 int main()
 {
 
-	int port = 2000;
+	int port = 13010;
 
 	sf::TcpListener listener;
 	sf::Packet packet;
 	sf::TcpSocket socket;
 
-	std::cout << "Server is running and accepting connections on port " << port << std::endl;
+	std::string serverName("Server: ");
 
 	listener.listen(port);
+	std::cout << "Server is running and accepting connections on port " << listener.getLocalPort() << " and address: " << std::endl;
+	std::cout << "Waiting for clients to connect...";
+
 	listener.accept(socket);
 	std::cout << "New client connected: " << socket.getRemoteAddress() << std::endl;
 
 	std::string message;
-	char command;
+	char command = 'a';
 
+	bool quit = false;
+	sf::Mutex globalMutex;
+
+	std::string msgSend;
+	std::string oldMsg;
+
+	sf::Packet packetReceive;
+	std::string msg;
+
+	while (!quit)
+	{
+
+		// receive	
+		socket.receive(packet);
+		packet >> message;
+		std::cout << "Adi said: " << " " << message << std::endl;
+
+		packet.clear();
+		message.clear();
+
+		std::cout << ", your message: ";
+		std::getline(std::cin, message);
+		packet << message;
+		socket.send(packet);
+
+		packet.clear();
+		message.clear();
+
+	}
+
+	/*
 	while (true)
 	{
 
-		std::cout << "command >";
-		std::cin >> command;
+		//std::cout << "command >";
+		//std::cin >> command;
+		std::cout << serverName;
 		if (command == 'x')
 		{
 			break;
 		}
 
+		// receive
+		socket.receive(packet);
+		std::string buffer;
+		packet >> message;
+		std::cout << serverName << " " << message << std::endl;
+
 		// send
-		std::cin >> message;
+		std::getline(std::cin, message);
 		packet << message;
 		socket.send(packet);
 
 		packet.clear();
-		
-		// receive	
-		socket.receive(packet);
-		std::string buffer;
-		packet >> buffer;
-		std::cout << "The client said: " << buffer << std::endl;
+		message.clear();
 	}
+	*/
 
 	return 0;
 }
