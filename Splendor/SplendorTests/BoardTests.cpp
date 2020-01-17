@@ -22,8 +22,9 @@ namespace SplendorTests
 		TEST_METHOD(TokenOverflow) {
 			PregameSetup pregameSetup(4, PregameSetup::GameMode::Local, false, false);
 			Board board;
+			
 			uint16_t amount = GamePieces::s_GemTokenCount + 1;
-			auto func = [&board,&amount]()
+			const auto func = [&board, &amount]()
 			{
 				while (amount)
 				{
@@ -34,7 +35,18 @@ namespace SplendorTests
 			};
 
 			Assert::ExpectException<std::out_of_range>(func);
+		}
 
+		TEST_METHOD(TokenUnderflow) {
+			PregameSetup pregameSetup(4, PregameSetup::GameMode::Local, false, false);
+			Board board;
+
+			const auto func = [&board]()
+			{
+				board.ReturnToken(IToken::Type::BlackOnyx);
+			};
+
+			Assert::ExpectException<std::out_of_range>(func);
 		}
 	};
 }
