@@ -1,11 +1,12 @@
 #pragma once
-
 #include "Board.h"
 #include "Hand.h"
 #include <SFML/Network/Packet.hpp>
 
 class NetworkPacket
 {
+public:
+	static inline std::string s_delimiter = "-";
 
 public:
 	// Hand
@@ -26,10 +27,10 @@ public:
 	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
 
 	// Decks
-	std::string m_boardNobleDeckString;
-	std::string m_boardExpansionL1DeckString;
-	std::string m_boardExpansionL2DeckString;
-	std::string m_boardExpansionL3DeckString;
+	std::string m_deckNobleDeckString;
+	std::string m_deckExpansionL1DeckString;
+	std::string m_deckExpansionL2DeckString;
+	std::string m_deckExpansionL3DeckString;
 
 	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
 
@@ -52,10 +53,10 @@ public:
 		out << "ExpansionsL3: " << packet.m_boardExpansionL3SlotsString << "\n";
 		//decks data
 		out << "[Decks Data]\n";
-		out << "Nobles: " << packet.m_boardNobleDeckString << "\n";
-		out << "ExpansionsL1: " << packet.m_boardExpansionL1DeckString << "\n";
-		out << "ExpansionsL2: " << packet.m_boardExpansionL2DeckString << "\n";
-		out << "ExpansionsL3: " << packet.m_boardExpansionL3DeckString << "\n";
+		out << "Nobles: " << packet.m_deckNobleDeckString << "\n";
+		out << "ExpansionsL1: " << packet.m_deckExpansionL1DeckString << "\n";
+		out << "ExpansionsL2: " << packet.m_deckExpansionL2DeckString << "\n";
+		out << "ExpansionsL3: " << packet.m_deckExpansionL3DeckString << "\n";
 
 		return out;
 	}

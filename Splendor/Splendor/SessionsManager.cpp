@@ -316,6 +316,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 		isSending = true;
 		network.InitialiseClient();
 		networkPacket.SetDecksData(board.ConvertDecksToPackage());
+		networkPacket.SetBoardData(board.ConvertBoardToPackage());
 		network.SendData(networkPacket);
 		break;
 	}
@@ -325,6 +326,9 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 		network.InitialiseServer();
 		network.AcceptConnection();
 		network.ReceiveData(networkPacket);
+
+		// Set-up board & decks
+		board.ConvertPackageToBoard(networkPacket);
 
 		// Point to server player
 		gameSessionGUI.PointToNextPlayer();

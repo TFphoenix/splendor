@@ -22,10 +22,10 @@ void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std:
 void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std::string, std::string>& decksData)
 {
 	auto& [nobleDeckString, expansionL1DeckString, expansionL2DeckString, expansionL3DeckString] = decksData;
-	m_boardNobleDeckString = nobleDeckString;
-	m_boardExpansionL1DeckString = expansionL1DeckString;
-	m_boardExpansionL2DeckString = expansionL2DeckString;
-	m_boardExpansionL3DeckString = expansionL3DeckString;
+	m_deckNobleDeckString = nobleDeckString;
+	m_deckExpansionL1DeckString = expansionL1DeckString;
+	m_deckExpansionL2DeckString = expansionL2DeckString;
+	m_deckExpansionL3DeckString = expansionL3DeckString;
 }
 
 void NetworkPacket::ClearData()
@@ -44,10 +44,10 @@ void NetworkPacket::ClearData()
 	m_boardExpansionL3SlotsString = "";
 
 	// Decks
-	m_boardNobleDeckString = "";
-	m_boardExpansionL1DeckString = "";
-	m_boardExpansionL2DeckString = "";
-	m_boardExpansionL3DeckString = "";
+	m_deckNobleDeckString = "";
+	m_deckExpansionL1DeckString = "";
+	m_deckExpansionL2DeckString = "";
+	m_deckExpansionL3DeckString = "";
 }
 
 sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
@@ -64,10 +64,10 @@ sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 	packet << networkPacket.m_boardExpansionL2SlotsString;
 	packet << networkPacket.m_boardExpansionL3SlotsString;
 	//decks data
-	packet << networkPacket.m_boardNobleDeckString;
-	packet << networkPacket.m_boardExpansionL1DeckString;
-	packet << networkPacket.m_boardExpansionL2DeckString;
-	packet << networkPacket.m_boardExpansionL3DeckString;
+	packet << networkPacket.m_deckNobleDeckString;
+	packet << networkPacket.m_deckExpansionL1DeckString;
+	packet << networkPacket.m_deckExpansionL2DeckString;
+	packet << networkPacket.m_deckExpansionL3DeckString;
 
 	return packet;
 }
@@ -86,9 +86,9 @@ sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 	packet >> networkPacket.m_boardExpansionL2SlotsString;
 	packet >> networkPacket.m_boardExpansionL3SlotsString;
 	//decks data
-	packet >> networkPacket.m_boardNobleDeckString;
-	packet >> networkPacket.m_boardExpansionL1DeckString;
-	packet >> networkPacket.m_boardExpansionL2DeckString;
-	packet >> networkPacket.m_boardExpansionL3DeckString;
+	packet >> networkPacket.m_deckNobleDeckString;
+	packet >> networkPacket.m_deckExpansionL1DeckString;
+	packet >> networkPacket.m_deckExpansionL2DeckString;
+	packet >> networkPacket.m_deckExpansionL3DeckString;
 	return packet;
 }

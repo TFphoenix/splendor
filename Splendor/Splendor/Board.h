@@ -1,6 +1,7 @@
 #pragma once
 #include "Deck.h"
 #include "CardDAO.h"
+#include "NetworkPacket.h"
 
 #include <cstdint>
 #include <array>
@@ -27,6 +28,7 @@ public:
 
 	// Networking
 	std::tuple < std::string, std::string, std::string, std::string, std::string > ConvertBoardToPackage() const;
+	void ConvertPackageToBoard(NetworkPacket& networkPacket);
 	std::tuple < std::string, std::string, std::string, std::string> ConvertDecksToPackage() const;
 
 private:
