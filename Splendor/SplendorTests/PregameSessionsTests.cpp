@@ -38,5 +38,18 @@ namespace SplendorTests
 			Assert::IsTrue(numberOfNobleCards == nobleCount, L"Number of nobles is not equal to player count (3) + 1!");
 		}
 
+		TEST_METHOD(CheckTokenDataFor3Players){
+			const int playerCount = 3;
+			const int tokenCount = playerCount + 1;
+			const bool withTimer = false;
+			const bool withAI = false;
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+
+			Board board;
+			const int numberOfToken = board.GetTokensData()[IToken::Type::BlueSapphire];
+			Assert::IsTrue(numberOfToken == GamePieces::GetGemTokenCount());
+			
+			
+		}
 	};
 }
