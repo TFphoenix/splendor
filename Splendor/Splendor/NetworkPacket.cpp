@@ -26,6 +26,26 @@ void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std:
 	m_boardExpansionL3DeckString = expansionL3DeckString;
 }
 
+void NetworkPacket::ClearData()
+{
+	// Hand
+	m_handResources = "";
+	m_handTokens = "";
+	m_handExpansions = "";
+	m_handNoble = "";
+
+	// Board
+	m_boardTokensString = "";
+	m_boardNobleSlotsString = "";
+	m_boardExpansionsSlotsString = "";
+
+	// Decks
+	m_boardNobleDeckString = "";
+	m_boardExpansionL1DeckString = "";
+	m_boardExpansionL2DeckString = "";
+	m_boardExpansionL3DeckString = "";
+}
+
 sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 {
 	//hand data

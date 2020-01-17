@@ -31,6 +31,8 @@ public:
 
 	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
 
+	void ClearData();
+	
 	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& packet)
 	{
 		//hand data
