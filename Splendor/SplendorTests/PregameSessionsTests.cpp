@@ -56,10 +56,9 @@ namespace SplendorTests
 			const int expansionl1Count = playerCount + 1;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
 
-			//const int two = pregameSetup.GetPlayerCount();
-			//std::cout << two;
+			
 
 			Board board;
 			const int numberOfExpansionL1Cards = board.GetCardSlotsData(CardDAO::Type::ExpansionL1).size();
@@ -72,10 +71,9 @@ namespace SplendorTests
 			const int expansionL3Count = playerCount + 1;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
 
-			//const int two = pregameSetup.GetPlayerCount();
-			//std::cout << two;
+			
 
 			Board board;
 			const int numberOfExpansionL3Cards = board.GetCardSlotsData(CardDAO::Type::ExpansionL3).size();
@@ -89,11 +87,8 @@ namespace SplendorTests
 			const int expansionL2Count = playerCount + 1;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
-
-			//const int two = pregameSetup.GetPlayerCount();
-			//std::cout << two;
-
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
+			
 			Board board;
 			const int numberOfExpansionL2Cards = board.GetCardSlotsData(CardDAO::Type::ExpansionL2).size();
 
