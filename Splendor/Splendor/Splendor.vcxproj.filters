@@ -168,6 +168,9 @@
     <ClCompile Include="Audio.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizer.h">

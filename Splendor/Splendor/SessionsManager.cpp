@@ -9,7 +9,8 @@
 #include "UIGameSession.h"
 #include "CardDAO.h"
 #include "Player.h"
-#include "Audio.h" 
+#include "SoundSystem.h"
+
 
 SessionsManager::SessionsManager() :
 	logger(logFileStream, Logger::Level::Error),
@@ -41,14 +42,16 @@ void SessionsManager::MainMenuSession() const
 	logger.Log("Entered Main Menu Session", Logger::Level::Info);
 	UIMainMenuSession mainMenuSessionGUI(windowSize);
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
-	Audio audio = Audio();
-	audio.GetMusic("menuMusic").setVolume(100);
-	audio.GetMusic("menuMusic").setLoop(true);
-	//audio.GetMusic("menuMusic").play();
 
+	SoundSystem::LoadFromFile();
+	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+	
+
+	
 
 	while (window->isOpen())
 	{
+
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -56,6 +59,7 @@ void SessionsManager::MainMenuSession() const
 			switch (mainMenuSessionGUI.GetEvent()) {
 			case UIMainMenuSession::Events::NewGame:
 				logger.Log("Starting PreGame Session...", Logger::Level::Info);
+
 				PreGameSession();
 				break;
 			case UIMainMenuSession::Events::Tutorial:
@@ -65,6 +69,7 @@ void SessionsManager::MainMenuSession() const
 				// Settings Session
 				break;
 			case UIMainMenuSession::Events::Exit:
+				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
 
 				return;
@@ -84,6 +89,7 @@ void SessionsManager::MainMenuSession() const
 
 void SessionsManager::PreGameSession() const
 {
+
 	logger.Log("Entered PreGame Session", Logger::Level::Info);
 	UIPreGameSession pregameSessionGUI(windowSize);
 	logger.Log("Initialized PreGame GUI", Logger::Level::Info);
@@ -121,6 +127,10 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	// Initialize Database
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
+
+	//Game Music sound on
+	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 
 	// Initialize Players
 	std::vector<Player> players;
@@ -190,6 +200,8 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:
+				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
 				return;
 			case UIGameSession::Events::PassButton:
 				gameSessionGUI.NextTurn();
