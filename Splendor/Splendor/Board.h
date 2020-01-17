@@ -26,8 +26,9 @@ public:
 	Deck<NobleCard> GetNobleDeck() const;
 
 	// Networking
-	std::tuple < std::string, std::string, std::string, std::string, std::string > ConvertToPackage() const;
-	
+	std::tuple < std::string, std::string, std::string > ConvertBoardToPackage() const;
+	std::tuple < std::string, std::string, std::string, std::string> ConvertDecksToPackage() const;
+
 private:
 	// Decks
 	Deck<NobleCard> m_nobleDeck;
