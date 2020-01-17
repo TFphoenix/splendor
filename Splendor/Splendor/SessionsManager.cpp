@@ -225,6 +225,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	Network network;
 	NetworkPacket networkPacket;
 	bool isSending;
+	bool offlineMode = false;
 
 	switch (pregameSetup.GetGameMode())
 	{
@@ -244,6 +245,11 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 		activePlayer = players[activePlayerIterator];
 		break;
 	}
+	case PregameSetup::GameMode::Offline:
+	{
+		offlineMode = true;
+		break;
+	}
 	default:
 	{
 		throw std::invalid_argument("Undefined connection");
@@ -252,6 +258,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 	// Game Loop
 	gameSessionGUI.StartGame();
+	std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
 	logger.Log("Game started", Logger::Level::Info);
 	while (window->isOpen())
 	{
@@ -275,23 +282,30 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 				if (activePlayerIterator == pregameSetup.GetPlayerCount())
 					activePlayerIterator = 0;
 				activePlayer = players[activePlayerIterator];
+				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
 
-				if (isSending)
+				if (offlineMode == false)
 				{
-					isSending = false;
-					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-					network.SendData(networkPacket);
+					if (isSending)
+					{
+						isSending = false;
+						networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+						network.SendData(networkPacket);
+					}
 				}
 				break;
 			}
 			default:
 			{
-				if (isSending == false)
+				if (offlineMode == false)
 				{
-					isSending = true;
-					network.ReceiveData(networkPacket);
+					if (isSending == false)
+					{
+						isSending = true;
+						network.ReceiveData(networkPacket);
+					}
+					break;
 				}
-				break;
 			}
 			}
 		}

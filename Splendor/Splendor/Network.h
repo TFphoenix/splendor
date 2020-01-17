@@ -16,7 +16,7 @@ public:
 
 	std::string m_message = "";
 	sf::Packet m_packet;
-	sf::IpAddress m_ip = "172.27.3.50";
+	sf::IpAddress m_ip = "192.168.0.105";
 	sf::TcpListener m_listener;
 	sf::TcpSocket m_socket;
 

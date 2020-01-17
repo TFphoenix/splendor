@@ -29,12 +29,13 @@ public:
 
 public:
 	UIGameSession(const sf::Vector2u& windowSize, const PregameSetup& pregameSetup, std::vector<Player>* pPlayers, Board* pBoard, std::reference_wrapper<Player>& rActivePlayer);
-	
+
 	// UI Logic
 	void StartGame();
 	void StopGame();
 	void UpdateGame();
 	void NextTurn();
+	void NextTurnOnline();
 	void SetActivePlayer(std::reference_wrapper<Player> activePlayerReference);
 
 	// Events
@@ -43,6 +44,13 @@ public:
 
 	// Graphics
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
+
+private:
+	// UI Logic
+	void CheckForWinCondition();
+	void ValidateActivePlayerChanges();
+	void CheckForExceedingTokens();
+	void PrepareUI();
 
 private:
 	// GUI
@@ -65,4 +73,3 @@ private:
 	Hand* p_exceedingHand;
 
 };
-
