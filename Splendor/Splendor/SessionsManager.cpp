@@ -214,11 +214,34 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 
-	
+	// Testing Networking
+	//
+	NetworkPacket networkPacket;
+
 	Hand hand = players[0].GetHand();
 	networkPacket.SetHandData(hand.ConvertToPackage());
 
-
+	Network network;
+	switch (pregameSetup.GetGameMode())
+	{
+		case PregameSetup::GameMode::Client:
+			{
+				network.InitialiseClient();
+				network.SendData(networkPacket);
+				break;
+			}
+		case PregameSetup::GameMode::Server:
+			{
+				network.InitialiseServer();
+				network.AcceptConnection();
+				network.ReceiveData(networkPacket);
+				break;
+			}
+		default:
+			{
+				break;
+			}
+	}
 
 	// Game Loop
 	gameSessionGUI.StartGame();
