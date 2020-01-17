@@ -50,12 +50,12 @@ private:
 
 private:
 	const inline static std::string s_musicFile = "../external/Resources/sounds/";
-	static inline std::unordered_map <MusicType, std::unique_ptr<sf::Music>> m_musics;
-	static inline std::unordered_map <SoundType, std::unique_ptr<sf::SoundBuffer>> m_sounds;
-	static inline std::unordered_map <MusicType, std::unique_ptr<sf::Music>> m_musics1;
+	static inline std::unordered_map <MusicType, std::unique_ptr<sf::Music>> s_musics;
+	static inline std::unordered_map <SoundType, std::unique_ptr<sf::SoundBuffer>> s_sounds;
 	static inline bool alreadyLoaded = false;
-	static inline sf::SoundBuffer* m_buffer;
-	static inline sf::Sound* m_activeSound;
+	static inline MusicType s_currentMusicType;
+	static inline sf::SoundBuffer* s_buffer;
+	static inline sf::Sound* s_activeSound;
 	static inline uint16_t s_musicVolume = 200;
 	static inline uint16_t s_sfxVolume = 100;
 };

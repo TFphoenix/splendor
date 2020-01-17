@@ -1,31 +1,27 @@
 #include "SoundSystem.h"
-#include "SoundSystem.h"
-#include "SoundSystem.h"
-#include "SoundSystem.h"
-#include "SoundSystem.h"
-#include "SoundSystem.h"
+
 
 void SoundSystem::AddMusic(MusicType musicType, std::unique_ptr<sf::Music> value)
 {
-	m_musics.insert(std::make_pair(musicType, std::move(value)));
+	s_musics.insert(std::make_pair(musicType, std::move(value)));
 
 }
 
 void SoundSystem::AddSound(SoundType soundType, std::unique_ptr<sf::SoundBuffer> value)
 {
 
-	m_sounds.insert(std::make_pair(soundType, std::move(value)));
+	s_sounds.insert(std::make_pair(soundType, std::move(value)));
 
 }
 
 sf::Music& SoundSystem::GetMusic(MusicType musicType)
 {
-	return *m_musics.at(musicType);
+	return *s_musics.at(musicType);
 }
 
 sf::SoundBuffer& SoundSystem::GetSound(SoundType soundType)
 {
-	return *m_sounds.at(soundType);
+	return *s_sounds.at(soundType);
 
 }
 
@@ -42,6 +38,7 @@ void SoundSystem::StopMusic(MusicType musicType)
 
 void SoundSystem::PlayMusic(MusicType musicType)
 {
+	s_currentMusicType = musicType;
 
 	GetMusic(musicType).setVolume(std::clamp<uint16_t>(s_musicVolume, 0, 100));
 	GetMusic(musicType).setLoop(true);
@@ -53,14 +50,14 @@ void SoundSystem::PlayMusic(MusicType musicType)
 void SoundSystem::PlaySFX(SoundType soundType)
 {
 
-	m_buffer = new sf::SoundBuffer;
+	s_buffer = new sf::SoundBuffer;
 
-	m_activeSound = new sf::Sound;
+	s_activeSound = new sf::Sound;
 
-	*m_buffer = GetSound(soundType);
-	m_activeSound->setBuffer(*m_buffer);
-	m_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
-	m_activeSound->play();
+	*s_buffer = GetSound(soundType);
+	s_activeSound->setBuffer(*s_buffer);
+	s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
+	s_activeSound->play();
 
 }
 
@@ -110,7 +107,11 @@ uint16_t SoundSystem::GetMusicVolume()
 
 void SoundSystem::SetMusicVolume(uint16_t musicVolume)
 {
+	
 	s_musicVolume = musicVolume;
+
+	GetMusic(s_currentMusicType).setVolume(s_musicVolume);
+	//GetMusic(s_currentMusicType).play();
 }
 
 void SoundSystem::SetSFXVolume(uint16_t sfxVolume)

@@ -74,6 +74,7 @@ void SessionsManager::MainMenuSession() const
 
 				return;
 			case UIMainMenuSession::Events::Test:
+				
 				TestSession();
 				break;
 			default:
@@ -229,8 +230,7 @@ void SessionsManager::GameSession(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
-	sf::SoundBuffer buffer;
-	if (buffer.loadFromFile("sound.wav"))
-		std::cout << "Successfully Loaded!\n";
-	return;
+	//SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+	
+		
 }
