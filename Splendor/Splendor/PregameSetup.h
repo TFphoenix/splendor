@@ -17,8 +17,9 @@ class PregameSetup
 public:
 	enum class GameMode
 	{
-		Local,
-		LAN
+		Offline,
+		Client,
+		Server
 	};
 
 public:

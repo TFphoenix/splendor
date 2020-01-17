@@ -18,7 +18,7 @@ namespace SplendorTests
 			const int playerCount = 3;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
 		}
 
 		TEST_METHOD(CheckNobleDataFor3Players)
@@ -27,7 +27,7 @@ namespace SplendorTests
 			const int nobleCount = playerCount + 1;
 			const bool withTimer = false;
 			const bool withAI = false;
-			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Local, withTimer, withAI);
+			PregameSetup pregameSetup(playerCount, PregameSetup::GameMode::Offline, withTimer, withAI);
 
 			const int two = pregameSetup.GetPlayerCount();
 			std::cout << two;

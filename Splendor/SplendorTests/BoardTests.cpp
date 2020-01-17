@@ -20,7 +20,7 @@ namespace SplendorTests
 		}
 
 		TEST_METHOD(TokenOverflow) {
-			PregameSetup pregameSetup(4, PregameSetup::GameMode::Local, false, false);
+			PregameSetup pregameSetup(4, PregameSetup::GameMode::Offline, false, false);
 			Board board;
 			
 			uint16_t amount = GamePieces::s_GemTokenCount + 1;
@@ -38,7 +38,7 @@ namespace SplendorTests
 		}
 
 		TEST_METHOD(TokenUnderflow) {
-			PregameSetup pregameSetup(4, PregameSetup::GameMode::Local, false, false);
+			PregameSetup pregameSetup(4, PregameSetup::GameMode::Offline, false, false);
 			Board board;
 
 			const auto func = [&board]()

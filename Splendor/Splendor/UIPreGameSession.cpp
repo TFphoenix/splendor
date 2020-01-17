@@ -27,8 +27,9 @@ UIPreGameSession::UIPreGameSession(const sf::Vector2u& windowSize) :
 	m_title.AlignText(UIText::TextAlign::mid_center);
 
 	// GameMode Panel
-	m_gameModePanel.AddOption("Local");
-	m_gameModePanel.AddOption("LAN");
+	m_gameModePanel.AddOption("Offline");
+	m_gameModePanel.AddOption("Client");
+	m_gameModePanel.AddOption("Server");
 
 	// Players Panel
 	m_playersPanel.AddOption("2");
@@ -94,8 +95,30 @@ void UIPreGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) c
 
 PregameSetup UIPreGameSession::GetPregameSetup() const
 {
+	// Player Count
 	const uint16_t playerCount = std::stoi(m_playersPanel.FirstChecked());
-	const PregameSetup::GameMode gameMode = m_gameModePanel.FirstChecked() == "LAN" ? PregameSetup::GameMode::LAN : PregameSetup::GameMode::Local;
+
+	// Game Mode
+	std::string gameModeOptionString = m_gameModePanel.FirstChecked();
+	PregameSetup::GameMode gameMode;
+	if (gameModeOptionString == "Offline")
+	{
+		gameMode = PregameSetup::GameMode::Offline;
+	}
+	else if (gameModeOptionString == "Client")
+	{
+		gameMode = PregameSetup::GameMode::Client;
+	}
+	else if (gameModeOptionString == "Server")
+	{
+		gameMode = PregameSetup::GameMode::Server;
+	}
+	else
+	{
+		throw std::invalid_argument("Invalid game mode");
+	}
+
+	// Other
 	const bool withTimer = m_otherSettingsPanel.IsChecked("Timer");
 	const bool withAI = m_otherSettingsPanel.IsChecked("A.I.");
 
