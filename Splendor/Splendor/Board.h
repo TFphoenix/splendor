@@ -24,6 +24,9 @@ public:
 	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
 	bool IsExpansionDeckEmpty(uint16_t deckLevel);
 	Deck<NobleCard> GetNobleDeck() const;
+
+	// Networking
+	std::tuple < std::string, std::string, std::string, std::string, std::string > ConvertToPackage() const;
 	
 private:
 	// Decks

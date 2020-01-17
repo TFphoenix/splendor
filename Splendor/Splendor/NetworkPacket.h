@@ -16,21 +16,30 @@ public:
 
 	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
 
-	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& c)
+	//board
+	std::string m_boardNobleDeckString;
+	std::string m_boardExpansionsDeckString;
+	std::string m_boardTokensString;
+	std::string m_boardNobleSlotsString;
+	std::string m_boardExpansionsSlotsString;
+
+	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
+	
+	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& packet)
 	{
-		out << c.m_handResources << " ";
-		out << c.m_handTokens << " ";
-		out << c.m_handExpansions << " ";
-		out << c.m_handNoble;
+		out << packet.m_handResources << " ";
+		out << packet.m_handTokens << " ";
+		out << packet.m_handExpansions << " ";
+		out << packet.m_handNoble;
 		return out;
 	}
 
-	friend std::istream& operator >>(std::istream& in, NetworkPacket& c)
+	friend std::istream& operator >>(std::istream& in, NetworkPacket& packet)
 	{
-		in >> c.m_handResources;
-		in >> c.m_handTokens;
-		in >> c.m_handExpansions;
-		in >> c.m_handNoble;
+		in >> packet.m_handResources;
+		in >> packet.m_handTokens;
+		in >> packet.m_handExpansions;
+		in >> packet.m_handNoble;
 		return in;
 	}
 };

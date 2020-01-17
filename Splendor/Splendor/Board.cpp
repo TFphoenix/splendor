@@ -238,3 +238,64 @@ Deck<NobleCard> Board::GetNobleDeck() const
 {
 	return m_nobleDeck;
 }
+
+std::tuple<std::string, std::string, std::string, std::string, std::string> Board::ConvertToPackage() const
+{
+	// Decks
+	Deck<NobleCard> m_nobleDeck;
+	std::string nobleDeckString = ""; // TODO
+
+	// Expansions
+	Deck<ExpansionCard, 3> m_expansionL3Deck;
+	Deck<ExpansionCard, 2> m_expansionL2Deck;
+	Deck<ExpansionCard, 1> m_expansionL1Deck;
+	std::string expansionsDeckString = "";	// TODO
+
+	// Tokens
+	std::string tokensString;
+	for (const auto& token : m_tokens)
+	{
+		switch (token.first)
+		{
+			case IToken::Type::GreenEmerald:
+				tokensString += "E";
+				break;
+			case IToken::Type::BlueSapphire:
+				tokensString += "S";
+				break;
+			case IToken::Type::WhiteDiamond:
+				tokensString += "D";
+				break;
+			case IToken::Type::BlackOnyx:
+				tokensString += "O";
+				break;
+			case IToken::Type::RedRuby:
+				tokensString += "R";
+				break;
+			case IToken::Type::Gold:
+				tokensString += "G";
+				break;
+			default:
+				throw std::domain_error("Error converting tokens to package");
+		}
+		tokensString += std::to_string(token.second) + ' ';
+	}
+	
+	// Noble Slots
+	std::string nobleSlotsString;
+	for (const auto& nobleSlot : m_nobleSlots)
+	{
+		if (nobleSlot.has_value())
+		{
+			nobleSlotsString += std::to_string(nobleSlot.value().GetId()) + ' ';
+		}
+	}
+
+	// Expansions slots
+	std::array<std::optional<ExpansionCard>, 4> m_expansionL3Slots;
+	std::array<std::optional<ExpansionCard>, 4> m_expansionL2Slots;
+	std::array<std::optional<ExpansionCard>, 4> m_expansionL1Slots;
+	std::string expansionsSlotsString = ""; // TODO
+
+	return std::make_tuple(nobleDeckString, expansionsDeckString, tokensString, nobleSlotsString, expansionsSlotsString);
+}
