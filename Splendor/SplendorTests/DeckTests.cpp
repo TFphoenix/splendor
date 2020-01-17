@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Deck.h"
 
+#include "Board.h"
 #include "CppUnitTest.h"
 #include "GamePieces.h"
 
@@ -31,8 +32,10 @@ namespace SplendorTests
 		}
 
 		TEST_METHOD(UndefinitedDeckInitialization) {
-		
-			Assert::ExpectException<std::invalid_argument>([](){const Deck<ExpansionCard, NULL> deck;});
+
+			Assert::ExpectException<std::invalid_argument>([]() {const Deck<ExpansionCard, NULL> deck; });
 		}
+
+		
 	};
 }

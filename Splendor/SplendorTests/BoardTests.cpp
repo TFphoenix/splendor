@@ -48,5 +48,17 @@ namespace SplendorTests
 
 			Assert::ExpectException<std::out_of_range>(func);
 		}
+
+		TEST_METHOD(ReplaceUndefinedExpansion) {
+			Board board;
+			Assert::ExpectException<std::invalid_argument>([&board]() {board.ReplaceExpansion(ExpansionCard::Level::Level1, 0); });
+		}
+
+		TEST_METHOD(ReplaceInexistentExpansion) {
+			Board board;
+			const auto expansionCard = board.DrawExpansionFromDeck(2);
+			Assert::ExpectException<std::invalid_argument>([&board,&expansionCard]() {board.ReplaceExpansion(expansionCard.GetLevel(), expansionCard.GetId()); });
+		}
+		
 	};
 }
