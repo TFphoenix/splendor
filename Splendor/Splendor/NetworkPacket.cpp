@@ -21,18 +21,32 @@ void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std:
 
 sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 {
+	//hand data
 	packet << networkPacket.m_handResources;
 	packet << networkPacket.m_handTokens;
 	packet << networkPacket.m_handExpansions;
 	packet << networkPacket.m_handNoble;
+	//board data
+	packet << networkPacket.m_boardNobleDeckString;
+	packet << networkPacket.m_boardExpansionsDeckString;
+	packet << networkPacket.m_boardTokensString;
+	packet << networkPacket.m_boardNobleSlotsString;
+	packet << networkPacket.m_boardExpansionsSlotsString;
 	return packet;
 }
 
 sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 {
+	//hand data
 	packet >> networkPacket.m_handResources;
 	packet >> networkPacket.m_handTokens;
 	packet >> networkPacket.m_handExpansions;
 	packet >> networkPacket.m_handNoble;
+	//board data
+	packet >> networkPacket.m_boardNobleDeckString;
+	packet >> networkPacket.m_boardExpansionsDeckString;
+	packet >> networkPacket.m_boardTokensString;
+	packet >> networkPacket.m_boardNobleSlotsString;
+	packet >> networkPacket.m_boardExpansionsSlotsString;
 	return packet;
 }
