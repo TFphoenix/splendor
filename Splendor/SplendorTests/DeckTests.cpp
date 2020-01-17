@@ -36,6 +36,70 @@ namespace SplendorTests
 			Assert::ExpectException<std::invalid_argument>([]() {const Deck<ExpansionCard, NULL> deck; });
 		}
 
-		
+		TEST_METHOD(ShuffleExpansionL1Deck) {
+			std::vector<Deck<ExpansionCard, 1>> decks(5);
+			for (auto& deck : decks)deck.ShuffleDeck();
+			std::vector<ExpansionCard> cards;
+			for (auto& deck : decks) cards.emplace_back(deck.DrawCard());
+
+			auto func = [&cards]()->bool
+			{	bool var = false;
+			for (int i = 0; i < cards.size() - 1; i++)
+			{
+				for (int j = i + 1; j < cards.size(); j++)
+				{
+					if (cards.at(i).GetId() != cards.at(j).GetId())
+						return  true;
+				}
+			}
+			return false;
+			};
+
+			Assert::IsTrue(func());
+		}
+
+		TEST_METHOD(ShuffleExpansionL2Deck) {
+			std::vector<Deck<ExpansionCard, 2>> decks(5);
+			for (auto& deck : decks)deck.ShuffleDeck();
+			std::vector<ExpansionCard> cards;
+			for (auto& deck : decks) cards.emplace_back(deck.DrawCard());
+
+			auto func = [&cards]()->bool
+			{	bool var = false;
+			for (int i = 0; i < cards.size() - 1; i++)
+			{
+				for (int j = i + 1; j < cards.size(); j++)
+				{
+					if (cards.at(i).GetId() != cards.at(j).GetId())
+						return  true;
+				}
+			}
+			return false;
+			};
+
+			Assert::IsTrue(func());
+		}
+
+		TEST_METHOD(ShuffleExpansionL3Deck) {
+			std::vector<Deck<ExpansionCard, 3>> decks(5);
+			for (auto& deck : decks)deck.ShuffleDeck();
+			std::vector<ExpansionCard> cards;
+			for (auto& deck : decks) cards.emplace_back(deck.DrawCard());
+
+			auto func = [&cards]()->bool
+			{	bool var = false;
+			for (int i = 0; i < cards.size() - 1; i++)
+			{
+				for (int j = i + 1; j < cards.size(); j++)
+				{
+					if (cards.at(i).GetId() != cards.at(j).GetId())
+						return  true;
+				}
+			}
+			return false;
+			};
+
+			Assert::IsTrue(func());
+		}
 	};
 }
