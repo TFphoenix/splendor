@@ -32,6 +32,7 @@ public:
 	std::string GetNameLabelString() const;
 	std::string GetPrestigeLabelString() const;
 	void AddPrestigePoints(uint16_t prestigePoints);
+	void SetPrestigePoints(uint16_t prestigePoints);
 
 public:
 	// GUI

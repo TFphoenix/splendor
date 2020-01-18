@@ -20,6 +20,7 @@ public:
 	// Logic
 	UIPlayerPanel* GetIfTriggered();
 	void AddPrestigePointsToCurrentPlayer(uint16_t prestigePoints);
+	void SyncAdversaryPlayerPrestigePoints(uint16_t prestigePoints);
 
 private:
 	static inline const float s_paddingPercentage = 0.04f;

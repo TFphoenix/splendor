@@ -135,6 +135,18 @@ void UIPlayerPanel::AddPrestigePoints(uint16_t prestigePoints)
 	m_prestigeLabel.setString(firstPart + " " + secondPart);
 }
 
+void UIPlayerPanel::SetPrestigePoints(uint16_t prestigePoints)
+{
+	std::stringstream sStream(m_prestigeLabel.getString());
+	std::string firstPart, secondPart;
+	sStream >> firstPart;
+	sStream >> secondPart;
+	firstPart = firstPart + " " + secondPart;
+	sStream >> secondPart;
+	secondPart = std::to_string(prestigePoints);
+	m_prestigeLabel.setString(firstPart + " " + secondPart);
+}
+
 void UIPlayerPanel::ShuffleTextures()
 {
 	Randomizer randomizer;

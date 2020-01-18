@@ -390,12 +390,15 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					{
 						players[1].GetHand().ConvertFromPackage(networkPacket);
 						players[1].ConvertFromPackage(networkPacket);
+						gameSessionGUI.SyncOnlineAdversaryPlayerPanel(players[1].GetPrestigePoints());
 					}
 					else
 					{
 						players[0].GetHand().ConvertFromPackage(networkPacket);
 						players[0].ConvertFromPackage(networkPacket);
+						gameSessionGUI.SyncOnlineAdversaryPlayerPanel(players[2].GetPrestigePoints());
 					}
+
 					gameSessionGUI.SyncBoard();
 				}
 			}

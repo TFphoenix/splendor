@@ -39,6 +39,7 @@ public:
 	void PointToNextPlayer();
 	void SetActivePlayer(std::reference_wrapper<Player> activePlayerReference);
 	void SyncBoard();
+	void SyncOnlineAdversaryPlayerPanel(uint16_t adversaryPrestigePoints);
 
 	// Events
 	void PassEvent(const sf::Event& event);

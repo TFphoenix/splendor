@@ -134,9 +134,10 @@ void UICard::OnMouseEnter()
 			UISelectedCard::UpdateText(sf::Vector2f(getPosition().x + getSize().x, getPosition().y));
 			return;
 		}
-		SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
 	}
-
+	
+	SoundSystem::PlaySFX(SoundSystem::SoundType::OverSFX);
+	
 	if (m_inHand) return;
 
 	setScale(2, 2);

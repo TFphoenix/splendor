@@ -79,3 +79,15 @@ void UIPlayersPanel::AddPrestigePointsToCurrentPlayer(uint16_t prestigePoints)
 {
 	m_playerPanels[m_playerPointerIterator]->AddPrestigePoints(prestigePoints);
 }
+
+void UIPlayersPanel::SyncAdversaryPlayerPrestigePoints(uint16_t prestigePoints)
+{
+	if (m_playerPointerIterator == 0)
+	{
+		m_playerPanels[1]->SetPrestigePoints(prestigePoints);
+	}
+	else
+	{
+		m_playerPanels[0]->SetPrestigePoints(prestigePoints);
+	}
+}

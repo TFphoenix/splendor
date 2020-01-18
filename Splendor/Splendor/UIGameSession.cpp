@@ -376,6 +376,11 @@ void UIGameSession::SyncBoard()
 	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
 }
 
+void UIGameSession::SyncOnlineAdversaryPlayerPanel(uint16_t adversaryPrestigePoints)
+{
+	m_playersPanel.SyncAdversaryPlayerPrestigePoints(adversaryPrestigePoints);
+}
+
 void UIGameSession::PassEvent(const sf::Event& event)
 {
 	// iterate panel vector and handle events
