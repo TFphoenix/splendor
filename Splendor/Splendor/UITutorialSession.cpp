@@ -95,8 +95,8 @@ void UITutorialSession::LoadFromFile()
 		}
 
 		s_sprite = new sf::Sprite(*s_texture);
-		s_sprite->setScale(sf::Vector2f(0.35, 0.35));
-		s_sprite->setPosition(sf::Vector2f(550, 180));
+		s_sprite->setScale(sf::Vector2f(0.5, 0.5));
+		s_sprite->setPosition(sf::Vector2f(890, 310));
 		s_tutorialImages.push_back(*s_sprite);
 	}
 

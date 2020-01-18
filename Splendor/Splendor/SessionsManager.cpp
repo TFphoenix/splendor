@@ -454,6 +454,9 @@ void SessionsManager::Leaderboard() const
 	cursorTexture.loadFromFile(s_cursorTexture);
 	cursorSprite.setTexture(cursorTexture);
 
+	leaderboardSessionGUI.LoadFromFile();
+	leaderboardSessionGUI.LoadLeaderboard(windowSize);
+
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -469,6 +472,8 @@ void SessionsManager::Leaderboard() const
 				break;
 			}
 		}
+
+
 
 		// Set sprite position to cursor position
 		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
