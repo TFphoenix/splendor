@@ -62,8 +62,6 @@ public:
 	template <>
 	static void TokenizePackage(std::array<std::optional<ExpansionCard>, 3>& toSlots, std::string&& fromString)
 	{
-		if (fromString.empty()) return;
-
 		for (auto& slot : toSlots)
 		{
 			slot.reset();

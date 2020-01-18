@@ -1,6 +1,8 @@
 #pragma once
 #include "Hand.h"
 
+class NetworkPacket;
+
 class Player
 {
 public:
@@ -23,6 +25,10 @@ public:
 
 	// Logic
 	void AddPrestigePoints(uint16_t amount);
+
+	// Networking
+	std::string ConvertToPackage() const;
+	void ConvertFromPackage(NetworkPacket& networkPacket);
 
 private:
 	uint16_t m_id;

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "NetworkPacket.h"
 
 Player::Player(uint16_t id, std::string&& name, Type type) :
 	m_id(id),
@@ -34,4 +35,14 @@ uint16_t Player::GetId() const
 void Player::AddPrestigePoints(uint16_t amount)
 {
 	m_prestigePoints += amount;
+}
+
+std::string Player::ConvertToPackage() const
+{
+	return std::to_string(m_prestigePoints);
+}
+
+void Player::ConvertFromPackage(NetworkPacket& networkPacket)
+{
+	m_prestigePoints = networkPacket.m_playerPrestigepoints;
 }

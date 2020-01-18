@@ -10,9 +10,7 @@ class NetworkPacket;
 
 class Board
 {
-
 public:
-	
 	enum class LastDrawn
 	{
 		None,
