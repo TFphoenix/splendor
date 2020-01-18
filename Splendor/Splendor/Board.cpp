@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "NetworkPacket.h"
 
 Board::Board() :
 	m_nobleDeck()

@@ -1,11 +1,12 @@
 #pragma once
 #include "Deck.h"
 #include "CardDAO.h"
-#include "NetworkPacket.h"
 
 #include <cstdint>
 #include <array>
 #include <optional>
+
+class NetworkPacket;
 
 class Board
 {
