@@ -305,13 +305,6 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
 
 	// Networking
 	Network network;

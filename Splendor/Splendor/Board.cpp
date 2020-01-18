@@ -1,6 +1,8 @@
 #include "Board.h"
 #include "NetworkPacket.h"
 
+#include <sstream>
+
 Board::Board() :
 	m_nobleDeck()
 {
@@ -308,41 +310,42 @@ std::tuple<std::string, std::string, std::string, std::string, std::string> Boar
 void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 {
 	// Noble Slots
-	/*{
-		for (auto& slot : m_nobleSlots)
-		{
-			slot.reset();
-		}
-		std::string nobleSlotsString = std::move(networkPacket.m_boardNobleSlotsString);
-		size_t position = 0;
-		size_t iterator = 0;
-		while ((position = nobleSlotsString.find(NetworkPacket::s_delimiter)) != std::string::npos)
-		{
-			const auto& token = nobleSlotsString.substr(0, position);
-			m_nobleSlots[iterator].emplace(std::stoi(token));
-			nobleSlotsString.erase(0, position + NetworkPacket::s_delimiter.length());
-			++iterator;
-		}
-	}*/
 	TokenizePackage(m_nobleSlots, std::move(networkPacket.m_boardNobleSlotsString));
 
 	// Expansion Slots
-	/*{
-		for (auto& slot : m_expansionL1Slots)
+	TokenizePackage(m_expansionL1Slots, std::move(networkPacket.m_boardExpansionL1SlotsString));
+	TokenizePackage(m_expansionL2Slots, std::move(networkPacket.m_boardExpansionL2SlotsString));
+	TokenizePackage(m_expansionL3Slots, std::move(networkPacket.m_boardExpansionL3SlotsString));
+
+	// Tokens
+	std::stringstream tokensStream(networkPacket.m_boardTokensString);
+	char tokenType;
+	uint16_t tokenCount;
+	while (tokensStream >> tokenType >> tokenCount)
+	{
+		switch (tokenType)
 		{
-			slot.reset();
+		case 'E':
+			m_tokens[IToken::Type::GreenEmerald] = tokenCount;
+			break;
+		case 'S':
+			m_tokens[IToken::Type::BlueSapphire] = tokenCount;
+			break;
+		case 'D':
+			m_tokens[IToken::Type::WhiteDiamond] = tokenCount;
+			break;
+		case 'O':
+			m_tokens[IToken::Type::BlackOnyx] = tokenCount;
+			break;
+		case 'R':
+			m_tokens[IToken::Type::RedRuby] = tokenCount;
+			break;
+		case 'G':
+			m_tokens[IToken::Type::Gold] = tokenCount;
+			break;
 		}
-		std::string expansionL1SlotsString = std::move(networkPacket.m_boardExpansionL1SlotsString);
-		size_t position = 0;
-		size_t iterator = 0;
-		while ((position = expansionL1SlotsString.find(NetworkPacket::s_delimiter)) != std::string::npos)
-		{
-			const auto& token = expansionL1SlotsString.substr(0, position);
-			m_expansionL1Slots[iterator].emplace(std::stoi(token));
-			expansionL1SlotsString.erase(0, position + NetworkPacket::s_delimiter.length());
-			++iterator;
-		}
-	}*/
+	}
+
 }
 
 std::tuple<std::string, std::string, std::string, std::string> Board::ConvertDecksToPackage() const
