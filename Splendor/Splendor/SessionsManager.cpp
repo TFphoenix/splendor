@@ -149,9 +149,11 @@ void SessionsManager::TutorialSession() const
 				break;
 			}
 		}
+		UITutorialSession::LoadFromFile();
 
 		window->clear(UIColors::NavyBlue);
 		window->draw(tutorialSessionGUI);
+		window->draw(UITutorialSession::GetSprite(2));
 		window->display();
 	}
 }
