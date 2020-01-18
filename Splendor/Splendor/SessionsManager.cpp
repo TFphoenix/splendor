@@ -134,6 +134,7 @@ void SessionsManager::TutorialSession() const
 	UITutorialSession tutorialSessionGUI(windowSize);
 	logger.Log("Initialized Tutorial GUI", Logger::Level::Info);
 
+	UITutorialSession::LoadFromFile();
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -145,15 +146,21 @@ void SessionsManager::TutorialSession() const
 			case UITutorialSession::Events::MainMenu:
 				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
 				return;
+			case UITutorialSession::Events::Next:
+				UITutorialSession::IncrementSprite();
+				break;
+			case UITutorialSession::Events::Previous:
+				UITutorialSession::DecrementSprite();
+				break;
 			default:
 				break;
 			}
 		}
-		UITutorialSession::LoadFromFile();
+
 
 		window->clear(UIColors::NavyBlue);
 		window->draw(tutorialSessionGUI);
-		window->draw(UITutorialSession::GetSprite(2));
+		window->draw(UITutorialSession::GetSprite());
 		window->display();
 	}
 }

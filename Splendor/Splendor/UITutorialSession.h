@@ -16,8 +16,10 @@ public:
 	enum class Events
 	{
 		None,
-		MainMenu
-		//StartGame
+		MainMenu,
+		Next,
+		Previous
+
 	};
 
 public:
@@ -25,6 +27,7 @@ public:
 	~UITutorialSession();
 
 	static inline std::vector<sf::Sprite> s_tutorialImages;
+	static inline int s_currentSprite=2 ;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
@@ -33,11 +36,12 @@ public:
 
 
 	static void LoadFromFile();
-	static sf::Sprite& GetSprite(int currentPos);
+	static sf::Sprite& GetSprite();
+	static void IncrementSprite();
+	static void DecrementSprite();
 
 private:
 	const inline static std::string s_imageFile = "../external/Resources/Textures/Tutorial/";
-	static inline const int currentSprite=1;
 	static inline const uint16_t s_imagesSize = 9;
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;
@@ -47,6 +51,6 @@ private:
 	UIButton* m_backToMenuButton;
 	static inline sf::Texture* s_texture;
 	static inline sf::Sprite* s_sprite;;
-	
+
 };
 

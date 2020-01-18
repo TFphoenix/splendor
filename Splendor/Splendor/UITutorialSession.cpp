@@ -58,6 +58,8 @@ void UITutorialSession::PassEvent(const sf::Event& event)
 {
 
 	m_backToMenuButton->HandleEvent(event);
+	m_nextButton->HandleEvent(event);
+	m_previousButton->HandleEvent(event);
 }
 
 UITutorialSession::Events UITutorialSession::GetEvent() const
@@ -66,23 +68,25 @@ UITutorialSession::Events UITutorialSession::GetEvent() const
 	{
 		return Events::MainMenu;
 	}
-	/*if (m_previousButton->GetState() == UIButton::State::Release)
+	if (m_previousButton->GetState() == UIButton::State::Press)
 	{
-		return Events::MainMenu;
+
+		return Events::Previous;
 	}
-	if (m_nextButton->GetState() == UIButton::State::Release)
+	if (m_nextButton->GetState() == UIButton::State::Press)
 	{
-		return Events::MainMenu;
-	}*/
+
+		return Events::Next;
+	}
 	return Events::None;
 }
 
 void UITutorialSession::LoadFromFile()
 {
 
-	for (uint16_t imageIt =0 ; imageIt < s_imagesSize; ++imageIt)
+	for (uint16_t imageIt = 0; imageIt < s_imagesSize; ++imageIt)
 	{
-		auto path = s_imageFile + "Screenshot"+std::to_string(imageIt)+".png";
+		auto path = s_imageFile + "Screenshot" + std::to_string(imageIt) + ".png";
 
 		s_texture = new sf::Texture;
 		if (!s_texture->loadFromFile(path))
@@ -98,7 +102,20 @@ void UITutorialSession::LoadFromFile()
 
 }
 
-sf::Sprite& UITutorialSession::GetSprite(int currentPos )
+sf::Sprite& UITutorialSession::GetSprite()
 {
-	return s_tutorialImages.at(std::clamp<int>(currentPos,0,9));
+	return s_tutorialImages.at(std::clamp<int>(s_currentSprite, 0, s_imagesSize - 1));
+}
+
+void UITutorialSession::IncrementSprite()
+{
+
+	++s_currentSprite;
+
+}
+
+void UITutorialSession::DecrementSprite()
+{
+
+	--s_currentSprite;
 }
