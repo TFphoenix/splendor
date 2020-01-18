@@ -19,9 +19,25 @@ void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std:
 	m_boardExpansionL3SlotsString = expansionL3SlotsString;
 }
 
-void NetworkPacket::SetCardDrawnFromDeck(sf::Uint16 cardDrawn)
+void NetworkPacket::SetCardDrawnFromDeck(Board::LastDrawn cardDrawn)
 {
-	m_cardDrawnFromDeck = cardDrawn;
+	switch (cardDrawn)
+	{
+		case Board::LastDrawn::None:
+			m_cardDrawnFromDeck = "0";
+			break;
+		case Board::LastDrawn::Level1:
+			m_cardDrawnFromDeck = "1";
+			break;
+		case Board::LastDrawn::Level2:
+			m_cardDrawnFromDeck = "2";
+			break;
+		case Board::LastDrawn::Level3:
+			m_cardDrawnFromDeck = "3";
+			break;
+		default:
+			break;
+	}
 }
 
 void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std::string, std::string>& decksData)
@@ -47,7 +63,7 @@ void NetworkPacket::ClearData()
 	m_boardExpansionL1SlotsString = "";
 	m_boardExpansionL2SlotsString = "";
 	m_boardExpansionL3SlotsString = "";
-	m_cardDrawnFromDeck = '0';
+	m_cardDrawnFromDeck = "";
 
 	// Decks
 	m_deckNobleDeckString = "";

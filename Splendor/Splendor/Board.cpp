@@ -4,7 +4,7 @@
 #include <sstream>
 
 Board::Board() :
-	m_lastExpansionDrawn(0)
+	m_lastExpansionDrawn(LastDrawn::None)
 {
 	// Shuffle Decks
 	m_nobleDeck.ShuffleDeck();
@@ -42,68 +42,68 @@ void Board::ReplaceExpansion(ExpansionCard::Level level, uint16_t id)
 {
 	switch (level)
 	{
-	case ExpansionCard::Level::Level1:
-		for (auto& card : m_expansionL1Slots)
-		{
-			if (card.has_value())
+		case ExpansionCard::Level::Level1:
+			for (auto& card : m_expansionL1Slots)
 			{
-				if (card->GetId() == id)
+				if (card.has_value())
 				{
-					try
+					if (card->GetId() == id)
 					{
-						card.emplace(m_expansionL1Deck.DrawCard());
+						try
+						{
+							card.emplace(m_expansionL1Deck.DrawCard());
+						}
+						catch (std::out_of_range & exception)
+						{
+							card.reset();
+						}
+						return;
 					}
-					catch (std::out_of_range & exception)
-					{
-						card.reset();
-					}
-					return;
 				}
 			}
-		}
-		break;
-	case ExpansionCard::Level::Level2:
-		for (auto& card : m_expansionL2Slots)
-		{
-			if (card.has_value())
+			break;
+		case ExpansionCard::Level::Level2:
+			for (auto& card : m_expansionL2Slots)
 			{
-				if (card->GetId() == id)
+				if (card.has_value())
 				{
-					try
+					if (card->GetId() == id)
 					{
-						card.emplace(m_expansionL2Deck.DrawCard());
+						try
+						{
+							card.emplace(m_expansionL2Deck.DrawCard());
+						}
+						catch (std::out_of_range & exception)
+						{
+							card.reset();
+						}
+						return;
 					}
-					catch (std::out_of_range & exception)
-					{
-						card.reset();
-					}
-					return;
 				}
 			}
-		}
-		break;
-	case ExpansionCard::Level::Level3:
-		for (auto& card : m_expansionL3Slots)
-		{
-			if (card.has_value())
+			break;
+		case ExpansionCard::Level::Level3:
+			for (auto& card : m_expansionL3Slots)
 			{
-				if (card->GetId() == id)
+				if (card.has_value())
 				{
-					try
+					if (card->GetId() == id)
 					{
-						card.emplace(m_expansionL3Deck.DrawCard());
+						try
+						{
+							card.emplace(m_expansionL3Deck.DrawCard());
+						}
+						catch (std::out_of_range & exception)
+						{
+							card.reset();
+						}
+						return;
 					}
-					catch (std::out_of_range & exception)
-					{
-						card.reset();
-					}
-					return;
 				}
 			}
-		}
-		break;
-	default:
-		throw std::invalid_argument("Can't take expansion of undefined level");
+			break;
+		default:
+			throw std::invalid_argument("Can't take expansion of undefined level");
 	}
 	throw std::invalid_argument("Card not found");
 }
@@ -112,17 +112,17 @@ ExpansionCard Board::DrawExpansionFromDeck(uint16_t deck)
 {
 	switch (deck)
 	{
-	case 1:
-		m_lastExpansionDrawn = 1;
-		return m_expansionL1Deck.DrawCard();
-	case 2:
-		m_lastExpansionDrawn = 2;
-		return m_expansionL2Deck.DrawCard();
-	case 3:
-		m_lastExpansionDrawn = 3;
-		return m_expansionL3Deck.DrawCard();
-	default:
-		throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
+		case 1:
+			m_lastExpansionDrawn = LastDrawn::Level1;
+			return m_expansionL1Deck.DrawCard();
+		case 2:
+			m_lastExpansionDrawn = LastDrawn::Level2;
+			return m_expansionL2Deck.DrawCard();
+		case 3:
+			m_lastExpansionDrawn = LastDrawn::Level3;
+			return m_expansionL3Deck.DrawCard();
+		default:
+			throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
 	}
 }
 
@@ -181,44 +181,44 @@ std::vector<CardDAO::Data> Board::GetCardSlotsData(CardDAO::Type dataType) const
 	std::vector<CardDAO::Data> dataToReturn;
 	switch (dataType)
 	{
-	case CardDAO::Type::Noble:
-		for (const auto& slot : m_nobleSlots)
-		{
-			if (slot.has_value())
+		case CardDAO::Type::Noble:
+			for (const auto& slot : m_nobleSlots)
 			{
-				dataToReturn.emplace_back(dataType, slot->GetId());
+				if (slot.has_value())
+				{
+					dataToReturn.emplace_back(dataType, slot->GetId());
+				}
 			}
-		}
-		break;
-	case CardDAO::Type::ExpansionL1:
-		for (const auto& slot : m_expansionL1Slots)
-		{
-			if (slot.has_value())
+			break;
+		case CardDAO::Type::ExpansionL1:
+			for (const auto& slot : m_expansionL1Slots)
 			{
-				dataToReturn.emplace_back(dataType, slot->GetId());
+				if (slot.has_value())
+				{
+					dataToReturn.emplace_back(dataType, slot->GetId());
+				}
 			}
-		}
-		break;
-	case CardDAO::Type::ExpansionL2:
-		for (const auto& slot : m_expansionL2Slots)
-		{
-			if (slot.has_value())
+			break;
+		case CardDAO::Type::ExpansionL2:
+			for (const auto& slot : m_expansionL2Slots)
 			{
-				dataToReturn.emplace_back(dataType, slot->GetId());
+				if (slot.has_value())
+				{
+					dataToReturn.emplace_back(dataType, slot->GetId());
+				}
 			}
-		}
-		break;
-	case CardDAO::Type::ExpansionL3:
-		for (const auto& slot : m_expansionL3Slots)
-		{
-			if (slot.has_value())
+			break;
+		case CardDAO::Type::ExpansionL3:
+			for (const auto& slot : m_expansionL3Slots)
 			{
-				dataToReturn.emplace_back(dataType, slot->GetId());
+				if (slot.has_value())
+				{
+					dataToReturn.emplace_back(dataType, slot->GetId());
+				}
 			}
-		}
-		break;
-	default:
-		throw std::invalid_argument("Can't get card slots data of UNKNOWN type");;
+			break;
+		default:
+			throw std::invalid_argument("Can't get card slots data of UNKNOWN type");;
 	}
 	return dataToReturn;
 }
@@ -232,14 +232,14 @@ bool Board::IsExpansionDeckEmpty(uint16_t deckLevel)
 {
 	switch (deckLevel)
 	{
-	case 1:
-		return m_expansionL1Deck.IsEmpty();
-	case 2:
-		return m_expansionL2Deck.IsEmpty();
-	case 3:
-		return m_expansionL3Deck.IsEmpty();
-	default:
-		throw std::invalid_argument("Invalid expansion deck level");
+		case 1:
+			return m_expansionL1Deck.IsEmpty();
+		case 2:
+			return m_expansionL2Deck.IsEmpty();
+		case 3:
+			return m_expansionL3Deck.IsEmpty();
+		default:
+			throw std::invalid_argument("Invalid expansion deck level");
 	}
 }
 
@@ -248,10 +248,10 @@ Deck<NobleCard> Board::GetNobleDeck() const
 	return m_nobleDeck;
 }
 
-uint8_t Board::ExtractLastExpansionDrawn()
+Board::LastDrawn Board::ExtractLastExpansionDrawn()
 {
-	const uint8_t extractedValue = m_lastExpansionDrawn;
-	m_lastExpansionDrawn = 0;
+	const LastDrawn extractedValue = m_lastExpansionDrawn;
+	m_lastExpansionDrawn = LastDrawn::None;
 	return extractedValue;
 }
 
@@ -263,26 +263,26 @@ std::tuple<std::string, std::string, std::string, std::string, std::string> Boar
 	{
 		switch (token.first)
 		{
-		case IToken::Type::GreenEmerald:
-			tokensString += "E";
-			break;
-		case IToken::Type::BlueSapphire:
-			tokensString += "S";
-			break;
-		case IToken::Type::WhiteDiamond:
-			tokensString += "D";
-			break;
-		case IToken::Type::BlackOnyx:
-			tokensString += "O";
-			break;
-		case IToken::Type::RedRuby:
-			tokensString += "R";
-			break;
-		case IToken::Type::Gold:
-			tokensString += "G";
-			break;
-		default:
-			throw std::domain_error("Error converting tokens to package");
+			case IToken::Type::GreenEmerald:
+				tokensString += "E";
+				break;
+			case IToken::Type::BlueSapphire:
+				tokensString += "S";
+				break;
+			case IToken::Type::WhiteDiamond:
+				tokensString += "D";
+				break;
+			case IToken::Type::BlackOnyx:
+				tokensString += "O";
+				break;
+			case IToken::Type::RedRuby:
+				tokensString += "R";
+				break;
+			case IToken::Type::Gold:
+				tokensString += "G";
+				break;
+			default:
+				throw std::domain_error("Error converting tokens to package");
 		}
 		tokensString += std::to_string(token.second);
 	}
@@ -331,21 +331,26 @@ void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 	NetworkPacket::TokenizePackage(m_tokens, std::move(networkPacket.m_boardTokensString));
 
 	// Card drawn from deck
-	switch (networkPacket.m_cardDrawnFromDeck)
+	if(networkPacket.m_cardDrawnFromDeck.empty())
 	{
-	case 0:
-		break;
-	case 1:
-		m_expansionL1Deck.RemoveTopCard();
-		break;
-	case 2:
-		m_expansionL2Deck.RemoveTopCard();
-		break;
-	case 3:
-		m_expansionL3Deck.RemoveTopCard();
-		break;
-	default:
-		throw std::invalid_argument("Invalid card drawn from deck");
+		return;
+	}
+	const char state = networkPacket.m_cardDrawnFromDeck[0];
+	switch (state)
+	{
+		case '0':
+			break;
+		case '1':
+			m_expansionL1Deck.RemoveTopCard();
+			break;
+		case '2':
+			m_expansionL2Deck.RemoveTopCard();
+			break;
+		case '3':
+			m_expansionL3Deck.RemoveTopCard();
+			break;
+		default:
+			throw std::invalid_argument("Invalid card drawn from deck");
 	}
 
 }

@@ -10,6 +10,17 @@ class NetworkPacket;
 
 class Board
 {
+
+public:
+	
+	enum class LastDrawn
+	{
+		None,
+		Level1,
+		Level2,
+		Level3
+	};
+	
 public:
 	Board();
 
@@ -26,7 +37,7 @@ public:
 	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
 	bool IsExpansionDeckEmpty(uint16_t deckLevel);
 	Deck<NobleCard> GetNobleDeck() const;
-	uint8_t ExtractLastExpansionDrawn();
+	LastDrawn ExtractLastExpansionDrawn();
 
 	// Networking
 	std::tuple < std::string, std::string, std::string, std::string, std::string > ConvertBoardToPackage() const;
@@ -47,6 +58,6 @@ private:
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL3Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL2Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL1Slots;
-	uint16_t m_lastExpansionDrawn;
+	LastDrawn m_lastExpansionDrawn;
 };
 
