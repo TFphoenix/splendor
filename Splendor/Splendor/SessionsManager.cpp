@@ -27,6 +27,9 @@ SessionsManager::SessionsManager() :
 	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
 	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
+	// Hides the cursor
+	window->setMouseCursorVisible(false);
+
 	logger.Log("Window created", Logger::Level::Info);
 
 	windowPosition = window->getPosition();
@@ -50,6 +53,10 @@ void SessionsManager::MainMenuSession() const
 	SoundSystem::LoadFromFile();
 	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
 
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
+
 	while (window->isOpen())
 	{
 
@@ -59,36 +66,40 @@ void SessionsManager::MainMenuSession() const
 			mainMenuSessionGUI.PassEvent(event);
 			switch (mainMenuSessionGUI.GetEvent())
 			{
-			case UIMainMenuSession::Events::NewGame:
-				logger.Log("Starting PreGame Session...", Logger::Level::Info);
-				PreGameSession();
-				break;
-			case UIMainMenuSession::Events::Tutorial:
-				// Tutorial Session
-				logger.Log("Starting Tutorial Session...", Logger::Level::Info);
-				TutorialSession();
-				break;
-			case UIMainMenuSession::Events::Settings:
-				// Settings Session
-				break;
+				case UIMainMenuSession::Events::NewGame:
+					logger.Log("Starting PreGame Session...", Logger::Level::Info);
+					PreGameSession();
+					break;
+				case UIMainMenuSession::Events::Tutorial:
+					// Tutorial Session
+					logger.Log("Starting Tutorial Session...", Logger::Level::Info);
+					TutorialSession();
+					break;
+				case UIMainMenuSession::Events::Settings:
+					// Settings Session
+					break;
 
-			case UIMainMenuSession::Events::Exit:
-				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
-				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
-				return;
-			case UIMainMenuSession::Events::Test:
-				TestSession();
-				break;
-			case UIMainMenuSession::Events::Leaderboard:
-				Leaderboard();
-				break;
-			default:
-				break;
+				case UIMainMenuSession::Events::Exit:
+					SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+					logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
+					return;
+				case UIMainMenuSession::Events::Test:
+					TestSession();
+					break;
+				case UIMainMenuSession::Events::Leaderboard:
+					Leaderboard();
+					break;
+				default:
+					break;
 			}
 		}
 
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+
 		window->clear();
 		window->draw(mainMenuSessionGUI);
+		window->draw(cursorSprite);
 		window->display();
 	}
 }
@@ -99,6 +110,10 @@ void SessionsManager::PreGameSession() const
 	UIPreGameSession pregameSessionGUI(windowSize);
 	logger.Log("Initialized PreGame GUI", Logger::Level::Info);
 
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
+
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -107,28 +122,32 @@ void SessionsManager::PreGameSession() const
 			pregameSessionGUI.PassEvent(event);
 			switch (pregameSessionGUI.GetEvent())
 			{
-			case UIPreGameSession::Events::MainMenu:
-			{
-				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
-				return;
-			}
-			case UIPreGameSession::Events::StartGame:
-			{
-				logger.Log("Starting Game Session...", Logger::Level::Info);
-				const PregameSetup& pregameSetup = pregameSessionGUI.GetPregameSetup();
-				if (pregameSetup.GetGameMode() == PregameSetup::GameMode::Offline)
-					GameSessionOffline(pregameSetup);
-				else
-					GameSessionOnline(pregameSetup);
-				return;
-			}
-			default:
-				break;
+				case UIPreGameSession::Events::MainMenu:
+					{
+						logger.Log("Exiting PreGame Session...", Logger::Level::Info);
+						return;
+					}
+				case UIPreGameSession::Events::StartGame:
+					{
+						logger.Log("Starting Game Session...", Logger::Level::Info);
+						const PregameSetup& pregameSetup = pregameSessionGUI.GetPregameSetup();
+						if (pregameSetup.GetGameMode() == PregameSetup::GameMode::Offline)
+							GameSessionOffline(pregameSetup);
+						else
+							GameSessionOnline(pregameSetup);
+						return;
+					}
+				default:
+					break;
 			}
 		}
 
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+
 		window->clear(UIColors::NavyBlue);
 		window->draw(pregameSessionGUI);
+		window->draw(cursorSprite);
 		window->display();
 	}
 }
@@ -139,6 +158,10 @@ void SessionsManager::TutorialSession() const
 	UITutorialSession tutorialSessionGUI(windowSize);
 	logger.Log("Initialized Tutorial GUI", Logger::Level::Info);
 
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
+
 	UITutorialSession::LoadFromFile();
 	while (window->isOpen())
 	{
@@ -148,24 +171,27 @@ void SessionsManager::TutorialSession() const
 			tutorialSessionGUI.PassEvent(event);
 			switch (tutorialSessionGUI.GetEvent())
 			{
-			case UITutorialSession::Events::MainMenu:
-				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-				return;
-			case UITutorialSession::Events::Next:
-				UITutorialSession::IncrementSprite();
-				break;
-			case UITutorialSession::Events::Previous:
-				UITutorialSession::DecrementSprite();
-				break;
-			default:
-				break;
+				case UITutorialSession::Events::MainMenu:
+					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+					return;
+				case UITutorialSession::Events::Next:
+					UITutorialSession::IncrementSprite();
+					break;
+				case UITutorialSession::Events::Previous:
+					UITutorialSession::DecrementSprite();
+					break;
+				default:
+					break;
 			}
 		}
 
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
 
 		window->clear(UIColors::NavyBlue);
 		window->draw(tutorialSessionGUI);
 		window->draw(UITutorialSession::GetSprite());
+		window->draw(cursorSprite);
 		window->display();
 	}
 }
@@ -199,9 +225,9 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
 
-
-
-
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
 
 	// Game Loop
 	gameSessionGUI.StartGame();
@@ -216,27 +242,31 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-			case UIGameSession::Events::MenuButton:
-				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-				return;
-			case UIGameSession::Events::PassButton:
-				gameSessionGUI.NextTurn();
-				++activePlayerIterator;
-				if (activePlayerIterator == pregameSetup.GetPlayerCount())
-					activePlayerIterator = 0;
-				activePlayer = players[activePlayerIterator];
-				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
-				break;
-			default:
-				break;
+				case UIGameSession::Events::MenuButton:
+					SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+					SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+					return;
+				case UIGameSession::Events::PassButton:
+					gameSessionGUI.NextTurn();
+					++activePlayerIterator;
+					if (activePlayerIterator == pregameSetup.GetPlayerCount())
+						activePlayerIterator = 0;
+					activePlayer = players[activePlayerIterator];
+					std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
+					break;
+				default:
+					break;
 			}
 		}
+
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
 
 		// Update & Display
 		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
 		window->draw(gameSessionGUI);
+		window->draw(cursorSprite);
 		window->display();
 	}
 }
@@ -314,37 +344,41 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 
 	switch (pregameSetup.GetGameMode())
 	{
-	case PregameSetup::GameMode::Client:
-	{
-		isSending = true;
-		network.InitialiseClient();
-		networkPacket.SetDecksData(board.ConvertDecksToPackage());
-		networkPacket.SetBoardData(board.ConvertBoardToPackage());
-		network.SendData(networkPacket);
-		break;
-	}
-	case PregameSetup::GameMode::Server:
-	{
-		isSending = false;
-		network.InitialiseServer();
-		network.AcceptConnection();
-		network.ReceiveData(networkPacket);
+		case PregameSetup::GameMode::Client:
+			{
+				isSending = true;
+				network.InitialiseClient();
+				networkPacket.SetDecksData(board.ConvertDecksToPackage());
+				networkPacket.SetBoardData(board.ConvertBoardToPackage());
+				network.SendData(networkPacket);
+				break;
+			}
+		case PregameSetup::GameMode::Server:
+			{
+				isSending = false;
+				network.InitialiseServer();
+				network.AcceptConnection();
+				network.ReceiveData(networkPacket);
 
-		// Set-up board & decks
-		board.ConvertPackageToBoard(networkPacket);
-		gameSessionGUI.SyncBoard();
+				// Set-up board & decks
+				board.ConvertPackageToBoard(networkPacket);
+				gameSessionGUI.SyncBoard();
 
-		// Point to server player
-		gameSessionGUI.PointToNextPlayer();
-		++activePlayerIterator;
-		activePlayer = players[activePlayerIterator];
-		break;
+				// Point to server player
+				gameSessionGUI.PointToNextPlayer();
+				++activePlayerIterator;
+				activePlayer = players[activePlayerIterator];
+				break;
+			}
+		default:
+			{
+				throw std::invalid_argument("Undefined connection");
+			}
 	}
-	default:
-	{
-		throw std::invalid_argument("Undefined connection");
-	}
-	}
+
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
 
 	// Game Loop
 	gameSessionGUI.StartGame();
@@ -359,42 +393,46 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-			case UIGameSession::Events::MenuButton:
-			{
-				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-				return;
-			}
-			case UIGameSession::Events::PassButton:
-			{
-				gameSessionGUI.NextTurnOnline();
+				case UIGameSession::Events::MenuButton:
+					{
+						SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+						SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+						return;
+					}
+				case UIGameSession::Events::PassButton:
+					{
+						gameSessionGUI.NextTurnOnline();
 
-				if (isSending)
-				{
-					isSending = false;
-					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-					networkPacket.SetBoardData(board.ConvertBoardToPackage());
-					network.SendData(networkPacket);
-				}
-				break;
-			}
-			default:
-			{
-				if (isSending == false)
-				{
-					isSending = true;
-					network.ReceiveData(networkPacket);
-					gameSessionGUI.SyncBoard();
-				}
-				break;
-			}
+						if (isSending)
+						{
+							isSending = false;
+							networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+							networkPacket.SetBoardData(board.ConvertBoardToPackage());
+							network.SendData(networkPacket);
+						}
+						break;
+					}
+				default:
+					{
+						{
+							isSending = true;
+							network.ReceiveData(networkPacket);
+							board.ConvertPackageToBoard(networkPacket);
+							gameSessionGUI.SyncBoard();
+						}
+						break;
+					}
 			}
 		}
+
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
 
 		// Update & Display
 		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
 		window->draw(gameSessionGUI);
+		window->draw(cursorSprite);
 		window->display();
 	}
 }
@@ -410,6 +448,10 @@ void SessionsManager::Leaderboard() const
 	UILeaderboardSession leaderboardSessionGUI(windowSize);
 	logger.Log("Initialized Leaderboard GUI", Logger::Level::Info);
 
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
+
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -418,18 +460,20 @@ void SessionsManager::Leaderboard() const
 			leaderboardSessionGUI.PassEvent(event);
 			switch (leaderboardSessionGUI.GetEvent())
 			{
-			case UILeaderboardSession::Events::MainMenu:
-				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-				return;
-			default:
-				break;
+				case UILeaderboardSession::Events::MainMenu:
+					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+					return;
+				default:
+					break;
 			}
 		}
 
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
 
 		window->clear(UIColors::NavyBlue);
 		window->draw(leaderboardSessionGUI);
-
+		window->draw(cursorSprite);
 		window->display();
 	}
 }

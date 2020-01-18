@@ -22,6 +22,7 @@ public:
 
 private:
 	static inline const std::string s_logFile = "./Log/LogFile.log";
+	static inline const std::string s_cursorTexture = "../external/Resources/Textures/UI/cursor.png";
 
 private:
 	// Window
@@ -32,4 +33,8 @@ private:
 	// Logger
 	Logger logger;
 	std::ofstream logFileStream;
+
+	// Cursor
+	mutable sf::Texture cursorTexture;
+	mutable sf::Sprite cursorSprite;
 };
