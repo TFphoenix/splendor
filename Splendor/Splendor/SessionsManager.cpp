@@ -235,6 +235,9 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 	logger.Log("Game started", Logger::Level::Info);
 	while (window->isOpen())
 	{
+		// Check for Win Condition
+		if (CheckForWinCondition(players)) return;
+
 		// Event Handling
 		sf::Event event;
 		while (window->pollEvent(event))
@@ -349,6 +352,9 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	logger.Log("Game started", Logger::Level::Info);
 	while (window->isOpen())
 	{
+		// Check for Win Condition
+		if (CheckForWinCondition(players)) return;
+
 		// Event Handling
 		sf::Event event;
 		while (window->pollEvent(event))
@@ -396,7 +402,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					{
 						players[0].GetHand().ConvertFromPackage(networkPacket);
 						players[0].ConvertFromPackage(networkPacket);
-						gameSessionGUI.SyncOnlineAdversaryPlayerPanel(players[2].GetPrestigePoints());
+						gameSessionGUI.SyncOnlineAdversaryPlayerPanel(players[0].GetPrestigePoints());
 					}
 
 					gameSessionGUI.SyncBoard();
@@ -419,6 +425,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
+	WinSession("Teodor");
 }
 
 void SessionsManager::Leaderboard() const
@@ -456,4 +463,56 @@ void SessionsManager::Leaderboard() const
 		window->draw(cursorSprite);
 		window->display();
 	}
+}
+
+void SessionsManager::WinSession(const std::string& winnerName) const
+{
+	// Text
+	UIText winnerText(sf::Vector2f(), UIText::TextAlign::mid_center, UIText::AvailableFonts::LatoBlack, winnerName + " HAS WON THE GAME", 60, UIColors::GoldYellow, UIColors::NeutralWhite, 3);
+	winnerText.AlignText(UIText::TextAlign::mid_center);
+	winnerText.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
+	const auto& textBounds = winnerText.getLocalBounds();
+
+	// Button
+	sf::RectangleShape buttonShape(sf::Vector2f(400, 125));
+	buttonShape.setPosition(buttonShape.getPosition().x + textBounds.height, buttonShape.getPosition().y + textBounds.height);
+	UIButton menuButton(buttonShape);
+	menuButton.ChangeText("Back to Main Menu");
+
+	while (window->isOpen())
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			menuButton.HandleEvent(event);
+			if (menuButton.GetState() == UIButton::State::Release)
+			{
+				menuButton.SwitchState(UIButton::State::Hover);
+				MainMenuSession();
+				return;
+			}
+		}
+
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+
+		window->clear(UIColors::NavyBlue);
+		window->draw(winnerText);
+		window->draw(menuButton);
+		window->draw(cursorSprite);
+		window->display();
+	}
+}
+
+bool SessionsManager::CheckForWinCondition(const std::vector<Player>& players) const
+{
+	for (auto& player : players)
+	{
+		if (player.GetPrestigePoints() >= GamePieces::s_winingPrestigePoints)
+		{
+			WinSession(player.GetName());
+			return true;
+		}
+	}
+	return false;
 }

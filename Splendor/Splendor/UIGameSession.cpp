@@ -316,14 +316,11 @@ void UIGameSession::UpdateGame()
 
 void UIGameSession::NextTurn()
 {
-	/// Win Condition
-	CheckForWinCondition();
-
-	/// Validate Active Player Changes
+	// Validate Active Player Changes
 	ValidateActivePlayerChanges();
 	CheckForExceedingTokens();
 
-	/// UI Logic
+	// UI Logic
 	m_infoPanel.IncrementTurn();
 	PointToNextPlayer();
 	PrepareUI();
@@ -331,14 +328,11 @@ void UIGameSession::NextTurn()
 
 void UIGameSession::NextTurnOnline()
 {
-	/// Win Condition
-	CheckForWinCondition();
-
-	/// Validate Active Player Changes
+	// Validate Active Player Changes
 	ValidateActivePlayerChanges();
 	CheckForExceedingTokens();
 
-	/// UI Logic
+	// UI Logic
 	m_infoPanel.IncrementTurn();
 	PrepareUI();
 }
@@ -416,15 +410,6 @@ void UIGameSession::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 	if (UISelectedCard::Get().second != nullptr)
 	{
 		target.draw(*UISelectedCard::Get().second);
-	}
-}
-
-void UIGameSession::CheckForWinCondition()
-{
-	if (r_activePlayer.get().GetPrestigePoints() >= GamePieces::s_winingPrestigePoints)
-	{
-		std::cout << r_activePlayer.get().GetName() << " WON THE GAME!\n";
-		StopGame();
 	}
 }
 

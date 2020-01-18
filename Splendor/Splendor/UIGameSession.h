@@ -50,7 +50,6 @@ public:
 
 private:
 	// UI Logic
-	void CheckForWinCondition();
 	void ValidateActivePlayerChanges();
 	void CheckForExceedingTokens();
 	void PrepareUI();

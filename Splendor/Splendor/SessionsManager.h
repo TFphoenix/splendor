@@ -5,6 +5,7 @@
 #include <fstream>
 
 class PregameSetup;
+class Player;
 
 class SessionsManager
 {
@@ -19,6 +20,10 @@ public:
 	void GameSessionOnline(const PregameSetup& pregameSetup) const;
 	void TestSession() const;
 	void Leaderboard() const;
+	void WinSession(const std::string& winnerName) const;
+
+private:
+	bool CheckForWinCondition(const std::vector<Player>& players) const;
 
 private:
 	static inline const std::string s_logFile = "./Log/LogFile.log";
