@@ -19,6 +19,11 @@ void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std:
 	m_boardExpansionL3SlotsString = expansionL3SlotsString;
 }
 
+void NetworkPacket::SetCardDrawnFromDeck(sf::Uint8 cardDrawn)
+{
+	m_cardDrawnFromDeck = cardDrawn;
+}
+
 void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std::string, std::string>& decksData)
 {
 	auto& [nobleDeckString, expansionL1DeckString, expansionL2DeckString, expansionL3DeckString] = decksData;
@@ -42,6 +47,7 @@ void NetworkPacket::ClearData()
 	m_boardExpansionL1SlotsString = "";
 	m_boardExpansionL2SlotsString = "";
 	m_boardExpansionL3SlotsString = "";
+	m_cardDrawnFromDeck = 0;
 
 	// Decks
 	m_deckNobleDeckString = "";
@@ -63,6 +69,7 @@ sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 	packet << networkPacket.m_boardExpansionL1SlotsString;
 	packet << networkPacket.m_boardExpansionL2SlotsString;
 	packet << networkPacket.m_boardExpansionL3SlotsString;
+	packet << networkPacket.m_cardDrawnFromDeck;
 	//decks data
 	packet << networkPacket.m_deckNobleDeckString;
 	packet << networkPacket.m_deckExpansionL1DeckString;
@@ -85,6 +92,7 @@ sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 	packet >> networkPacket.m_boardExpansionL1SlotsString;
 	packet >> networkPacket.m_boardExpansionL2SlotsString;
 	packet >> networkPacket.m_boardExpansionL3SlotsString;
+	packet >> networkPacket.m_cardDrawnFromDeck;
 	//decks data
 	packet >> networkPacket.m_deckNobleDeckString;
 	packet >> networkPacket.m_deckExpansionL1DeckString;
@@ -108,6 +116,7 @@ std::ostream& operator<<(std::ostream& out, const NetworkPacket& packet)
 	out << "ExpansionsL1: " << packet.m_boardExpansionL1SlotsString << "\n";
 	out << "ExpansionsL2: " << packet.m_boardExpansionL2SlotsString << "\n";
 	out << "ExpansionsL3: " << packet.m_boardExpansionL3SlotsString << "\n";
+	out << "CardDrawn: " << packet.m_cardDrawnFromDeck << "\n";
 	//decks data
 	out << "[Decks Data]\n";
 	out << "Nobles: " << packet.m_deckNobleDeckString << "\n";
