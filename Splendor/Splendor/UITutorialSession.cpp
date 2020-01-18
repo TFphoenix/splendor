@@ -91,7 +91,7 @@ void UITutorialSession::LoadFromFile()
 		s_texture = new sf::Texture;
 		if (!s_texture->loadFromFile(path))
 		{
-			throw "error";
+			throw "Screenshot file could not be loaded";
 		}
 
 		s_sprite = new sf::Sprite(*s_texture);

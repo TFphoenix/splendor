@@ -31,8 +31,6 @@ public:
 	};
 	static inline const uint16_t s_musicTypeSize = 2;
 
-
-
 public:
 	static void StopMusic(MusicType musicType);
 	static void PlayMusic(MusicType musicType);
@@ -55,8 +53,8 @@ private:
 	static inline std::unordered_map <SoundType, std::unique_ptr<sf::SoundBuffer>> s_sounds;
 	static inline bool alreadyLoaded = false;
 	static inline MusicType s_currentMusicType;
-	static inline sf::SoundBuffer* s_buffer;
-	static inline sf::Sound* s_activeSound;
+	static inline std::unique_ptr<sf::SoundBuffer> s_buffer;
+	static inline std::unique_ptr<sf::Sound> s_activeSound;
 	static inline uint16_t s_musicVolume = 200;
 	static inline uint16_t s_sfxVolume = 100;
 };
