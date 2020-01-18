@@ -19,7 +19,7 @@ void NetworkPacket::SetBoardData(const std::tuple<std::string, std::string, std:
 	m_boardExpansionL3SlotsString = expansionL3SlotsString;
 }
 
-void NetworkPacket::SetCardDrawnFromDeck(sf::Uint8 cardDrawn)
+void NetworkPacket::SetCardDrawnFromDeck(sf::Uint16 cardDrawn)
 {
 	m_cardDrawnFromDeck = cardDrawn;
 }

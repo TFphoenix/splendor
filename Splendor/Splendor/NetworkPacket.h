@@ -14,7 +14,7 @@ public:
 	// Data Manipulators
 	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
 	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
-	void SetCardDrawnFromDeck(sf::Uint8 cardDrawn);
+	void SetCardDrawnFromDeck(sf::Uint16 cardDrawn);
 	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
 	void ClearData();
 
@@ -148,7 +148,7 @@ public:
 	std::string m_boardExpansionL1SlotsString;
 	std::string m_boardExpansionL2SlotsString;
 	std::string m_boardExpansionL3SlotsString;
-	sf::Uint8 m_cardDrawnFromDeck;	//0 = no card drawn, 1 = from L1 deck, 2 = ..L2, 3 = ..L3
+	sf::Uint16 m_cardDrawnFromDeck;	//0 = no card drawn, 1 = from L1 deck, 2 = ..L2, 3 = ..L3
 
 	// Decks
 	std::string m_deckNobleDeckString;

@@ -47,6 +47,6 @@ private:
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL3Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL2Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL1Slots;
-	uint8_t m_lastExpansionDrawn;
+	uint16_t m_lastExpansionDrawn;
 };
 
