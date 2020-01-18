@@ -47,7 +47,7 @@ void NetworkPacket::ClearData()
 	m_boardExpansionL1SlotsString = "";
 	m_boardExpansionL2SlotsString = "";
 	m_boardExpansionL3SlotsString = "";
-	m_cardDrawnFromDeck = 0;
+	m_cardDrawnFromDeck = '0';
 
 	// Decks
 	m_deckNobleDeckString = "";
