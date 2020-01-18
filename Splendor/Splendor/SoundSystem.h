@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include "UISettingsSession.h"
 
 class SoundSystem
 {
@@ -33,6 +34,7 @@ public:
 
 public:
 	static void StopMusic(MusicType musicType);
+	static void PauseMusic();
 	static void PlayMusic(MusicType musicType);
 	static void PlaySFX(SoundType soundType);
 	static void LoadFromFile();

@@ -48,11 +48,15 @@ void SessionsManager::MainMenuSession() const
 {
 	logger.Log("Entered Main Menu Session", Logger::Level::Info);
 	UIMainMenuSession mainMenuSessionGUI(windowSize);
+	UISettingsSession settingsSessionGUI(windowSize);
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
 
 	// Set-up sound system and play main menu music
-	SoundSystem::LoadFromFile();
-	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+	
+		SoundSystem::LoadFromFile();
+		SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+	
+
 
 	// Load image and create sprite
 	cursorTexture.loadFromFile(s_cursorTexture);
@@ -60,7 +64,7 @@ void SessionsManager::MainMenuSession() const
 
 	while (window->isOpen())
 	{
-
+		settingsSessionGUI.UpdateSound();
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -212,9 +216,13 @@ void SessionsManager::SettingsSession() const
 
 	while (window->isOpen())
 	{
+
+		settingsSessionGUI.UpdateSound();
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
+
+			
 			settingsSessionGUI.PassEvent(event);
 			switch (settingsSessionGUI.GetEvent())
 			{
@@ -222,7 +230,6 @@ void SessionsManager::SettingsSession() const
 
 				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
 				return;
-
 
 			default:
 				break;
@@ -250,9 +257,13 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
 	//Game Music sound on
+
+
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 	SoundSystem::SetMusicVolume(60);
+
+
 
 	// Initialize Players
 	std::vector<Player> players;
@@ -304,8 +315,10 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 			switch (gameSessionGUI.GetEvent())
 			{
 			case UIGameSession::Events::MenuButton:
+
 				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
 				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+
 				return;
 			case UIGameSession::Events::PassButton:
 				gameSessionGUI.NextTurn();

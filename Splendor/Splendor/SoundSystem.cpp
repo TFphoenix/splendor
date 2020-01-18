@@ -20,30 +20,47 @@ sf::SoundBuffer& SoundSystem::GetSound(SoundType soundType)
 	return *s_sounds.at(soundType);
 }
 
+
 void SoundSystem::StopMusic(MusicType musicType)
 {
 	GetMusic(musicType).pause();
 }
 
+void SoundSystem::PauseMusic()
+{
+	for (uint16_t musicIt = 0; musicIt < s_musicTypeSize; ++musicIt)
+	{
+		GetMusic(static_cast<MusicType>(musicIt)).pause();
+	}
+
+}
+
+
 void SoundSystem::PlayMusic(MusicType musicType)
 {
-	s_currentMusicType = musicType;
+	if (UISettingsSession::activeSFX)
+	{
+		s_currentMusicType = musicType;
 
-	GetMusic(musicType).setVolume(std::clamp<uint16_t>(s_musicVolume, 0, 100));
-	GetMusic(musicType).setLoop(true);
-	GetMusic(musicType).play();
+		GetMusic(musicType).setVolume(std::clamp<uint16_t>(s_musicVolume, 0, 100));
+		GetMusic(musicType).setLoop(true);
+		GetMusic(musicType).play();
+	}
 }
 
 void SoundSystem::PlaySFX(SoundType soundType)
 {
-	s_activeSound.reset();
-	s_activeSound = std::make_unique<sf::Sound>();
+	if (UISettingsSession::activeSFX)
+	{
+		s_activeSound.reset();
+		s_activeSound = std::make_unique<sf::Sound>();
 
-	s_buffer.reset();
-	s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
-	s_activeSound->setBuffer(*s_buffer);
-	s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
-	s_activeSound->play();
+		s_buffer.reset();
+		s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
+		s_activeSound->setBuffer(*s_buffer);
+		s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
+		s_activeSound->play();
+	}
 }
 
 void SoundSystem::LoadFromFile()

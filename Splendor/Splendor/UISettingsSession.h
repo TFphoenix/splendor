@@ -7,6 +7,7 @@
 #include "UISelectorBox.h"
 #include "Collider.h"
 #include "UIColors.h"
+#include "SoundSystem.h"
 
 
 class UISettingsSession :public sf::Drawable
@@ -16,7 +17,7 @@ public:
 	{
 		None,
 		MainMenu
-		
+
 	};
 
 public:
@@ -30,11 +31,20 @@ public:
 	// Graphics
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 
+	//Update
+	void UpdateSound();
+	static inline  bool activeSound=true;
+	static inline  bool activeSFX=true;
+	static inline bool GetActiveSound();
+	static inline bool GetActiveSFX();
+
 private:
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;
-	UIOptionsPanel m_gameModePanel;
+	UIOptionsPanel m_musicPanel;
+	UIOptionsPanel m_sfxPanel;
 	UIButton* m_mainMenuButton;
+
 
 };
 
