@@ -25,8 +25,8 @@ SessionsManager::SessionsManager() :
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	// Hides the cursor
 	window->setMouseCursorVisible(false);
@@ -202,7 +202,6 @@ void SessionsManager::TutorialSession() const
 		window->display();
 	}
 }
-
 
 void SessionsManager::SettingsSession() const
 {
@@ -542,8 +541,6 @@ void SessionsManager::Leaderboard() const
 		window->display();
 	}
 }
-
-
 
 void SessionsManager::WinSession(const std::string& winnerName) const
 {

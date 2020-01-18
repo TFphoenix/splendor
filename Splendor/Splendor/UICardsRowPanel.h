@@ -10,7 +10,7 @@ class UICardsRowPanel :public UIPanel
 public:
 	UICardsRowPanel(uint16_t cardSlots, const sf::Vector2f& position = { 0,0 }, const sf::Vector2f& size = { 1024,100 }, const sf::Vector2f& padding = { 0.1f,0.05f }, bool isActive = true);
 	
-	// Logic
+	// UI Logic
 	std::vector<UICard::Data> GetCardsData() const;
 	void SetCardsData(const std::vector<UICard::Data>& cardsData);
 	void SetCardsData(const std::vector<CardDAO::Data>& cardsData, uint16_t withBackground = 0, bool isDataNumb = false);

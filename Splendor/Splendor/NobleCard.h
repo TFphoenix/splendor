@@ -4,7 +4,7 @@
 class NobleCard : public ICard
 {
 public:
-	// Constr.
+	// Constr. + Rule of 5
 	NobleCard(uint16_t id = 0, bool isFaceUp = true);
 	NobleCard(const NobleCard& other);
 	NobleCard(NobleCard&& other);

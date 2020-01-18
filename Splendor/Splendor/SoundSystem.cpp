@@ -50,17 +50,11 @@ void SoundSystem::PlayMusic(MusicType musicType)
 
 void SoundSystem::PlaySFX(SoundType soundType)
 {
-	if (UISettingsSession::activeSFX)
-	{
-		s_activeSound.reset();
-		s_activeSound = std::make_unique<sf::Sound>();
-
-		s_buffer.reset();
-		s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
-		s_activeSound->setBuffer(*s_buffer);
-		s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
-		s_activeSound->play();
-	}
+	s_activeSound = std::make_unique<sf::Sound>();
+	s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
+	s_activeSound->setBuffer(*s_buffer);
+	s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
+	s_activeSound->play();
 }
 
 void SoundSystem::LoadFromFile()
@@ -79,7 +73,7 @@ void SoundSystem::LoadFromFile()
 
 	for (uint16_t soundIt = 0; soundIt < s_soundTypeSize; ++soundIt)
 	{
-		auto sound = std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer());
+		auto sound = std::make_unique<sf::SoundBuffer>(sf::SoundBuffer());
 		auto path = s_musicFile + "s_" + std::to_string(static_cast<int>(static_cast<SoundType>(soundIt))) + ".wav";
 		if (!sound->loadFromFile(path))
 			throw "Sound effect file could not be opened";

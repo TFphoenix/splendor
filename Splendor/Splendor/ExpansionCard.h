@@ -14,7 +14,7 @@ public:
 	};
 
 public:
-	// Constr.
+	// Constr. + Rule of 5
 	ExpansionCard(Level level,uint16_t id=0,bool isFaceUp = true);
 	ExpansionCard(const ExpansionCard& other);
 	ExpansionCard(ExpansionCard&& other);

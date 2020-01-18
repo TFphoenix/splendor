@@ -133,6 +133,10 @@
     <ClCompile Include="NetworkPacket.cpp">
       <Filter>Network</Filter>
     </ClCompile>
+    <ClCompile Include="UISettingsSession.cpp" />
+    <ClCompile Include="UILeaderboardSession.cpp">
+      <Filter>GUI\Sessions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rapidxml.hpp">
@@ -278,6 +282,10 @@
     </ClInclude>
     <ClInclude Include="NetworkPacket.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="UISettingsSession.h" />
+    <ClInclude Include="UILeaderboardSession.h">
+      <Filter>GUI\Sessions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

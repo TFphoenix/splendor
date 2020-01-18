@@ -80,7 +80,7 @@ UICard::State UICard::GetState() const
 	return m_state;
 }
 
-void UICard::SetState(const State& state)
+void UICard::SetState(State state)
 {
 	m_state = state;
 }

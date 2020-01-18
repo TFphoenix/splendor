@@ -11,7 +11,7 @@ public:
 	using GemsMap = std::unordered_map<GemType, uint16_t>;
 
 public:
-	// Constr. & Destr.
+	// Constr. + Rule of 5
 	ICard(uint16_t id, bool isFaceUp, uint16_t prestigePoints = 0);
 	ICard& operator=(ICard&& other);
 	ICard& operator=(const ICard& other);

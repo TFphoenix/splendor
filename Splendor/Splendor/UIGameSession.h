@@ -70,8 +70,10 @@ private:
 
 	// Logic
 	PregameSetup m_pregameSetup;
+	//std::shared_ptr<Board> p_board;
 	Board* p_board;
 	std::reference_wrapper<Player>& r_activePlayer;
+	//std::shared_ptr<Hand> p_exceedingHand;
 	Hand* p_exceedingHand;
 
 };

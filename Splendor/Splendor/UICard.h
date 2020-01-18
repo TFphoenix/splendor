@@ -10,7 +10,6 @@ class UICard :public RectCollider, public sf::RectangleShape
 public:
 	using TextureMap = std::unordered_map<uint16_t, sf::Texture*>;
 
-public:
 	enum class Type
 	{
 		Unknown = -1,
@@ -51,7 +50,7 @@ public:
 	bool GetNumb() const;
 	void SetNumb(bool numb);
 	State GetState() const;
-	void SetState(const State& state);
+	void SetState(State state);
 	void TriggerWarning();
 	void Deactivate();
 	void Activate();
