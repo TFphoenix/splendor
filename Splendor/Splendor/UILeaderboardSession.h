@@ -8,6 +8,8 @@
 #include "Collider.h"
 #include "UIColors.h"
 
+#include <algorithm>
+#include <fstream>
 
 class UILeaderboardSession :public sf::Drawable
 {
@@ -24,23 +26,26 @@ public:
 	UILeaderboardSession(const sf::Vector2u& windowSize);
 	~UILeaderboardSession();
 
-	//static inline std::vector<sf::Sprite> s_tutorialImages;
+	static inline std::vector<std::pair<std::string, uint16_t>> s_leaderboard;
 	
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 	void PassEvent(const sf::Event& event);
 	Events GetEvent() const;
 
+	static void LoadFromFile();
+
+
 
 private:
-	const inline static std::string s_imageFile = "../external/Resources/Textures/Tutorial/";
-	static inline const uint16_t s_imagesSize = 9;
+	const inline static std::string s_leaderboardFile = "../external/Resources/test1.txt";
+	//static inline int count = 1;
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;
 	UIOptionsPanel m_gameModePanel;
 	UIButton* m_backToMenuButton;
-	static inline sf::Texture* s_texture;
-	static inline sf::Sprite* s_sprite;;
+	UIText* m_labelText;
+
 
 };
 
