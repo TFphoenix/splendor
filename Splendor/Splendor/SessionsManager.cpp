@@ -555,7 +555,6 @@ void SessionsManager::WinSession(const std::string& winnerName) const
 			if (menuButton.GetState() == UIButton::State::Release)
 			{
 				menuButton.SwitchState(UIButton::State::Hover);
-				MainMenuSession();
 				return;
 			}
 		}

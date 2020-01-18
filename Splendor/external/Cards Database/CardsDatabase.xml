@@ -997,7 +997,7 @@
         <REWARD>WD</REWARD>
         <PRESTIGE>1</PRESTIGE>
         <REQUEST>
-          <GE>3</GE>
+          <GE>0</GE>
           <BS>3</BS>
           <WD>2</WD>
           <BO>0</BO>

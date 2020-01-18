@@ -29,7 +29,7 @@ public:
 	static inline const uint16_t s_L3ExpansionCardCount = 20;
 
 	// Win Condition
-	static inline const uint16_t s_winingPrestigePoints = 1;
+	static inline const uint16_t s_winingPrestigePoints = 15;
 
 private:
 	// Updatable Pieces
