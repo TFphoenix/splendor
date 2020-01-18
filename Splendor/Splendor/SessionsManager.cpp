@@ -279,7 +279,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	CardDAO cardsDatabase;
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
-	//Game Music sound on
+	// Stop menu music, then play in-game music
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 	SoundSystem::SetMusicVolume(60);
@@ -299,43 +299,6 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	// Initialize GUI
 	UIGameSession gameSessionGUI(windowSize, pregameSetup, &players, &board, activePlayer);
 	logger.Log("Initialized Game GUI", Logger::Level::Info);
-
-	// Dummy Data
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::RedRuby);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::BlackOnyx);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::WhiteDiamond);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::GreenEmerald);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
-	players[0].GetHand().AddResource(IToken::Type::BlueSapphire);
 
 	// Networking
 	Network network;
@@ -422,6 +385,10 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					isSending = true;
 					network.ReceiveData(networkPacket);
 					board.ConvertPackageToBoard(networkPacket);
+					if (activePlayerIterator == 0)
+						players[1].GetHand().ConvertFromPackage(networkPacket);
+					else
+						players[0].GetHand().ConvertFromPackage(networkPacket);
 					gameSessionGUI.SyncBoard();
 				}
 			}

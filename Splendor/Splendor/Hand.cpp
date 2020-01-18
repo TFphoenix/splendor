@@ -1,5 +1,6 @@
 #include "Hand.h"
 #include "GamePieces.h"
+#include "NetworkPacket.h"
 
 std::vector<CardDAO::Data> Hand::GetExpansionsData() const
 {
@@ -191,7 +192,7 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 		default:
 			throw std::domain_error("Error converting resources to package");
 		}
-		resourcesString += std::to_string(resource.second) + ' ';
+		resourcesString += std::to_string(resource.second);
 	}
 
 	// Tokens
@@ -221,7 +222,7 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 		default:
 			throw std::domain_error("Error converting tokens to package");
 		}
-		tokensString += std::to_string(token.second) + ' ';
+		tokensString += std::to_string(token.second);
 	}
 
 	// Expansion Cards
@@ -244,7 +245,7 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 			default:
 				throw std::domain_error("Error converting expansion cards to package");;
 			}
-			expansionCardsString += std::to_string(expansionCard.value().GetId()) + ' ';
+			expansionCardsString += std::to_string(expansionCard.value().GetId()) + '-';
 		}
 	}
 
@@ -254,7 +255,7 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 	{
 		if (nobleCard.has_value())
 		{
-			nobleCardsString += std::to_string(nobleCard.value().GetId()) + ' ';
+			nobleCardsString += std::to_string(nobleCard.value().GetId()) + '-';
 		}
 	}
 
@@ -262,9 +263,19 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 	return std::make_tuple(resourcesString, tokensString, expansionCardsString, nobleCardsString);
 }
 
-void Hand::ConvertFromPackage(const NetworkPacket& networkPacket)
+void Hand::ConvertFromPackage(NetworkPacket& networkPacket)
 {
+	// Resources
+	NetworkPacket::TokenizePackage(m_resources, std::move(networkPacket.m_handResources));
 
+	// Tokens
+	NetworkPacket::TokenizePackage(m_tokens, std::move(networkPacket.m_handTokens));
+
+	// Expansions
+	NetworkPacket::TokenizePackage(m_expansionCards, std::move(networkPacket.m_handExpansions));
+
+	// Nobles
+	NetworkPacket::TokenizePackage(m_nobleCards, std::move(networkPacket.m_handNoble));
 }
 
 bool Hand::IsFull() const

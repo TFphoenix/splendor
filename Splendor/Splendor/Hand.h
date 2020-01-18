@@ -39,7 +39,7 @@ public:
 
 	// Networking
 	std::tuple < std::string, std::string, std::string, std::string > ConvertToPackage() const;
-	void ConvertFromPackage(const NetworkPacket& networkPacket);
+	void ConvertFromPackage(NetworkPacket& networkPacket);
 
 private:
 	mutable GemsMap m_resources;

@@ -59,6 +59,28 @@ public:
 		}
 	}
 
+	template <>
+	static void TokenizePackage(std::array<std::optional<ExpansionCard>, 3>& toSlots, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		for (auto& slot : toSlots)
+		{
+			slot.reset();
+		}
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = fromString.find(s_delimiter)) != std::string::npos)
+		{
+			auto tokenId = fromString.substr(0, position);
+			const auto& tokenLevel = tokenId.at(0);
+			tokenId.erase(0, 1);
+			toSlots[iterator].emplace(static_cast<ExpansionCard::Level>(tokenLevel - '0'), std::stoi(tokenId));
+			fromString.erase(0, position + s_delimiter.length());
+			++iterator;
+		}
+	}
+
 	static void TokenizePackage(std::unordered_map<IToken::Type, uint16_t>& toGemsMap, std::string&& fromString)
 	{
 		if (fromString.empty()) return;
