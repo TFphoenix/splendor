@@ -7,6 +7,7 @@
 #include "NobleCard.h"
 #include "CardDAO.h"
 
+class NetworkPacket;
 
 class Hand
 {
@@ -38,6 +39,7 @@ public:
 
 	// Networking
 	std::tuple < std::string, std::string, std::string, std::string > ConvertToPackage() const;
+	void ConvertFromPackage(const NetworkPacket& networkPacket);
 
 private:
 	mutable GemsMap m_resources;

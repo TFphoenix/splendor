@@ -92,3 +92,28 @@ sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 	packet >> networkPacket.m_deckExpansionL3DeckString;
 	return packet;
 }
+
+std::ostream& operator<<(std::ostream& out, const NetworkPacket& packet)
+{
+	//hand data
+	out << "[Hand Data]\n";
+	out << "Resources: " << packet.m_handResources << "\n";
+	out << "Tokens: " << packet.m_handTokens << "\n";
+	out << "Expansions: " << packet.m_handExpansions << "\n";
+	out << "Nobles: " << packet.m_handNoble << "\n";
+	//board data
+	out << "[Board Data]\n";
+	out << "Tokens: " << packet.m_boardTokensString << "\n";
+	out << "Nobles: " << packet.m_boardNobleSlotsString << "\n";
+	out << "ExpansionsL1: " << packet.m_boardExpansionL1SlotsString << "\n";
+	out << "ExpansionsL2: " << packet.m_boardExpansionL2SlotsString << "\n";
+	out << "ExpansionsL3: " << packet.m_boardExpansionL3SlotsString << "\n";
+	//decks data
+	out << "[Decks Data]\n";
+	out << "Nobles: " << packet.m_deckNobleDeckString << "\n";
+	out << "ExpansionsL1: " << packet.m_deckExpansionL1DeckString << "\n";
+	out << "ExpansionsL2: " << packet.m_deckExpansionL2DeckString << "\n";
+	out << "ExpansionsL3: " << packet.m_deckExpansionL3DeckString << "\n";
+
+	return out;
+}

@@ -262,6 +262,11 @@ std::tuple < std::string, std::string, std::string, std::string > Hand::ConvertT
 	return std::make_tuple(resourcesString, tokensString, expansionCardsString, nobleCardsString);
 }
 
+void Hand::ConvertFromPackage(const NetworkPacket& networkPacket)
+{
+
+}
+
 bool Hand::IsFull() const
 {
 	return m_expansionCards[2].has_value();

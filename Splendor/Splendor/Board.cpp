@@ -310,42 +310,26 @@ std::tuple<std::string, std::string, std::string, std::string, std::string> Boar
 void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 {
 	// Noble Slots
-	TokenizePackage(m_nobleSlots, std::move(networkPacket.m_boardNobleSlotsString));
+	NetworkPacket::TokenizePackage(m_nobleSlots, std::move(networkPacket.m_boardNobleSlotsString));
 
 	// Expansion Slots
-	TokenizePackage<ExpansionCard::Level::Level1>(m_expansionL1Slots, std::move(networkPacket.m_boardExpansionL1SlotsString));
-	TokenizePackage<ExpansionCard::Level::Level2>(m_expansionL2Slots, std::move(networkPacket.m_boardExpansionL2SlotsString));
-	TokenizePackage<ExpansionCard::Level::Level3>(m_expansionL3Slots, std::move(networkPacket.m_boardExpansionL3SlotsString));
+	NetworkPacket::TokenizePackage<ExpansionCard::Level::Level1>(m_expansionL1Slots, std::move(networkPacket.m_boardExpansionL1SlotsString));
+	NetworkPacket::TokenizePackage<ExpansionCard::Level::Level2>(m_expansionL2Slots, std::move(networkPacket.m_boardExpansionL2SlotsString));
+	NetworkPacket::TokenizePackage<ExpansionCard::Level::Level3>(m_expansionL3Slots, std::move(networkPacket.m_boardExpansionL3SlotsString));
 
 	// Tokens
-	std::stringstream tokensStream(networkPacket.m_boardTokensString);
-	char tokenType;
-	uint16_t tokenCount;
-	while (tokensStream >> tokenType >> tokenCount)
-	{
-		switch (tokenType)
-		{
-		case 'E':
-			m_tokens[IToken::Type::GreenEmerald] = tokenCount;
-			break;
-		case 'S':
-			m_tokens[IToken::Type::BlueSapphire] = tokenCount;
-			break;
-		case 'D':
-			m_tokens[IToken::Type::WhiteDiamond] = tokenCount;
-			break;
-		case 'O':
-			m_tokens[IToken::Type::BlackOnyx] = tokenCount;
-			break;
-		case 'R':
-			m_tokens[IToken::Type::RedRuby] = tokenCount;
-			break;
-		case 'G':
-			m_tokens[IToken::Type::Gold] = tokenCount;
-			break;
-		}
-	}
+	NetworkPacket::TokenizePackage(m_tokens, std::move(networkPacket.m_boardTokensString));
+}
 
+void Board::ConvertPackageToDecks(NetworkPacket& networkPacket)
+{
+	// Noble Deck
+	NetworkPacket::TokenizePackage(m_nobleDeck, std::move(networkPacket.m_deckNobleDeckString));
+
+	// Expansion Decks
+	NetworkPacket::TokenizePackage(m_expansionL1Deck, std::move(networkPacket.m_deckExpansionL1DeckString));
+	NetworkPacket::TokenizePackage(m_expansionL2Deck, std::move(networkPacket.m_boardExpansionL2SlotsString));
+	NetworkPacket::TokenizePackage(m_expansionL3Deck, std::move(networkPacket.m_boardExpansionL3SlotsString));
 }
 
 std::tuple<std::string, std::string, std::string, std::string> Board::ConvertDecksToPackage() const

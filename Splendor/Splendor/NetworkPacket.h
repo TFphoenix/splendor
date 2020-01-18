@@ -1,12 +1,138 @@
 #pragma once
+#include <SFML/Network/Packet.hpp>
+#include <sstream>
+
 #include "Board.h"
 #include "Hand.h"
-#include <SFML/Network/Packet.hpp>
 
 class NetworkPacket
 {
 public:
 	static inline std::string s_delimiter = "-";
+
+public:
+	// Data Manipulators
+	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
+	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
+	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
+	void ClearData();
+
+	// Package Tokenizers
+	template <class slotType, size_t size, ExpansionCard::Level level = ExpansionCard::Level::Level1>
+	static void TokenizePackage(std::array<std::optional<slotType>, size>& toSlots, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		for (auto& slot : toSlots)
+		{
+			slot.reset();
+		}
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = fromString.find(s_delimiter)) != std::string::npos)
+		{
+			const auto& token = fromString.substr(0, position);
+			toSlots[iterator].emplace(std::stoi(token));
+			fromString.erase(0, position + s_delimiter.length());
+			++iterator;
+		}
+	}
+
+	template <ExpansionCard::Level level>
+	static void TokenizePackage(std::array<std::optional<ExpansionCard>, 4>& toSlots, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		for (auto& slot : toSlots)
+		{
+			slot.reset();
+		}
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = fromString.find(s_delimiter)) != std::string::npos)
+		{
+			const auto& token = fromString.substr(0, position);
+			toSlots[iterator].emplace(level, std::stoi(token));
+			fromString.erase(0, position + s_delimiter.length());
+			++iterator;
+		}
+	}
+
+	static void TokenizePackage(std::unordered_map<IToken::Type, uint16_t>& toGemsMap, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		std::stringstream tokensStream(fromString);
+		char tokenType;
+		uint16_t tokenCount;
+		while (tokensStream >> tokenType >> tokenCount)
+		{
+			switch (tokenType)
+			{
+			case 'E':
+				toGemsMap[IToken::Type::GreenEmerald] = tokenCount;
+				break;
+			case 'S':
+				toGemsMap[IToken::Type::BlueSapphire] = tokenCount;
+				break;
+			case 'D':
+				toGemsMap[IToken::Type::WhiteDiamond] = tokenCount;
+				break;
+			case 'O':
+				toGemsMap[IToken::Type::BlackOnyx] = tokenCount;
+				break;
+			case 'R':
+				toGemsMap[IToken::Type::RedRuby] = tokenCount;
+				break;
+			case 'G':
+				toGemsMap[IToken::Type::Gold] = tokenCount;
+				break;
+			default:
+				throw std::invalid_argument("Corrupted token string");
+			}
+		}
+	}
+
+	template <class cardType, size_t level>
+	static void TokenizePackage(Deck<cardType, level>& toDeck, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		std::vector<cardType> cards;
+
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = fromString.find(s_delimiter)) != std::string::npos)
+		{
+			const auto& token = fromString.substr(0, position);
+			cards.emplace_back(std::stoi(token));
+			fromString.erase(0, position + s_delimiter.length());
+			++iterator;
+		}
+
+		toDeck.SwapCards(std::move(cards));
+	}
+
+	template <size_t level>
+	static void TokenizePackage(Deck<ExpansionCard, level>& toDeck, std::string&& fromString)
+	{
+		if (fromString.empty()) return;
+
+		std::vector<ExpansionCard> cards;
+
+		size_t position = 0;
+		while ((position = fromString.find(s_delimiter)) != std::string::npos)
+		{
+			const auto& token = fromString.substr(0, position);
+			cards.emplace_back(static_cast<ExpansionCard::Level>(level), std::stoi(token));
+			fromString.erase(0, position + s_delimiter.length());
+		}
+
+		toDeck.SwapCards(std::move(cards));
+	}
+
+	// Inspection ostream operator
+	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& packet);
 
 public:
 	// Hand
@@ -15,8 +141,6 @@ public:
 	std::string m_handExpansions;
 	std::string m_handNoble;
 
-	void SetHandData(const std::tuple<std::string, std::string, std::string, std::string>& handData);
-
 	// Board
 	std::string m_boardTokensString;
 	std::string m_boardNobleSlotsString;
@@ -24,42 +148,12 @@ public:
 	std::string m_boardExpansionL2SlotsString;
 	std::string m_boardExpansionL3SlotsString;
 
-	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
-
 	// Decks
 	std::string m_deckNobleDeckString;
 	std::string m_deckExpansionL1DeckString;
 	std::string m_deckExpansionL2DeckString;
 	std::string m_deckExpansionL3DeckString;
 
-	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
-
-	void ClearData();
-
-	friend std::ostream& operator <<(std::ostream& out, const NetworkPacket& packet)
-	{
-		//hand data
-		out << "[Hand Data]\n";
-		out << "Resources: " << packet.m_handResources << "\n";
-		out << "Tokens: " << packet.m_handTokens << "\n";
-		out << "Expansions: " << packet.m_handExpansions << "\n";
-		out << "Nobles: " << packet.m_handNoble << "\n";
-		//board data
-		out << "[Board Data]\n";
-		out << "Tokens: " << packet.m_boardTokensString << "\n";
-		out << "Nobles: " << packet.m_boardNobleSlotsString << "\n";
-		out << "ExpansionsL1: " << packet.m_boardExpansionL1SlotsString << "\n";
-		out << "ExpansionsL2: " << packet.m_boardExpansionL2SlotsString << "\n";
-		out << "ExpansionsL3: " << packet.m_boardExpansionL3SlotsString << "\n";
-		//decks data
-		out << "[Decks Data]\n";
-		out << "Nobles: " << packet.m_deckNobleDeckString << "\n";
-		out << "ExpansionsL1: " << packet.m_deckExpansionL1DeckString << "\n";
-		out << "ExpansionsL2: " << packet.m_deckExpansionL2DeckString << "\n";
-		out << "ExpansionsL3: " << packet.m_deckExpansionL3DeckString << "\n";
-
-		return out;
-	}
 };
 
 sf::Packet& operator <<(sf::Packet& packet, const NetworkPacket& networkPacket);

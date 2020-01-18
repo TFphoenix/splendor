@@ -393,35 +393,35 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-				case UIGameSession::Events::MenuButton:
-					{
-						SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-						SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-						return;
-					}
-				case UIGameSession::Events::PassButton:
-					{
-						gameSessionGUI.NextTurnOnline();
+			case UIGameSession::Events::MenuButton:
+			{
+				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+				return;
+			}
+			case UIGameSession::Events::PassButton:
+			{
+				gameSessionGUI.NextTurnOnline();
 
-						if (isSending)
-						{
-							isSending = false;
-							networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-							networkPacket.SetBoardData(board.ConvertBoardToPackage());
-							network.SendData(networkPacket);
-						}
-						break;
-					}
-				default:
-					{
-						{
-							isSending = true;
-							network.ReceiveData(networkPacket);
-							board.ConvertPackageToBoard(networkPacket);
-							gameSessionGUI.SyncBoard();
-						}
-						break;
-					}
+				// Sending
+				if (isSending)
+				{
+					isSending = false;
+					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
+					networkPacket.SetBoardData(board.ConvertBoardToPackage());
+					network.SendData(networkPacket);
+				}
+				break;
+			}
+			default:
+			{
+				// Recieving
+				if (isSending == false)
+				{
+					isSending = true;
+					network.ReceiveData(networkPacket);
+					board.ConvertPackageToBoard(networkPacket);
+					gameSessionGUI.SyncBoard();
 			}
 		}
 

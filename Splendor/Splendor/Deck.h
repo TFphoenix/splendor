@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+class NetworkPacket;
+
 template <class cardType, size_t level = NULL>
 class Deck
 {
@@ -51,6 +53,29 @@ public:
 	std::vector<cardType> GetCards() const
 	{
 		return m_cards;
+	}
+
+protected:
+	friend NetworkPacket;
+
+	void SetCards(const std::vector<cardType>& cards)
+	{
+		m_cards = cards;
+	}
+
+	void SetCards(std::vector<cardType>&& cards)
+	{
+		m_cards = std::move(cards);
+	}
+
+	void ResetCards()
+	{
+		m_cards.clear();
+	}
+
+	void SwapCards(std::vector<cardType>&& cards)
+	{
+		m_cards.swap(std::move(cards));
 	}
 
 private:
