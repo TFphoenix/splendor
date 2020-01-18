@@ -331,6 +331,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 
 		// Set-up board & decks
 		board.ConvertPackageToBoard(networkPacket);
+		gameSessionGUI.SyncBoard();
 
 		// Point to server player
 		gameSessionGUI.PointToNextPlayer();

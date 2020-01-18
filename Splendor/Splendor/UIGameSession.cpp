@@ -367,6 +367,14 @@ void UIGameSession::SetActivePlayer(std::reference_wrapper<Player> activePlayerR
 	r_activePlayer = activePlayerReference;
 }
 
+void UIGameSession::SyncBoard()
+{
+	m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble));
+	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
+	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
+	m_expansionsL1Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL1), 1);
+}
+
 void UIGameSession::PassEvent(const sf::Event& event)
 {
 	// iterate panel vector and handle events

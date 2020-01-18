@@ -38,6 +38,7 @@ public:
 	void NextTurnOnline();
 	void PointToNextPlayer();
 	void SetActivePlayer(std::reference_wrapper<Player> activePlayerReference);
+	void SyncBoard();
 
 	// Events
 	void PassEvent(const sf::Event& event);
