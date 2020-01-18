@@ -313,9 +313,9 @@ void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 	TokenizePackage(m_nobleSlots, std::move(networkPacket.m_boardNobleSlotsString));
 
 	// Expansion Slots
-	TokenizePackage(m_expansionL1Slots, std::move(networkPacket.m_boardExpansionL1SlotsString));
-	TokenizePackage(m_expansionL2Slots, std::move(networkPacket.m_boardExpansionL2SlotsString));
-	TokenizePackage(m_expansionL3Slots, std::move(networkPacket.m_boardExpansionL3SlotsString));
+	TokenizePackage<ExpansionCard::Level::Level1>(m_expansionL1Slots, std::move(networkPacket.m_boardExpansionL1SlotsString));
+	TokenizePackage<ExpansionCard::Level::Level2>(m_expansionL2Slots, std::move(networkPacket.m_boardExpansionL2SlotsString));
+	TokenizePackage<ExpansionCard::Level::Level3>(m_expansionL3Slots, std::move(networkPacket.m_boardExpansionL3SlotsString));
 
 	// Tokens
 	std::stringstream tokensStream(networkPacket.m_boardTokensString);

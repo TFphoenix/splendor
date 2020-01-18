@@ -34,7 +34,7 @@ public:
 
 private:
 	// Networking
-	template <class T, size_t size>
+	template <class T, size_t size, ExpansionCard::Level level = ExpansionCard::Level::Level1>
 	void TokenizePackage(std::array<std::optional<T>, size>& toSlots, std::string&& fromString)
 	{
 		for (auto& slot : toSlots)
@@ -47,6 +47,24 @@ private:
 		{
 			const auto& token = fromString.substr(0, position);
 			toSlots[iterator].emplace(std::stoi(token));
+			fromString.erase(0, position + NetworkPacket::s_delimiter.length());
+			++iterator;
+		}
+	}
+
+	template <ExpansionCard::Level level>
+	void TokenizePackage(std::array<std::optional<ExpansionCard>, 4>& toSlots, std::string&& fromString)
+	{
+		for (auto& slot : toSlots)
+		{
+			slot.reset();
+		}
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = fromString.find(NetworkPacket::s_delimiter)) != std::string::npos)
+		{
+			const auto& token = fromString.substr(0, position);
+			toSlots[iterator].emplace(level, std::stoi(token));
 			fromString.erase(0, position + NetworkPacket::s_delimiter.length());
 			++iterator;
 		}
