@@ -18,6 +18,7 @@ public:
 
 	// G&S
 	std::string GetName() const;
+	void SetName(const std::string& name);
 	Type GetType() const;
 	uint16_t GetPrestigePoints() const;
 	Hand& GetHand();

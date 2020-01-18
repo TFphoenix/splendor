@@ -12,6 +12,11 @@ std::string Player::GetName() const
 	return m_name;
 }
 
+void Player::SetName(const std::string& name)
+{
+	m_name = name;
+}
+
 Player::Type Player::GetType() const
 {
 	return m_type;

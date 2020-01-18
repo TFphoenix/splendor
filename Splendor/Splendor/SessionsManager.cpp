@@ -215,6 +215,19 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 	{
 		players.emplace_back(playerNr, "Player " + std::to_string(playerNr));
 	}
+	if (players.size() >= 2)
+	{
+		players[0].SetName("Adrian");
+		players[1].SetName("Bogdan");
+	}
+	if (players.size() >= 3)
+	{
+		players[2].SetName("Eugen");
+	}
+	if (players.size() == 4)
+	{
+		players[3].SetName("Teodor");
+	}
 	size_t activePlayerIterator = 0;
 	std::reference_wrapper<Player> activePlayer = players[activePlayerIterator];
 
@@ -293,6 +306,8 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	{
 		players.emplace_back(playerNr, "Player " + std::to_string(playerNr));
 	}
+	players[0].SetName("Teodor");
+	players[1].SetName("Adrian");
 	size_t activePlayerIterator = 0;
 	std::reference_wrapper<Player> activePlayer = players[activePlayerIterator];
 
