@@ -72,10 +72,10 @@ public:
 		size_t iterator = 0;
 		while ((position = fromString.find(s_delimiter)) != std::string::npos)
 		{
-			auto tokenId = fromString.substr(0, position);
-			const auto& tokenLevel = tokenId.at(0);
-			tokenId.erase(0, 1);
-			toSlots[iterator].emplace(static_cast<ExpansionCard::Level>(tokenLevel - '0'), std::stoi(tokenId));
+			const auto token = fromString.substr(0, position);
+			const auto& tokenLevel = token.substr(0, 1);
+			const auto& tokenId = token.substr(1, token.size() - 1);
+			toSlots[iterator].emplace(static_cast<ExpansionCard::Level>(std::stoi(tokenLevel)), std::stoi(tokenId));
 			fromString.erase(0, position + s_delimiter.length());
 			++iterator;
 		}
