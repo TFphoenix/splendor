@@ -163,6 +163,7 @@
     <ClCompile Include="UIHTokensPanel.cpp" />
     <ClCompile Include="UIInfoPanel.cpp" />
     <ClCompile Include="UICardsRowPanel.cpp" />
+    <ClCompile Include="UILeaderboardSession.cpp" />
     <ClCompile Include="UIPlayerPanel.cpp" />
     <ClCompile Include="UIPlayersPanel.cpp" />
     <ClCompile Include="UIResource.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="UIHTokensPanel.h" />
     <ClInclude Include="UIInfoPanel.h" />
     <ClInclude Include="UICardsRowPanel.h" />
+    <ClInclude Include="UILeaderboardSession.h" />
     <ClInclude Include="UIPlayerPanel.h" />
     <ClInclude Include="UIPlayersPanel.h" />
     <ClInclude Include="UIResource.h" />

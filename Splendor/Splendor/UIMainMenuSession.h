@@ -16,7 +16,8 @@ private:
 		Exit,
 		Test,
 		ExitYes,
-		ExitNo
+		ExitNo,
+		Leaderboard
 	};
 	
 public:
@@ -27,7 +28,8 @@ public:
 		Tutorial,
 		Settings,
 		Exit,
-		Test
+		Test,
+		Leaderboard
 	};
 	
 public:

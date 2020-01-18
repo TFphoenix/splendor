@@ -18,6 +18,7 @@ public:
 	void GameSessionOffline(const PregameSetup& pregameSetup) const;
 	void GameSessionOnline(const PregameSetup& pregameSetup) const;
 	void TestSession() const;
+	void Leaderboard() const;
 
 private:
 	static inline const std::string s_logFile = "./Log/LogFile.log";

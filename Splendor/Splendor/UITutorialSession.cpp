@@ -111,11 +111,12 @@ void UITutorialSession::IncrementSprite()
 {
 
 	++s_currentSprite;
-
+	s_currentSprite = std::clamp<int>(s_currentSprite, 0, s_imagesSize);
 }
 
 void UITutorialSession::DecrementSprite()
 {
 
 	--s_currentSprite;
+	s_currentSprite = std::clamp<int>(s_currentSprite, 0, s_imagesSize);
 }

@@ -43,21 +43,24 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	sf::RectangleShape smallButtonShape(sf::Vector2f(100, 50));
 
 	// Main Menu Buttons
-	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 150));
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 130));
 	m_buttons[Buttons::NewGame] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::NewGame]->ChangeText("New Game");
-	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 250));
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 230));
 	m_buttons[Buttons::Tutorial] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::Tutorial]->ChangeText("Tutorial");
-	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 350));
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 330));
 	m_buttons[Buttons::Settings] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::Settings]->ChangeText("Settings");
-	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 450));
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 430));
 	m_buttons[Buttons::Exit] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::Exit]->ChangeText("Exit Game");
-	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 550));
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 530));
 	m_buttons[Buttons::Test] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
 	m_buttons[Buttons::Test]->ChangeText("Test Session");
+	mediumButtonShape.setPosition(sf::Vector2f(mainMenuPosition.x + 50, mainMenuPosition.y + 630));
+	m_buttons[Buttons::Leaderboard] = new UIButton(mediumButtonShape, s_buttonNoneDesign, s_buttonHoverDesign, s_buttonPressDesign);
+	m_buttons[Buttons::Leaderboard]->ChangeText("Leaderboard");
 
 	// Exit Menu Buttons
 	smallButtonShape.setPosition(sf::Vector2f(exitMenuPosition.x - smallButtonShape.getSize().x - 50, exitMenuPosition.y + 20));
@@ -76,6 +79,7 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Settings]);
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Exit]);
 	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Test]);
+	m_mainMenuDrawableVector.push_back(m_buttons[Buttons::Leaderboard]);
 	// Drawable Exit Menu Vector
 	m_exitMenuDrawableVector.push_back(&m_exitMenu);
 	m_exitMenuDrawableVector.push_back(m_exitMenuText);
@@ -88,6 +92,7 @@ UIMainMenuSession::UIMainMenuSession(const sf::Vector2u& windowSize) :
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Settings]);
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Exit]);
 	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Test]);
+	m_mainMenuColliderVector.push_back(m_buttons[Buttons::Leaderboard]);
 	// Collider Exit Menu Vector
 	m_exitMenuColliderVector.push_back(m_buttons[Buttons::ExitNo]);
 	m_exitMenuColliderVector.push_back(m_buttons[Buttons::ExitYes]);
@@ -148,6 +153,11 @@ UIMainMenuSession::Events UIMainMenuSession::GetEvent()
 	if (m_buttons[Buttons::ExitYes]->GetState() == UIButton::State::Release)
 	{
 		return Events::Exit;
+	}
+	if (m_buttons[Buttons::Leaderboard]->GetState() == UIButton::State::Release)
+	{
+		m_buttons[Buttons::Leaderboard]->SwitchState(UIButton::State::None);
+		return Events::Leaderboard;
 	}
 	return Events::None;
 }

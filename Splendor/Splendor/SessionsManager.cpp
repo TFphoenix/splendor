@@ -8,6 +8,7 @@
 #include "UIPreGameSession.h"
 #include "UIGameSession.h"
 #include "UITutorialSession.h"
+#include "UILeaderboardSession.h"
 #include "CardDAO.h"
 #include "Player.h"
 #include "SoundSystem.h"
@@ -70,12 +71,16 @@ void SessionsManager::MainMenuSession() const
 			case UIMainMenuSession::Events::Settings:
 				// Settings Session
 				break;
+
 			case UIMainMenuSession::Events::Exit:
 				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
 				return;
 			case UIMainMenuSession::Events::Test:
 				TestSession();
+				break;
+			case UIMainMenuSession::Events::Leaderboard:
+				Leaderboard();
 				break;
 			default:
 				break;
@@ -396,4 +401,35 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 
 void SessionsManager::TestSession() const
 {
+}
+
+void SessionsManager::Leaderboard() const
+{
+
+	logger.Log("Entered Leaderboard Session", Logger::Level::Info);
+	UILeaderboardSession leaderboardSessionGUI(windowSize);
+	logger.Log("Initialized Leaderboard GUI", Logger::Level::Info);
+
+	while (window->isOpen())
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			leaderboardSessionGUI.PassEvent(event);
+			switch (leaderboardSessionGUI.GetEvent())
+			{
+			case UILeaderboardSession::Events::MainMenu:
+				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+				return;
+			default:
+				break;
+			}
+		}
+
+
+		window->clear(UIColors::NavyBlue);
+		window->draw(leaderboardSessionGUI);
+
+		window->display();
+	}
 }
