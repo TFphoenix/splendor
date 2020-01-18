@@ -41,8 +41,8 @@ public:
 	static void DecrementSprite();
 
 private:
-	const inline static std::string s_imageFile = "../external/Resources/Textures/Tutorial/";
-	static inline const uint16_t s_imagesSize = 9;
+	const inline static std::string s_imageFile = "../external/Resources/Textures/Tutorial1.2/";
+	static inline const uint16_t s_imagesSize = 6;
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;
 	UIOptionsPanel m_gameModePanel;
