@@ -4,7 +4,7 @@
 #include <sstream>
 
 Board::Board() :
-	m_nobleDeck()
+	m_lastExpansionDrawn(0)
 {
 	// Shuffle Decks
 	m_nobleDeck.ShuffleDeck();
@@ -113,10 +113,13 @@ ExpansionCard Board::DrawExpansionFromDeck(uint16_t deck)
 	switch (deck)
 	{
 	case 1:
+		m_lastExpansionDrawn = 1;
 		return m_expansionL1Deck.DrawCard();
 	case 2:
+		m_lastExpansionDrawn = 2;
 		return m_expansionL2Deck.DrawCard();
 	case 3:
+		m_lastExpansionDrawn = 3;
 		return m_expansionL3Deck.DrawCard();
 	default:
 		throw std::invalid_argument("Undefined deck<" + std::to_string(deck) + ">");
@@ -245,6 +248,13 @@ Deck<NobleCard> Board::GetNobleDeck() const
 	return m_nobleDeck;
 }
 
+uint8_t Board::ExtractLastExpansionDrawn()
+{
+	const uint8_t extractedValue = m_lastExpansionDrawn;
+	m_lastExpansionDrawn = 0;
+	return extractedValue;
+}
+
 std::tuple<std::string, std::string, std::string, std::string, std::string> Board::ConvertBoardToPackage() const
 {
 	// Tokens
@@ -319,6 +329,25 @@ void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 
 	// Tokens
 	NetworkPacket::TokenizePackage(m_tokens, std::move(networkPacket.m_boardTokensString));
+
+	// Card drawn from deck
+	switch (networkPacket.m_cardDrawnFromDeck)
+	{
+	case 0:
+		break;
+	case 1:
+		m_expansionL1Deck.RemoveTopCard();
+		break;
+	case 2:
+		m_expansionL2Deck.RemoveTopCard();
+		break;
+	case 3:
+		m_expansionL3Deck.RemoveTopCard();
+		break;
+	default:
+		throw std::invalid_argument("Invalid card drawn from deck");
+	}
+
 }
 
 void Board::ConvertPackageToDecks(NetworkPacket& networkPacket)

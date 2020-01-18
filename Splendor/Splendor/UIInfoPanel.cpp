@@ -23,10 +23,10 @@ UIInfoPanel::UIInfoPanel(const sf::Vector2f& position, const sf::Vector2f& size,
 	m_menuButton->ChangeText("x");// future texture
 
 	// Pass Button
-	sf::RectangleShape buttonShape1(sf::Vector2f(0.05 * size.x, size.y - 2 * s_padding));
+	sf::RectangleShape buttonShape1(sf::Vector2f(0.11f * size.x, size.y - 2 * s_padding));
 	buttonShape1.setPosition(position.x + size.x - buttonShape1.getSize().x - buttonShape2.getSize().x - 4 * s_padding, position.y + s_padding);
 	m_passButton = new UIButton(buttonShape1);
-	m_passButton->ChangeText("Pass");
+	m_passButton->ChangeText("finish turn");
 
 	//Background
 	m_background.setSize(size);

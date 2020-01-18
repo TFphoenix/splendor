@@ -408,8 +408,8 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 				{
 					isSending = false;
 					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
-					networkPacket.SetDecksData(board.ConvertDecksToPackage());
 					networkPacket.SetBoardData(board.ConvertBoardToPackage());
+					networkPacket.SetCardDrawnFromDeck(board.ExtractLastExpansionDrawn());
 					network.SendData(networkPacket);
 				}
 				break;
@@ -421,7 +421,6 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 				{
 					isSending = true;
 					network.ReceiveData(networkPacket);
-					board.ConvertPackageToDecks(networkPacket);
 					board.ConvertPackageToBoard(networkPacket);
 					gameSessionGUI.SyncBoard();
 				}

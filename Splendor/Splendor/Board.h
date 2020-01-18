@@ -21,11 +21,12 @@ public:
 	void ReturnToken(IToken::Type type, uint16_t amount = 1);
 	void ReturnTokens(std::unordered_map<IToken::Type, uint16_t>&& tokens);
 
-	// Getters
+	// Manipulators
 	std::vector<CardDAO::Data> GetCardSlotsData(CardDAO::Type dataType) const;
 	std::unordered_map<IToken::Type, uint16_t> GetTokensData() const;
 	bool IsExpansionDeckEmpty(uint16_t deckLevel);
 	Deck<NobleCard> GetNobleDeck() const;
+	uint8_t ExtractLastExpansionDrawn();
 
 	// Networking
 	std::tuple < std::string, std::string, std::string, std::string, std::string > ConvertBoardToPackage() const;
@@ -46,5 +47,6 @@ private:
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL3Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL2Slots;
 	std::array<std::optional<ExpansionCard>, 4> m_expansionL1Slots;
+	uint8_t m_lastExpansionDrawn;
 };
 

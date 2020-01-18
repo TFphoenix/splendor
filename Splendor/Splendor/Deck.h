@@ -35,6 +35,13 @@ public:
 		return topCard;
 	}
 
+	void RemoveTopCard()
+	{
+		if (m_cards.empty())
+			throw std::out_of_range("Can't remove card from empty deck");
+		m_cards.pop_back();
+	}
+
 	void AddCard(cardType&& card)
 	{
 		m_cards.push_back(std::move(card));
