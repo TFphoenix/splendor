@@ -228,10 +228,6 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 			}
 		}
 
-		// Game Logic
-		// (Transfer everything to a Game Controller)
-		// ...
-
 		// Update & Display
 		gameSessionGUI.UpdateGame();
 		window->clear(UIColors::NavyBlue);
@@ -367,11 +363,6 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 			case UIGameSession::Events::PassButton:
 			{
 				gameSessionGUI.NextTurnOnline();
-				/*++activePlayerIterator;
-				if (activePlayerIterator == pregameSetup.GetPlayerCount())
-					activePlayerIterator = 0;
-				activePlayer = players[activePlayerIterator];
-				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";*/
 
 				if (isSending)
 				{
@@ -388,15 +379,12 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 				{
 					isSending = true;
 					network.ReceiveData(networkPacket);
+					gameSessionGUI.SyncBoard();
 				}
 				break;
 			}
 			}
 		}
-
-		// Game Logic
-		// (Transfer everything to a Game Controller)
-		// ...
 
 		// Update & Display
 		gameSessionGUI.UpdateGame();

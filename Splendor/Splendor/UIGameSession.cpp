@@ -369,6 +369,7 @@ void UIGameSession::SetActivePlayer(std::reference_wrapper<Player> activePlayerR
 
 void UIGameSession::SyncBoard()
 {
+	m_tokensPanel.SyncTokens(p_board->GetTokensData());
 	m_noblesPanel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::Noble));
 	m_expansionsL3Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL3), 3);
 	m_expansionsL2Panel.SetCardsData(p_board->GetCardSlotsData(CardDAO::Type::ExpansionL2), 2);
