@@ -308,20 +308,41 @@ std::tuple<std::string, std::string, std::string, std::string, std::string> Boar
 void Board::ConvertPackageToBoard(NetworkPacket& networkPacket)
 {
 	// Noble Slots
-	for (auto& slot : m_nobleSlots)
-	{
-		slot.reset();
-	}
-	std::string nobleSlotsString = std::move(networkPacket.m_boardNobleSlotsString);
-	size_t position = 0;
-	size_t iterator = 0;
-	while ((position = nobleSlotsString.find(NetworkPacket::s_delimiter)) != std::string::npos)
-	{
-		const auto& token = nobleSlotsString.substr(0, position);
-		m_nobleSlots[iterator].emplace(std::stoi(token));
-		nobleSlotsString.erase(0, position + NetworkPacket::s_delimiter.length());
-		++iterator;
-	}
+	/*{
+		for (auto& slot : m_nobleSlots)
+		{
+			slot.reset();
+		}
+		std::string nobleSlotsString = std::move(networkPacket.m_boardNobleSlotsString);
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = nobleSlotsString.find(NetworkPacket::s_delimiter)) != std::string::npos)
+		{
+			const auto& token = nobleSlotsString.substr(0, position);
+			m_nobleSlots[iterator].emplace(std::stoi(token));
+			nobleSlotsString.erase(0, position + NetworkPacket::s_delimiter.length());
+			++iterator;
+		}
+	}*/
+	TokenizePackage(m_nobleSlots, std::move(networkPacket.m_boardNobleSlotsString));
+
+	// Expansion Slots
+	/*{
+		for (auto& slot : m_expansionL1Slots)
+		{
+			slot.reset();
+		}
+		std::string expansionL1SlotsString = std::move(networkPacket.m_boardExpansionL1SlotsString);
+		size_t position = 0;
+		size_t iterator = 0;
+		while ((position = expansionL1SlotsString.find(NetworkPacket::s_delimiter)) != std::string::npos)
+		{
+			const auto& token = expansionL1SlotsString.substr(0, position);
+			m_expansionL1Slots[iterator].emplace(std::stoi(token));
+			expansionL1SlotsString.erase(0, position + NetworkPacket::s_delimiter.length());
+			++iterator;
+		}
+	}*/
 }
 
 std::tuple<std::string, std::string, std::string, std::string> Board::ConvertDecksToPackage() const
