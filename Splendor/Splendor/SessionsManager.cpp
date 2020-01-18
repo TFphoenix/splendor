@@ -66,31 +66,31 @@ void SessionsManager::MainMenuSession() const
 			mainMenuSessionGUI.PassEvent(event);
 			switch (mainMenuSessionGUI.GetEvent())
 			{
-				case UIMainMenuSession::Events::NewGame:
-					logger.Log("Starting PreGame Session...", Logger::Level::Info);
-					PreGameSession();
-					break;
-				case UIMainMenuSession::Events::Tutorial:
-					// Tutorial Session
-					logger.Log("Starting Tutorial Session...", Logger::Level::Info);
-					TutorialSession();
-					break;
-				case UIMainMenuSession::Events::Settings:
-					// Settings Session
-					break;
+			case UIMainMenuSession::Events::NewGame:
+				logger.Log("Starting PreGame Session...", Logger::Level::Info);
+				PreGameSession();
+				break;
+			case UIMainMenuSession::Events::Tutorial:
+				// Tutorial Session
+				logger.Log("Starting Tutorial Session...", Logger::Level::Info);
+				TutorialSession();
+				break;
+			case UIMainMenuSession::Events::Settings:
+				// Settings Session
+				break;
 
-				case UIMainMenuSession::Events::Exit:
-					SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
-					logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
-					return;
-				case UIMainMenuSession::Events::Test:
-					TestSession();
-					break;
-				case UIMainMenuSession::Events::Leaderboard:
-					Leaderboard();
-					break;
-				default:
-					break;
+			case UIMainMenuSession::Events::Exit:
+				SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
+				logger.Log("Exiting Main Menu Session...", Logger::Level::Info);
+				return;
+			case UIMainMenuSession::Events::Test:
+				TestSession();
+				break;
+			case UIMainMenuSession::Events::Leaderboard:
+				Leaderboard();
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -122,23 +122,23 @@ void SessionsManager::PreGameSession() const
 			pregameSessionGUI.PassEvent(event);
 			switch (pregameSessionGUI.GetEvent())
 			{
-				case UIPreGameSession::Events::MainMenu:
-					{
-						logger.Log("Exiting PreGame Session...", Logger::Level::Info);
-						return;
-					}
-				case UIPreGameSession::Events::StartGame:
-					{
-						logger.Log("Starting Game Session...", Logger::Level::Info);
-						const PregameSetup& pregameSetup = pregameSessionGUI.GetPregameSetup();
-						if (pregameSetup.GetGameMode() == PregameSetup::GameMode::Offline)
-							GameSessionOffline(pregameSetup);
-						else
-							GameSessionOnline(pregameSetup);
-						return;
-					}
-				default:
-					break;
+			case UIPreGameSession::Events::MainMenu:
+			{
+				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
+				return;
+			}
+			case UIPreGameSession::Events::StartGame:
+			{
+				logger.Log("Starting Game Session...", Logger::Level::Info);
+				const PregameSetup& pregameSetup = pregameSessionGUI.GetPregameSetup();
+				if (pregameSetup.GetGameMode() == PregameSetup::GameMode::Offline)
+					GameSessionOffline(pregameSetup);
+				else
+					GameSessionOnline(pregameSetup);
+				return;
+			}
+			default:
+				break;
 			}
 		}
 
@@ -171,17 +171,17 @@ void SessionsManager::TutorialSession() const
 			tutorialSessionGUI.PassEvent(event);
 			switch (tutorialSessionGUI.GetEvent())
 			{
-				case UITutorialSession::Events::MainMenu:
-					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-					return;
-				case UITutorialSession::Events::Next:
-					UITutorialSession::IncrementSprite();
-					break;
-				case UITutorialSession::Events::Previous:
-					UITutorialSession::DecrementSprite();
-					break;
-				default:
-					break;
+			case UITutorialSession::Events::MainMenu:
+				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+				return;
+			case UITutorialSession::Events::Next:
+				UITutorialSession::IncrementSprite();
+				break;
+			case UITutorialSession::Events::Previous:
+				UITutorialSession::DecrementSprite();
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -242,20 +242,20 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 			gameSessionGUI.PassEvent(event);
 			switch (gameSessionGUI.GetEvent())
 			{
-				case UIGameSession::Events::MenuButton:
-					SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
-					SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-					return;
-				case UIGameSession::Events::PassButton:
-					gameSessionGUI.NextTurn();
-					++activePlayerIterator;
-					if (activePlayerIterator == pregameSetup.GetPlayerCount())
-						activePlayerIterator = 0;
-					activePlayer = players[activePlayerIterator];
-					std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
-					break;
-				default:
-					break;
+			case UIGameSession::Events::MenuButton:
+				SoundSystem::StopMusic(SoundSystem::MusicType::GameMusic);
+				SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+				return;
+			case UIGameSession::Events::PassButton:
+				gameSessionGUI.NextTurn();
+				++activePlayerIterator;
+				if (activePlayerIterator == pregameSetup.GetPlayerCount())
+					activePlayerIterator = 0;
+				activePlayer = players[activePlayerIterator];
+				std::cout << "Active player: " << activePlayer.get().GetName() << "\n";
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -344,36 +344,36 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 
 	switch (pregameSetup.GetGameMode())
 	{
-		case PregameSetup::GameMode::Client:
-			{
-				isSending = true;
-				network.InitialiseClient();
-				networkPacket.SetDecksData(board.ConvertDecksToPackage());
-				networkPacket.SetBoardData(board.ConvertBoardToPackage());
-				network.SendData(networkPacket);
-				break;
-			}
-		case PregameSetup::GameMode::Server:
-			{
-				isSending = false;
-				network.InitialiseServer();
-				network.AcceptConnection();
-				network.ReceiveData(networkPacket);
+	case PregameSetup::GameMode::Client:
+	{
+		isSending = true;
+		network.InitialiseClient();
+		networkPacket.SetDecksData(board.ConvertDecksToPackage());
+		networkPacket.SetBoardData(board.ConvertBoardToPackage());
+		network.SendData(networkPacket);
+		break;
+	}
+	case PregameSetup::GameMode::Server:
+	{
+		isSending = false;
+		network.InitialiseServer();
+		network.AcceptConnection();
+		network.ReceiveData(networkPacket);
 
-				// Set-up board & decks
-				board.ConvertPackageToBoard(networkPacket);
-				gameSessionGUI.SyncBoard();
+		// Set-up board & decks
+		board.ConvertPackageToBoard(networkPacket);
+		gameSessionGUI.SyncBoard();
 
-				// Point to server player
-				gameSessionGUI.PointToNextPlayer();
-				++activePlayerIterator;
-				activePlayer = players[activePlayerIterator];
-				break;
-			}
-		default:
-			{
-				throw std::invalid_argument("Undefined connection");
-			}
+		// Point to server player
+		gameSessionGUI.PointToNextPlayer();
+		++activePlayerIterator;
+		activePlayer = players[activePlayerIterator];
+		break;
+	}
+	default:
+	{
+		throw std::invalid_argument("Undefined connection");
+	}
 	}
 
 	// Load image and create sprite
@@ -422,18 +422,20 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					network.ReceiveData(networkPacket);
 					board.ConvertPackageToBoard(networkPacket);
 					gameSessionGUI.SyncBoard();
+				}
+			}
+
+			// Set sprite position to cursor position
+			cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+
+			// Update & Display
+			gameSessionGUI.UpdateGame();
+			window->clear(UIColors::NavyBlue);
+			window->draw(gameSessionGUI);
+			window->draw(cursorSprite);
+			window->display();
 			}
 		}
-
-		// Set sprite position to cursor position
-		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
-
-		// Update & Display
-		gameSessionGUI.UpdateGame();
-		window->clear(UIColors::NavyBlue);
-		window->draw(gameSessionGUI);
-		window->draw(cursorSprite);
-		window->display();
 	}
 }
 
@@ -460,11 +462,11 @@ void SessionsManager::Leaderboard() const
 			leaderboardSessionGUI.PassEvent(event);
 			switch (leaderboardSessionGUI.GetEvent())
 			{
-				case UILeaderboardSession::Events::MainMenu:
-					logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
-					return;
-				default:
-					break;
+			case UILeaderboardSession::Events::MainMenu:
+				logger.Log("Exiting Tutorial Session...", Logger::Level::Info);
+				return;
+			default:
+				break;
 			}
 		}
 

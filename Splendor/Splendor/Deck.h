@@ -73,11 +73,6 @@ protected:
 		m_cards.clear();
 	}
 
-	void SwapCards(std::vector<cardType>&& cards)
-	{
-		m_cards.swap(std::move(cards));
-	}
-
 private:
 	std::vector<cardType> m_cards;
 

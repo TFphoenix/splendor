@@ -110,7 +110,7 @@ public:
 			++iterator;
 		}
 
-		toDeck.SwapCards(std::move(cards));
+		toDeck.SetCards(std::move(cards));
 	}
 
 	template <size_t level>
@@ -128,7 +128,7 @@ public:
 			fromString.erase(0, position + s_delimiter.length());
 		}
 
-		toDeck.SwapCards(std::move(cards));
+		toDeck.SetCards(std::move(cards));
 	}
 
 	// Inspection ostream operator
