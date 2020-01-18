@@ -16,6 +16,7 @@ public:
 	void SetBoardData(const std::tuple<std::string, std::string, std::string, std::string, std::string>& boardData);
 	void SetCardDrawnFromDeck(Board::LastDrawn cardDrawn);
 	void SetDecksData(const std::tuple < std::string, std::string, std::string, std::string>& decksData);
+	void SetPlayerData(const std::string& prestigePoints);
 	void ClearData();
 
 	// Package Tokenizers
@@ -176,6 +177,8 @@ public:
 	std::string m_deckExpansionL2DeckString;
 	std::string m_deckExpansionL3DeckString;
 
+	// Player
+	std::string m_playerPrestigePoints;
 };
 
 sf::Packet& operator <<(sf::Packet& packet, const NetworkPacket& networkPacket);

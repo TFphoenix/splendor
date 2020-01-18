@@ -49,6 +49,11 @@ void NetworkPacket::SetDecksData(const std::tuple<std::string, std::string, std:
 	m_deckExpansionL3DeckString = expansionL3DeckString;
 }
 
+void NetworkPacket::SetPlayerData(const std::string& prestigePoints)
+{
+	m_playerPrestigePoints = prestigePoints;
+}
+
 void NetworkPacket::ClearData()
 {
 	// Hand
@@ -70,6 +75,9 @@ void NetworkPacket::ClearData()
 	m_deckExpansionL1DeckString = "";
 	m_deckExpansionL2DeckString = "";
 	m_deckExpansionL3DeckString = "";
+
+	// Player
+	m_playerPrestigePoints = "";
 }
 
 sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
@@ -91,7 +99,9 @@ sf::Packet& operator<<(sf::Packet& packet, const NetworkPacket& networkPacket)
 	packet << networkPacket.m_deckExpansionL1DeckString;
 	packet << networkPacket.m_deckExpansionL2DeckString;
 	packet << networkPacket.m_deckExpansionL3DeckString;
-
+	//player data
+	packet << networkPacket.m_playerPrestigePoints;
+	
 	return packet;
 }
 
@@ -114,6 +124,9 @@ sf::Packet& operator>>(sf::Packet& packet, NetworkPacket& networkPacket)
 	packet >> networkPacket.m_deckExpansionL1DeckString;
 	packet >> networkPacket.m_deckExpansionL2DeckString;
 	packet >> networkPacket.m_deckExpansionL3DeckString;
+	//player data
+	packet >> networkPacket.m_playerPrestigePoints;
+	
 	return packet;
 }
 
@@ -139,6 +152,9 @@ std::ostream& operator<<(std::ostream& out, const NetworkPacket& packet)
 	out << "ExpansionsL1: " << packet.m_deckExpansionL1DeckString << "\n";
 	out << "ExpansionsL2: " << packet.m_deckExpansionL2DeckString << "\n";
 	out << "ExpansionsL3: " << packet.m_deckExpansionL3DeckString << "\n";
-
+	//player data
+	out << "[Player Data]\n";
+	out << "Prestige points:" << packet.m_playerPrestigePoints << "\n";
+	
 	return out;
 }
