@@ -44,5 +44,5 @@ std::string Player::ConvertToPackage() const
 
 void Player::ConvertFromPackage(NetworkPacket& networkPacket)
 {
-	m_prestigePoints = networkPacket.m_playerPrestigepoints;
+	m_prestigePoints = std::stoi(networkPacket.m_playerPrestigePoints);
 }

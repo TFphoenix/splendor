@@ -24,8 +24,8 @@ SessionsManager::SessionsManager() :
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
 	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
 
-	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
+	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	// Hides the cursor
 	window->setMouseCursorVisible(false);
@@ -373,6 +373,7 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					networkPacket.SetHandData(activePlayer.get().GetHand().ConvertToPackage());
 					networkPacket.SetBoardData(board.ConvertBoardToPackage());
 					networkPacket.SetCardDrawnFromDeck(board.ExtractLastExpansionDrawn());
+					networkPacket.SetPlayerData(activePlayer.get().ConvertToPackage());
 					network.SendData(networkPacket);
 				}
 				break;
@@ -386,9 +387,15 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 					network.ReceiveData(networkPacket);
 					board.ConvertPackageToBoard(networkPacket);
 					if (activePlayerIterator == 0)
+					{
 						players[1].GetHand().ConvertFromPackage(networkPacket);
+						players[1].ConvertFromPackage(networkPacket);
+					}
 					else
+					{
 						players[0].GetHand().ConvertFromPackage(networkPacket);
+						players[0].ConvertFromPackage(networkPacket);
+					}
 					gameSessionGUI.SyncBoard();
 				}
 			}
