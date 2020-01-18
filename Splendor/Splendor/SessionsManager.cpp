@@ -9,6 +9,7 @@
 #include "UIGameSession.h"
 #include "UITutorialSession.h"
 #include "UILeaderboardSession.h"
+#include "UISettingsSession.h"
 #include "CardDAO.h"
 #include "Player.h"
 #include "SoundSystem.h"
@@ -77,6 +78,8 @@ void SessionsManager::MainMenuSession() const
 				break;
 			case UIMainMenuSession::Events::Settings:
 				// Settings Session
+				logger.Log("Starting Settings Session...", Logger::Level::Info);
+				SettingsSession();
 				break;
 
 			case UIMainMenuSession::Events::Exit:
@@ -194,6 +197,48 @@ void SessionsManager::TutorialSession() const
 		window->draw(cursorSprite);
 		window->display();
 	}
+}
+
+
+void SessionsManager::SettingsSession() const
+{
+	logger.Log("Entered Settings Session", Logger::Level::Info);
+	UISettingsSession settingsSessionGUI(windowSize);
+	logger.Log("Initialized Settings GUI", Logger::Level::Info);
+
+	// Load image and create sprite
+	cursorTexture.loadFromFile(s_cursorTexture);
+	cursorSprite.setTexture(cursorTexture);
+
+	while (window->isOpen())
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			settingsSessionGUI.PassEvent(event);
+			switch (settingsSessionGUI.GetEvent())
+			{
+			case UISettingsSession::Events::MainMenu:
+
+				logger.Log("Exiting PreGame Session...", Logger::Level::Info);
+				return;
+
+
+			default:
+				break;
+			}
+		}
+
+		// Set sprite position to cursor position
+		cursorSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window)));
+
+		window->clear(UIColors::NavyBlue);
+		window->draw(settingsSessionGUI);
+		window->draw(cursorSprite);
+		window->display();
+	}
+
+
 }
 
 void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
@@ -484,6 +529,8 @@ void SessionsManager::Leaderboard() const
 		window->display();
 	}
 }
+
+
 
 void SessionsManager::WinSession(const std::string& winnerName) const
 {

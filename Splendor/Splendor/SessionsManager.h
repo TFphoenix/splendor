@@ -20,6 +20,7 @@ public:
 	void GameSessionOnline(const PregameSetup& pregameSetup) const;
 	void TestSession() const;
 	void Leaderboard() const;
+	void SettingsSession() const;
 	void WinSession(const std::string& winnerName) const;
 
 private:

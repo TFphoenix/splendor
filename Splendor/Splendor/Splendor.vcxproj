@@ -175,6 +175,7 @@
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIPreGameSession.cpp" />
     <ClCompile Include="UISelector.cpp" />
+    <ClCompile Include="UISettingsSession.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UIToken.cpp" />
     <ClCompile Include="UITokenAlertPanel.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIPreGameSession.h" />
     <ClInclude Include="UISelector.h" />
+    <ClInclude Include="UISettingsSession.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UIToken.h" />
     <ClInclude Include="UITokenAlertPanel.h" />
