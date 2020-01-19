@@ -12,13 +12,13 @@ class Network
 public:
 
 	int m_port = 13010;
+	sf::IpAddress m_ip = "192.168.0.106";
+
 	std::string m_name = "";
 
-	std::string m_message = "";
-	sf::Packet m_packet;
-	sf::IpAddress m_ip = "192.168.0.106";
 	sf::TcpListener m_listener;
 	sf::TcpSocket m_socket;
+	sf::Packet m_packet;
 
 public:
 	void InitialiseServer();
@@ -28,4 +28,3 @@ public:
 	void SendData(NetworkPacket& networkPacket);
 	void ReceiveData(NetworkPacket& networkPacket);
 };
-

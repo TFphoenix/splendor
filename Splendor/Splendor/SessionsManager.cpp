@@ -23,7 +23,9 @@ SessionsManager::SessionsManager() :
 {
 	logger.Log("Application started", Logger::Level::Info);
 	const sf::VideoMode desktopVM = sf::VideoMode().getDesktopMode();
-	const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
+	//const sf::VideoMode windowedVM = sf::VideoMode(1280, 720);
+	//const sf::VideoMode windowedVM = sf::VideoMode(1366,768);
+	//const sf::VideoMode windowedVM = sf::VideoMode(1600,900);
 
 	//window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
 	window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
