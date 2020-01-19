@@ -1,4 +1,4 @@
-[![Splendor logo](http://www.asmodee.co.uk/wp-content/uploads/2016/04/logo-Splendor.png)](https://www.youtube.com/playlist?list=PLMqdVzQ4OXLD6iWwEyTRa2PbtSxKbBp6u)
+[![Splendor logo](https://i.ibb.co/N6g0Crb/logo-Splendor-resized.png)](https://www.youtube.com/playlist?list=PLMqdVzQ4OXLD6iWwEyTRa2PbtSxKbBp6u)
 
 # Splendor — SMC Project 2019-2020
 
