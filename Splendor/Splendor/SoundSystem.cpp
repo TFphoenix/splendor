@@ -35,10 +35,18 @@ void SoundSystem::PauseMusic()
 
 }
 
+void SoundSystem::PlayMusic()
+{
+
+	GetMusic(MusicType::MenuMusic).play();
+
+}
+
 
 void SoundSystem::PlayMusic(MusicType musicType)
 {
-	if (UISettingsSession::activeSFX)
+
+	if (UISettingsSession::activeSound)
 	{
 		s_currentMusicType = musicType;
 
@@ -46,15 +54,19 @@ void SoundSystem::PlayMusic(MusicType musicType)
 		GetMusic(musicType).setLoop(true);
 		GetMusic(musicType).play();
 	}
+
 }
 
 void SoundSystem::PlaySFX(SoundType soundType)
 {
-	s_activeSound = std::make_unique<sf::Sound>();
-	s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
-	s_activeSound->setBuffer(*s_buffer);
-	s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
-	s_activeSound->play();
+	if (UISettingsSession::activeSFX)
+	{
+		s_activeSound = std::make_unique<sf::Sound>();
+		s_buffer = std::make_unique<sf::SoundBuffer>(GetSound(soundType));
+		s_activeSound->setBuffer(*s_buffer);
+		s_activeSound->setVolume(std::clamp<uint16_t>(s_sfxVolume, 0, 100));
+		s_activeSound->play();
+	}
 }
 
 void SoundSystem::LoadFromFile()

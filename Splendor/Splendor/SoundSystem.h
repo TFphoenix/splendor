@@ -35,6 +35,7 @@ public:
 public:
 	static void StopMusic(MusicType musicType);
 	static void PauseMusic();
+	static void PlayMusic();
 	static void PlayMusic(MusicType musicType);
 	static void PlaySFX(SoundType soundType);
 	static void LoadFromFile();

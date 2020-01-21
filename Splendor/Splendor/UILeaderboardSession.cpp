@@ -5,9 +5,6 @@
 float startY = 110.f;
 float margin = 0.3;
 
-;
-
-
 
 
 UILeaderboardSession::UILeaderboardSession(const sf::Vector2u& windowSize) :
@@ -173,7 +170,6 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 		[](const std::pair<std::string, uint16_t>& l, const std::pair<std::string, uint16_t>& r) {
 		
 				return l.second > r.second;
-
 
 		});
 

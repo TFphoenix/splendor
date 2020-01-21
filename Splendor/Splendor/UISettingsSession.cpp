@@ -27,11 +27,12 @@ UISettingsSession::UISettingsSession(const sf::Vector2u& windowSize) :
 
 
 	//Music Panel
-	
+	m_musicPanel.AddOption("Sound On");
 	m_musicPanel.AddOption("Mute");
 
 	// SFX Panel
 
+	m_sfxPanel.AddOption("Sound On");
 	m_sfxPanel.AddOption("Mute");
 
 
@@ -89,10 +90,22 @@ void UISettingsSession::UpdateSound()
 		SoundSystem::PauseMusic();
 	}
 
+	if (soundModeOptionString == "Sound On")
+	{
+		activeSound = true;
+		SoundSystem::PlayMusic();
+	}
+
 
 	if (sfxModeOptionString == "Mute")
 	{
 		activeSFX = false;
+
+	}
+
+	if (sfxModeOptionString == "Sound On")
+	{
+		activeSFX = true;
 
 	}
 
