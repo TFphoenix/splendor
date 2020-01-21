@@ -28,7 +28,7 @@ SessionsManager::SessionsManager() :
 	//const sf::VideoMode windowedVM = sf::VideoMode(1600,900);
 
 	window = new sf::RenderWindow(desktopVM, "Splendor", sf::Style::None);
-	//window = new sf::RenderWuindow(windowedVM, "Splendor", sf::Style::None);
+	//window = new sf::RenderWindow(windowedVM, "Splendor", sf::Style::None);
 
 	// Hides the cursor
 	window->setMouseCursorVisible(false);
@@ -37,7 +37,6 @@ SessionsManager::SessionsManager() :
 
 	windowPosition = window->getPosition();
 	windowSize = window->getSize();
-
 }
 
 SessionsManager::~SessionsManager()
@@ -54,10 +53,10 @@ void SessionsManager::MainMenuSession() const
 	logger.Log("Initialized Main Menu GUI", Logger::Level::Info);
 
 	// Set-up sound system and play main menu music
-	
-		SoundSystem::LoadFromFile();
-		SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
-	
+
+	SoundSystem::LoadFromFile();
+	SoundSystem::PlayMusic(SoundSystem::MusicType::MenuMusic);
+
 
 
 	// Load image and create sprite
@@ -223,7 +222,7 @@ void SessionsManager::SettingsSession() const
 		while (window->pollEvent(event))
 		{
 
-			
+
 			settingsSessionGUI.PassEvent(event);
 			switch (settingsSessionGUI.GetEvent())
 			{
@@ -258,13 +257,9 @@ void SessionsManager::GameSessionOffline(const PregameSetup& pregameSetup) const
 	logger.Log("Initialized Cards Database", Logger::Level::Info);
 
 	//Game Music sound on
-
-
 	SoundSystem::StopMusic(SoundSystem::MusicType::MenuMusic);
 	SoundSystem::PlayMusic(SoundSystem::MusicType::GameMusic);
 	SoundSystem::SetMusicVolume(60);
-
-
 
 	// Initialize Players
 	std::vector<Player> players;
@@ -387,6 +382,11 @@ void SessionsManager::GameSessionOnline(const PregameSetup& pregameSetup) const
 	case PregameSetup::GameMode::Client:
 	{
 		isSending = true;
+		std::string ipAddress;
+		std::cout << "Enter server's IP adress: ";
+		std::cin >> ipAddress;
+		std::cout << "Connecting to IP " << ipAddress << "...\n";
+		network.SetIp(std::move(ipAddress));
 		network.InitialiseClient();
 		networkPacket.SetDecksData(board.ConvertDecksToPackage());
 		networkPacket.SetBoardData(board.ConvertBoardToPackage());
@@ -554,7 +554,7 @@ void SessionsManager::WinSession(const std::string& winnerName) const
 	const auto& textBounds = winnerText.getLocalBounds();
 
 	logger.Log(winnerName, Logger::Level::Win);
-	
+
 
 	// Button
 	sf::RectangleShape buttonShape(sf::Vector2f(400, 125));

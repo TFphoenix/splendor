@@ -2,6 +2,11 @@
 
 #include "Network.h"
 
+void Network::SetIp(std::string&& ip)
+{
+	m_ip = ip;
+}
+
 void Network::InitialiseServer()
 {
 	m_name = "Server";

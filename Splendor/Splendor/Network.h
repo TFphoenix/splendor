@@ -11,8 +11,8 @@ class Network
 {
 public:
 
-	int m_port = 13010;
-	sf::IpAddress m_ip = "192.168.0.106";
+	int m_port = 52000;
+	sf::IpAddress m_ip = "25.89.219.2";
 
 	std::string m_name = "";
 
@@ -21,6 +21,7 @@ public:
 	sf::Packet m_packet;
 
 public:
+	void SetIp(std::string&& ip);
 	void InitialiseServer();
 	void AcceptConnection();
 	bool InitialiseClient();
