@@ -62,6 +62,10 @@ UILeaderboardSession::UILeaderboardSession(const sf::Vector2u& windowSize) :
 	m_numberOfWins->setFillColor(UIColors::GoldYellow);
 	m_numberOfWins->setOutlineThickness(3.0f);
 	m_numberOfWins->AlignText(UIText::TextAlign::mid_center);
+	m_dateOfLastWin = new UIText(sf::Vector2f(0.5 * windowSize.x + 550.0f, 0.3 * windowSize.y + 30.0f), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, "Date of Last Win", 60);
+	m_dateOfLastWin->setFillColor(UIColors::GoldYellow);
+	m_dateOfLastWin->setOutlineThickness(3.0f);
+	m_dateOfLastWin->AlignText(UIText::TextAlign::mid_center);
 
 	m_labelTextDrawableVector.push_back(m_labelText1);
 	m_labelTextDrawableVector.push_back(m_labelText2);
@@ -70,6 +74,7 @@ UILeaderboardSession::UILeaderboardSession(const sf::Vector2u& windowSize) :
 	m_labelTextDrawableVector.push_back(m_labelText5);
 	m_labelTextDrawableVector.push_back(m_nameText);
 	m_labelTextDrawableVector.push_back(m_numberOfWins);
+	m_labelTextDrawableVector.push_back(m_dateOfLastWin);
 }
 
 UILeaderboardSession::~UILeaderboardSession()
@@ -95,6 +100,11 @@ void UILeaderboardSession::draw(sf::RenderTarget& target, sf::RenderStates state
 	{
 		target.draw(*drawable);
 	}
+	for (const auto& drawable : m_playerDateOfLastWinDrawableVector)
+	{
+		target.draw(*drawable);
+	}
+
 
 }
 
@@ -122,16 +132,21 @@ bool SortBySec(const std::pair<std::string, uint16_t>& a, const std::pair<std::s
 
 void UILeaderboardSession::LoadFromFile()
 {
-	s_leaderboard.insert(std::make_pair("Adrian", 0));
-	s_leaderboard.insert(std::make_pair("Bogdan", 0));
-	s_leaderboard.insert(std::make_pair("Eugen", 0));
-	s_leaderboard.insert(std::make_pair("Teodor", 0));
-	s_leaderboard.insert(std::make_pair("?", 0));
+	m_playerNameDrawableVector.clear();
+	m_playerNumberOfWinsDrawableVector.clear();
+	m_playerDateOfLastWinDrawableVector.clear();
+	s_leaderboard.clear();
+
+	s_leaderboard.insert(std::make_pair("Adrian", std::make_pair(0,"None")));
+	s_leaderboard.insert(std::make_pair("Bogdan", std::make_pair(0, "None")));
+	s_leaderboard.insert(std::make_pair("Eugen", std::make_pair(0, "None")));
+	s_leaderboard.insert(std::make_pair("Teodor", std::make_pair(0, "None")));
+	s_leaderboard.insert(std::make_pair("?", std::make_pair(0, "None")));
 
 
 	std::ifstream readFile(s_leaderboardFile);
 	std::string name;
-	uint16_t number;
+	std::string date;
 
 
 	std::string line;
@@ -141,16 +156,19 @@ void UILeaderboardSession::LoadFromFile()
 		if (IsWanted(line))
 		{
 			name = IsPlayer(line);
-			std::map<std::string, uint16_t>::iterator it = s_leaderboard.find(name);
+			date = line.substr(9, 21);
+			std::map < std::string, std::pair< uint16_t,std::string> > ::iterator it = s_leaderboard.find(name);
 			
 			if (it != s_leaderboard.end()) {
-				it->second++;	
+				it->second.first++;	
+				it->second.second = date;
 			}
-			
+			date.clear();
+
 		}
 	}
 
-
+	readFile.close();
 
 }
 
@@ -158,7 +176,9 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 {
 
 
-	std::vector<std::pair<std::string,uint16_t>> players;
+	std::vector<std::pair<std::string, std::pair<uint16_t, std::string>>> players;
+
+
 
 	
 	std::copy(s_leaderboard.begin(),
@@ -167,11 +187,14 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 
 
 	std::sort(players.begin(), players.end(),
-		[](const std::pair<std::string, uint16_t>& l, const std::pair<std::string, uint16_t>& r) {
+		[](const std::pair<std::string,std::pair<uint16_t,std::string>>& l, const std::pair<std::string, std::pair<uint16_t, std::string>>& r) {
 		
-				return l.second > r.second;
+				return l.second.first > r.second.first;
 
 		});
+
+	startY = 110.f;
+	margin = 0.3;
 
 	for (const auto& index: players)
 	{
@@ -192,9 +215,9 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 
 	for (const auto& index : players)
 	{
-		//std::map<std::string, uint16_t>::iterator it;
+		
 
-		s_playerWins = new UIText(sf::Vector2f(0.4 * windowSize.x + 350.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, std::to_string(index.second), 60);
+		s_playerWins = new UIText(sf::Vector2f(0.4 * windowSize.x + 350.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, std::to_string(index.second.first), 60);
 		s_playerWins->setFillColor(UIColors::OpaqueWhite);
 		s_playerWins->setOutlineThickness(3.0f);
 		s_playerWins->AlignText(UIText::TextAlign::mid_center);
@@ -203,6 +226,24 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 		startY += range;
 		margin += 0.05f;
 	}
+
+	startY = 110.f;
+	margin = 0.3;
+
+	for (const auto& index : players)
+	{
+		
+
+		s_playerDateOfLastWin = new UIText(sf::Vector2f(0.5 * windowSize.x + 550.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, index.second.second, 60);
+		s_playerDateOfLastWin->setFillColor(UIColors::OpaqueWhite);
+		s_playerDateOfLastWin->setOutlineThickness(3.0f);
+		s_playerDateOfLastWin->AlignText(UIText::TextAlign::mid_center);
+
+		m_playerDateOfLastWinDrawableVector.push_back(s_playerDateOfLastWin);
+		startY += range;
+		margin += 0.05f;
+	}
+	//players.clear();
 }
 
 bool UILeaderboardSession::IsWanted(const std::string& line)

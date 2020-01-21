@@ -30,10 +30,11 @@ public:
 	UILeaderboardSession(const sf::Vector2u& windowSize);
 	~UILeaderboardSession();
 
-	static inline std::map<std::string, uint16_t> s_leaderboard;
+	static inline std::map<std::string, std::pair<uint16_t,std::string>> s_leaderboard;
 	static inline const int s_top5 = 5;
 	static inline 	UIText* s_playerName;
 	static inline 	UIText* s_playerWins;
+	static inline 	UIText* s_playerDateOfLastWin;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates()) const override;
 	void PassEvent(const sf::Event& event);
@@ -57,6 +58,7 @@ private:
 	std::vector<sf::Drawable*> m_labelTextDrawableVector;
 	static inline std::vector<sf::Drawable*> m_playerNameDrawableVector;
 	static inline std::vector<sf::Drawable*> m_playerNumberOfWinsDrawableVector;
+	static inline std::vector<sf::Drawable*> m_playerDateOfLastWinDrawableVector;
 	UIText* m_labelText1;
 	UIText* m_labelText2;
 	UIText* m_labelText3;
@@ -64,6 +66,7 @@ private:
 	UIText* m_labelText5;
 	UIText* m_nameText;
 	UIText* m_numberOfWins;
+	UIText* m_dateOfLastWin;
 
 
 };
