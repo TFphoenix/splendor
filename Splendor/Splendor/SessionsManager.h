@@ -27,7 +27,7 @@ private:
 	bool CheckForWinCondition(const std::vector<Player>& players) const;
 
 private:
-	static inline const std::string s_logFile = "./Log/LogFile.log";
+	static inline const std::string s_logFile = "../Logging/LogFileStream.log";
 	static inline const std::string s_cursorTexture = "../external/Resources/Textures/UI/cursor.png";
 
 private:

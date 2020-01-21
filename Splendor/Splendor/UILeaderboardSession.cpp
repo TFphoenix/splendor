@@ -1,8 +1,14 @@
 #include "UILeaderboardSession.h"
+#include <iostream>
 
 #define range  60.0f
 float startY = 110.f;
 float margin = 0.3;
+
+;
+
+
+
 
 UILeaderboardSession::UILeaderboardSession(const sf::Vector2u& windowSize) :
 	m_gameModePanel("", UIOptionsPanel::Type::Radio,
@@ -119,16 +125,35 @@ bool SortBySec(const std::pair<std::string, uint16_t>& a, const std::pair<std::s
 
 void UILeaderboardSession::LoadFromFile()
 {
+	s_leaderboard.insert(std::make_pair("Adrian", 0));
+	s_leaderboard.insert(std::make_pair("Bogdan", 0));
+	s_leaderboard.insert(std::make_pair("Eugen", 0));
+	s_leaderboard.insert(std::make_pair("Teodor", 0));
+	s_leaderboard.insert(std::make_pair("?", 0));
+
 
 	std::ifstream readFile(s_leaderboardFile);
 	std::string name;
 	uint16_t number;
-	while (readFile >> name >> number)
+
+
+	std::string line;
+
+	while (std::getline(readFile, line))
 	{
-		s_leaderboard.push_back(std::make_pair(name, number));
+		if (IsWanted(line))
+		{
+			name = IsPlayer(line);
+			std::map<std::string, uint16_t>::iterator it = s_leaderboard.find(name);
+			
+			if (it != s_leaderboard.end()) {
+				it->second++;	
+			}
+			
+		}
 	}
 
-	std::sort(s_leaderboard.begin(), s_leaderboard.end(), SortBySec);
+
 
 }
 
@@ -136,11 +161,27 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 {
 
 
-	for (uint16_t playerIt = 0; playerIt < s_top5; ++playerIt)
-	{
-		auto& [name, wins] = s_leaderboard[playerIt];
+	std::vector<std::pair<std::string,uint16_t>> players;
 
-		s_playerName = new UIText(sf::Vector2f(0.3 * windowSize.x + 150.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, name, 60);
+	
+	std::copy(s_leaderboard.begin(),
+		s_leaderboard.end(),
+		std::back_inserter(players));
+
+
+	std::sort(players.begin(), players.end(),
+		[](const std::pair<std::string, uint16_t>& l, const std::pair<std::string, uint16_t>& r) {
+		
+				return l.second > r.second;
+
+
+		});
+
+	for (const auto& index: players)
+	{
+
+
+		s_playerName = new UIText(sf::Vector2f(0.3 * windowSize.x + 150.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, index.first , 60);
 		s_playerName->setFillColor(UIColors::OpaqueWhite);
 		s_playerName->setOutlineThickness(3.0f);
 		s_playerName->AlignText(UIText::TextAlign::mid_center);
@@ -153,11 +194,11 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 	startY = 110.f;
 	margin = 0.3;
 
-	for (uint16_t playerIt = 0; playerIt < s_top5; ++playerIt)
+	for (const auto& index : players)
 	{
-		auto& [name, wins] = s_leaderboard[playerIt];
+		//std::map<std::string, uint16_t>::iterator it;
 
-		s_playerWins = new UIText(sf::Vector2f(0.4 * windowSize.x + 350.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, std::to_string(wins), 60);
+		s_playerWins = new UIText(sf::Vector2f(0.4 * windowSize.x + 350.0f, margin * windowSize.y + startY), UIText::TextAlign::mid_center, UIText::AvailableFonts::DosisLight, std::to_string(index.second), 60);
 		s_playerWins->setFillColor(UIColors::OpaqueWhite);
 		s_playerWins->setOutlineThickness(3.0f);
 		s_playerWins->AlignText(UIText::TextAlign::mid_center);
@@ -166,5 +207,28 @@ void UILeaderboardSession::LoadLeaderboard(const sf::Vector2u& windowSize)
 		startY += range;
 		margin += 0.05f;
 	}
+}
+
+bool UILeaderboardSession::IsWanted(const std::string& line)
+{
+	return (line.find("[Win]") != std::string::npos);
+}
+
+ std::string UILeaderboardSession::IsPlayer(const std::string& line)
+{
+	std::string name;
+	if (line.find("Adrian") != std::string::npos)
+		name = "Adrian";
+	else
+		if (line.find("Bogdan") != std::string::npos)
+			name = "Bogdan";
+		else
+			if (line.find("Eugen") != std::string::npos)
+				name = "Eugen";
+			else
+				if (line.find("Teodor") != std::string::npos)
+					name = "Teodor";
+	return name;
+
 }
 

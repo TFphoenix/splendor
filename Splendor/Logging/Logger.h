@@ -17,6 +17,7 @@ public:
 		Debug,
 		Info,
 		Warning,
+		Win,
 		Error
 	};
 

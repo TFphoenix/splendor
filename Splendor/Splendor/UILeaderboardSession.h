@@ -10,6 +10,10 @@
 
 #include <algorithm>
 #include <fstream>
+#include <map>
+
+
+
 
 class UILeaderboardSession :public sf::Drawable
 {
@@ -26,7 +30,7 @@ public:
 	UILeaderboardSession(const sf::Vector2u& windowSize);
 	~UILeaderboardSession();
 
-	static inline std::vector<std::pair<std::string, uint16_t>> s_leaderboard;
+	static inline std::map<std::string, uint16_t> s_leaderboard;
 	static inline const int s_top5 = 5;
 	static inline 	UIText* s_playerName;
 	static inline 	UIText* s_playerWins;
@@ -38,10 +42,13 @@ public:
 	static void LoadFromFile();
 	static void LoadLeaderboard(const sf::Vector2u& windowSize);
 
-
+private:
+	static inline bool IsWanted(const std::string& line);
+	static inline std::string IsPlayer(const std::string& line);
+	
 
 private:
-	const inline static std::string s_leaderboardFile = "../external/Resources/test1.txt";
+	const inline static std::string s_leaderboardFile = "../Logging/LogFileStream.log";
 	//static inline int count = 1;
 	UIText m_title;
 	sf::RectangleShape m_titleBackground;

@@ -18,7 +18,7 @@
 
 
 SessionsManager::SessionsManager() :
-	logger(logFileStream, Logger::Level::Error),
+	logger(logFileStream, Logger::Level::Info),
 	logFileStream(s_logFile, std::ios::app)
 {
 	logger.Log("Application started", Logger::Level::Info);
@@ -548,9 +548,13 @@ void SessionsManager::WinSession(const std::string& winnerName) const
 {
 	// Text
 	UIText winnerText(sf::Vector2f(), UIText::TextAlign::mid_center, UIText::AvailableFonts::LatoBlack, winnerName + " HAS WON THE GAME", 60, UIColors::GoldYellow, UIColors::NeutralWhite, 3);
+
 	winnerText.AlignText(UIText::TextAlign::mid_center);
 	winnerText.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
 	const auto& textBounds = winnerText.getLocalBounds();
+
+	logger.Log(winnerName, Logger::Level::Win);
+	
 
 	// Button
 	sf::RectangleShape buttonShape(sf::Vector2f(400, 125));
