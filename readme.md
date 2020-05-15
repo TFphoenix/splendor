@@ -1,4 +1,4 @@
-[![Splendor logo](https://i.ibb.co/N6g0Crb/logo-Splendor-resized.png)](https://www.youtube.com/playlist?list=PLMqdVzQ4OXLD6iWwEyTRa2PbtSxKbBp6u)
+[![Splendor logo](http://drive.google.com/uc?export=view&id=1TkFN5WGP_-l1IBT__F-hcHhMMyS6E2yX)](https://www.youtube.com/playlist?list=PLMqdVzQ4OXLD6iWwEyTRa2PbtSxKbBp6u)
 
 # Splendor — SMC Project 2019-2020
 
@@ -9,7 +9,13 @@
   - Bogdan Kocsis
   - Eugen Motoc
 
-## Videos
+## In-Game Screenshots
+
+![SS_1](http://drive.google.com/uc?export=view&id=1QdnC32-k3Ekpyx5CR-E_mV1gub5f6z8F)  |  ![SS_2](http://drive.google.com/uc?export=view&id=1ZSuSKfjdqrNwbhb4pwdvDKsaI9XJgP0w)
+:------------------------:|:------------------------:
+![SS_3](http://drive.google.com/uc?export=view&id=1f1fRVOMIg8myHj5M9sY0Ff1qUg9OA43j)  |  ![SS_4](http://drive.google.com/uc?export=view&id=1-2LDiwer1hhVLRzXhJFIp6psEknuCoE-)
+
+## Presentation Videos (RO)
 
 ### Playlist
 https://www.youtube.com/playlist?list=PLMqdVzQ4OXLD6iWwEyTRa2PbtSxKbBp6u
